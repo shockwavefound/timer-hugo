@@ -74,7 +74,7 @@
                 minlength: "Your name must consist of at least 2 characters"
             },
         },
-        submitHandler: function (form) {
+        XXXsubmitHandler: function (form) {
             $(form).ajaxSubmit({
                 type: "POST",
                 data: $(form).serialize(),

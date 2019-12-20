@@ -689,7 +689,7 @@ article {
 }
 
 .blog-content .blog-meta span:after {
-  content: '/';
+  XXXcontent: '/';
   padding: 0 3px 0 6px;
 }
 

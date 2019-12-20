@@ -7,10 +7,14 @@
                 <div class="block">
                     <h2>{{ .Title }}</h2>
                     <div class="portfolio-meta">
-                        <span>{{ dateFormat "Monday, Jan 2, 2006" .Date }}</span>|
-                        <span> Tags:
-                            {{ if ne .Params.tags nil }}{{ delimit .Params.tags ", " }}{{ end }}
-                        </span>
+                        {{ with .Date }}
+                        <span>{{ dateFormat "Monday, Jan 2, 2006" . }}</span>
+                        {{ end }}
+                        {{ with .Params.tags }}
+                            |<span> Tags:
+                                {{ delimit . ", " }}
+                            </span>
+                        {{ end }}
                     </div>
                 </div>
             </div>
@@ -22,10 +26,16 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                {{ with .Params.image }}
-                <div class="post-img">
-                    <img class="img-fluid" alt="" src="{{ . | absURL }}">
-                </div>
+                {{ if .Params.image }}
+                <<figure>>
+                    <div class="post-img">
+                        <img class="img-fluid" alt="" src="{{ .Params.image | absURL }}"
+                             {{ with .Params.imageAlttext }} alt="{{ . }}" {{ end }}>
+                    </div>
+                    {{ with .Params.imageCaption }}
+                        <figcaption>{{ . }}</figcaption>
+                    {{ end }}
+                </figure>
                 {{ end }}
                 <div class="post-content">
                     {{ .Content }}

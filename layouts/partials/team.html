@@ -17,7 +17,7 @@
                     {{ end }}
                     {{ with .name }}<h3 class="team_name">{{ . }}</h3>{{ end }}
                     {{ with .designation }}<p class="team_designation">{{ . }}</p>{{ end }}
-                    {{ with .description }}<p class="team_text">{{ . }}</p>{{ end }}
+                    {{ with .description }}<p class="team_text">{{ . | safeHTML }}</p>{{ end }}
                     <p class="social-icons">
                         {{ with .facebook }}
                         <a href="{{ . }}" class="facebook" target="_blank">
