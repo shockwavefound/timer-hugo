@@ -27,13 +27,13 @@
         <div class="row">
             <div class="col-md-12">
                 {{ if .Params.image }}
-                <<figure>>
+                <figure class="figure">
                     <div class="post-img">
-                        <img class="img-fluid" alt="" src="{{ .Params.image | absURL }}"
-                             {{ with .Params.imageAlttext }} alt="{{ . }}" {{ end }}>
+                        <img class="figure-img img-fluid w-100" src="{{ .Params.image | absURL }}"
+                             alt="{{ with .Params.imageAlt }}{{ . }}{{ else }}post-single-image{{ end }}">
                     </div>
                     {{ with .Params.imageCaption }}
-                        <figcaption>{{ . }}</figcaption>
+                        <figcaption class="figure-caption text-right">{{ . }}</figcaption>
                     {{ end }}
                 </figure>
                 {{ end }}
