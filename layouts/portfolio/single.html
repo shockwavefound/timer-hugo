@@ -29,11 +29,13 @@
                     <figure class="figure">
                         <img class="figure-img img-fluid w-100" src="{{ .Params.image | absURL }}"
                              alt="{{ with .Params.imageAlt }}{{ . }}{{ else }}work-single-image{{ end }}">
-                        {{ if .Params.imageCaption }}
-                        {{ with .Params.imageCaption }}<figcaption class="figure-caption text-right">{{ . }}</figcaption>{{ end }}
+                        <figcaption class="figure-caption text-right">
+                        {{ with .Params.imageCaption }}
+                            {{ . }}
                         {{ else }}
-                        <figcaption class="figure-caption text-right">image courtesy {{ .Params.client.name }}</figcaption>
+                            image courtesy {{ .Params.client.name }}
                         {{ end }}
+                        </figcaption>
                     </figure>
                 </div>
                 {{ end }}
