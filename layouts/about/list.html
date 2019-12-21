@@ -26,15 +26,15 @@
 {{ "<!--  Company Feature Section Start -->" | safeHTML }}
 <section class="about-feature clearfix">
     <div class="container-fluid">
-        <div class="row">
+        <div class="card-group">
             {{ range $index, $element := .Site.Data.about.aboutItem }}
-            <div class="col-lg-4 px-0">
                 {{ $class := add $index 1 }}
-                <div class="block about-feature-{{ $class }} wow fadeInDown" data-wow-duration="500ms" data-wow-delay=".3s">
-                    {{ with .title }}<h2>{{ . }}</h2>{{ end }}
-                    {{ with .description }}<p>{{ . }}</p>{{ end }}
+                <div class="col-lg-4 px-0 card about-feature-{{ $class }}">
+                    <div class="block wow fadeInDown" data-wow-duration="500ms" data-wow-delay=".3s">
+                        {{ with .title }}<h2>{{ . }}</h2>{{ end }}
+                        {{ with .description }}<p>{{ . }}</p>{{ end }}
+                    </div>
                 </div>
-            </div>
             {{ end }}
         </div>
     </div>
