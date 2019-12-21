@@ -1,4 +1,4 @@
-<section class="top-bar animated-header">
+<section class="top-bar navbar-fixed-top animated-header">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -18,10 +18,24 @@
                                     href="{{ .Site.BaseURL }}">{{ with .Site.Params.home }}{{ . }}{{ end }}</a>
                             </li>
                             {{ range .Site.Menus.nav }}
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ .URL | absURL }}">{{ .Name }}</a>
-                            </li>
+                                {{ if .HasChildren }}
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="{{ .URL | absURL }}">{{ .Name }}</a>
+                                    <div class="dropdown-menu">
+                                        <ul>
+                                        {{ range .Children }}
+                                            <li><a class="dropdown-item" href="{{ .URL | absURL }}">{{ .Name }}</a></li>
+                                        {{ end }}
+                                        </ul>
+                                    </div>
+                                </li>
+                                {{ else }}
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ .URL | absURL }}">{{ .Name }}</a>
+                                </li>
+                                {{ end }}
                             {{ end }}
+                        </ul>
                     </div>
                 </nav>
             </div>
