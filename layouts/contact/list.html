@@ -58,6 +58,7 @@
             </div>
             {{ end }}
         </div>
+        {{ if .Site.Data.contact.enableAddress }}
         <div class="row address-details">
             <div class="col-lg-4 col-sm-8">
                 <div class="address wow fadeInLeft" data-wow-duration="500ms" data-wow-delay=".3s">
@@ -80,6 +81,7 @@
                 </div>
             </div>
         </div>
+        {{ end }}
     </div>
 </section>
 {{ "<!-- Contact Section End -->" | safeHTML }}
