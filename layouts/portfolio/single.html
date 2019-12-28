@@ -10,7 +10,7 @@
                     <div class="portfolio-meta">
                         <span>{{ .Date.Format "January 2006" }}</span>
                         {{ with .Params.category }}|<span> Categories: {{ delimit . ", " }}</span>{{ end }}
-                        {{ with .Params.liveLink }}|<span> <a href="{{ .}}" target="blank">{{ . }}</a></span>{{ end }}
+                        {{ with .Params.liveLink }}|<span> <a href="{{ . }}" target="blank">{{ . }}</a></span>{{ end }}
                     </div>
                 </div>
             </div>
