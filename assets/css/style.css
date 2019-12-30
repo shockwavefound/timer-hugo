@@ -161,6 +161,17 @@ a:hover {
   color: #fff;
 }
 
+/*
+.global-page-header .breadcrumb li:not(:first-child) {
+  padding-left: 1em;
+  border-left: 1px solid #fff;
+}
+*/
+.global-page-header .breadcrumb li:not(:first-child)::before {
+  content: ">";
+  padding-right: 5px;
+}
+
 .global-page-header .block {
   position: relative;
   z-index: 9;
