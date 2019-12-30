@@ -5,7 +5,7 @@ date: 2018-07-12T16:58:55+06:00
 description : "This is meta description"
 caption: Conceptual Design
 image: images/portfolio/item-5.jpg
-category: ["bag","mockup"]
+categories: ["bag","mockup"]
 liveLink: https://www.themefisher.com
 client: Julia Robertson
 submitDate: November 20, 2017

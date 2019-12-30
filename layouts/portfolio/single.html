@@ -1,22 +1,6 @@
 {{ define "main" }}
 
-{{ "<!-- Page Header -->" | safeHTML }}
-<section class="global-page-header">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="block">
-                    <h2>{{ .Title }}</h2>
-                    <div class="portfolio-meta">
-                        <span>{{ .Date.Format "January 2006" }}</span>
-                        {{ with .Params.category }}|<span> Categories: {{ delimit . ", " }}</span>{{ end }}
-                        {{ with .Params.liveLink }}|<span> <a href="{{ . }}" target="blank">{{ . }}</a></span>{{ end }}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+{{ partial "page-title.html" . }}
 
 {{ "<!-- work details part start -->" | safeHTML }}
 <section class="work-single">
@@ -55,17 +39,33 @@
                 <!-- sidebar -->
                 <div class="work-single-sidebar">
                     {{ if .logo }}
-                    {{ with $.Params.livelink }}<a href="{{ . }}" target="blank">{{ end }}
+                    {{ with .livelink }}<a href="{{ . }}" target="blank">{{ end }}
                     <img class="img-fluid mx-auto d-block p-3" src="{{ .logo | absURL }}" alt="{{ .name }} logo">
-                    {{ with $.Params.livelink }}</a>{{ end }}
+                    {{ with .livelink }}</a>{{ end }}
                     {{ end }}
                     {{ with .name }}
                     <h5>Organization</h5>
                     <h6>{{ . }}</h6>
                     {{ end }}
-                    {{ with $.Params.liveLink }}
+                    {{ with .liveLink }}
                     <h5>Website</h5>
                     <h6><a href="{{ . }}" target="blank">{{ . }}</a></h6>
+                    {{ end }}
+                    {{ with $.Params.categories }}
+                    <h5>Categories</h5>
+                    <h6>{{ delimit . ", " }}</h6>
+                    {{ end }}
+                    {{ with $.Params.tags }}
+                    <h5>Tags</h5>
+                    <h6>{{ delimit . ", " }}</h6>
+                    {{ end }}
+                    {{ with .beneficiaries }}
+                    <h5>Beneficiaries</h5>
+                    <h6>{{ delimit . ", " }}</h6>
+                    {{ end }}
+                    {{ with .locations }}
+                    <h5>Location(s)</h5>
+                    <h6>{{ delimit . ", " }}</h6>
                     {{ end }}
                     {{ with .requested }}
                     <h5>Requested</h5>
@@ -94,18 +94,6 @@
                     {{ with .duration }}
                     <h5>Project Duration</h5>
                     <h6>{{ . }}</h6>
-                    {{ end }}
-                    {{ with .beneficiaries }}
-                    <h5>Beneficiaries</h5>
-                    <h6>{{ delimit . ", " }}</h6>
-                    {{ end }}
-                    {{ with .locations }}
-                    <h5>Location(s)</h5>
-                    <h6>{{ delimit . ", " }}</h6>
-                    {{ end }}
-                    {{ with $.Params.category }}
-                    <h5>Categories</h5>
-                    <h6>{{ delimit . ", " }}</h6>
                     {{ end }}
                 </div>
                 {{ end }}

@@ -1,26 +1,6 @@
 {{ define "main" }}
 
-<section class="global-page-header">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="block">
-                    <h2>{{ .Title }}</h2>
-                    <div class="portfolio-meta">
-                        {{ with .Date }}
-                        <span>{{ dateFormat "Monday, Jan 2, 2006" . }}</span>
-                        {{ end }}
-                        {{ with .Params.tags }}
-                            |<span> Tags:
-                                {{ delimit . ", " }}
-                            </span>
-                        {{ end }}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+{{ partial "page-title.html" . }}
 
 <section class="single-post">
     <div class="container">
