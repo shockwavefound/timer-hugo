@@ -12,13 +12,19 @@
                 {{ $delay := mul $index 300 }}
                 <figure class="wow fadeInLeft animated portfolio-item" data-wow-duration="500ms" data-wow-delay="{{ $delay }}ms">
                     <div class="img-wrapper">
-                        <img src="{{ .Params.Image | absURL }}" class="img-fluid" alt="{{ .Title }}">
-                        <div class="overlay">
+                        {{ $original := .Page.Resources.GetMatch (printf "*%s*" .Params.image) }}
+                        {{ if $original }}
+                          {{ $image := $original.Fill "350x240 left" }}
+                          <img src="{{ $image.Permalink }}" class="img-fluid" alt="{{ .Title }}">
+                          <div class="overlay">
                             <div class="buttons">
-                                {{/* <a rel="gallery" class="fancybox" href="{{ .Params.Image | relURL }}">Demo</a> */}}
+                                {{/* <a rel="gallery" class="fancybox" href="{{ $original.Permalink }}">Demo</a> */}}
                                 <a href="{{ .Permalink }}">Details</a>
                             </div>
-                        </div>
+                          </div>
+                        {{ else }}
+                          {{ errorf "%s: %s not found." .File.Path .Params.image }}
+                        {{ end }}
                     </div>
                     <figcaption>
                         <h4>
