@@ -21,22 +21,22 @@
                         {{ with .description }}<p class="team_text">{{ . | safeHTML }}</p>{{ end }}
                         <p class="social-icons">
                             {{ with .facebook }}
-                            <a href="{{ . }}" class="facebook" target="_blank">
+                            <a href="{{ . }}" class="facebook" target="_blank" rel="noopener noreferrer">
                                 <i class="ion-social-facebook"></i>
                             </a>
                             {{ end }}
                             {{ with .twitter }}
-                            <a href="{{ . }}" target="_blank">
+                            <a href="{{ . }}" class="twitter" target="_blank" rel="noopener noreferrer">
                                 <i class="ion-social-twitter"></i>
                             </a>
                             {{ end }}
                             {{ with .linkedIn }}
-                            <a href="{{ . }}" target="_blank">
+                            <a href="{{ . }}" class="linkedin" target="_blank" rel="noopener noreferrer">
                                 <i class="ion-social-linkedin"></i>
                             </a>
                             {{ end }}
                             {{ with .googleplus }}
-                            <a href="{{ . }}" target="_blank">
+                            <a href="{{ . }}" class="googleplus" target="_blank" rel="noopener noreferrer">
                                 <i class="ion-social-googleplus"></i>
                             </a>
                             {{ end }}
