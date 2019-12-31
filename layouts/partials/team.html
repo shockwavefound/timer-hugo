@@ -10,9 +10,13 @@
             <div class="card">
                 {{ $delay := mul $index 300 }}
                 <div class="team-member wow fadeInLeft" data-wow-duration="500ms" data-wow-delay="{{ $delay }}ms">
-                    {{ with .image }}
+                    {{ if .image }}
                     <div class="card-img-top team-img">
-                        <img src="{{ . | absURL }}" class="team-pic" alt="team-member">
+                        {{ $original := $.Resources.GetMatch .image }}
+                        {{ $image := $original.Fill "400x600" }}
+                        {{/* $grey := $image | images.Filter (images.Grayscale) */}}
+                        <img src="{{ $image.Permalink }}" class="team-pic"
+                             alt="{{ .name }} portrait">
                     </div>
                     {{ end }}
                     <div class="card-body">

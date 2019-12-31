@@ -7,15 +7,17 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 wow fadeInLeft" data-wow-delay=".3s">
-                {{ with .Site.Data.about.image }}<img src="{{ . | absURL }}" alt="" class="img-fluid">{{ end }}
+                {{ with .Params.image }}
+                    {{ $original := $.Resources.GetMatch (printf "*%s*" .) }}
+                    {{ $image := $original.Resize "540x" }}
+                    <img src="{{ $image.Permalink }}" class="img-fluid">
+                {{ end }}
             </div>
             <div class="col-md-6">
                 <div class="block">
-                    {{ with .Site.Data.about.title }}<h3 class="subtitle wow fadeInUp" data-wow-delay=".3s" data-wow-duration="500ms">{{ . }}</h3>{{ end }}
-                    {{ with .Site.Data.about.description }}
-                    <p class="wow fadeInUp" data-wow-delay=".5s" data-wow-duration="500ms">
-                        {{ . | safeHTML }}
-                    </p>
+                    {{ with .Params.about.title }}<h3 class="subtitle wow fadeInUp" data-wow-delay=".3s" data-wow-duration="500ms">{{ . }}</h3>{{ end }}
+                    {{ with .Content }}
+                    <div class="wow fadeInUp" data-wow-delay=".5s" data-wow-duration="500ms">{{ . }}</div>
                     {{ end }}
                 </div>
             </div>
@@ -27,7 +29,7 @@
 <section class="about-feature clearfix">
     <div class="container-fluid">
         <div class="card-group">
-            {{ range $index, $element := .Site.Data.about.aboutItem }}
+            {{ range $index, $element := .Params.aboutItems }}
                 {{ $class := add $index 1 }}
                 <div class="col-lg-4 px-0 card about-feature-{{ $class }}">
                     <div class="block wow fadeInDown" data-wow-duration="500ms" data-wow-delay=".3s">
