@@ -2,7 +2,6 @@
   {{ "<!-- Basic Page Needs -->" | safeHTML }}
   <meta charset="utf-8">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-
   <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}">
   {{ with .Site.Params.author }}<meta name="author" content="{{ . }}">{{ end }}
   {{ hugo.Generator }}
@@ -12,6 +11,7 @@
   {{ template "_internal/schema.html" . }}
   {{ template "_internal/opengraph.html" . }}
   {{ template "_internal/twitter_cards.html" . }}
+  {{- partial "seo_schema" . -}}
 
   {{ "<!-- Mobile Specific Metas -->" | safeHTML }}
   <meta name="format-detection" content="telephone=no">
