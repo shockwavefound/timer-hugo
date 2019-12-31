@@ -17,21 +17,24 @@
                                 <a class="nav-link"
                                     href="{{ .Site.BaseURL }}">{{ with .Site.Params.home }}{{ . }}{{ end }}</a>
                             </li>
-                            {{ range .Site.Menus.nav }}
+                            {{ range $index, $element := .Site.Menus.nav }}
                                 {{ if .HasChildren }}
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="{{ .URL | absURL }}">{{ .Name }}</a>
-                                    <div class="dropdown-menu">
+                                    <a class="nav-link dropdown-toggle text-primary"
+                                       data-toggle="dropdown" id="dropdown{{ $index }}"
+                                       aria-haspopup="true" aria-expanded="false"
+                                       href="{{ .URL | absURL }}">{{ .Pre }} {{ .Name }}</a>
+                                    <div class="dropdown-menu" aria-labeledby="dropdown{{ $index }}">
                                         <ul>
                                         {{ range .Children }}
-                                            <li><a class="dropdown-item" href="{{ .URL | absURL }}">{{ .Name }}</a></li>
+                                        <li><a class="dropdown-item" href="{{ .URL | absURL }}">{{ .Pre }} {{ .Name }}</a></li>
                                         {{ end }}
                                         </ul>
                                     </div>
                                 </li>
                                 {{ else }}
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ .URL | absURL }}">{{ .Name }}</a>
+                                    <a class="nav-link text-primary" href="{{ .URL | absURL }}">{{ .Pre }} {{ .Name }}</a>
                                 </li>
                                 {{ end }}
                             {{ end }}
