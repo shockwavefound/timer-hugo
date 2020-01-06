@@ -1,0 +1,26 @@
+<figure class="image-caption">
+  {{- $src := .Page.Resources.GetMatch (printf "*%s*" .Destination) -}}
+  {{- $altText := .PlainText }}
+  {{- $imgTitle := .Title }}
+  {{- if $src }}
+      {{- $sizes := dict "tiny" 500 "small" 800 "medium" 1200 "large" 1500 }}
+      {{- $scratch := newScratch }}
+      {{- range $name, $width := $sizes }}
+        {{- $scratch.Set $name ($src.Resize (printf "%dx" $width)) }}
+      {{- end }}
+      <img src="{{ $src.Permalink }}"
+        sizes="(min-width: 35em) 1200px, 100vw"
+        srcset="
+        {{- range $name, $width := $sizes }}
+          {{- if ge $src.Width $width }}
+            {{- with $scratch.Get $name }}{{ .RelPermalink }} {{ $width }}w, {{ end }}
+          {{- end }}
+        {{- end }}"
+  {{- else }}
+      <img class="unfound" src="{{ .Destination | safeURL }}"
+  {{- end }}
+        {{- with $imgTitle }} title="{{ . }}"{{ end }}
+        {{- with $altText }} alt="{{ . }}" {{ end -}}
+      />
+  {{ with $.Title }}<figcaption>{{ . | safeHTML }}</figcaption>{{ end }}
+</figure>

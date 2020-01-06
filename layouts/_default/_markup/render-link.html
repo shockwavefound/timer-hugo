@@ -1,0 +1,13 @@
+{{- $link := .Destination }}
+{{- $isRemote := strings.HasPrefix $link "http" }}
+{{- if not $isRemote -}}
+{{- $url := urls.Parse .Destination }}
+{{- $fragment := "" }}
+{{- with $url.Fragment }}{{ $fragment = printf "#%s" . }}{{ end -}}
+{{- with .Page.GetPage $url.Path }}{{ $link = printf "%s%s" .RelPermalink $fragment }}{{ end }}{{ end -}}
+<a href="{{ $link | safeURL }}"
+   {{- with .Title}} title="{{ . }}"{{ end }}
+   {{- if $isRemote }} target="_blank" rel="noopener" aria-label="This is an external link (opens in a new tab)"{{ end }}>
+   {{- .Text | safeHTML -}}
+   {{- if $isRemote }} <i class="fas fa-external-link-alt"></i>{{ end -}}
+   </a>
