@@ -433,6 +433,14 @@ a:hover {
   max-width: 100%;
 }
 
+#about a {
+  color: #444 !important;
+}
+
+#about a:hover {
+  color: #2cc0d3 !important;
+}
+
 .about-feature .block {
   color: #fff;
   padding: 85px 65px;
