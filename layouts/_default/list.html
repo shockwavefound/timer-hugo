@@ -4,9 +4,9 @@
 
 <section id="blog-full-width">
     <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                {{ range .Pages }}
+      <div class="row">
+        {{ range .Pages }}
+            <div class="col-md-6">
                 <article class="wow fadeInDown" data-wow-delay=".3s" data-wow-duration="500ms">
                     <div class="blog-post-image">
                         <a href="{{ .Permalink }}">
@@ -42,9 +42,9 @@
                         {{ with .Permalink }}<a href="{{ . }}" class="btn btn-default btn-details hvr-bounce-to-right">Continue Reading</a>{{ end }}
                     </div>
                 </article>
-                {{ end }}
             </div>
-        </div>
+        {{ end }}
+      </div>
     </div>
 </section>
 
