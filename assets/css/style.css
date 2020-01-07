@@ -305,6 +305,11 @@ a:hover {
   color: #fff;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
   position: relative;
+
+  /* mobile safari breaks background-attachment fixed */
+  @supports (-webkit-overflow-scrolling: touch) {
+    background-attachment: scroll;
+  }
 }
 
 #hero-area:before {
