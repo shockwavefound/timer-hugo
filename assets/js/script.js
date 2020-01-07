@@ -55,23 +55,29 @@
                 email: true
             },
             subject: {
-                required: false,
+                required: true,
+                minlength: 2
             },
             message: {
                 required: true,
+                minlength: 10
             },
         },
         messages: {
             user_name: {
                 required: "Come on, you have a name don't you?",
-                minlength: "Your name must consist of at least 2 characters"
+                minlength: "Your name must consist of at least 4 characters"
             },
             email: {
-                required: "Please put your email address",
+                required: "Please include your email address",
+            },
+            subject: {
+                required: "A subject is required",
+                minlength: "Your subject must consist of at least 4 characters"
             },
             message: {
-                required: "Put some messages here?",
-                minlength: "Your name must consist of at least 2 characters"
+                required: "Put a messages here",
+                minlength: "Your message must consist of at least 10 characters"
             },
         },
         XXXsubmitHandler: function (form) {
