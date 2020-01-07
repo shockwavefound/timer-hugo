@@ -6,39 +6,39 @@
             {{ with .Site.Params.portfolio.title }}<h1 class="title wow fadeInDown" data-wow-delay=".3s">{{ . }}</h1>{{ end }}
             {{ with .Site.Params.portfolio.subtitle }}<p class="wow fadeInDown" data-wow-delay=".5s">{{ . }}</p>{{ end }}
         </div>
-        <div class="row">
-            {{ range $index, $element:= first 6 (where .Site.RegularPages "Type" "portfolio") }}
-            <div class="col-md-4 col-sm-6">
-                {{ $delay := mul $index 300 }}
-                <figure class="wow fadeInLeft animated portfolio-item" data-wow-duration="500ms" data-wow-delay="{{ $delay }}ms">
-                    <div class="img-wrapper">
-                        {{ $original := .Page.Resources.GetMatch (printf "*%s*" .Params.image) }}
-                        {{ if $original }}
-                          {{ $image := $original.Fill "350x240 left" }}
-                          <img src="{{ $image.Permalink }}" class="img-fluid" alt="{{ .Title }}">
-                          <div class="overlay">
-                            <div class="buttons">
-                                {{/* <a rel="gallery" class="fancybox" href="{{ $original.Permalink }}">Demo</a> */}}
-                                <a href="{{ .Permalink }}">Details</a>
-                            </div>
-                          </div>
-                        {{ else }}
-                          {{ errorf "%s: %s not found." .File.Path .Params.image }}
-                        {{ end }}
+        <div class="row row-cols-1 row-cols-md-3">
+          {{ range $index, $element:= first 6 (where .Site.RegularPages "Type" "portfolio") }}
+            <div class="col mb-3">
+              {{ $delay := mul $index 300 }}
+              <figure class="portfolio-item card h-100 wow fadeInLeft animated" data-wow-duration="500ms" data-wow-delay="{{ $delay }}ms">
+                {{ $original := .Page.Resources.GetMatch (printf "*%s*" .Params.image) }}
+                {{ if $original }}
+                  {{ $image := $original.Fill "350x240 left" }}
+                  <div class="img-wrapper">
+                    <img src="{{ $image.Permalink }}" class="card-img-top portfolio-pic" alt="{{ .Title }}"/>
+                    <div class="overlay">
+                      <div class="buttons">
+                        {{/* <a rel="gallery" class="fancybox" href="{{ $original.Permalink }}">Demo</a> */}}
+                        <a href="{{ .Permalink }}">Details</a>
+                      </div>
                     </div>
-                    <figcaption>
-                        <h4>
-                            <a href="{{ .Permalink }}">
-                                {{ .Title }}
-                            </a>
-                        </h4>
-                        <p>
-                            {{ .Params.caption }}
-                        </p>
-                    </figcaption>
-                </figure>
+                  </div>
+                {{ else }}
+                  {{ errorf "%s: %s not found." .File.Path .Params.image }}
+                {{ end }}
+                <div class="card-body">
+                  <h4 class="card-title">
+                    <a href="{{ .Permalink }}">
+                      {{ .Title }}
+                    </a>
+                  </h4>
+                  <p class="card-text">
+                    {{ .Params.caption }}
+                  </p>
+                </div>
+              </figure>
             </div>
-            {{ end }}
+          {{ end }}
         </div>
     </div>
 </section>

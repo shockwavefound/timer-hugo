@@ -601,6 +601,7 @@ figure figcaption h4 {
   margin: 0;
 }
 
+figure .card-body h4 a,
 figure figcaption h4 a {
   color: #2cc0d3;
 }
