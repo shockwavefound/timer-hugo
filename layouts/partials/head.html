@@ -17,7 +17,11 @@
   <meta name="format-detection" content="telephone=no">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ .Title }}</title>
+  {{ if (fileExists "static/images/favicon.svg") -}}
+  <link rel="icon" href="{{ "images/favicon.svg" | absURL }}" sizes="any" type="image/svg+xml">
+  {{- else -}}
   <link rel="icon" href="{{ "images/favicon.ico" | absURL }}">
+  {{- end }}
 
   {{ "<!-- Twitter Bootstrap  -->" | safeHTML }}
   <link rel="stylesheet" href="{{ "plugins/bootstrap/bootstrap.min.css" | absURL }}">
