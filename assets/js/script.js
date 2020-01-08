@@ -54,37 +54,27 @@
                 required: true,
                 email: true
             },
-            subject: {
-                required: true,
-                minlength: 2
-            },
             message: {
                 required: true,
                 minlength: 10
             },
         },
         messages: {
-            user_name: {
-                required: "Come on, you have a name don't you?",
-                minlength: "Your name must consist of at least 4 characters"
+            name: {
+                required: "Please enter your full name",
+                minlength: jQuery.validator.format("Your name must contain at least {0} characters")
             },
             email: {
-                required: "Please include your email address",
-            },
-            subject: {
-                required: "A subject is required",
-                minlength: "Your subject must consist of at least 4 characters"
+                required: "Please enter your email address",
             },
             message: {
-                required: "Put a messages here",
-                minlength: "Your message must consist of at least 10 characters"
+                required: "Please enter a message",
+                minlength: jQuery.validator.format("Your message must contain at least {0} characters")
             },
         },
-        XXXsubmitHandler: function (form) {
+        submitHandler: function (form) {
             $(form).ajaxSubmit({
-                type: "POST",
-                data: $(form).serialize(),
-                url: "sendmail.php",
+                dataType: "json",
                 success: function () {
                     $('#contact-form #success').fadeIn();
                 },
@@ -92,6 +82,7 @@
                     $('#contact-form #error').fadeIn();
                 }
             });
+            return false; // prevent normal browser submit/navigation
         }
     });
 

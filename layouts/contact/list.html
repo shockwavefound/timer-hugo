@@ -13,22 +13,25 @@
                     {{ with .Site.Data.contact.contactFormSubtitle | safeHTML }}<p class="subtitle-des wow fadeInDown" data-wow-duration="500ms" data-wow-delay=".5s">{{ . }}</p>{{ end }}
                     <div class="contact-form">
                         <form id="contact-form" method="POST" action="{{ .Site.Data.contact.contactPost }}" role="form">
-
+                          <fieldset id="contact-form-inputs">
                             <div class="form-group wow fadeInDown" data-wow-duration="500ms" data-wow-delay=".6s">
-                                <input type="text" placeholder="Your Name" class="form-control" name="name" id="name">
+                                <label for="name">Full Name</label>
+                                <input type="text" placeholder="First and Last" class="form-control" name="name" id="name">
                             </div>
 
                             <div class="form-group wow fadeInDown" data-wow-duration="500ms" data-wow-delay=".8s">
-                                <input type="email" placeholder="Your Email" class="form-control" name="_replyto" id="email">
-                            </div>
-
-                            <div class="form-group wow fadeInDown" data-wow-duration="500ms" data-wow-delay="1s">
-                                <input type="text" placeholder="Subject" class="form-control" name="_subject" id="subject">
+                                <label for="email">Email Address</label>
+                                <input type="email" placeholder="email@example.com" class="form-control" name="email" id="email">
                             </div>
 
                             <div class="form-group wow fadeInDown" data-wow-duration="500ms" data-wow-delay="1.2s">
-                                <textarea rows="6" placeholder="Message" class="form-control" name="message" id="message"></textarea>
+                                <label for="message">Message</label>
+                                <textarea rows="6" placeholder="Your Message" class="form-control" name="message" id="message"></textarea>
                             </div>
+
+                            {{ $url := urls.Parse .Site.BaseURL }}
+                            <input type="hidden" name="_subject" value="Contact from {{ $url.Host }}">
+                            <input type="text" name="_gotcha" style="display:none">
 
                             <div id="success" class="success">
                                 Thank you. The mail is on its way.
@@ -41,6 +44,7 @@
                             <div id="submit" class="wow fadeInDown" data-wow-duration="500ms" data-wow-delay="1.4s">
                                 <button type="submit" id="contact-submit" class="btn btn-default btn-send hvr-bounce-to-right" value="Send Message">Send Message</button>
                             </div>
+                          </fieldset>
                         </form>
                     </div>
                 </div>
