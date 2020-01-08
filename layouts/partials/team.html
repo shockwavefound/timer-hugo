@@ -22,26 +22,31 @@
                     <div class="card-body">
                         {{ with .name }}<h3 class="team_name">{{ . }}</h3>{{ end }}
                         {{ with .designation }}<p class="team_designation">{{ . }}</p>{{ end }}
-                        {{ with .description }}<p class="team_text">{{ . | safeHTML }}</p>{{ end }}
+                        {{ with .description }}<p class="team_text">{{ . | markdownify }}</p>{{ end }}
                         <p class="social-icons">
                             {{ with .facebook }}
                             <a href="{{ . }}" class="facebook" target="_blank" rel="noopener noreferrer">
-                                <i class="ion-social-facebook"></i>
+                                <i class="ion-social-facebook"></i><span class="visible-hidden"> Facebook</span>
                             </a>
                             {{ end }}
                             {{ with .twitter }}
                             <a href="{{ . }}" class="twitter" target="_blank" rel="noopener noreferrer">
-                                <i class="ion-social-twitter"></i>
+                                <i class="ion-social-twitter"></i><span class="visible-hidden"> Twitter</span>
                             </a>
                             {{ end }}
                             {{ with .linkedIn }}
                             <a href="{{ . }}" class="linkedin" target="_blank" rel="noopener noreferrer">
-                                <i class="ion-social-linkedin"></i>
+                                <i class="ion-social-linkedin"></i><span class="visible-hidden"> LinkedIn</span>
+                            </a>
+                            {{ end }}
+                            {{ with .instagram }}
+                            <a href="{{ . }}" class="instagram" target="_blank" rel="noopener noreferrer">
+                                <i class="ion-social-instagram"></i><span class="visible-hidden"> Instagram</span>
                             </a>
                             {{ end }}
                             {{ with .googleplus }}
                             <a href="{{ . }}" class="googleplus" target="_blank" rel="noopener noreferrer">
-                                <i class="ion-social-googleplus"></i>
+                                <i class="ion-social-googleplus"></i><span class="visible-hidden"> Google+</span>
                             </a>
                             {{ end }}
                         </p>

@@ -27,11 +27,11 @@
                   {{ errorf "%s: %s not found." .File.Path .Params.image }}
                 {{ end }}
                 <div class="card-body">
-                  <h4 class="card-title">
+                  <h2 class="card-title">
                     <a href="{{ .Permalink }}">
                       {{ .Title }}
                     </a>
-                  </h4>
+                  </h2>
                   <p class="card-text">
                     {{ .Params.caption }}
                   </p>

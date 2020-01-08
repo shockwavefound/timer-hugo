@@ -10,7 +10,7 @@
                 {{ with .Params.image }}
                     {{ $original := $.Resources.GetMatch (printf "*%s*" .) }}
                     {{ $image := $original.Resize "540x" }}
-                    <img src="{{ $image.Permalink }}" class="img-fluid">
+                    <img src="{{ $image.Permalink }}" class="img-fluid" alt="{{ $.Params.imageAlt | default "about us image"}}">
                 {{ end }}
             </div>
             <div class="col-md-6">

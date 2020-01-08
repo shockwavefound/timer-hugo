@@ -13,7 +13,6 @@
                     {{ with .Site.Data.contact.contactFormSubtitle | safeHTML }}<p class="subtitle-des wow fadeInDown" data-wow-duration="500ms" data-wow-delay=".5s">{{ . }}</p>{{ end }}
                     <div class="contact-form">
                         <form id="contact-form" method="POST" action="{{ .Site.Data.contact.contactPost }}" role="form">
-                          <fieldset id="contact-form-inputs">
                             <div class="form-group wow fadeInDown" data-wow-duration="500ms" data-wow-delay=".6s">
                                 <label for="name">Full Name</label>
                                 <input type="text" placeholder="First and Last" class="form-control" name="name" id="name">
@@ -30,7 +29,8 @@
                             </div>
 
                             {{ with .Site.Data.contact.contactSubject }}<input type="hidden" name="_subject" value="{{ . }}">{{ end }}
-                            <input type="text" name="_gotcha" style="display:none">
+                            <label for="gotcha" style="display:none">Don't fill this in</label>
+                            <input type="text" id="gotcha" name="_gotcha" style="display:none">
 
                             <div id="success" class="success">
                                 Thank you, your message is on its way.
@@ -43,7 +43,6 @@
                             <div id="submit" class="wow fadeInDown" data-wow-duration="500ms" data-wow-delay="1.4s">
                                 <button type="submit" id="contact-submit" class="btn btn-default btn-send hvr-bounce-to-right" value="Send Message">Send Message</button>
                             </div>
-                          </fieldset>
                         </form>
                     </div>
                 </div>

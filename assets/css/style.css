@@ -142,7 +142,7 @@ a:hover {
   color: #fff;
 }
 
-.global-page-header h2 {
+.global-page-header h1 {
   font-size: 42px;
   font-weight: bold;
   color: #fff;
@@ -156,8 +156,11 @@ a:hover {
   display: block;
 }
 
-.global-page-header .breadcrumb .active,
 .global-page-header .breadcrumb li a {
+  color: #eee;
+}
+
+.global-page-header .breadcrumb li a:hover {
   color: #fff;
 }
 
@@ -415,7 +418,7 @@ a:hover {
   padding: 20px 30px 0 30px;
 }
 
-#about .block h2 {
+#about .block h1 {
   font-size: 24px;
   font-weight: 600;
   margin-bottom: 30px;
@@ -477,7 +480,7 @@ a:hover {
   opacity: 1;
 }
 
-.works .block h4 {
+.works .block h2 {
   padding: 20px 15px;
   margin-top: 0;
   color: #666;
@@ -601,12 +604,10 @@ figure figcaption h4 {
   margin: 0;
 }
 
-figure .card-body h4 a,
 figure figcaption h4 a {
   color: #2cc0d3;
 }
 
-figure .card-body h4 a:hover,
 figure figcaption h4 a:hover {
   color: #666;
 }
@@ -615,6 +616,14 @@ figure figcaption p {
   font-size: 14px;
   margin-bottom: 0;
   margin-top: 5px;
+}
+
+.card-title a {
+  color: #444;
+}
+
+.card-title a:hover {
+  color: #2cc0d3;
 }
 
 #feature {
@@ -705,6 +714,10 @@ article {
   color: #444;
   font-weight: 400;
   font-size: 30px;
+}
+
+.blog-content h2 a:hover {
+  color: #2cc0d3;
 }
 
 .blog-content .blog-meta {
@@ -1352,4 +1365,20 @@ ul.social-icons li {
   text-decoration: none;
 }
 
+.visible-hidden {
+    clip: rect(1px, 1px, 1px, 1px);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+}
+
+.visible-hidden:focus {
+    clip: auto;
+    height: auto;
+    overflow: auto;
+    position: absolute;
+    width: auto;
+}
 /*# sourceMappingURL=maps/style.css.map */

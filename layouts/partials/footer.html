@@ -11,14 +11,17 @@
                 </p>
                 {{ end }}
             </div>
+            {{ with .Site.Params.footer.socialIcon }}
             <div class="col-md-4 col-12">
                 {{ "<!-- Social Media -->" | safeHTML }}
-                <ul class="social text-center text-md-right text-lg-right">
-                    {{ range .Site.Params.footer.socialIcon }}
-                    <li><a href="{{ .url }}" target="_blank" rel="noopener noreferrer"><i class="{{ .icon }}"></i></a></li>
+                <ul class="social social-icons text-center text-md-right text-lg-right">
+                    {{ range . }}
+                      <li><a href="{{ .url }}" target="_blank" rel="noopener noreferrer"><i class="{{ .icon }}"></i>
+                      <span class="visible-hidden"> {{ .text }}</span></a></li>
                     {{ end }}
                 </ul>
             </div>
+            {{ end }}
         </div>
     </div>
 </footer>
