@@ -478,7 +478,7 @@ a:hover {
   z-index: 99;
 }
 
-.works .block:hover .img-overly .overly {
+.works .block:hover .img-overlay .overlay {
   opacity: 1;
 }
 
@@ -488,16 +488,16 @@ a:hover {
   color: #666;
 }
 
-.works .block .img-overly {
+.works .block .img-overlay {
   position: relative;
   background: rgba(0, 0, 0, 0.85);
 }
 
-.works .block .img-overly img {
+.works .block .img-overlay img {
   border-radius: 0;
 }
 
-.works .block .img-overly .overly {
+.works .block .img-overlay .overlay {
   background: rgba(57, 181, 74, 0.9);
   position: absolute;
   top: 0;
@@ -508,13 +508,13 @@ a:hover {
   transition: .3s all;
 }
 
-.works .block .img-overly .overly a {
+.works .block .img-overlay .overlay a {
   position: absolute;
   top: 45%;
   left: 22%;
 }
 
-.works .block .img-overly .overly a i {
+.works .block .img-overlay .overlay a i {
   font-size: 30px;
   color: #fff;
 }
@@ -609,6 +609,11 @@ figure figcaption h4 {
 figure .card-body h4 a,
 figure figcaption h4 a {
   color: #2cc0d3;
+}
+
+figure .card-body h4 a:hover,
+figure figcaption h4 a:hover {
+  color: #666;
 }
 
 figure figcaption p {
@@ -1181,7 +1186,7 @@ article {
   box-shadow: 0 0px 1px rgba(0, 0, 0, 0.14);
 }
 
-#related-items .block:hover .img-overly .overly {
+#related-items .block:hover .img-overlay .overlay {
   opacity: 1;
 }
 
@@ -1196,16 +1201,16 @@ article {
   color: #2cc0d3;
 }
 
-#related-items .block .img-overly {
+#related-items .block .img-overlay {
   position: relative;
   background: rgba(0, 0, 0, 0.85);
 }
 
-#related-items .block .img-overly img {
+#related-items .block .img-overlay img {
   border-radius: 0;
 }
 
-#related-items .block .img-overly .overly {
+#related-items .block .img-overlay .overlay {
   background: rgba(57, 181, 74, 0.9);
   position: absolute;
   top: 0;
@@ -1216,13 +1221,13 @@ article {
   transition: .3s all;
 }
 
-#related-items .block .img-overly .overly a {
+#related-items .block .img-overlay .overlay a {
   position: absolute;
   top: 45%;
   left: 45%;
 }
 
-#related-items .block .img-overly .overly a i {
+#related-items .block .img-overlay .overlay a i {
   font-size: 30px;
   color: #fff;
 }
