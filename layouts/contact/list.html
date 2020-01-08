@@ -29,8 +29,7 @@
                                 <textarea rows="6" placeholder="Your Message" class="form-control" name="message" id="message"></textarea>
                             </div>
 
-                            {{ $url := urls.Parse .Site.BaseURL }}
-                            <input type="hidden" name="_subject" value="Contact from {{ $url.Host }}">
+                            {{ with .Site.Data.contact.contactSubject }}<input type="hidden" name="_subject" value="{{ . }}">{{ end }}
                             <input type="text" name="_gotcha" style="display:none">
 
                             <div id="success" class="success">
