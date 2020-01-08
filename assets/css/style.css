@@ -161,12 +161,6 @@ a:hover {
   color: #fff;
 }
 
-/*
-.global-page-header .breadcrumb li:not(:first-child) {
-  padding-left: 1em;
-  border-left: 1px solid #fff;
-}
-*/
 .global-page-header .breadcrumb li:not(:first-child)::before {
   content: ">";
   padding-right: 5px;
@@ -343,9 +337,10 @@ a:hover {
   margin-bottom: 38px;
   line-height: 27px;
   text-transform: uppercase;
-  color: #444;
+  color: #333;
   font-family: 'Roboto', sans-serif;
   margin-top: 25px;
+  text-shadow: 0.1em 0.1em 0.4em white;
 }
 
 #hero-area .btn {
@@ -1328,6 +1323,7 @@ article {
 
 .cd-headline.slide .cd-words-wrapper {
   color: #2cc0d3;
+  text-shadow: 0.0em 0.0em 0.1em white;
 }
 
 ul.social-icons {
