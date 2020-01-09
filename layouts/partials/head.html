@@ -13,15 +13,29 @@
   {{ template "_internal/twitter_cards.html" . }}
   {{/* }}{{- partial "seo_schema" . -}} */}}
 
+  {{ "<!-- Favicon References -->" | safeHTML }}
+  {{ if (fileExists "static/apple-touch-icon.png") -}}
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  {{- end }}
+  {{ if (fileExists "static/favicon-32x32.png") -}}
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  {{- end }}
+  {{ if (fileExists "static/favicon-16x16.png") -}}
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  {{- end }}
+  {{ if (fileExists "static/site.webmanifest") -}}
+    <link rel="manifest" href="/site.webmanifest">
+  {{- end }}
+  {{ if (fileExists "static/safari-pinned-tab.svg") -}}
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  {{- end }}
+  <meta name="msapplication-TileColor" content="#00aba9">
+  <meta name="theme-color" content="#000000">
+
   {{ "<!-- Mobile Specific Metas -->" | safeHTML }}
   <meta name="format-detection" content="telephone=no">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ .Title }}</title>
-  {{ if (fileExists "static/images/favicon.svg") -}}
-  <link rel="icon" href="{{ "images/favicon.svg" | absURL }}" sizes="any" type="image/svg+xml">
-  {{- else -}}
-  <link rel="icon" href="{{ "images/favicon.ico" | absURL }}">
-  {{- end }}
 
   {{ "<!-- Twitter Bootstrap  -->" | safeHTML }}
   <link rel="stylesheet" href="{{ "plugins/bootstrap/bootstrap.min.css" | absURL }}">
