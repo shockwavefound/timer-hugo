@@ -1261,9 +1261,11 @@ article {
   margin: 50px 0;
 }
 
+/*
 .team-member {
-  XXXmargin-top: 30px;
+  margin-top: 30px;
 }
+*/
 
 .team-member:hover .team-img img {
   opacity: .8;
@@ -1298,6 +1300,7 @@ article {
   padding: 4px 8px;
   display: inline-block;
   font-size: 15px;
+  border-radius: 6px;
 }
 
 .team-member .social-icons .facebook {
@@ -1321,17 +1324,8 @@ article {
 
 #footer .social {
   text-align: right;
+  font-size: 13px;
   margin-bottom: 0;
-}
-
-#footer .social li {
-  display: inline-block;
-  margin-right: 15px;
-}
-
-#footer .social li a {
-  font-size: 22px;
-  color: #2cc0d3;
 }
 
 .cd-headline.slide .cd-words-wrapper {
@@ -1350,6 +1344,19 @@ ul.social-icons li {
   float: none;
   display: inline-block;
   height: 36px;
+}
+
+ul.social-icons li a {
+  background: #2cc0d3;
+  color: #fff;
+  padding: 4px 8px;
+  display: inline-block;
+  font-size: 15px;
+  border-radius: 6px;
+}
+
+#footer .ion-social-facebook {
+    padding: 3px 4px;
 }
 
 #copyright a:hover,
