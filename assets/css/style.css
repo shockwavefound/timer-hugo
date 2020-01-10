@@ -37,6 +37,14 @@ a:hover {
   text-decoration: none;
 }
 
+a {
+  color: #2cc0d3;
+}
+
+a:hover {
+  color: #27459c;
+}
+
 .slick-slide:focus {
   outline: 0;
 }
@@ -151,11 +159,11 @@ a:hover {
   display: block;
 }
 
-.global-page-header .breadcrumb li a {
+.global-page-header a {
   color: #eee;
 }
 
-.global-page-header .breadcrumb li a:hover {
+.global-page-header a:hover {
   color: #fff;
 }
 
@@ -222,7 +230,6 @@ a:hover {
 }
 
 .navbar .nav-item .nav-link {
-  color: #444 !important;
   font-size: 14px;
   font-weight: 500;
   transition: .3s all;
@@ -231,8 +238,9 @@ a:hover {
   display: block;
 }
 
-.navbar .nav-item .nav-link:hover {
-  color: #2cc0d3 !important;
+.navbar-light .navbar-nav .nav-link:focus,
+.navbar-light .navbar-nav .nav-link:hover {
+  color: #27459c;
 }
 
 .navbar .nav-item:last-child .nav-link {
@@ -240,7 +248,6 @@ a:hover {
 }
 
 .dropdown-menu {
-  background: #222222;
   border: 0;
   border-radius: 0;
   padding: 15px;
@@ -263,8 +270,6 @@ a:hover {
 }
 
 .dropdown-item {
-  color: #fff;
-  display: block;
   font-size: 14px;
   font-weight: 500;
   line-height: normal;
@@ -277,8 +282,13 @@ a:hover {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
+.dropdown-item.active,
+.dropdown-item:active: {
+  background-color: #2cc0d3;
+}
+
 .dropdown-item:hover {
-  color: #2cc0d3 !important;
+  color: #27459c !important;
   background: transparent;
 }
 
@@ -429,14 +439,6 @@ a:hover {
   max-width: 100%;
 }
 
-#about a {
-  color: #444 !important;
-}
-
-#about a:hover {
-  color: #2cc0d3 !important;
-}
-
 .about-feature .block {
   color: #fff;
   padding: 85px 65px;
@@ -578,6 +580,7 @@ figure .buttons {
   display: inline-block;
 }
 
+/*
 figure .buttons a:hover {
   background: #2cc0d3;
   border-color: #2cc0d3;
@@ -586,6 +589,7 @@ figure .buttons a:hover {
 figure .buttons a:focus {
   text-decoration: none;
 }
+*/
 
 figure figcaption {
   padding: 10px 25px;
@@ -597,26 +601,16 @@ figure figcaption h4 {
   margin: 0;
 }
 
-figure figcaption h4 a {
-  color: #2cc0d3;
-}
-
+/*
 figure figcaption h4 a:hover {
   color: #666;
 }
+*/
 
 figure figcaption p {
   font-size: 14px;
   margin-bottom: 0;
   margin-top: 5px;
-}
-
-.card-title a {
-  color: #444;
-}
-
-.card-title a:hover {
-  color: #2cc0d3;
 }
 
 #feature {
@@ -700,13 +694,8 @@ article {
 }
 
 .blog-content h2 a {
-  color: #444;
   font-weight: 400;
   font-size: 30px;
-}
-
-.blog-content h2 a:hover {
-  color: #2cc0d3;
 }
 
 .blog-content .blog-meta {
@@ -720,16 +709,17 @@ article {
   padding: 0 3px 0 6px;
 }
 
+/*
 .blog-content .blog-meta a {
   color: #acacac;
 }
+*/
 
 .blog-content .blog-meta p {
   margin-top: 20px;
 }
 
 .blog-content .btn-details {
-  color: #2cc0d3;
   padding: 0;
   background: #2cc0d3;
   color: #fff;
@@ -812,12 +802,7 @@ article {
 }
 
 .sidebar .recent-post ul li a {
-  color: #555;
   font-size: 15px;
-}
-
-.sidebar .recent-post ul li a:hover {
-  color: #2cc0d3;
 }
 
 .sidebar .recent-post time {
@@ -978,7 +963,6 @@ article {
 }
 
 .single-post .media .media-body a {
-  color: #2cc0d3;
   font-size: 12px;
 }
 
@@ -1036,14 +1020,6 @@ article {
   position: sticky;
   top: 100px;
   padding: 30px 25px;
-}
-
-.work-single-sidebar a {
-    color: #212529;
-}
-
-.work-single-sidebar a:hover {
-    color: #2cc0d3;
 }
 
 .work-single-sidebar h5 {
@@ -1267,7 +1243,6 @@ article {
 }
 
 .team-member h3 {
-  color: #2cc0d3;
   margin-bottom: 0;
   font-size: 20px;
 }
@@ -1298,10 +1273,6 @@ article {
 #footer .copyright {
   font-size: 13px;
   margin-bottom: 0;
-}
-
-#footer .copyright a {
-  color: #2cc0d3;
 }
 
 #footer .social {
@@ -1339,19 +1310,6 @@ ul.social-icons li a {
 
 #footer .ion-social-facebook {
     padding: 3px 4px;
-}
-
-#copyright a:hover,
-#copyright nav .menu li a:hover {
-  color: #e4e4e4 !important;
-}
-
-#copyright a {
-  text-decoration: none;
-}
-
-#copyright a:hover {
-  text-decoration: none;
 }
 
 /*# sourceMappingURL=maps/style.css.map */
