@@ -25,13 +25,10 @@
                                        aria-haspopup="true" aria-expanded="false"
                                        href="{{ .URL | absURL }}">{{ .Pre }}{{ .Name }}</a>
                                     <div class="dropdown-menu" aria-labeledby="dropdown{{ $index }}">
-                                        <ul>
                                         {{ range .Children }}
-                                          <li class="{{ if $currentPage.IsMenuCurrent "nav" . }}active{{ end }}">
-                                            <a class="dropdown-item" href="{{ .URL | absURL }}">{{ .Pre }}{{ .Name }}</a>
-                                          </li>
+                                        {{/* <a class="dropdown-item {{ if $currentPage.IsMenuCurrent "nav" . }}active{{ end }}" href="{{ .URL | absURL }}">{{ .Pre }}{{ .Name }}</a> */}}
+                                          <a class="dropdown-item" href="{{ .URL | absURL }}">{{ .Pre }}{{ .Name }}</a>
                                         {{ end }}
-                                        </ul>
                                     </div>
                                 </li>
                                 {{ else }}
