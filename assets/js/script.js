@@ -89,12 +89,9 @@
 
 }(jQuery));
 
-
-
-jQuery(document).ready(function () {
+$(document).ready(function () {
     "use strict";
     new WOW().init();
-
 
     (function () {
         jQuery('.smooth-scroll').scrollingTo();
@@ -102,11 +99,7 @@ jQuery(document).ready(function () {
 
 });
 
-
-
-
 $(document).ready(function () {
-
     $(window).scroll(function () {
         if ($(window).scrollTop() > 50) {
             $(".navbar-brand a").css("color", "#fff");
@@ -141,11 +134,7 @@ $(document).ready(function () {
           }
         ]
       });
-
-
 });
-
-
 
 // fancybox
 $(".fancybox").fancybox({
@@ -168,4 +157,19 @@ $(".fancybox").fancybox({
             }
         }
     }
+});
+
+/*
+ * Override bootstrap and allow us to click on a dropdown menu parent
+ */
+$('.navbar .dropdown').hover(function() {
+    $(this).find('.dropdown-menu').first().stop(true, true).delay(250).slideDown();
+
+}, function() {
+    $(this).find('.dropdown-menu').first().stop(true, true).delay(100).slideUp();
+
+});
+
+$('.navbar .dropdown > a').click(function(){
+    location.href = this.href;
 });
