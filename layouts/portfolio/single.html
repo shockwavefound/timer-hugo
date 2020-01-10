@@ -74,33 +74,35 @@
                     <h5>Location(s)</h5>
                     <h6>{{ delimit . ", " }}</h6>
                     {{ end }}
-                    {{ with .requested }}
-                    <h5>Requested</h5>
-                    <h6>{{ . }}</h6>
-                    {{ end }}
-                    {{ with .awarded }}
-                    <h5>Awarded</h5>
-                    <h6>{{ . }}</h6>
-                    {{ end }}
-                    {{ with .invested }}
-                    <h5>Invested</h5>
-                    <h6>{{ . }}</h6>
-                    {{ end }}
-                    {{ with .distributed }}
-                    <h5>Distributed</h5>
-                    <h6>{{ . }}</h6>
-                    {{ end }}
-                    {{ with .datesubmitted }}
-                    <h5>Date Submitted</h5>
-                    <h6>{{ dateFormat "January 2006" . }}</h6>
-                    {{ end }}
-                    {{ with .dateawarded }}
-                    <h5>Date Awarded</h5>
-                    <h6>{{ dateFormat "January 2006" . }}</h6>
-                    {{ end }}
-                    {{ with .duration }}
-                    <h5>Project Duration</h5>
-                    <h6>{{ . }}</h6>
+                    {{ range .awards }}
+                      {{ with .datesubmitted }}
+                        <h5>Date Submitted</h5>
+                        <h6>{{ dateFormat "January 2006" . }}</h6>
+                      {{ end }}
+                      {{ with .dateawarded }}
+                        <h5>Date Awarded</h5>
+                        <h6>{{ dateFormat "January 2006" . }}</h6>
+                      {{ end }}
+                      {{ with .requested }}
+                        <h5>Requested</h5>
+                        <h6>{{ . }}</h6>
+                      {{ end }}
+                      {{ with .awarded }}
+                        <h5>Awarded</h5>
+                        <h6>{{ . }}</h6>
+                      {{ end }}
+                      {{ with .invested }}
+                        <h5>Invested</h5>
+                        <h6>{{ . }}</h6>
+                      {{ end }}
+                      {{ with .distributed }}
+                        <h5>Distributed</h5>
+                        <h6>{{ . }}</h6>
+                      {{ end }}
+                      {{ with .duration }}
+                        <h5>Project Duration</h5>
+                        <h6>{{ . }}</h6>
+                      {{ end }}
                     {{ end }}
                 </div>
                 {{ end }}
