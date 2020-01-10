@@ -75,11 +75,11 @@
                     <h6>{{ delimit . ", " }}</h6>
                     {{ end }}
                     {{ range .awards }}
-                      {{ with .datesubmitted }}
+                      {{ with .dateSubmitted }}
                         <h5>Date Submitted</h5>
                         <h6>{{ dateFormat "January 2006" . }}</h6>
                       {{ end }}
-                      {{ with .dateawarded }}
+                      {{ with .dateAwarded }}
                         <h5>Date Awarded</h5>
                         <h6>{{ dateFormat "January 2006" . }}</h6>
                       {{ end }}
