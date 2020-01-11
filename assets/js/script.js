@@ -161,15 +161,17 @@ $(".fancybox").fancybox({
 
 /*
  * Override bootstrap and allow us to click on a dropdown menu parent
+ * Don't do this on touch-screen devices.
  */
-$('.navbar .dropdown').hover(function() {
-    $(this).find('.dropdown-menu').first().stop(true, true).delay(250).slideDown();
-
-}, function() {
-    $(this).find('.dropdown-menu').first().stop(true, true).delay(100).slideUp();
-
-});
-
-$('.navbar .dropdown > a').click(function(){
-    location.href = this.href;
-});
+ jQuery(function($) {
+     if($(window).width() > 769) {
+         $('.navbar .dropdown').hover(function() {
+             $(this).find('.dropdown-menu').first().stop(true, true).delay(250).slideDown();
+         }, function() {
+             $(this).find('.dropdown-menu').first().stop(true, true).delay(100).slideUp();
+         });
+         $('.navbar .dropdown > a').click(function(){
+             location.href = this.href;
+         });
+     }
+ });
