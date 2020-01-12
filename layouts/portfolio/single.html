@@ -85,19 +85,19 @@
                       {{ end }}
                       {{ with .requested }}
                         <h5>Requested</h5>
-                        <h6>{{ . }}</h6>
+                        <h6>${{ lang.NumFmt 0 . }}</h6>
                       {{ end }}
                       {{ with .awarded }}
                         <h5>Awarded</h5>
-                        <h6>{{ . }}</h6>
+                        <h6>${{ lang.NumFmt 0 . }}</h6>
                       {{ end }}
                       {{ with .invested }}
                         <h5>Invested</h5>
-                        <h6>{{ . }}</h6>
+                        <h6>${{ lang.NumFmt 0 . }}</h6>
                       {{ end }}
                       {{ with .distributed }}
                         <h5>Distributed</h5>
-                        <h6>{{ . }}</h6>
+                        <h6>${{ lang.NumFmt 0 . }}</h6>
                       {{ end }}
                       {{ with .duration }}
                         <h5>Project Duration</h5>
