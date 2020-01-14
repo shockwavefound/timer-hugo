@@ -6,7 +6,7 @@ description : "This is meta description"
 caption: Fashion Design
 image: images/portfolio/item-4.jpg
 categories: ["fashion","package"]
-liveLink: https://www.themefisher.com
+website: https://www.themefisher.com
 client: Julia Robertson
 submitDate: November 20, 2017
 location: 1201 park street, Avenue, Dhaka

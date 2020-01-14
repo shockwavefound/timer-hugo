@@ -43,9 +43,9 @@
                     {{ if .logo }}
                       {{ $logo := $.Page.Resources.GetMatch (printf "*%s*" .logo) }}
                       {{ if $logo }}
-                        {{ with .livelink }}<a href="{{ . }}" target="_blank">{{ end }}
+                        {{ with .website }}<a href="{{ . }}" target="_blank">{{ end }}
                           <img class="img-fluid mx-auto d-block p-3" src="{{ $logo.Permalink }}" alt="{{ .name }} logo">
-                        {{ with .livelink }}</a>{{ end }}
+                        {{ with .website }}</a>{{ end }}
                       {{ else }}
                         {{ errorf "%s: %s: Not found" $.File.Path .logo }}
                       {{ end }}
@@ -54,7 +54,7 @@
                     <h5>Organization</h5>
                     <h6>{{ . }}</h6>
                     {{ end }}
-                    {{ with .liveLink }}
+                    {{ with .website }}
                     <h5>Website</h5>
                     <h6><a href="{{ . }}" target="_blank">{{ . }}</a></h6>
                     {{ end }}
