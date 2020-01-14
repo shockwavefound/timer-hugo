@@ -1,16 +1,16 @@
-{{ define "breadcrumbnav" }}
-{{ if .p1.Parent }}
-{{ template "breadcrumbnav" (dict "p1" .p1.Parent "p2" .p2 )  }}
-{{ else if not .p1.IsHome }}
-{{ template "breadcrumbnav" (dict "p1" .p1.Site.Home "p2" .p2 )  }}
-{{ end }}
+{{ define "breadcrumbnav" -}}
+{{ if .p1.Parent -}}
+{{ template "breadcrumbnav" (dict "p1" .p1.Parent "p2" .p2 )  -}}
+{{ else if not .p1.IsHome -}}
+{{ template "breadcrumbnav" (dict "p1" .p1.Site.Home "p2" .p2 )  -}}
+{{ end -}}
 <li class="list-inline-item{{ if eq .p1 .p2 }} active{{ end }}">
   <a href="{{ .p1.Permalink }}">
-    {{ if .p1.IsHome }}
+    {{- if .p1.IsHome -}}
       <i class="ion-ios-home"></i> Home
-    {{ else }}
-      {{ .p1.Title }}
-    {{ end }}
+    {{- else -}}
+      {{- .p1.Title -}}
+    {{- end -}}
   </a>
 </li>
-{{ end }}
+{{ end -}}
