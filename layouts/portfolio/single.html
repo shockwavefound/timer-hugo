@@ -74,7 +74,8 @@
                     <h5>Location(s)</h5>
                     <h6>{{ delimit . ", " }}</h6>
                     {{ end }}
-                    {{ range .awards }}
+                    {{ range sort .awards "dateAwarded" "desc" }}
+                      <hr>
                       {{ with .dateSubmitted }}
                         <h5>Date Submitted</h5>
                         <h6>{{ dateFormat "January 2006" . }}</h6>
