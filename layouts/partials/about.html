@@ -1,9 +1,10 @@
 {{ if .Site.Params.about.enable }}
 {{ "<!-- About Section Start -->" | safeHTML }}
+{{ $width := cond (isset .Site.Params.about "twitter") "col-sm-4" "col-sm-6" }}
 <section id="about">
     <div class="container">
         <div class="row">
-            <div class="col-sm-6">
+            <div class="{{ $width }}">
                 <div class="block wow fadeInLeft" data-wow-delay=".3s" data-wow-duration="500ms">
                     {{ if .Site.Params.about.titleLink }}<a href="{{ .Site.Params.about.titleLink }}">{{ end -}}
                     {{ with .Site.Params.about.title }}<h1>{{ . }}</h1>{{ end -}}
@@ -11,11 +12,18 @@
                     {{ with .Site.Params.about.content }}<p>{{ . | safeHTML }}</p>{{ end }}
                 </div>
             </div>
-            <div class="col-sm-6">
+            <div class="{{ $width }}">
                 <div class="block wow fadeInRight" data-wow-delay=".3s" data-wow-duration="500ms">
                     {{ with .Site.Params.about.image }}<img src="{{ . | absURL }}" alt="{{ $.Site.Params.about.imageAlt | default "about-image" }}">{{ end }}
                 </div>
             </div>
+            {{ with .Site.Params.about.twitter }}
+              <div class="{{ $width }}">
+                <div class="block wow fadeInRight" data-wow-delay=".3s" data-wow-duration="500ms">
+                  {{ partial "twitter_widget.html" . }}
+                </div>
+              </div>
+            {{ end }}
         </div>
     </div>
 </section>

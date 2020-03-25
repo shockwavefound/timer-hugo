@@ -1,0 +1,22 @@
+{{ with . }}
+  <div class="card">
+    <div class="card-body">
+      {{/* widget classes are twitter-follow-button, twitter-timeline ... */}}
+      <a class="{{ .class | default "twitter-timeline" }}"
+        {{ with .tweet_limit }}
+          data-tweet-limit="{{ . }}"
+        {{ end }}
+        {{/* noheader nofooter noborders noscrollbar transparent */}}
+        {{ with .chrome }}
+          data-chrome="{{ . }}"
+        {{ end }}
+        {{ with .aria_polite }}
+          data-aria-polite="{{ . }}"
+        {{ end }}
+          data-height="{{ .height | default "100%" }}"
+          data-width="{{ .width | default "100%" }}"
+          href="https://twitter.com/{{ .profile }}?ref_src=twsrc%5Etfw">Tweets by {{ .profile }}</a>
+      <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    </div>
+  </div>
+{{ end }}
