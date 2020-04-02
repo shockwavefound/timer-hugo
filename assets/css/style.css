@@ -25,6 +25,10 @@ body {
   background: #ffffff;
 }
 
+/*
+ * commented out so I could use UL/LI in blog posts...
+ * April 1, 2020 - pst
+
 ul {
   padding-left: 0;
 }
@@ -32,6 +36,7 @@ ul {
 ul li {
   list-style: none;
 }
+*/
 
 a:hover {
   text-decoration: none;
@@ -952,10 +957,14 @@ article {
   border-left: 5px solid #eee;
 }
 
+/* commented out for now - pst 4/1/2020
+
 .single-post .post-content ol li,
 .single-post .post-content ul li {
   color: #666;
 }
+*/
+
 
 .single-post .media {
   border: 1px solid #dedede;
