@@ -1,0 +1,59 @@
+{{ if .Site.Params.news.enable }}
+{{ "<!-- News Section Start -->" | safeHTML }}
+{{ $maxItems := cond (isset .Site.Params.about "news") 2 3 }}
+<section id="works" class="works">
+    <div class="container">
+        <div class="section-heading">
+            {{ with .Site.Params.news.title }}<h1 class="title wow fadeInDown" data-wow-delay=".3s">{{ . }}</h1>{{ end }}
+            {{ with .Site.Params.news.subtitle }}<p class="wow fadeInDown" data-wow-delay=".5s">{{ . }}</p>{{ end }}
+        </div>
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
+          {{ range $index, $element:= first 3 (where .Site.RegularPages "Type" "blog") }}
+            <div class="col mb-3">
+              {{ $delay := mul $index 300 }}
+              <figure class="news-item card h-100 wow fadeInLeft animated" data-wow-duration="500ms" data-wow-delay="{{ $delay }}ms">
+                {{ $original := .Page.Resources.GetMatch (printf "*%s*" .Params.image) }}
+                {{ if $original }}
+                  {{ $image := $original.Fill "350x240 left" }}
+                  <div class="img-wrapper">
+                    <img src="{{ $image.Permalink }}" class="card-img-top news-pic" alt="{{ .Title }}"/>
+                    <div class="overlay">
+                      <div class="buttons">
+                        {{/* <a rel="gallery" class="fancybox" href="{{ $original.Permalink }}">Demo</a> */}}
+                        <a href="{{ .Permalink }}">Details</a>
+                      </div>
+                    </div>
+                  </div>
+                {{ else }}
+                  {{ errorf "%s: %s not found." .File.Path .Params.image }}
+                {{ end }}
+                <div class="card-body">
+                  <h2 class="card-title">
+                    <a href="{{ .Permalink }}">
+                      {{ .Title }}
+                    </a>
+                  </h2>
+                  {{ with .Date }}
+                    <h6 class="card-subtitle mb-2 text-muted">
+                      {{ dateFormat "January 2, 2006" . }}
+                    </h6>
+                  {{ end }}
+                  <p class="card-text">
+                    {{ .Summary }}
+                  </p>
+                </div>
+              </figure>
+            </div>
+          {{ end }}
+          {{ with .Site.Params.news.twitter }}
+            <div class="col mb-3">
+              <div class="block wow fadeInRight" data-wow-delay=".3s" data-wow-duration="500ms">
+                {{ partial "twitter_widget.html" . }}
+              </div>
+            </div>
+          {{ end }}
+        </div>
+    </div>
+</section>
+{{ "<!-- News Section End -->" | safeHTML }}
+{{ end }}

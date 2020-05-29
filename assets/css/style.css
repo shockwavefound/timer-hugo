@@ -933,11 +933,13 @@ article {
   left: 40%;
 }
 
+.news-meta span,
 .portfolio-meta span {
   margin: 5px 10px;
   font-weight: 300;
 }
 
+.news-meta span,
 .portfolio-meta span a {
   color: #fff;
 }
