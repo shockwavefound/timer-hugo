@@ -32,6 +32,12 @@
                             <label for="gotcha" style="display:none">Don't fill this in</label>
                             <input type="text" id="gotcha" name="_gotcha" style="display:none">
 
+
+                            {{ with .Site.Data.contact.reCAPTCHAkey }}
+                            <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+                            <div class="g-recaptcha" data-sitekey="{{ . }}"></div>
+                            {{ end }}
+
                             <div id="success" class="success">
                                 Thank you, your message is on its way.
                             </div>
