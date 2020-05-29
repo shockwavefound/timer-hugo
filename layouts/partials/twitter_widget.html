@@ -1,5 +1,5 @@
 {{ with . }}
-  <div class="card">
+  <div class="card" style="border: none;">
     <div class="card-body">
       {{/* widget classes are twitter-follow-button, twitter-timeline ... */}}
       <a class="{{ .class | default "twitter-timeline" }}"
@@ -12,6 +12,9 @@
         {{ end }}
         {{ with .aria_polite }}
           data-aria-polite="{{ . }}"
+        {{ end }}
+        {{ with .dnt }}
+          data-dnt="true"
         {{ end }}
           data-height="{{ .height | default "100%" }}"
           data-width="{{ .width | default "100%" }}"
