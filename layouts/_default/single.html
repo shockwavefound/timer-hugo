@@ -27,18 +27,30 @@
                     <span>{{ dateFormat "Monday, Jan 2, 2006" .Date }}</span>
                     {{ with .Params.tags }}<span>&mdash; {{ delimit . ", " }} </span>{{ end }}
                 </div>
-                {{ if isset .Params "author" }}
-                  {{ $author := index .Site.Data.authors .Params.author }}
-                  {{ with $author }}
-                    <div class="post-byline">
-                      {{ .name }}
-                      {{ with .title }}<div class="post-byline-title">{{ . }}{{ end }}</div>
-                    </div>
-                  {{ end }}
-                {{ end }}
                 <div class="post-content">
                     {{ .Content }}
                 </div>
+                {{ if isset .Params "author" }}
+                  <div class="byline">
+                    {{ $author := index .Site.Data.authors .Params.author }}
+                    {{ if isset $author "image" }}
+                      {{ $about_bundle  := .Site.GetPage "/about" }}
+                      {{ $original := $about_bundle.Resources.GetMatch $author.image }}
+                      {{ $image := $original.Fill "66x100" }}
+                      {{ $grey := $image | images.Filter (images.Grayscale) }}
+                      <img class="byline-pic" src="{{ $grey.Permalink }}"
+                                              alt="{{ $author.name }} portrait">
+                    {{ end }}
+                    {{ with $author }}
+                      <div class="byline-name">
+                        by {{ .name }}
+                        {{ with .title }}
+                          <div class="byline-title">{{ . }}</div>
+                        {{ end }}
+                      </div>
+                    {{ end }}
+                  </div>
+                {{ end }}
             </div>
             {{ template "_internal/disqus.html" . }}
         </div>
