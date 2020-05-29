@@ -23,6 +23,19 @@
                     {{ errorf "%s: %s not found." .File.Path .Params.image }}
                   {{ end }}
                 {{ end }}
+                <div class="post-date">
+                    <span>{{ dateFormat "Monday, Jan 2, 2006" .Date }}</span>
+                    {{ with .Params.tags }}<span>&mdash; {{ delimit . ", " }} </span>{{ end }}
+                </div>
+                {{ if isset .Params "author" }}
+                  {{ $author := index .Site.Data.authors .Params.author }}
+                  {{ with $author }}
+                    <div class="post-byline">
+                      {{ .name }}
+                      {{ with .title }}<div class="post-byline-title">{{ . }}{{ end }}</div>
+                    </div>
+                  {{ end }}
+                {{ end }}
                 <div class="post-content">
                     {{ .Content }}
                 </div>
