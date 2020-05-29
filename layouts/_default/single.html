@@ -23,6 +23,32 @@
                     {{ errorf "%s: %s not found." .File.Path .Params.image }}
                   {{ end }}
                 {{ end }}
+                {{ if isset .Params "author" }}
+                  {{ $author := index .Site.Data.authors .Params.author }}
+                  <div class="row mb-2">
+                    <div class="col-md-6">
+                      <div class="card flex-md-row mb-4 shadow-sm h-md-250">
+                        {{ if isset $author "image" }}
+                          {{ $about_bundle  := .Site.GetPage "/about" }}
+                          {{ $original := $about_bundle.Resources.GetMatch $author.image }}
+                          {{ $image := $original.Fill "66x100" }}
+                          {{ $grey := $image | images.Filter (images.Grayscale) }}
+                        <img class="byline-pic card-img-left flex-auto d-none d-lg-block"
+                             src="{{ $grey.Permalink }}"
+                             alt="{{ $author.name }} portrait">
+                        {{ end }}
+                        <div class="card-body d-flex flex-column align-items-start">
+                          {{ with $author }}
+                            <h5 class="byline-name mb-0 text-dark">{{ .name }}</h5>
+                            {{ with .title }}
+                              <h6 class="byline-title mb-1 text-muted small">{{ . }}</h6>
+                            {{ end }}
+                          {{ end }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                {{ end }}
                 <div class="post-date">
                     <span>{{ dateFormat "Monday, Jan 2, 2006" .Date }}</span>
                     {{ with .Params.tags }}<span>&mdash; {{ delimit . ", " }} </span>{{ end }}
@@ -30,26 +56,13 @@
                 <div class="post-content">
                     {{ .Content }}
                 </div>
-                {{ if isset .Params "author" }}
-                  <div class="byline">
-                    {{ $author := index .Site.Data.authors .Params.author }}
-                    {{ if isset $author "image" }}
-                      {{ $about_bundle  := .Site.GetPage "/about" }}
-                      {{ $original := $about_bundle.Resources.GetMatch $author.image }}
-                      {{ $image := $original.Fill "66x100" }}
-                      {{ $grey := $image | images.Filter (images.Grayscale) }}
-                      <img class="byline-pic" src="{{ $grey.Permalink }}"
-                                              alt="{{ $author.name }} portrait">
-                    {{ end }}
-                    {{ with $author }}
-                      <div class="byline-name">
-                        by {{ .name }}
-                        {{ with .title }}
-                          <div class="byline-title">{{ . }}</div>
-                        {{ end }}
-                      </div>
-                    {{ end }}
-                  </div>
+                {{ if .Params.about }}
+                    <hr>
+                    <p class="mission text-muted small">
+                      {{ .Site.Params.about.content | safeHTML }}
+                      For more information, visit
+                      <a href="{{ .Site.BaseURL }}">{{ .Site.BaseURL }}</a>.
+                    </p>
                 {{ end }}
             </div>
             {{ template "_internal/disqus.html" . }}
