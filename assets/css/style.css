@@ -1324,3 +1324,83 @@ ul.social-icons li a {
 }
 
 /*# sourceMappingURL=maps/style.css.map */
+
+/* taxonomy terms */
+.badge-category,
+a.badge-category {
+  color: #fff !important;
+  background-color: #9b59b6;
+  &:hover, &:focus {
+    color: #9b59b6 !important;
+    background: transparent;
+    background-color: transparent;
+    text-decoration: none;
+    border-bottom: none;
+  }
+}
+
+.badge-tag,
+a.badge-tag {
+  color: #fff !important;
+  background-color: #2cc0d3;
+  &:hover, &:focus {
+    color: #2cc0d3 !important;
+    background: transparent;
+    background-color: transparent;
+    text-decoration: none;
+    border-bottom: none;
+  }
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.25em 0.4em;
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 0.25rem;
+}
+
+.letter {
+    color: #3c6382;
+    font-size: 1.2rem;
+    font-weight: 400;
+    display: inline-block;
+    width: 100%;
+    border-bottom: 1.25pt solid #3c6382;
+    margin-top: 1rem;
+    margin-bottom: .5rem;
+}
+
+.badge-tag-list,
+a.badge-tag-list {
+  color: #2cc0d3 !important;
+  border-radius: 0.25rem;
+  border: 1pt #2cc0d3 solid;
+  &:hover, &:focus {
+    color: #fff !important;
+    background-color: #2cc0d3;
+    // background: transparent;
+    // background-color: transparent;
+    text-decoration: none;
+    border-bottom: none;
+  }
+}
+
+.badge-tag-list-page,
+a.badge-tag-list-page {
+  color: #2cc0d3 !important;
+  font-size: $root-font-size;
+  min-width: 200px;
+  border-radius: 0.25rem;
+  margin-bottom: 5px;
+  margin-right: 5px;
+  border: 1pt #2cc0d3 solid;
+  &:hover, &:focus {
+    color: #fff !important;
+    background-color: #2cc0d3;
+  }
+}
