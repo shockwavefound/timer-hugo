@@ -27,6 +27,10 @@
                         </h2>
                         <div class="blog-meta">
                             <span>{{ dateFormat "January, 2006" .Date }}</span>
+                            {{ with .Params.categories }}<span>&mdash;
+                                {{ delimit . ", " }}
+                            </span>
+                            {{ end }}
                             {{ with .Params.tags }}<span>&mdash;
                                 {{ delimit . ", " }}
                             </span>
