@@ -25,29 +25,13 @@ body {
   background: #ffffff;
 }
 
-/*
- * commented out so I could use UL/LI in blog posts...
- * April 1, 2020 - pst
-
-ul {
-  padding-left: 0;
-}
-
-ul li {
-  list-style: none;
-}
-*/
-
-a:hover {
-  text-decoration: none;
-}
-
 a {
   color: #2cc0d3;
 }
 
 a:hover {
   color: #27459c;
+  text-decoration: none;
 }
 
 .slick-slide:focus {
@@ -211,14 +195,12 @@ a:hover {
   background: #fff;
   color: #fff;
   transition: all 0.2s ease-out 0s;
-  /* padding: 15px 0; */
   box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.1);
   border-bottom: 1px solid #dedede;
   z-index: 10;
 }
 
 .top-bar.animated-header {
-  /* padding: 20px 0; */
   background: #fff;
   box-shadow: none;
 }
@@ -585,17 +567,6 @@ figure .buttons {
   display: inline-block;
 }
 
-/*
-figure .buttons a:hover {
-  background: #2cc0d3;
-  border-color: #2cc0d3;
-}
-
-figure .buttons a:focus {
-  text-decoration: none;
-}
-*/
-
 figure figcaption {
   padding: 10px 25px;
   margin-top: 0;
@@ -605,12 +576,6 @@ figure figcaption {
 figure figcaption h4 {
   margin: 0;
 }
-
-/*
-figure figcaption h4 a:hover {
-  color: #666;
-}
-*/
 
 figure figcaption p {
   font-size: 14px;
@@ -710,15 +675,8 @@ article {
 }
 
 .blog-content .blog-meta span:after {
-  XXXcontent: '/';
   padding: 0 3px 0 6px;
 }
-
-/*
-.blog-content .blog-meta a {
-  color: #acacac;
-}
-*/
 
 .blog-content .blog-meta p {
   margin-top: 20px;
@@ -933,17 +891,6 @@ article {
   left: 40%;
 }
 
-.news-meta span,
-.portfolio-meta span {
-  margin: 5px 10px;
-  font-weight: 300;
-}
-
-.news-meta span,
-.portfolio-meta span a {
-  color: #fff;
-}
-
 .single-post {
   padding: 80px 0 20px;
 }
@@ -958,15 +905,6 @@ article {
   font-size: 17.5px;
   border-left: 5px solid #eee;
 }
-
-/* commented out for now - pst 4/1/2020
-
-.single-post .post-content ol li,
-.single-post .post-content ul li {
-  color: #666;
-}
-*/
-
 
 .single-post .media {
   border: 1px solid #dedede;
@@ -1323,8 +1261,6 @@ ul.social-icons li a {
     padding: 3px 4px;
 }
 
-/*# sourceMappingURL=maps/style.css.map */
-
 /* taxonomy terms */
 .badge-category,
 a.badge-category {
@@ -1404,3 +1340,5 @@ a.badge-tag-list-page {
     background-color: #2cc0d3;
   }
 }
+
+/*# sourceMappingURL=maps/style.css.map */
