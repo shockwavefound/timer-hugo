@@ -33,7 +33,6 @@
   <meta name="theme-color" content="#000000">
 
   {{ "<!-- Mobile Specific Metas -->" | safeHTML }}
-  <meta name="format-detection" content="telephone=no">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ .Title }}</title>
 
@@ -43,22 +42,22 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700|Roboto+Condensed:400,300,700">
 
   {{ "<!-- Twitter Bootstrap  -->" | safeHTML }}
-  <link rel="stylesheet" href="{{ "plugins/bootstrap/bootstrap.min.css" | absURL }}">
+  <link rel="stylesheet" href="{{ `plugins/bootstrap/bootstrap.min.css` | absURL }}">
   {{ "<!-- Ionicons Fonts  -->" | safeHTML }}
-  <link rel="stylesheet" href="{{ "plugins/ionicons/ionicons.min.css" | absURL }}">
+  <link rel="stylesheet" href="{{ `plugins/ionicons/ionicons.min.css` | absURL }}">
   {{ "<!-- FontAwesome Fonts -->" | safeHTML }}
-  <link rel="stylesheet" href="{{ "plugins/fontawesome/css/all.min.css" | absURL }}">
+  <link rel="stylesheet" href="{{ `plugins/fontawesome/css/all.min.css` | absURL }}">
   {{ "<!-- animate css -->" | safeHTML }}
-  <link rel="stylesheet" href="{{ "plugins/animate-css/animate.css" | absURL }}">
+  <link rel="stylesheet" href="{{ `plugins/animate-css/animate.css` | absURL }}">
   {{ "<!-- Hero area slider -->" | safeHTML }}
-  <link rel="stylesheet" href="{{ "plugins/slider/slider.css" | absURL }}">
+  <link rel="stylesheet" href="{{ `plugins/slider/slider.css` | absURL }}">
   {{ "<!-- slick slider -->" | safeHTML }}
-  <link rel="stylesheet" href="{{ "plugins/slick/slick.css" | absURL }}">
+  <link rel="stylesheet" href="{{ `plugins/slick/slick.css` | absURL }}">
   {{ "<!-- Fancybox -->" | safeHTML }}
-  <link rel="stylesheet" href="{{ "plugins/fancybox/jquery.fancybox.min.css" | absURL }}">
+  <link rel="stylesheet" href="{{ `plugins/fancybox/jquery.fancybox.min.css` | absURL }}">
   {{ "<!-- hover -->" | safeHTML }}
-  <link rel="stylesheet" href="{{ "plugins/hover/hover-min.css" | absURL }}">
+  <link rel="stylesheet" href="{{ `plugins/hover/hover-min.css` | absURL }}">
   {{ "<!-- template main css file -->" | safeHTML }}
   {{ $styles := resources.Get "css/style.css" | minify}}
-  <link rel="stylesheet" href="{{ $styles.Permalink }}" integrity="{{ $styles.Data.Integrity }}" media="screen">
+  <link rel="stylesheet" href="{{ $styles.Permalink }}" media="screen">
 </head>

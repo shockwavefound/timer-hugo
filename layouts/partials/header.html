@@ -4,7 +4,7 @@
             <div class="col-lg-12">
                 <nav class="navbar navbar-expand-md navbar-light bg-light">
                     <a class="navbar-brand" href="{{ .Site.BaseURL }}">
-                        <img src="{{ .Site.Params.logo | absURL }}" alt="{{ .Site.Params.logoAlt | default "logo" }}">
+                        <img src="{{ .Site.Params.logo | absURL }}" alt="{{ .Site.Params.logoAlt | default .Site.Title }}">
                     </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
                         aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
@@ -14,12 +14,12 @@
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item{{ if .IsHome }} active{{ end }}">
                                 <a class="nav-link"
-                                    href="{{ .Site.BaseURL }}">{{ with .Site.Params.home }}{{ . }}{{ end }}</a>
+                                    href="{{ .Site.BaseURL }}">{{ .Site.Params.home }}</a>
                             </li>
                             {{ $currentPage := . }}
-                            {{ range $index, $element := .Site.Menus.nav }}
+                            {{ range $index, $element := .Site.Menus.main }}
                                 {{ if .HasChildren }}
-                                <li class="nav-item dropdown{{ if $currentPage.HasMenuCurrent "nav" . }} active{{ end }}">
+                                <li class="nav-item dropdown{{ if $currentPage.HasMenuCurrent "main" . }} active{{ end }}">
                                     <a class="nav-link dropdown-toggle" role="button"
                                        data-toggle="dropdown" id="dropdown{{ $index }}"
                                        aria-haspopup="true" aria-expanded="false"
@@ -32,7 +32,7 @@
                                     </div>
                                 </li>
                                 {{ else }}
-                                <li class="nav-item {{ if $currentPage.IsMenuCurrent "nav" . }} active{{ end }}">
+                                <li class="nav-item {{ if $currentPage.IsMenuCurrent "main" . }} active{{ end }}">
                                     <a class="nav-link" href="{{ .URL | absURL }}">{{ .Pre }}{{ .Name }}</a>
                                 </li>
                                 {{ end }}
