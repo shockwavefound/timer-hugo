@@ -942,6 +942,14 @@ article {
   border-radius: 0;
 }
 
+.work-list .tag-cloud {
+  background: #eae9ec;
+}
+
+.work-list .tag-cloud a {
+  Xcolor: #848484 !important;
+}
+
 /* portfolio single */
 .work-single {
   padding: 100px 0 20px;
