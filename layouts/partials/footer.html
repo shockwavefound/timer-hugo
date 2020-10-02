@@ -43,6 +43,13 @@
 <script src="{{ `plugins/slider/slider.js` | absURL }}"></script>
 {{ "<!-- Fancybox -->" | safeHTML }}
 <script src="{{ `plugins/fancybox/jquery.fancybox.js` | absURL }}"></script>
+{{ "<!-- Embedded Search w/Fuse -->" | safeHTML }}
+<div id="fastSearch">
+    <input id="searchInput" tabindex="0">
+    <ul id="searchResults"></ul>
+</div>
+<script src="{{ `plugins/fusejs.io/fuse.min.js` | absURL }}"></script>
+<script src="{{ `plugins/fastsearch/fastsearch.js` | absURL }}"></script>
 {{ "<!-- template main js -->" | safeHTML }}
 {{ $script := resources.Get "js/script.js" | minify}}
 <script src="{{ $script.Permalink }}"></script>
