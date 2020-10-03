@@ -45,8 +45,18 @@
 <script src="{{ `plugins/fancybox/jquery.fancybox.js` | absURL }}"></script>
 {{ "<!-- Embedded Search w/Fuse -->" | safeHTML }}
 <script src="{{ `plugins/fusejs.io/fuse.min.js` | absURL }}"></script>
-<script src="{{ `plugins/markjs.io/jquery.mark.min.js` | absURL }}"></script>
+{{/* <script src="{{ `plugins/markjs.io/jquery.mark.min.js` | absURL }}"></script> */}}
 <script src="{{ `plugins/fastsearch/fastsearch.js` | absURL }}"></script>
+<script id="searchResultsTemplate" type="text/x-js-template">
+    <li>
+        <a href="${permalink}" tabindex="0">
+            <span class="title">${title}</span><br/>
+            <span class="section">${section}</span>
+            ${isset date}<span class="date">${date}</span>${end}
+            ${isset summary}<span class="summary">${summary}${end}
+        </a>
+    </li>
+</script>
 {{ "<!-- template main js -->" | safeHTML }}
 {{ $script := resources.Get "js/script.js" | minify}}
 <script src="{{ $script.Permalink }}"></script>

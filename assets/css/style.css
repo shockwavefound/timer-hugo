@@ -1370,13 +1370,6 @@ a.badge-tag-list-page {
   border-bottom: 1px dotted #000;
 }
 
-#searchResults li .title {
-  font-size: 1.5em;
-  margin-bottom: 10px;
-  display: inline-block;
-  color: #2cc0d3;
-}
-
 #searchResults a {
   text-decoration: none !important;
   padding: 10px;
@@ -1388,6 +1381,24 @@ a.badge-tag-list-page {
   outline: 0;
   background-color: #666;
   color: #fff;
+}
+
+#searchResults li .title {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+  display: inline-block;
+  color: #2cc0d3;
+}
+
+#searchResults li .section {
+  font-variant-caps: all-small-caps;
+}
+
+#searchResults li .date {
+}
+
+#searchResults li .summary {
+   font-style: italic;
 }
 
 /*# sourceMappingURL=maps/style.css.map */

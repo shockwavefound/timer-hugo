@@ -153,20 +153,58 @@ function executeSearch(term) {
   let results = fuse.search(term); // the actual query being run using fuse.js
   let searchitems = ''; // our results bucket
 
+  while (list.firstChild)
+      list.removeChild(list.lastChild);
+
   if (results.length === 0) { // no results based on what was typed into the input box
     resultsAvailable = false;
-    searchitems = '<li><a href="#">No results found.</a></li>';
+    list.appendChild(htmlToElement('<li><a href="#">No results found.</a></li>'));
   } else { // build our html
+    var templateDefinition = document.getElementById('searchResultsTemplate').innerHTML;
     for (let item in results.slice(0,5)) { // only show first 5 results
-      let result = results[item].item;
-      searchitems = searchitems + '<li><a href="' + result.permalink + '" tabindex="0">' + '<span class="title">' + result.title + '</span><br /> <span class="section">'+ result.section +'</span> — ' + result.date + ' — <em>' + result.summary + '</em></a></li>';
+      let output = render(templateDefinition, results[item].item);
+      list.appendChild(htmlToElement(output));
     }
     resultsAvailable = true;
-  }
-
-  document.getElementById("searchResults").innerHTML = searchitems;
-  if (results.length > 0) {
     first = list.firstChild.firstElementChild; // first result container — used for checking against keyboard up/down location
     last = list.lastChild.firstElementChild; // last result container — used for checking against keyboard up/down location
   }
+}
+
+function render(templateString, data) {
+  var conditionalMatches, conditionalPattern, copy;
+  conditionalPattern = /\$\{\s*isset ([a-zA-Z]*)\s*\}(.*)\$\{\s*end\s*}/g;
+  // since loop below depends on re.lastInxdex, we use a copy to capture any manipulations
+  // whilst inside the loop
+  copy = templateString;
+  while ((conditionalMatches = conditionalPattern.exec(templateString)) !== null) {
+    if (data[conditionalMatches[1]]) {
+      //valid key, remove conditionals, leave content.
+      copy = copy.replace(conditionalMatches[0], conditionalMatches[2]);
+    } else {
+      //not valid, remove entire section
+      copy = copy.replace(conditionalMatches[0], '');
+    }
+  }
+  templateString = copy;
+  //now any conditionals removed we can do simple substitution
+  var key, find, re;
+  for (key in data) {
+    find = '\\$\\{\\s*' + key + '\\s*\\}';
+    re = new RegExp(find, 'g');
+    templateString = templateString.replace(re, data[key]);
+  }
+  return templateString;
+}
+
+/**
+ * By Mark Amery: https://stackoverflow.com/a/35385518
+ * @param {String} HTML representing a single element
+ * @return {Element}
+ */
+function htmlToElement(html) {
+    var template = document.createElement('template');
+    html = html.trim(); // Never return a text node of whitespace as the result
+    template.innerHTML = html;
+    return template.content.firstChild;
 }
