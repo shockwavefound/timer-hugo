@@ -38,8 +38,27 @@
                                 {{ end }}
                             {{ end }}
                         </ul>
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                {{/*
+                                <form class="form-inline" action="{{ "search" | absURL }}">
+                                    <input id="search-query" name="s"
+                                           class="form-control ml-sm-2" type="search"
+                                           placeholder="Search" aria-label="Search">
+                                    <button class="invisible btn btn-outline-success my-2 my-sm-0"
+                                           type="submit">Search</button>
+                                </form>
+                                */}}
+                                <form id="fastSearch" role="search">
+                                    <input id="searchInput"
+                                           class="form-control ml-sm-2" type="search"
+                                           placeholder="Search" aria-label="Search" tabindex="0">
+                                </form>
+                            </li>
+                        </ul>
                     </div>
                 </nav>
+                <ul id="searchResults"></ul>
             </div>
         </div>
     </div>

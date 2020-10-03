@@ -1350,34 +1350,15 @@ a.badge-tag-list-page {
 }
 
 /* fastSearch */
-#fastSearch {
+#searchResults {
   visibility: hidden;
   position: absolute;
   right: 20px;
-  top: 0px;
   display: inline-block;
-  width: 300px;
+  width: 320px;
   min-width: 300px;
   font-size: .8em;
   z-index: 99;
-}
-
-#fastSearch input {
-  padding: 4px 10px;
-  width: 100%;
-  height: 31px;
-  font-size: 1.6em;
-  color: #aaa;
-  font-weight: bold;
-  background-color: #000;
-  border-radius: 3px 3px 0px 0px;
-  border: none;
-  outline: none;
-  text-align: left;
-  display: inline-block;
-  transition-property: background-color, border;
-  transition-duration: 0.3s;
-  transition-timing-function: ease;
 }
 
 #searchResults li {
@@ -1394,12 +1375,6 @@ a.badge-tag-list-page {
   margin-bottom: 10px;
   display: inline-block;
   color: #2cc0d3;
-}
-
-#searchResults {
-  visibility: inherit;
-  display: inline-block;
-  width: 320px;
 }
 
 #searchResults a {
