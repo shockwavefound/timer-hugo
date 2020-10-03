@@ -90,7 +90,7 @@ document.getElementById("searchInput").onsearch = function(e) {
         searchVisible = false;
     } else if (resultsAvailable) {
         if (first && first.href) {
-            open(first.href, "_self");
+            location.assign(first.href);
         }
     }
 }
