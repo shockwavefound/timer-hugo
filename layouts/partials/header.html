@@ -26,7 +26,7 @@
                                        href="{{ .URL | absURL }}">{{ .Pre }}{{ .Name }}</a>
                                     <div class="dropdown-menu" aria-labeledby="dropdown{{ $index }}">
                                         {{ range .Children }}
-                                        {{/* <a class="dropdown-item {{ if $currentPage.IsMenuCurrent "nav" . }}active{{ end }}" href="{{ .URL | absURL }}">{{ .Pre }}{{ .Name }}</a> */}}
+                                        {{/* <a class="dropdown-item {{ if $currentPage.IsMenuCurrent "main" . }}active{{ end }}" href="{{ .URL | absURL }}">{{ .Pre }}{{ .Name }}</a> */}}
                                           <a class="dropdown-item" href="{{ .URL | absURL }}">{{ .Pre }}{{ .Name }}</a>
                                         {{ end }}
                                     </div>
