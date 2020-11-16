@@ -4,6 +4,13 @@
 
 <section id="blog-full-width" class="work-list">
     <div class="container">
+      {{ with .Content }}
+      <div class="row">
+          <div class="col-sm-12">
+                <div class="work-list-content block">{{ . }}</div>
+          </div>
+      </div>
+     {{ end }}
       <div class="row">
           <div class="col-sm-12">
               {{ partial "tag-cloud.html" . }}
