@@ -1,6 +1,6 @@
 {{ if .Site.Params.news.enable }}
 {{ "<!-- News Section Start -->" | safeHTML }}
-{{ $maxItems := cond (isset .Site.Params.about "news") 2 3 }}
+{{ $maxItems := cond (isset .Site.Params.news "twitter") 2 3 }}
 <section id="news" class="works">
     <div class="container">
         <div class="section-heading">
@@ -8,7 +8,7 @@
             {{ with .Site.Params.news.subtitle }}<p class="wow fadeInDown" data-wow-delay=".5s">{{ . }}</p>{{ end }}
         </div>
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
-          {{ range $index, $element:= first 3 (where .Site.RegularPages "Type" "news") }}
+          {{ range $index, $element:= first $maxItems (where .Site.RegularPages "Type" "news") }}
             <div class="col mb-3">
               {{ $delay := mul $index 300 }}
               <figure class="news-item card h-100 wow fadeInLeft animated" data-wow-duration="500ms" data-wow-delay="{{ $delay }}ms">
