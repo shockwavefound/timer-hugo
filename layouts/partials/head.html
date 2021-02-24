@@ -36,7 +36,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ .Title }}</title>
 
-  {{ "<!-- Google Founts -->" | safeHTML }}
+  {{ "<!-- Google Fonts -->" | safeHTML }}
   <link rel="dns-prefetch" href="//fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700|Roboto+Condensed:400,300,700">
@@ -60,4 +60,8 @@
   {{ "<!-- template main css file -->" | safeHTML }}
   {{ $styles := resources.Get "css/style.css" | minify}}
   <link rel="stylesheet" href="{{ $styles.Permalink }}" media="screen">
+
+  {{ with .Site.Params.mailChimp }}
+  <script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/{{ .uid1 }}/{{ .uid2 }}.js");</script>
+  {{ end }}
 </head>
