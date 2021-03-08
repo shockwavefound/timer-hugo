@@ -1219,7 +1219,11 @@ article {
 }
 
 .team-member .social-icons .facebook {
-  padding: 4px 12px;
+  padding: 4px 10px;
+}
+
+.team-member .social-icons .twitter {
+  padding: 4px 6px;
 }
 
 #footer {
