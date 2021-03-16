@@ -73,11 +73,6 @@
 
 <!-- Begin Mailchimp Signup Form -->
 <link href="//cdn-images.mailchimp.com/embedcode/classic-10_7.css" rel="stylesheet" type="text/css">
-<style type="text/css">
-	#XXXmc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; }
-	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
-	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
-</style>
 <div id="mc_embed_signup">
     <form action="{{ .subscribeURL | safeURL }}"
           method="post" id="mc-embedded-subscribe-form"
@@ -109,9 +104,9 @@
                 <input type="text" name="b_65810877db6c5386233516942_eae5322031" tabindex="-1"
                        value="">
             </div>
-            <div class="wow fadeInDown" data-wow-duration="500ms" data-wow-delay="1.4s">
-                <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe"
-                        class="btn btn-default btn-send hvr-bounce-to-right">
+            <div id="mc-subscribe" class="clear wow fadeInDown" data-wow-duration="500ms" data-wow-delay="1.4s">
+                <button type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe"
+                        class="btn btn-default btn-send hvr-bounce-to-right">Subscribe</button>
             </div>
         </div>
     </form>
