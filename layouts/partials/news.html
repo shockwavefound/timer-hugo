@@ -17,12 +17,14 @@
                   {{ $image := $original.Fill "350x240 left" }}
                   <div class="img-wrapper">
                     <img src="{{ $image.Permalink }}" class="card-img-top news-pic" alt="{{ .Title }}"/>
+{{ if .Site.Params.news.imageButtons -}}
                     <div class="overlay">
                       <div class="buttons">
                         {{/* <a rel="gallery" class="fancybox" href="{{ $original.Permalink }}">Demo</a> */}}
                         <a href="{{ .Permalink }}">Details</a>
                       </div>
                     </div>
+{{- end }}
                   </div>
                 {{ else }}
                   {{ errorf "%s: %s not found." .File.Path .Params.image }}
