@@ -20,7 +20,7 @@
                         {{ end }}
                     </figure>
                   {{ else }}
-                    {{ errorf "%s: %s not found." .File.Path .Params.image }}
+                    {{ errorf "%s: %s not found. (layouts/_default/single.html)" .File.Path .Params.image }}
                   {{ end }}
                 {{ end }}
                 {{ if isset .Params "author" }}

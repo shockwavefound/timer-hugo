@@ -26,7 +26,7 @@
                        </figure>
                     </div>
                   {{ else }}
-                    {{ errorf "%s: %s not found." .File.Path .Params.image }}
+                    {{ errorf "%s: %s not found. (layouts/portfolio/single.html)" .File.Path .Params.image }}
                   {{ end }}
                 {{ end }}
                 <!-- work single Content -->

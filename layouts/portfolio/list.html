@@ -28,7 +28,7 @@
                                 {{ $image := $original.Fill "800x600 left" }}
                                 <img class="img-fluid" src="{{ $image.Permalink }}" alt="{{ .Params.imageAlt | default (printf "%s image" .Params.Title) }}"/>
                               {{ else }}
-                                {{ errorf "%s: %s not found." .File.Path .Params.image }}
+                                {{ errorf "%s: %s not found. (layouts/portfolio/list.html)" .File.Path .Params.image }}
                               {{ end }}
                             {{ end }}
                         </a>
