@@ -2,7 +2,7 @@
 
 {{ partial "page-title.html" . }}
 
-<section id="tags" class="blog-full-width work-list">
+<section id="tags" class="blog-full-width">
     <div class="container">
       <div class="row">
           <div class="col-sm-12">
@@ -21,7 +21,7 @@
                                 {{ $image := $original.Fill "800x600 left" }}
                                 <img class="img-fluid" src="{{ $image.Permalink }}" alt="{{ .Params.imageAlt | default (printf "%s image" .Params.Title) }}"/>
                               {{ else }}
-                                {{ errorf "%s: %s not found. (layouts/tags/single.html)" .File.Path .Params.image }}
+                                {{ errorf "%s: %s not found. (layouts/tags/list.html)" .File.Path .Params.image }}
                               {{ end }}
                             {{ end }}
                         </a>

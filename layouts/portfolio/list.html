@@ -2,23 +2,42 @@
 
 {{ partial "page-title.html" . }}
 
-<section id="blog-full-width" class="work-list">
+<section id="portfolio" class="blog-full-width">
     <div class="container">
-      {{ with .Content }}
-      <div class="row">
-          <div class="col-sm-12">
-                <div class="work-list-content block">{{ . }}</div>
-          </div>
-      </div>
-     {{ end }}
-      <div class="row">
-          <div class="col-sm-12">
-              {{ partial "tag-cloud.html" . }}
-          </div>
-      </div>
-      <div class="row">
-        {{ range .Pages }}
-            <div class="col-md-6">
+        {{ with .Content }}
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="block">{{ . }}</div>
+            </div>
+        </div>
+        {{ end }}
+        <div class="row">
+            <div class="col-sm-12">
+                {{ partial "tag-cloud.html" . }}
+            </div>
+        </div>
+{{/*
+        <div class="row">
+            <div class="col">
+                <button type="button" id="portfolio-sort-button" class="btn btn-primary float-right">Sort by Name</button>
+            </div>
+        </div>
+<!--
+        <div class="row">
+            <div class="btn-group dropdown sort-btn">
+                <button id="portfolioSortButton" class="btn btn-primary" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sort</button>
+                <button class="btn btn-primary" data-sort="down"><i class="fas fa-sort-down"></i></button>
+                <div class="dropdown-menu" aria-labelledby="portfolioSortButton">
+                    <a class="dropdown-item" href="#" tabindex="-1" data-type="alpha">Name</a>
+                    <a class="dropdown-item" href="#" tabindex="-1" data-type="numeric">Date</a>
+                </div>
+            </div>
+        </div>
+--> 
+*/}} 
+        <div id="portfolio-items" class="row">
+            {{ range .Pages }}
+            <div class="portfolio-item col-md-6" data-portfolio-name="{{ .Params.Title }}" data-portfolio-update="{{ .Date.Unix }}">
                 <article class="wow fadeInDown" data-wow-delay=".3s" data-wow-duration="500ms">
                     <div class="blog-post-image">
                         <a href="{{ .Permalink }}">
@@ -34,7 +53,7 @@
                         </a>
                     </div>
                     <div class="blog-content">
-                        <h2 class="blogpost-title">
+                        <h2 class="blog-post-title">
                             <a href="{{ .Permalink }}">{{ .Title }}</a>
                         </h2>
                         <div class="blog-meta">
@@ -55,8 +74,8 @@
                     </div>
                 </article>
             </div>
-        {{ end }}
-      </div>
+            {{ end }}
+        </div>
     </div>
 </section>
 

@@ -947,15 +947,6 @@ article {
   border-radius: 0;
 }
 
-.work-list .tag-cloud {
-  background: #eae9ec;
-}
-
-.work-list .tag-cloud a {
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
 /* portfolio single */
 .work-single {
   padding: 100px 0 20px;
@@ -1406,4 +1397,13 @@ a.badge-tag-list-page {
 
 #searchResults li .summary {
    font-style: italic;
+}
+
+.tag-cloud {
+  background: #eae9ec;
+}
+
+.tag-cloud a {
+  padding-left: 5px;
+  padding-right: 5px;
 }
