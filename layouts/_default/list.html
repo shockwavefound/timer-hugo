@@ -2,7 +2,7 @@
 
 {{ partial "page-title.html" . }}
 
-<section id="blog-full-width">
+<section id="blog" class="blog-full-width">
     <div class="container">
       <div class="row">
         {{ range .Pages }}
@@ -22,7 +22,7 @@
                         </a>
                     </div>
                     <div class="blog-content">
-                        <h2 class="blogpost-title">
+                        <h2 class="blog-post-title">
                             <a href="{{ .Permalink }}">{{ .Title }}</a>
                         </h2>
                         <div class="blog-meta">

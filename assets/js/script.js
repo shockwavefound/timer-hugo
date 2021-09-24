@@ -1,105 +1,11 @@
-(function ($) {
-    'use strict';
-
-    $.fn.scrollingTo = function (opts) {
-        var defaults = {
-            animationTime: 1000,
-            easing: '',
-            callbackBeforeTransition: function () {},
-            callbackAfterTransition: function () {}
-        };
-
-        var config = $.extend({}, defaults, opts);
-
-        $(this).click(function (e) {
-            var eventVal = e;
-            e.preventDefault();
-
-            var $section = $(document).find($(this).data('section'));
-            if ($section.length < 1) {
-                return false;
-            };
-
-            if ($('html, body').is(':animated')) {
-                $('html, body').stop(true, true);
-            };
-
-            var scrollPos = $section.offset().top;
-
-            if ($(window).scrollTop() == scrollPos) {
-                return false;
-            };
-
-            config.callbackBeforeTransition(eventVal, $section);
-
-            $('html, body').animate({
-                'scrollTop': (scrollPos + 'px')
-            }, config.animationTime, config.easing, function () {
-                config.callbackAfterTransition(eventVal, $section);
-            });
-        });
-    };
-
-    /* ========================================================================= */
-    /*   Contact Form Validating
-    /* ========================================================================= */
-
-    $('#contact-form').validate({
-        rules: {
-            name: {
-                required: true,
-                minlength: 4
-            },
-            email: {
-                required: true,
-                email: true
-            },
-            message: {
-                required: true,
-                minlength: 10
-            },
-        },
-        messages: {
-            name: {
-                required: "Please enter your full name",
-                minlength: jQuery.validator.format("Your name must contain at least {0} characters")
-            },
-            email: {
-                required: "Please enter your email address",
-            },
-            message: {
-                required: "Please enter a message",
-                minlength: jQuery.validator.format("Your message must contain at least {0} characters")
-            },
-        },
-        submitHandler: function (form) {
-            $(form).ajaxSubmit({
-                dataType: "json",
-                success: function () {
-                    $('#contact-form #success').fadeIn();
-                },
-                error: function () {
-                    $('#contact-form #error').fadeIn();
-                }
-            });
-            return false; // prevent normal browser submit/navigation
-        }
-    });
-
-
-}(jQuery));
-
 $(document).ready(function () {
     "use strict";
+
+    // Initialize WOW animations
     new WOW().init();
 
-    (function () {
-        jQuery('.smooth-scroll').scrollingTo();
-    }());
-
-});
-
-$(document).ready(function () {
+    // looks like this reduces/hides the brand link after a scroll?
+    // I think this is dead/redundant code
     $(window).scroll(function () {
         if ($(window).scrollTop() > 50) {
             $(".navbar-brand a").css("color", "#fff");
@@ -110,6 +16,7 @@ $(document).ready(function () {
         }
     });
 
+    // slick (for clients slider)
     $('.clients-logo-slider').slick({
         dots: false,
         infinite: true,
@@ -133,30 +40,105 @@ $(document).ready(function () {
             }
           }
         ]
-      });
-});
+    });
 
-// fancybox
-$(".fancybox").fancybox({
-    padding: 0,
+    // fancybox (for gallery)
+    $(".fancybox").fancybox({
+        padding: 0,
 
-    openEffect: 'elastic',
-    openSpeed: 450,
+        openEffect: 'elastic',
+        openSpeed: 450,
 
-    closeEffect: 'elastic',
-    closeSpeed: 350,
+        closeEffect: 'elastic',
+        closeSpeed: 350,
 
-    closeClick: true,
-    helpers: {
-        title: {
-            type: 'inside'
-        },
-        overlay: {
-            css: {
-                'background': 'rgba(0,0,0,0.8)'
+        closeClick: true,
+        helpers: {
+            title: {
+                type: 'inside'
+            },
+            overlay: {
+                css: {
+                    'background': 'rgba(0,0,0,0.8)'
+                }
             }
         }
-    }
+    });
+
+    // contact form validation
+    $('#contact-form').validate({
+        submitHandler: function (form) {
+            $(form).ajaxSubmit({
+                dataType: "json",
+                success: function () {
+                    $('#contact-form #success').fadeIn();
+                },
+                error: function () {
+                    $('#contact-form #error').fadeIn();
+                }
+            });
+            return false; // prevent normal browser submit/navigation
+        }
+    });
+
+});
+
+
+
+/*
+(function(fn) {
+	'use strict';
+	fn(window.jQuery, window, document);
+}(function($, window, document) {
+	'use strict';
+
+	$(function() {
+		$('.sort-btn').on('click', '[data-sort]', function(event) {
+			event.preventDefault();
+			var $this = $(this),
+				sortDir = 'down';
+            console.log($this);
+			if ($this.data('sort') !== 'up') {
+				sortDir = 'up';
+			}
+			$this.data('sort', sortDir).find('.fas').attr('class', 'fas fa-sort-' + sortDir);
+
+			// call sortDesc() or sortAsc() or whathaveyou...
+            var divList = $(".portfolio-item");
+            if (sortDir === 'up') {
+                divList.sort(function(a, b) {
+                    return $(a).data("portfolio-update")-$(b).data("portfolio-update");
+                });
+            } else {
+                divList.sort(function(b, a) {
+                    return $(a).data("portfolio-update")-$(b).data("portfolio-update");
+                });
+            }
+            $("#portfolio").html(divList);
+		});
+	});
+}));
+*/
+
+jQuery(function($) {
+    var divList = $(".portfolio-item");
+    var portfolioSorted = "time";
+    $("#portfolio-sort-button").click(function (e) {
+        if (portfolioSorted == "time") {
+            $("#portfolio-sort-button").text("Sort by Time");
+            portfolioSorted = "name";
+            divList.sort(function(a, b) {
+                return String.prototype.localeCompare.call($(a).data('portfolio-name').toLowerCase(), $(b).data('portfolio-name').toLowerCase());
+            });
+        } else {
+            $("#portfolio-sort-button").text("Sort by Date");
+            portfolioSorted = "time";
+            divList.sort(function(a, b) {
+                return $(b).data("portfolio-update")-$(a).data("portfolio-update");
+            });
+        }
+        $("#portfolio-items").html(divList);
+    });
 });
 
 /*

@@ -53,6 +53,7 @@
   {{ "<!-- Hero area slider -->" | safeHTML }}
   <link rel="stylesheet" href="{{ `plugins/slider/slider.css` | absURL }}">
   {{ "<!-- template main css file -->" | safeHTML }}
-  {{ $styles := resources.Get "css/style.css" | minify | fingerprint}}
+  {{ $options := (dict "enableSourceMap" true "outputStyle" "compressed")}}
+  {{ $styles := resources.Get "css/style.scss" | toCSS $options}}
   <link rel="stylesheet" href="{{ $styles.Permalink }}" media="screen">
 </head>
