@@ -84,60 +84,32 @@ $(document).ready(function () {
 });
 
 
+$(function() {
+    'use strict';
 
-/*
-(function(fn) {
-	'use strict';
-	fn(window.jQuery, window, document);
-}(function($, window, document) {
-	'use strict';
-
-	$(function() {
-		$('.sort-btn').on('click', '[data-sort]', function(event) {
-			event.preventDefault();
-			var $this = $(this),
-				sortDir = 'down';
-            console.log($this);
-			if ($this.data('sort') !== 'up') {
-				sortDir = 'up';
-			}
-			$this.data('sort', sortDir).find('.fas').attr('class', 'fas fa-sort-' + sortDir);
-
-			// call sortDesc() or sortAsc() or whathaveyou...
-            var divList = $(".portfolio-item");
-            if (sortDir === 'up') {
-                divList.sort(function(a, b) {
-                    return $(a).data("portfolio-update")-$(b).data("portfolio-update");
+    $('.sort-btn').on('click', '[data-sort]', function(event) {
+        event.preventDefault();
+        var $this = $(this);
+        var mode = $this.data('sort');
+        var items = $(".sort-item");
+        switch(mode) {
+            case 'alpha':
+                items.sort(function(a, b) {
+                    return String.prototype.localeCompare.call($(a).data('sort-name').toLowerCase(), $(b).data('sort-name').toLowerCase());
                 });
-            } else {
-                divList.sort(function(b, a) {
-                    return $(a).data("portfolio-update")-$(b).data("portfolio-update");
+                break;
+            case 'newest':
+                items.sort(function(b, a) {
+                    return $(a).data("sort-time")-$(b).data("sort-time");
                 });
-            }
-            $("#portfolio").html(divList);
-		});
-	});
-}));
-*/
-
-jQuery(function($) {
-    var divList = $(".portfolio-item");
-    var portfolioSorted = "time";
-    $("#portfolio-sort-button").click(function (e) {
-        if (portfolioSorted == "time") {
-            $("#portfolio-sort-button").text("Sort by Time");
-            portfolioSorted = "name";
-            divList.sort(function(a, b) {
-                return String.prototype.localeCompare.call($(a).data('portfolio-name').toLowerCase(), $(b).data('portfolio-name').toLowerCase());
-            });
-        } else {
-            $("#portfolio-sort-button").text("Sort by Date");
-            portfolioSorted = "time";
-            divList.sort(function(a, b) {
-                return $(b).data("portfolio-update")-$(a).data("portfolio-update");
-            });
-        }
-        $("#portfolio-items").html(divList);
+                break;
+            case 'oldest':
+                items.sort(function(a, b) {
+                    return $(a).data("sort-time")-$(b).data("sort-time");
+                });
+                break;
+        };
+        $("#sort-items").html(items);
     });
 });
 

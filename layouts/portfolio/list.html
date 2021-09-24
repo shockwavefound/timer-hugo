@@ -16,28 +16,21 @@
                 {{ partial "tag-cloud.html" . }}
             </div>
         </div>
-{{/*
         <div class="row">
-            <div class="col">
-                <button type="button" id="portfolio-sort-button" class="btn btn-primary float-right">Sort by Name</button>
-            </div>
-        </div>
-<!--
-        <div class="row">
-            <div class="btn-group dropdown sort-btn">
-                <button id="portfolioSortButton" class="btn btn-primary" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sort</button>
-                <button class="btn btn-primary" data-sort="down"><i class="fas fa-sort-down"></i></button>
-                <div class="dropdown-menu" aria-labelledby="portfolioSortButton">
-                    <a class="dropdown-item" href="#" tabindex="-1" data-type="alpha">Name</a>
-                    <a class="dropdown-item" href="#" tabindex="-1" data-type="numeric">Date</a>
+            <div class="col-sm-12">
+                <div class="dropdown float-right sort-btn">
+                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sort</button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" data-sort="newest" href="#">Newest</a>
+                        <a class="dropdown-item" data-sort="oldest" href="#">Oldest</a>
+                        <a class="dropdown-item" data-sort="alpha"  href="#">By Name</a>
+                    </div>
                 </div>
             </div>
         </div>
---> 
-*/}} 
-        <div id="portfolio-items" class="row">
+        <div id="sort-items" class="row">
             {{ range .Pages }}
-            <div class="portfolio-item col-md-6" data-portfolio-name="{{ .Params.Title }}" data-portfolio-update="{{ .Date.Unix }}">
+            <div class="sort-item col-md-6" data-sort-name="{{ .Params.Title }}" data-sort-time="{{ .Date.Unix }}">
                 <article class="wow fadeInDown" data-wow-delay=".3s" data-wow-duration="500ms">
                     <div class="blog-post-image">
                         <a href="{{ .Permalink }}">
