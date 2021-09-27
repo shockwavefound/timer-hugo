@@ -92,6 +92,7 @@ $(function() {
         var $this = $(this);
         var mode = $this.data('sort');
         var items = $(".sort-item");
+        $('.wow').removeClass('wow');   // disable WOW because we're sorting
         switch(mode) {
             case 'alpha':
                 items.sort(function(a, b) {
@@ -117,6 +118,7 @@ $(function() {
  * Override bootstrap and allow us to click on a dropdown menu parent
  * Don't do this on touch-screen devices.
  */
+/*
  jQuery(function($) {
      if($(window).width() > 769) {
          $('.navbar .dropdown').hover(function() {
@@ -129,3 +131,4 @@ $(function() {
          });
      }
  });
+ */
