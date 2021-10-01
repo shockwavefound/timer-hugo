@@ -6,7 +6,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h1><i class="fas fa-tags"></i> {{ .Title }}</h1>
+                <h1><i class="icon ion-ios-pricetags"></i> {{ .Title }}</h1>
                 {{ .Content }}
             </div>
         </div>
@@ -31,7 +31,7 @@
                   <span class="letter">{{ $firstChar }}</span><br />
                 {{ end }}
 
-                <a class="badge badge-tag-list-page" href="{{ .Page.Permalink }}"><i class="fas fa-tags"></i> {{ .Page.Title }} ({{ .Count }})</a>
+                <a class="badge badge-tag-list-page" href="{{ .Page.Permalink }}"><i class="icon ion-ios-pricetags"></i> {{ .Page.Title }} ({{ .Count }})</a>
               {{ end }}
             {{ end }}
             </div>

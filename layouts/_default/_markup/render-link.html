@@ -9,5 +9,5 @@
    {{- with .Title}} title="{{ . }}"{{ end }}
    {{- if $isRemote }} target="_blank" rel="noopener" aria-label="This is an external link (opens in a new tab)"{{ end }}>
    {{- .Text | safeHTML -}}
-   {{- if $isRemote }} <i class="fas fa-external-link-alt"></i>{{ end -}}
+   {{- if $isRemote }} <i class="icon ion-ios-open"></i>{{ end -}}
    </a>
