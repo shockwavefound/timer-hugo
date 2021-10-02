@@ -8,10 +8,8 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-6">
-				{{ with .Site.Data.service.title }}<h2 class="subtitle wow fadeInUp animated" data-wow-delay=".3s"
-					data-wow-duration="500ms">{{ . }}</h2>{{ end }}
-				{{ with .Site.Data.service.subtitle }}<p class="subtitle-des wow fadeInUp animated" data-wow-delay=".5s"
-					data-wow-duration="500ms">{{ . }}</p>{{ end }}
+				{{ with .Site.Data.service.title }}<h2 class="subtitle" data-aos="fade-up" data-aos-delay="300">{{ . }}</h2>{{ end }}
+				{{ with .Site.Data.service.subtitle }}<p class="subtitle-des" data-aos="fade-up" data-aos-delay="500">{{ . }}</p>{{ end }}
 			</div>
 		</div>
 		<div class="row">
@@ -20,7 +18,7 @@
 					<div class="row service-parts">
 						{{ range .Site.Data.service.serviceItem }}
 						<div class="col-md-6">
-							<div class="block wow fadeInUp animated" data-wow-duration="400ms" data-wow-delay="600ms">
+							<div class="block" data-aos="fade-up" data-aos-delay="700">
 								{{ with .icon }}<i class="{{ . }}"></i>{{ end }}
 								{{ with .title }}<h4>{{ . }}</h4>{{ end }}
 								{{ with .description }}<p>{{ . }}</p>{{ end }}

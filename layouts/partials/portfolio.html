@@ -3,14 +3,14 @@
 <section id="works" class="works">
     <div class="container">
         <div class="section-heading">
-            {{ with .Site.Params.portfolio.title }}<h1 class="title wow fadeInDown" data-wow-delay=".3s">{{ . }}</h1>{{ end }}
-            {{ with .Site.Params.portfolio.subtitle }}<p class="wow fadeInDown" data-wow-delay=".5s">{{ . }}</p>{{ end }}
+            {{ with .Site.Params.portfolio.title }}<h1 class="title" data-aos="fade-down" data-aos-delay="300">{{ . }}</h1>{{ end }}
+            {{ with .Site.Params.portfolio.subtitle }}<p data-aos="fade-down" data-aos-delay="500">{{ . }}</p>{{ end }}
         </div>
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
           {{ range $index, $element:= first 6 (where .Site.RegularPages "Type" "portfolio") }}
             <div class="col mb-3">
               {{ $delay := mul $index 300 }}
-              <figure class="portfolio-item card h-100 wow fadeInLeft animated" data-wow-duration="500ms" data-wow-delay="{{ $delay }}ms">
+              <figure class="portfolio-item card h-100" data-aos="fade-left" data-aos-delay="{{ $delay }}">
                 {{ if .Params.image }}
                   {{ $original := .Page.Resources.GetMatch (printf "*%s*" .Params.image) }}
                   {{ if $original }}

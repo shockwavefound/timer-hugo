@@ -12,7 +12,7 @@
       <div class="row">
         {{ range .Pages }}
             <div class="col-md-6">
-                <article class="wow fadeInDown" data-wow-delay=".3s" data-wow-duration="500ms">
+                <article data-aos="fade-down" data-aos-delay="300">
                     <div class="blog-post-image">
                         <a href="{{ .Permalink }}">
                             {{ if .Params.image }}

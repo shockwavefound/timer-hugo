@@ -9,7 +9,7 @@
             {{ range $index, $element:= .Site.Data.team.members }}
             <div class="card">
                 {{ $delay := mul $index 300 }}
-                <div class="team-member wow fadeInLeft" data-wow-duration="500ms" data-wow-delay="{{ $delay }}ms">
+                <div class="team-member" data-aos="fade-left" data-aos-delay="{{ $delay }}">
                     {{ if .image }}
                     <div class="card-img-top team-img">
                         {{ $original := $.Resources.GetMatch .image }}
