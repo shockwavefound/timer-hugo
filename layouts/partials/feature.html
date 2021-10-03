@@ -4,8 +4,7 @@
 	<div class="container">
 		<div class="section-heading">
 			{{ with .Site.Data.feature.title }}<h1 class="title" data-aos="fade-down" data-aos-delay="300">{{ . }}</h1>{{ end }}
-			{{ with .Site.Data.feature.subtitle }}<p data-aos="fade-down" data-aos-delay="500">{{ . | safeHTML }}</p>
-			{{ end }}
+			{{ with .Site.Data.feature.subtitle }}<p data-aos="fade-down" data-aos-delay="500">{{ . | safeHTML }}</p>{{ end }}
 		</div>
 		<div class="row">
 			{{ range $index, $elemrnt := .Site.Data.feature.item }}
