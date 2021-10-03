@@ -55,4 +55,8 @@
   {{ $options := (dict "enableSourceMap" true "outputStyle" "compressed")}}
   {{ $styles := resources.Get "css/style.scss" | toCSS $options}}
   <link rel="stylesheet" href="{{ $styles.Permalink }}" media="screen">
+	{{ "<!-- Custom stylesheet - for your changes -->" | safeHTML}}
+	{{ $custom := resources.Get "css/custom.scss" | toCSS $options }}
+  <link rel="stylesheet" href="{{ $custom.Permalink }}" media="screen">
+  
 </head>

@@ -1,62 +1,54 @@
 {{ if .Site.Params.portfolio.enable }}
 {{ "<!-- Portfolio Section Start -->" | safeHTML }}
 <section id="works" class="works">
-    <div class="container">
-        <div class="section-heading">
-            {{ with .Site.Params.portfolio.title }}<h1 class="title" data-aos="fade-down" data-aos-delay="300">{{ . }}</h1>{{ end }}
-            {{ with .Site.Params.portfolio.subtitle }}<p data-aos="fade-down" data-aos-delay="500">{{ . }}</p>{{ end }}
-        </div>
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
-          {{ range $index, $element:= first 6 (where .Site.RegularPages "Type" "portfolio") }}
-            <div class="col mb-3">
-              {{ $delay := mul $index 300 }}
-              <figure class="portfolio-item card h-100" data-aos="fade-left" data-aos-delay="{{ $delay }}">
-                {{ if .Params.image }}
-                  {{ $original := .Page.Resources.GetMatch (printf "*%s*" .Params.image) }}
-                  {{ if $original }}
-                    {{ $image := $original.Fill "350x240 left" }}
-                    <div class="img-wrapper">
-                      <img src="{{ $image.Permalink }}" class="card-img-top portfolio-pic" alt="{{ .Title }}"/>
-  {{ if .Site.Params.portfolio.buttons -}}
-                      <div class="overlay">
-                        <div class="buttons">
-                          {{/* <a rel="gallery" class="fancybox" href="{{ $original.Permalink }}">Demo</a> */}}
-                          <a href="{{ .Permalink }}">Details</a>
-                        </div>
-                      </div>
-  {{- end }}
-                    </div>
-                  {{ else }}
-                    {{ errorf "%s: %s not found. (partials/portfolio.html)" .File.Path .Params.image }}
-                  {{ end }}
-                {{ end }}
-                <div class="card-body">
-                  <h2 class="card-title">
-                    <a href="{{ .Permalink }}">
-                      {{ .Title }}
-                    </a>
-                  </h2>
-                  {{ with .Params.client.awards }}
-                    {{ range first 1 (sort . "dateAwarded" "desc") }}
-                      <h6 class="card-subtitle mb-2 text-muted">
-                      {{ with (or .awarded .invested) }}
-                        ${{ lang.NumFmt 0 . }}
-                      {{ end }}
-                      {{ with .dateAwarded }}
-                        / {{ dateFormat "January 2006" . }}
-                      {{ end }}
-                      </h6>
-                    {{ end }}
-                  {{ end }}
-                  <p class="card-text">
-                    {{ .Params.caption }}
-                  </p>
-                </div>
-              </figure>
-            </div>
-          {{ end }}
-        </div>
+  <div class="container">
+    <div class="section-heading">
+      {{ with .Site.Params.portfolio.title }}<h1 class="title" data-aos="fade-down" data-aos-delay="300">{{ . }}</h1>{{ end }}
+      {{ with .Site.Params.portfolio.subtitle }}<p data-aos="fade-down" data-aos-delay="500">{{ . }}</p>{{ end }}
     </div>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
+    {{ range $index, $element:= first 6 (where .Site.RegularPages "Type" "portfolio") }}
+      <div class="col mb-3">
+        {{ $delay := mul $index 300 }}
+        <figure class="portfolio-item card h-100" data-aos="fade-left" data-aos-delay="{{ $delay }}">
+          {{ if .Params.image }}
+            {{ $original := .Page.Resources.GetMatch (printf "*%s*" .Params.image) }}
+            {{ if $original }}
+              {{ $image := $original.Fill "350x240 left" }}
+              <div class="img-wrapper">
+                <img src="{{ $image.Permalink }}" class="card-img-top portfolio-pic" alt="{{ .Title }}"/>
+                {{ if .Site.Params.portfolio.buttons -}}
+                <div class="overlay">
+                  <div class="buttons">
+                    <a rel="gallery" class="fancybox" href="{{ $original.Permalink }}">Demo</a>
+                    <a href="{{ .Permalink }}">Details</a>
+                  </div>
+                </div>
+                {{- end }}
+              </div>
+            {{ else }}
+              {{ errorf "%s: %s not found. (partials/portfolio.html)" .File.Path .Params.image }}
+            {{ end }}
+          {{ end }}
+          <div class="card-body">
+            <h2 class="card-title">
+              <a href="{{ .Permalink }}">{{ .Title }}</a>
+            </h2>
+            {{ with .Params.client.awards }}
+              {{ range first 1 (sort . "dateAwarded" "desc") }}
+                  <h6 class="card-subtitle mb-2 text-muted">
+                    {{ with (or .awarded .invested) }}${{ lang.NumFmt 0 . }}{{ end }}
+                    {{ with .dateAwarded }} / {{ dateFormat "January 2006" . }}{{ end }}
+                  </h6>
+              {{ end }}
+            {{ end }}
+            <p class="card-text">{{ .Params.caption }}</p>
+          </div>
+        </figure>
+      </div>
+    {{ end }}
+    </div>
+  </div>
 </section>
 {{ "<!-- Portfolio Section End -->" | safeHTML }}
 {{ end }}

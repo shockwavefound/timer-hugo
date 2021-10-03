@@ -12,31 +12,26 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navigation">
                         <ul class="navbar-nav ml-auto">
-                            <li class="nav-item{{ if .IsHome }} active{{ end }}">
-                                <a class="nav-link"
-                                    href="{{ .Site.BaseURL }}">{{ .Site.Params.home }}</a>
-                            </li>
-                            {{ $currentPage := . }}
-                            {{ range $index, $element := .Site.Menus.main }}
-                                {{ if .HasChildren }}
-                                <li class="nav-item dropdown{{ if $currentPage.HasMenuCurrent "main" . }} active{{ end }}">
+                            {{- $currentPage := . }}
+                            {{- range $index, $element := .Site.Menus.main }}
+                                {{- if .HasChildren }}
+                                <li class="nav-item dropdown{{ if or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) }} active{{ end }}">
                                     <a class="nav-link dropdown-toggle" role="button"
                                        data-toggle="dropdown" id="dropdown{{ $index }}"
                                        aria-haspopup="true" aria-expanded="false"
-                                       href="{{ .URL | absURL }}">{{ .Pre }}{{ .Name }}</a>
+                                       href="{{ .URL | absLangURL }}">{{ .Pre }}{{ .Name }}</a>
                                     <div class="dropdown-menu" aria-labeledby="dropdown{{ $index }}">
-                                        {{ range .Children }}
-                                        {{/* <a class="dropdown-item {{ if $currentPage.IsMenuCurrent "main" . }}active{{ end }}" href="{{ .URL | absURL }}">{{ .Pre }}{{ .Name }}</a> */}}
-                                          <a class="dropdown-item" href="{{ .URL | absURL }}">{{ .Pre }}{{ .Name }}</a>
-                                        {{ end }}
+                                    {{ range .Children }}
+                                        <a class="dropdown-item{{ if or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) }} active{{ end }}" href="{{ .URL | absLangURL }}">{{ .Pre }}{{ .Name }}</a>
+                                    {{ end }}
                                     </div>
                                 </li>
-                                {{ else }}
-                                <li class="nav-item {{ if $currentPage.IsMenuCurrent "main" . }} active{{ end }}">
-                                    <a class="nav-link" href="{{ .URL | absURL }}">{{ .Pre }}{{ .Name }}</a>
+                                {{- else }}
+                                <li class="nav-item{{ if or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) }} active{{ end }}">
+                                    <a class="nav-link" href="{{ .URL | absLangURL }}">{{ .Pre }}{{ .Name }}</a>
                                 </li>
                                 {{ end }}
-                            {{ end }}
+                            {{- end }}
                             <li class="nav-item">
                                     <input id="searchInput"
                                            class="form-control ml-sm-2" type="search"

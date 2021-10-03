@@ -6,9 +6,9 @@
         <div class="row">
             <div class="{{ $width }}">
                 <div class="block" data-aos="fade-left" data-aos-delay="300">
-                    {{ if .Site.Params.about.titleLink }}<a href="{{ .Site.Params.about.titleLink }}">{{ end -}}
+                    {{ with .Site.Params.about.titleLink }}<a href="{{ . }}">{{ end -}}
                     {{ with .Site.Params.about.title }}<h1>{{ . }}</h1>{{ end -}}
-                    {{ if .Site.Params.about.titleLink }}</a>{{ end -}}
+                    {{ with .Site.Params.about.titleLink }}</a>{{ end -}}
                     {{ with .Site.Params.about.content }}<p>{{ . | safeHTML }}</p>{{ end }}
                 </div>
             </div>
