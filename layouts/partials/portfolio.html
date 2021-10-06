@@ -11,7 +11,7 @@
       <div class="col mb-3">
         {{ $delay := mul $index 300 }}
         <figure class="portfolio-item card h-100" data-aos="fade-left" data-aos-delay="{{ $delay }}">
-          {{ if .Params.image }}
+          {{ if isset .Params "image" }}
             {{ $original := .Page.Resources.GetMatch (printf "*%s*" .Params.image) }}
             {{ if $original }}
               {{ $image := $original.Fill "350x240 left" }}
@@ -29,6 +29,8 @@
             {{ else }}
               {{ errorf "%s: %s not found. (partials/portfolio.html)" .File.Path .Params.image }}
             {{ end }}
+          {{ else }}
+            {{ warnf "%s: image not set. (partials/portfolio.html)" }}
           {{ end }}
           <div class="card-body">
             <h2 class="card-title">

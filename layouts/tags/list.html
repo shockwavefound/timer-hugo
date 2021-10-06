@@ -13,19 +13,19 @@
         {{ range .Pages }}
             <div class="col-md-6">
                 <article data-aos="fade-down" data-aos-delay="300">
+                    {{ if isset .Params "image" }}
                     <div class="blog-post-image">
                         <a href="{{ .Permalink }}">
-                            {{ if .Params.image }}
-                              {{ $original := .Page.Resources.GetMatch (printf "*%s*" .Params.image) }}
-                              {{ if $original }}
-                                {{ $image := $original.Fill "800x600 left" }}
+                            {{ $original := .Page.Resources.GetMatch (printf "*%s*" .Params.image) }}
+                            {{ if $original }}
+                              {{ $image := $original.Fill "800x600 left" }}
                                 <img class="img-fluid" src="{{ $image.Permalink }}" alt="{{ .Params.imageAlt | default (printf "%s image" .Params.Title) }}"/>
                               {{ else }}
                                 {{ errorf "%s: %s not found. (layouts/tags/list.html)" .File.Path .Params.image }}
                               {{ end }}
-                            {{ end }}
                         </a>
                     </div>
+                    {{ end }}
                     <div class="blog-content">
                         <h2 class="blog-post-title">
                             <a href="{{ .Permalink }}">{{ .Title }}</a>

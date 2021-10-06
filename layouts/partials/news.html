@@ -12,22 +12,26 @@
             <div class="col mb-3">
               {{ $delay := mul $index 300 }}
               <figure class="news-item card h-100" data-aos="fade-left" data-aos-delay="{{ $delay }}">
-                {{ $original := .Page.Resources.GetMatch (printf "*%s*" .Params.image) }}
-                {{ if $original }}
-                  {{ $image := $original.Fill "350x240 left" }}
-                  <div class="img-wrapper">
-                    <img src="{{ $image.Permalink }}" class="card-img-top news-pic" alt="{{ .Title }}"/>
-{{ if .Site.Params.news.imageButtons -}}
-                    <div class="overlay">
-                      <div class="buttons">
-                        {{/* <a rel="gallery" class="fancybox" href="{{ $original.Permalink }}">Demo</a> */}}
-                        <a href="{{ .Permalink }}">Details</a>
+                {{ if isset .Params "image" }}
+                  {{ $original := .Page.Resources.GetMatch (printf "*%s*" .Params.image) }}
+                  {{ if $original }}
+                    {{ $image := $original.Fill "350x240 left" }}
+                    <div class="img-wrapper">
+                      <img src="{{ $image.Permalink }}" class="card-img-top news-pic" alt="{{ .Title }}"/>
+                      {{ if .Site.Params.news.imageButtons -}}
+                      <div class="overlay">
+                        <div class="buttons">
+                          {{/* <a rel="gallery" class="fancybox" href="{{ $original.Permalink }}">Demo</a> */}}
+                          <a href="{{ .Permalink }}">Details</a>
+                        </div>
                       </div>
+                      {{- end }}
                     </div>
-{{- end }}
-                  </div>
+                  {{ else }}
+                    {{ errorf "%s: %s not found. (layouts/partials/news.html)" .File.Path .Params.image }}
+                  {{ end }}
                 {{ else }}
-                  {{ errorf "%s: %s not found." .File.Path .Params.image }}
+                  {{ warnf "%s: image not set. (layouts/partials/news.html)" .File.Path }}
                 {{ end }}
                 <div class="card-body">
                   <h2 class="card-title">
