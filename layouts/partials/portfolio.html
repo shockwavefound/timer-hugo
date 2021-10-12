@@ -40,7 +40,7 @@
               {{ range first 1 (sort . "dateAwarded" "desc") }}
                   <h6 class="card-subtitle mb-2 text-muted">
                     {{ with (or .awarded .invested) }}${{ lang.NumFmt 0 . }}{{ end }}
-                    {{ with .dateAwarded }} / {{ dateFormat "January 2006" . }}{{ end }}
+                    {{ with .dateAwarded }} / {{ dateFormat $.Site.Params.monthFormat . }}{{ end }}
                   </h6>
               {{ end }}
             {{ end }}

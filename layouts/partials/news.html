@@ -41,7 +41,7 @@
                   </h2>
                   {{ with .Date }}
                     <h6 class="card-subtitle mb-2 text-muted">
-                      {{ dateFormat "January 2, 2006" . }}
+                      {{ dateFormat $.Site.Params.dateFormat . }}
                     </h6>
                   {{ end }}
                   <p class="card-text">

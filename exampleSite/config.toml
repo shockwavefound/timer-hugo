@@ -35,7 +35,7 @@ weight  = 6
 [params]
 home = "Home"
 logo = "images/logo.png"
-dateFormat = "6 January 2006"
+dateFormat = "2 January 2006"
 # Meta data
 description = "Airspace Hugo theme"
 author = "Themefisher"

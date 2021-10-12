@@ -28,7 +28,7 @@
                             <a href="{{ .Permalink }}">{{ .Title }}</a>
                         </h2>
                         <div class="blog-meta">
-                            <span>{{ dateFormat "Monday, Jan 2, 2006" .Date }}</span>
+                            <span>{{ dateFormat $.Site.Params.dateFormat .Date }}</span>
                             {{ with .Params.tags }}<span>&mdash;
                                 {{ delimit . ", " }}
                             </span>
