@@ -23,33 +23,12 @@
                         {{ if .name }}
                         <h3 class="team_name">{{ .name }}
                             {{ with .social }}
-                            <span class="social-icons">
-                                {{ with .facebook }}
-                                <a href="{{ . }}" class="facebook" target="_blank" rel="noopener noreferrer">
-                                    <i class="icon ion-logo-facebook"></i><span class="sr-only"> Facebook</span>
-                                </a>
+                            <ul class="social social-icons text-center text-md-right text-lg-right">
+                                {{ range . }}
+                                    <li><a href="{{ .url }}" target="_blank" rel="noopener noreferrer"><i class="{{ .icon }}"></i>
+                                    <span class="sr-only"> {{ .text }}</span></a></li>
                                 {{ end }}
-                                {{ with .twitter }}
-                                <a href="{{ . }}" class="twitter" target="_blank" rel="noopener noreferrer">
-                                    <i class="icon ion-logo-twitter"></i><span class="sr-only"> Twitter</span>
-                                </a>
-                                {{ end }}
-                                {{ with .linkedIn }}
-                                <a href="{{ . }}" class="linkedin" target="_blank" rel="noopener noreferrer">
-                                    <i class="icon ion-logo-linkedin"></i><span class="sr-only"> LinkedIn</span>
-                                </a>
-                                {{ end }}
-                                {{ with .instagram }}
-                                <a href="{{ . }}" class="instagram" target="_blank" rel="noopener noreferrer">
-                                    <i class="icon ion-logo-instagram"></i><span class="sr-only"> Instagram</span>
-                                </a>
-                                {{ end }}
-                                {{ with .googleplus }}
-                                <a href="{{ . }}" class="googleplus" target="_blank" rel="noopener noreferrer">
-                                    <i class="icon ion-logo-googleplus"></i><span class="sr-only"> Google+</span>
-                                </a>
-                                {{ end }}
-                            </span>
+                            </ul>
                             {{ end }}
                         </h3>
                         {{ end }}

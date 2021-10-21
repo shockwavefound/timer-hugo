@@ -381,7 +381,7 @@ a:hover {
 #call-to-action .block .btn-contact {
   background: #fff;
   border: 2px solid #fff;
-  color: #2cc0d3;
+  color: #27459c;
   padding: 15px 34px;
   margin-top: 20px;
   font-size: 12px;
@@ -397,7 +397,7 @@ a:hover {
 
 #call-to-action .block .btn-contact:hover {
   color: #fff;
-  background: #2cc0d3;
+  background: #27459c;
 }
 
 #about {
@@ -1205,19 +1205,6 @@ article {
   font-size: 14px;
 }
 
-.team-member .social-icons a {
-  background: #2cc0d3;
-  color: #fff;
-  padding: 4px 8px;
-  display: inline-block;
-  font-size: 15px;
-  border-radius: 6px;
-}
-
-.team-member .social-icons .twitter {
-  padding: 4px 6px;
-}
-
 #footer {
   background: #fff;
   padding: 25px 0;
@@ -1241,6 +1228,7 @@ article {
 }
 
 ul.social-icons {
+  display: inline;
   height: auto;
   overflow: hidden;
   list-style: none !important;
@@ -1254,7 +1242,7 @@ ul.social-icons li {
 }
 
 ul.social-icons li a {
-  background: #2cc0d3;
+  background: #27459c;
   color: #fff;
   padding: 4px 8px;
   display: inline-block;
@@ -1262,8 +1250,8 @@ ul.social-icons li a {
   border-radius: 6px;
 }
 
-#footer .ion-social-facebook {
-    padding: 3px 4px;
+.ion-logo-twitter {
+  Xpadding: 3px 0px;
 }
 
 /* taxonomy terms */

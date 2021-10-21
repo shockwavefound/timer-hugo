@@ -86,13 +86,13 @@ subtitle= "Aliquam lobortis. Maecenas vestibulum mollis diam. Pellentesque aucto
 
 # social icon
 [[params.socialIcon]]
-icon = "ion-social-facebook"
+icon = "ion-logo-facebook"
 url = "#"
 
 [[params.socialIcon]]
-icon = "ion-social-instagram"
+icon = "ion-logo-instagram"
 url = "#"
 
 [[params.socialIcon]]
-icon = "ion-social-linkedin"
+icon = "ion-logo-linkedin"
 url = "#"
