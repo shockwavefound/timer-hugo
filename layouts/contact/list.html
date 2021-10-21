@@ -2,6 +2,7 @@
 
 {{ partial "page-title.html" . }}
 
+<!--sse-->
 {{ if .Site.Data.contact.enable }}
 {{ "<!-- Contact Section Start -->" | safeHTML }}
 <section id="contact-section">
@@ -145,6 +146,7 @@
 </section>
 {{ "<!-- Contact Section End -->" | safeHTML }}
 {{ end }}
+<!--/sse-->
 
 {{ partial "cta.html" . }}
 
