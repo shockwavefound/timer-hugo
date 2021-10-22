@@ -38,10 +38,10 @@
             </h2>
             {{ with .Params.client.awards }}
               {{ range first 1 (sort . "dateAwarded" "desc") }}
-                  <h6 class="card-subtitle mb-2 text-muted">
+                  <h3 class="card-subtitle h5 mb-2 text-muted">
                     {{ with (or .awarded .invested) }}${{ lang.NumFmt 0 . }}{{ end }}
                     {{ with .dateAwarded }} / {{ dateFormat $.Site.Params.monthFormat . }}{{ end }}
-                  </h6>
+                  </h3>
               {{ end }}
             {{ end }}
             <p class="card-text">{{ .Params.caption }}</p>

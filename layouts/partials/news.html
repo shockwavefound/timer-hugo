@@ -40,9 +40,9 @@
                     </a>
                   </h2>
                   {{ with .Date }}
-                    <h6 class="card-subtitle mb-2 text-muted">
+                    <h3 class="card-subtitle h6 mb-2 text-muted">
                       {{ dateFormat $.Site.Params.dateFormat . }}
-                    </h6>
+                    </h3>
                   {{ end }}
                   <p class="card-text">
                     {{ .Summary }}
