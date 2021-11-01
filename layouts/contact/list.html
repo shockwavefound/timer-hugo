@@ -10,43 +10,35 @@
         <div class="row">
             <div class="col-md-6 mb-5 mb-md-0">
                 <div class="block">
-                    {{ with .Site.Data.contact.contactFormTitle }}<h2 class="subtitle" data-aos="fade-down" data-aos-delay="300">{{ . }}</h2>{{ end }}
-                    {{ with .Site.Data.contact.contactFormSubtitle | safeHTML }}<p class="subtitle-des" data-aos="fade-down" data-aos-delay="500">{{ . }}</p>{{ end }}
+                    {{ with .Site.Data.contact.contactFormTitle }}<h2 class="subtitle" >{{ . }}</h2>{{ end }}
+                    {{ with .Site.Data.contact.contactFormSubtitle | safeHTML }}<p class="subtitle-des">{{ . }}</p>{{ end }}
                     <div class="contact-form">
-                        <form id="contact-form" method="POST" action="{{ .Site.Data.contact.contactPost }}" role="form">
-                            <div class="form-group" data-aos="fade-down" data-aos-delay="600">
-                                <label for="name">Full Name</label>
-                                <input type="text" placeholder="First and Last" class="form-control" name="name" id="name" minlength="4" required autocomplete="name">
-                            </div>
-
-                            <div class="form-group" data-aos="fade-down" data-aos-delay="800">
+                        <form id="contact-form" method="POST" action="{{ .Site.Data.contact.contactPost }}" role="form" validate>
+                            <div class="form-group">
                                 <label for="email">Email Address</label>
                                 <input type="email" placeholder="email@example.com" class="form-control" name="email" id="email" required autocomplete="email">
                             </div>
-
-                            <div class="form-group" data-aos="fade-down" data-aos-delay="1000">
+                            <div class="form-group">
+                                <label for="name">Full Name</label>
+                                <input type="text" placeholder="First and Last" class="form-control" name="name" id="name" minlength="4" required autocomplete="name">
+                            </div>
+                            <div class="form-group">
                                 <label for="message">Message</label>
                                 <textarea rows="6" placeholder="Your Message" class="form-control" name="message" id="message" minlength="10" required></textarea>
                             </div>
 
-                            {{ with .Site.Data.contact.contactSubject }}<input type="hidden" name="_subject" value="{{ . }}" aria-hidden="true">{{ end }}
-                            <label for="gotcha" style="display:none" aria-hidden="true">Don't fill this in</label>
-                            <input type="text" id="gotcha" name="_gotcha" style="display:none" aria-hidden="true">
+                            {{ with .Site.Data.contact.contactSubject }}<input type="hidden" name="_subject" value="{{ . }}" hidden>{{ end }}
+                            <label for="gotcha" style="display:none" hidden>Don't fill this in</label>
+                            <input type="text" id="gotcha" name="_gotcha" style="display:none" hidden>
 
                             {{ with .Site.Data.contact.reCAPTCHAkey }}
-                            <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+                            <script src="//www.google.com/recaptcha/api.js" async defer></script>
                             <div class="g-recaptcha" data-sitekey="{{ . }}"></div>
                             {{ end }}
 
-                            <div id="success" class="success">
-                                Thank you, your message is on its way.
-                            </div>
-
-                            <div id="error" class="error">
-                                Sorry, there was an error submitting the form.
-                            </div>
-
-                            <div id="submit" data-aos="fade-down" data-aos-delay="1200">
+                            <div id="success" class="success">Thank you, your message is on its way.</div>
+                            <div id="error" class="error">Sorry, there was an error submitting the form.</div>
+                            <div id="submit">
                                 <button type="submit" id="contact-submit" class="btn btn-default btn-send hvr-bounce-to-right" value="Send Message">Send Message</button>
                             </div>
                         </form>
@@ -56,8 +48,8 @@
             {{ if .Site.Data.contact.mapUrl }}
             <div class="col-md-6">
                 <div class="map-area">
-                    {{ with .Site.Data.contact.mapTitle }}<h2 class="subtitle " data-aos="fade-down" data-aos-delay="300">{{ . }}</h2>{{ end }}
-                    {{ with .Site.Data.contact.mapSubtitle }}<p class="subtitle-des" data-aos="fade-down" data-aos-delay="500">{{ . }}</p>{{ end }}
+                    {{ with .Site.Data.contact.mapTitle }}<h2 class="subtitle">{{ . }}</h2>{{ end }}
+                    {{ with .Site.Data.contact.mapSubtitle }}<p class="subtitle-des">{{ . }}</p>{{ end }}
                     <div class="map">
                         <iframe src="{{ .Site.Data.contact.mapUrl }}"
                             width="100%" height="400" frameborder="0" style="border:0" allowfullscreen></iframe>
@@ -68,52 +60,50 @@
             {{ with .Site.Data.contact.mailChimp }}
             <div class="col-md-6">
                 <div class="block">
-                    {{ with .title }}<h2 class="subtitle" data-aos="fade-down" data-aos-delay="300">{{ . | safeHTML }}</h2>{{ end }}
-                    {{ with .subtitle }}<p class="subtitle-des" data-aos="fade-down" data-aos-delay="500">{{ . | safeHTML }}</p>{{ end }}
-
-<!-- Begin Mailchimp Signup Form -->
-<link href="//cdn-images.mailchimp.com/embedcode/classic-10_7.css" rel="stylesheet" type="text/css">
-<div id="mc_embed_signup">
-    <form action="{{ .subscribeURL | safeURL }}"
-          method="post" id="mc-embedded-subscribe-form"
-          name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-        <div id="mc_embed_signup_scroll">
-            <div class="indicates-required"><span class="asterisk">*</span> indicates required</div>
-            <div class="mc-field-group form-group" data-aos="fade-down" data-aos-delay="600">
-                <label for="mce-EMAIL">Email Address  <span class="asterisk">*</span></label>
-                <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
-            </div>
-            <div class="mc-field-group form-group" data-aos="fade-down" data-aos-delay="800">
-                <label for="mce-FNAME">First Name </label>
-                <input type="text" value="" name="FNAME" class="" id="mce-FNAME" autocomplete="given-name">
-            </div>
-            <div class="mc-field-group form-group" data-aos="fade-down" data-aos-delay="1000">
-                <label for="mce-LNAME">Last Name </label>
-                <input type="text" value="" name="LNAME" class="" id="mce-LNAME" autocomplete="family-name">
-            </div>
-            <div class="mc-field-group form-group" data-aos="fade-down" data-aos-delay="1200">
-                <label for="mce-MMERGE6">Organization </label>
-                <input type="text" value="" name="MMERGE6" class="" id="mce-MMERGE6" autocomplete="organization">
-            </div>
-            <div id="mce-responses" class="clear">
-                <div class="response" id="mce-error-response" style="display:none"></div>
-                <div class="response" id="mce-success-response" style="display:none"></div>
-            </div>
-            <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-            <div style="position: absolute; left: -5000px;" aria-hidden="true">
-                <input type="text" name="b_65810877db6c5386233516942_eae5322031" tabindex="-1"
-                       value="">
-            </div>
-            <div id="mc-subscribe" class="clear" data-aos="fade-down" data-aos-delay="1400">
-                <button type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe"
-                        class="btn btn-default btn-send hvr-bounce-to-right">Subscribe</button>
-            </div>
-        </div>
-    </form>
-</div>
-<script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script><script type='text/javascript'>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';fnames[3]='ADDRESS';ftypes[3]='address';fnames[4]='PHONE';ftypes[4]='phone';fnames[6]='MMERGE6';ftypes[6]='text';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
-<!--End mc_embed_signup-->
-
+                    {{ with .title }}<h2 class="subtitle">{{ . | safeHTML }}</h2>{{ end }}
+                    {{ with .subtitle }}<p class="subtitle-des">{{ . | safeHTML }}</p>{{ end }}
+                    <!-- Begin Mailchimp Signup Form -->
+                    <link href="//cdn-images.mailchimp.com/embedcode/classic-10_7.css" rel="stylesheet" type="text/css">
+                    <div id="mc_embed_signup">
+                        <form action="{{ .subscribeURL | safeURL }}"
+                            method="post" id="mc-embedded-subscribe-form"
+                            name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+                            <div id="mc_embed_signup_scroll">
+                                <div class="indicates-required"><span class="asterisk">*</span> indicates required</div>
+                                <div class="mc-field-group form-group">
+                                    <label for="mce-EMAIL">Email Address <span class="asterisk">*</span></label>
+                                    <input type="email" placeholder="email@example.com" value="" name="EMAIL" class="required" id="mce-EMAIL" required>
+                                </div>
+                                <div class="mc-field-group form-group">
+                                    <label for="mce-FNAME">First Name </label>
+                                    <input type="text" placeholder="John" value="" name="FNAME" class="" id="mce-FNAME" autocomplete="given-name">
+                                </div>
+                                <div class="mc-field-group form-group">
+                                    <label for="mce-LNAME">Last Name </label>
+                                    <input type="text" placeholder="Smith" value="" name="LNAME" class="" id="mce-LNAME" autocomplete="family-name">
+                                </div>
+                                <div class="mc-field-group form-group">
+                                    <label for="mce-MMERGE6">Organization </label>
+                                    <input type="text" placeholder="United Federation" value="" name="MMERGE6" class="" id="mce-MMERGE6" autocomplete="organization">
+                                </div>
+                                <div id="mce-responses" class="clear">
+                                    <div class="response" id="mce-error-response" style="display:none"></div>
+                                    <div class="response" id="mce-success-response" style="display:none"></div>
+                                </div>
+                                <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                                <div style="position: absolute; left: -5000px;" hidden>
+                                    <input type="text" name="b_65810877db6c5386233516942_eae5322031" tabindex="-1"
+                                        value="">
+                                </div>
+                                <div id="mc-subscribe" class="clear">
+                                    <button type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe"
+                                            class="btn btn-default btn-send hvr-bounce-to-right">Subscribe</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script><script type='text/javascript'>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';fnames[3]='ADDRESS';ftypes[3]='address';fnames[4]='PHONE';ftypes[4]='phone';fnames[6]='MMERGE6';ftypes[6]='text';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
+                    <!--End mc_embed_signup-->
                 </div>
             </div>
             {{ end }}
