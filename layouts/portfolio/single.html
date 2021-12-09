@@ -29,6 +29,9 @@
                     {{ errorf "%s: %s not found. (layouts/portfolio/single.html)" .File.Path .Params.image }}
                   {{ end }}
                 {{ end }}
+                <div class="work-single-date block" data-aos="fade-left" data-aos-delay="300">
+                  Last updated: {{ dateFormat $.Site.Params.dateFormat .Date }}
+                </div>
                 <!-- work single Content -->
                 {{ with .Content }}
                 <div class="work-single-content block" data-aos="fade-left" data-aos-delay="300">
