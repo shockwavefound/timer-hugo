@@ -1,4 +1,5 @@
 {{ if .Site.Params.portfolio.enable }}
+{{ $dateFormat := .Site.Params.dateFormat }}
 {{ "<!-- Portfolio Section Start -->" | safeHTML }}
 <section id="works" class="works">
   <div class="container">
@@ -45,6 +46,11 @@
               {{ end }}
             {{ end }}
             <p class="card-text">{{ .Params.caption }}</p>
+            {{ with .Date }}
+              <h3 class="card-subtitle h6 mb-2 text-muted">
+                Updated: {{ dateFormat $dateFormat . }}
+              </h3>
+            {{ end }}       
           </div>
         </figure>
       </div>

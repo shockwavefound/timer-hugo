@@ -29,15 +29,16 @@
                     {{ errorf "%s: %s not found. (layouts/portfolio/single.html)" .File.Path .Params.image }}
                   {{ end }}
                 {{ end }}
-                <div class="work-single-date block" data-aos="fade-left" data-aos-delay="300">
-                  Last updated: {{ dateFormat $.Site.Params.dateFormat .Date }}
-                </div>
                 <!-- work single Content -->
                 {{ with .Content }}
                 <div class="work-single-content block" data-aos="fade-left" data-aos-delay="300">
                     {{ . }}
                 </div>
                 {{ end }}
+                {{ partial "related.html" . }}
+                <h2 class="h6 mb-2 text-muted" data-aos="fade-left" data-aos-delay="300">
+                  Last updated: {{ dateFormat $.Site.Params.dateFormat .Date }}
+                </h2>
             </div>
             <div class="col-lg-4">
                 {{ with .Params.client }}
