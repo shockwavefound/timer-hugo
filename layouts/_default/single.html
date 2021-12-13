@@ -58,6 +58,7 @@
                 <div class="post-content">
                     {{ .Content }}
                 </div>
+                {{ partial "related.html" . }}
                 {{ if .Params.about }}
                     <hr>
                     <p class="mission text-muted small">
