@@ -5,9 +5,7 @@
             <div class="col-md-8 col-12 text-center text-lg-left text-md-left">
                 {{ if .Site.Params.copyright }}
                 <p class="copyright">Copyright &copy;{{ with .Site.Params.copyrightStart }} {{ . }} - {{ end }}
-                    <span>
-                        <script>document.write(new Date().getFullYear())</script>
-                    </span> by {{ .Site.Params.copyright }}
+                    {{ .Site.LastChange | dateFormat "2006" }} by {{ .Site.Params.copyright }}
                 </p>
                 {{ end }}
             </div>
