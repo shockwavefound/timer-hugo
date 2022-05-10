@@ -7,7 +7,7 @@
 {{- with .Page.GetPage $url.Path }}{{ $link = printf "%s%s" .RelPermalink $fragment }}{{ end }}{{ end -}}
 <a href="{{ $link | safeURL }}"
    {{- with .Title}} title="{{ . }}"{{ end }}
-   {{- if $isRemote }} target="_blank" rel="noopener" aria-label="This is an external link (opens in a new tab)"{{ end }}>
+   {{- if $isRemote }} target="_blank" rel="noopener"{{ end }}>
    {{- .Text | safeHTML -}}
-   {{- if $isRemote }} <i class="icon ion-ios-open"></i>{{ end -}}
+   {{- if $isRemote }} <i aria-hidden="true" class="icon ion-ios-open"></i>{{ end -}}
    </a>

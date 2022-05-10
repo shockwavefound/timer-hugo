@@ -1,16 +1,17 @@
-<section class="top-bar navbar-fixed-top animated-header">
+<a href="#main-content" class="sr-only">Skip to main content</a>
+<header class="top-bar navbar-fixed-top animated-header">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <nav class="navbar navbar-expand-md navbar-light bg-light">
-                    <a class="navbar-brand" aria-hidden="true" href="{{ .Site.BaseURL }}">
+                <nav class="navbar navbar-expand-md navbar-light bg-light" aria-label="Site Navigation">
+                    <a class="navbar-brand" href="{{ .Site.BaseURL }}">
                         <img src="{{ .Site.Params.logo | absURL }}" alt="{{ .Site.Params.logoAlt | default .Site.Title }}">
                     </a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
-                        aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navHeader"
+                        aria-controls="navHeader" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                    <div class="collapse navbar-collapse" id="navigation">
+                    <div class="collapse navbar-collapse" id="navHeader">
                         <ul class="navbar-nav ml-auto">
                             {{- $currentPage := . }}
                             {{- range $index, $element := .Site.Menus.main }}
@@ -20,7 +21,7 @@
                                        data-toggle="dropdown" id="dropdown{{ $index }}"
                                        aria-haspopup="true" aria-expanded="false"
                                        href="{{ .URL | absLangURL }}">{{ .Pre }}{{ .Name }}</a>
-                                    <div class="dropdown-menu" aria-labeledby="dropdown{{ $index }}">
+                                    <div class="dropdown-menu" aria-labelledby="dropdown{{ $index }}">
                                     {{ range .Children }}
                                         <a class="dropdown-item{{ if or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) }} active{{ end }}" href="{{ .URL | absLangURL }}">{{ .Pre }}{{ .Name }}</a>
                                     {{ end }}
@@ -44,4 +45,4 @@
             </div>
         </div>
     </div>
-</section>
+</header>

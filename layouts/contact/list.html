@@ -5,7 +5,7 @@
 <!--sse-->
 {{ if .Site.Data.contact.enable }}
 {{ "<!-- Contact Section Start -->" | safeHTML }}
-<section id="contact-section">
+<main id="main-content" class="contact-section">
     <div class="container">
         <div class="row">
             <div class="col-md-6 mb-5 mb-md-0">
@@ -92,7 +92,7 @@
                                 </div>
                                 <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
                                 <div style="position: absolute; left: -5000px;" hidden>
-                                    <input type="text" name="b_65810877db6c5386233516942_eae5322031" tabindex="-1"
+                                    <input type="text" name="b_65810877db6c5386233516942_eae5322031" tabindex="-1" aria-hidden="true"
                                         value="">
                                 </div>
                                 <div id="mc-subscribe" class="clear">
@@ -133,7 +133,7 @@
         </div>
         {{ end }}
     </div>
-</section>
+</main>
 {{ "<!-- Contact Section End -->" | safeHTML }}
 {{ end }}
 <!--/sse-->

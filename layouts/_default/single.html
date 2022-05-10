@@ -2,7 +2,7 @@
 
 {{ partial "page-title.html" . }}
 
-<section class="single-post">
+<main id="main-content" class="single-post">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -13,7 +13,7 @@
                     <figure class="figure">
                         <div class="post-img">
                             <img class="figure-img img-fluid w-100" src="{{ $image.Permalink }}"
-                                 alt="{{ with .Params.imageAlt }}{{ . }}{{ else }}{{ .Params.title }} image{{ end }}">
+                                 alt="{{ with .Params.imageAlt }}{{ . }}{{ end }}">
                         </div>
                         {{ with .Params.imageCaption }}
                             <figcaption class="figure-caption text-right">{{ . }}</figcaption>
@@ -51,27 +51,28 @@
                     </div>
                   </div>
                 {{ end }}
-                <div class="post-date">
-                    <span>{{ dateFormat $.Site.Params.dateFormat .Date }}</span>
-                    {{ with .Params.tags }}<span>&mdash; {{ delimit . ", " }} </span>{{ end }}
-                </div>
-                <div class="post-content">
-                    {{ .Content }}
-                </div>
-                {{ partial "related.html" . }}
+                <article data-aos="fade-left" data-aos-delay="300">
+                  <div class="post-date">
+                      <time datetime="{{ dateFormat $.Site.Params.rfc3339Format .Date }}">{{ dateFormat $.Site.Params.dateFormat .Date }}</time>
+                      {{ with .Params.tags }}<span>&mdash; {{ delimit . ", " }} </span>{{ end }}
+                  </div>
+                  <div class="post-content">
+                      {{ .Content }}
+                  </div>
+                </article>
                 {{ if .Params.about }}
-                    <hr>
-                    <p class="mission text-muted small">
-                      {{ .Site.Params.about.content | safeHTML }}
-                      For more information, visit
-                      <a href="{{ .Site.BaseURL }}">{{ .Site.BaseURL }}</a>.
-                    </p>
+                <footer class="mission text-muted small">
+                  {{ .Site.Params.about.content | safeHTML }}
+                  For more information, visit
+                  <a href="{{ .Site.BaseURL }}">{{ .Site.BaseURL }}</a>.
+                </footer>
                 {{ end }}
+                {{ partial "related.html" . }}
             </div>
             {{ template "_internal/disqus.html" . }}
         </div>
     </div>
-</section>
+  </main>
 
 {{ partial "cta.html" . }}
 

@@ -2,8 +2,7 @@
 
 {{ partial "page-title.html" . }}
 
-{{ "<!-- work details part start -->" | safeHTML }}
-<section class="work-single">
+<main id="main-content" class="work-single">
     <div class="container">
         <div class="row">
             <div class="col-lg-8">
@@ -30,17 +29,18 @@
                   {{ end }}
                 {{ end }}
                 <!-- work single Content -->
-                {{ with .Content }}
-                <div class="work-single-content block" data-aos="fade-left" data-aos-delay="300">
-                    {{ . }}
-                </div>
-                {{ end }}
+                <article data-aos="fade-left" data-aos-delay="300">
+                  <div class="work-single-content block">
+                    {{ .Content }}
+                  </div>
+                  <p class="post-date">
+                    Last updated:
+                    <time datetime="{{ dateFormat $.Site.Params.rfc3339Format .Date }}">{{ dateFormat $.Site.Params.dateFormat .Date }}</time>
+                  </p>
+                </article>
                 {{ partial "related.html" . }}
-                <h2 class="h6 mb-2 text-muted" data-aos="fade-left" data-aos-delay="300">
-                  Last updated: {{ dateFormat $.Site.Params.dateFormat .Date }}
-                </h2>
             </div>
-            <div class="col-lg-4">
+            <aside class="col-lg-4">
                 {{ with .Params.client }}
                 <!-- sidebar -->
                 <div class="work-single-sidebar block" data-aos="fade-right" data-aos-delay="300">
@@ -56,66 +56,65 @@
                     {{ end }}
                     {{ with .name }}
                     <h5>Organization</h5>
-                    <h6>{{ . }}</h6>
+                    <p>{{ . }}</p>
                     {{ end }}
                     {{ with .website }}
                     <h5>Website</h5>
-                    <h6><a href="{{ . }}" target="_blank">{{ . }}</a></h6>
+                    <p><a href="{{ . }}" target="_blank">{{ . }}</a></p>
                     {{ end }}
                     {{ with $.Params.categories }}
                     <h5>Categories</h5>
-                    <h6>{{ delimit . ", " }}</h6>
+                    <p>{{ delimit . ", " }}</p>
                     {{ end }}
                     {{ with $.Params.tags }}
                     <h5>Tags</h5>
-                    <h6>{{ delimit . ", " }}</h6>
+                    <p>{{ delimit . ", " }}</p>
                     {{ end }}
                     {{ with .beneficiaries }}
                     <h5>Beneficiaries</h5>
-                    <h6>{{ delimit . ", " }}</h6>
+                    <p>{{ delimit . ", " }}</p>
                     {{ end }}
                     {{ with .locations }}
                     <h5>Location(s)</h5>
-                    <h6>{{ delimit . ", " }}</h6>
+                    <p>{{ delimit . ", " }}</p>
                     {{ end }}
                     {{ range sort .awards "dateAwarded" "desc" }}
                       <hr>
                       {{ with .dateSubmitted }}
                         <h5>Date Submitted</h5>
-                        <h6>{{ dateFormat $.Site.Params.monthFormat . }}</h6>
+                        <p><time datetime="{{ dateFormat $.Site.Params.rfc3339Format . }}">{{ dateFormat $.Site.Params.monthFormat . }}</time></p>
                       {{ end }}
                       {{ with .dateAwarded }}
                         <h5>Date Awarded</h5>
-                        <h6>{{ dateFormat $.Site.Params.monthFormat . }}</h6>
+                        <p><time datetime="{{ dateFormat $.Site.Params.rfc3339Format . }}">{{ dateFormat $.Site.Params.monthFormat . }}</time></p>
                       {{ end }}
                       {{ with .requested }}
                         <h5>Requested</h5>
-                        <h6>${{ lang.NumFmt 0 . }}</h6>
+                        <p>${{ lang.NumFmt 0 . }}</p>
                       {{ end }}
                       {{ with .awarded }}
                         <h5>Awarded</h5>
-                        <h6>${{ lang.NumFmt 0 . }}</h6>
+                        <p>${{ lang.NumFmt 0 . }}</p>
                       {{ end }}
                       {{ with .invested }}
                         <h5>Invested</h5>
-                        <h6>${{ lang.NumFmt 0 . }}</h6>
+                        <p>${{ lang.NumFmt 0 . }}</p>
                       {{ end }}
                       {{ with .distributed }}
                         <h5>Distributed</h5>
-                        <h6>${{ lang.NumFmt 0 . }}</h6>
+                        <p>${{ lang.NumFmt 0 . }}</p>
                       {{ end }}
                       {{ with .duration }}
                         <h5>Project Duration</h5>
-                        <h6>{{ . }}</h6>
+                        <p>{{ . }}</p>
                       {{ end }}
                     {{ end }}
                 </div>
                 {{ end }}
-            </div>
+              </aside>
         </div>
     </div>
-</section>
-{{"<!-- work details part end -->" | safeHTML }}
+  </main>
 
 {{ partial "cta.html" . }}
 

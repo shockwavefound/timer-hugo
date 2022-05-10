@@ -4,7 +4,7 @@
 <section id="news" class="works">
     <div class="container">
         <div class="section-heading">
-            {{ with .Site.Params.news.title }}<h1 class="title" data-aos="fade-down" data-aos-delay="300">{{ . }}</h1>{{ end }}
+            {{ with .Site.Params.news.title }}<h2 class="title" data-aos="fade-down" data-aos-delay="300">{{ . }}</h2>{{ end }}
             {{ with .Site.Params.news.subtitle }}<p data-aos="fade-down" data-aos-delay="500">{{ . }}</p>{{ end }}
         </div>
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
@@ -17,7 +17,7 @@
                   {{ if $original }}
                     {{ $image := $original.Fill "350x240 left" }}
                     <div class="img-wrapper">
-                      <img src="{{ $image.Permalink }}" class="card-img-top news-pic" alt="{{ .Title }}"/>
+                      <img src="{{ $image.Permalink }}" class="card-img-top news-pic" alt=""/>
                       {{ if .Site.Params.news.imageButtons -}}
                       <div class="overlay">
                         <div class="buttons">
@@ -34,18 +34,19 @@
                   {{ warnf "%s: image not set. (layouts/partials/news.html)" .File.Path }}
                 {{ end }}
                 <div class="card-body">
-                  <h2 class="card-title">
+                  <h3 class="card-title">
                     <a href="{{ .Permalink }}">
                       {{ .Title }}
                     </a>
-                  </h2>
+                  </h3>
                   <p class="card-text">
                     {{ .Summary }}
                   </p>
                   {{ with .Date }}
-                  <h3 class="card-subtitle h6 mb-2 text-muted">
-                    Updated: {{ dateFormat $.Site.Params.dateFormat . }}
-                  </h3>
+                  <p class="card-subtitle mb-2 text-muted">
+                    Updated: 
+                    <time datetime="{{ dateFormat $.Site.Params.rfc3339Format . }}">{{ dateFormat $.Site.Params.dateFormat . }}</time>
+                  </p>
                   {{ end }}
                 </div>
               </figure>

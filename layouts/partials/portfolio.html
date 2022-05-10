@@ -1,10 +1,9 @@
 {{ if .Site.Params.portfolio.enable }}
-{{ $dateFormat := .Site.Params.dateFormat }}
 {{ "<!-- Portfolio Section Start -->" | safeHTML }}
 <section id="works" class="works">
   <div class="container">
     <div class="section-heading">
-      {{ with .Site.Params.portfolio.title }}<h1 class="title" data-aos="fade-down" data-aos-delay="300">{{ . }}</h1>{{ end }}
+      {{ with .Site.Params.portfolio.title }}<h2 class="title" data-aos="fade-down" data-aos-delay="300">{{ . }}</h2>{{ end }}
       {{ with .Site.Params.portfolio.subtitle }}<p data-aos="fade-down" data-aos-delay="500">{{ . }}</p>{{ end }}
     </div>
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
@@ -17,7 +16,7 @@
             {{ if $original }}
               {{ $image := $original.Fill "350x240 left" }}
               <div class="img-wrapper">
-                <img src="{{ $image.Permalink }}" class="card-img-top portfolio-pic" alt="{{ .Title }}"/>
+                <img src="{{ $image.Permalink }}" class="card-img-top portfolio-pic" alt=""/>
                 {{ if .Site.Params.portfolio.buttons -}}
                 <div class="overlay">
                   <div class="buttons">
@@ -34,22 +33,23 @@
             {{ warnf "%s: image not set. (partials/portfolio.html)" }}
           {{ end }}
           <div class="card-body">
-            <h2 class="card-title">
+            <h3 class="card-title">
               <a href="{{ .Permalink }}">{{ .Title }}</a>
-            </h2>
+            </h3>
             {{ with .Params.client.awards }}
               {{ range first 1 (sort . "dateAwarded" "desc") }}
-                  <h3 class="card-subtitle h5 mb-2 text-muted">
+                  <p class="card-subtitle mb-2 text-muted">
                     {{ with (or .awarded .invested) }}${{ lang.NumFmt 0 . }}{{ end }}
-                    {{ with .dateAwarded }} / {{ dateFormat $.Site.Params.monthFormat . }}{{ end }}
-                  </h3>
+                    {{ with .dateAwarded }} / <time datetime="{{ dateFormat $.Site.Params.rfc3339Format . }}">{{ dateFormat $.Site.Params.monthFormat . }}</time>{{ end }}
+                  </p>
               {{ end }}
             {{ end }}
             <p class="card-text">{{ .Params.caption }}</p>
             {{ with .Date }}
-              <h3 class="card-subtitle h6 mb-2 text-muted">
-                Updated: {{ dateFormat $dateFormat . }}
-              </h3>
+              <p class="card-subtitle mb-2 text-muted">
+                Updated:
+                <time datetime="{{ dateFormat $.Site.Params.rfc3339Format . }}">{{ dateFormat $.Site.Params.dateFormat . }}</time>
+              </p>
             {{ end }}       
           </div>
         </figure>

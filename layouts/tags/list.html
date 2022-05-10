@@ -2,36 +2,55 @@
 
 {{ partial "page-title.html" . }}
 
-<section id="tags" class="blog-full-width">
+<section id="portfolio" class="blog-full-width">
     <div class="container">
-      <div class="row">
-          <div class="col-sm-12">
-              {{ partial "tag-cloud.html" . }}
-          </div>
-      </div>
-      <div class="row">
-        {{ range .Pages }}
-            <div class="col-md-6">
-                <article data-aos="fade-down" data-aos-delay="300">
-                    {{ if isset .Params "image" }}
-                    <div class="blog-post-image">
-                        <a href="{{ .Permalink }}">
-                            {{ $original := .Page.Resources.GetMatch (printf "*%s*" .Params.image) }}
-                            {{ if $original }}
-                              {{ $image := $original.Fill "800x600 left" }}
-                                <img class="img-fluid" src="{{ $image.Permalink }}" alt="{{ .Params.imageAlt | default (printf "%s image" .Params.Title) }}"/>
-                              {{ else }}
-                                {{ errorf "%s: %s not found. (layouts/tags/list.html)" .File.Path .Params.image }}
-                              {{ end }}
-                        </a>
+        {{ with .Content }}
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="block">{{ . }}</div>
+            </div>
+        </div>
+        {{ end }}
+        <nav class="row" aria-label="tag cloud">
+            <div class="col-sm-12">
+                {{ partial "tag-cloud.html" . }}
+            </div>
+        </nav>
+        <nav class="row" aria-label="sort order">
+            <div class="col-sm-12">
+                <div class="dropdown float-right sort-btn">
+                    <button type="button" id="itemSortButton" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sort</button>
+                    <div class="dropdown-menu" aria-labelledby="itemSortButton">
+                        <a class="dropdown-item" data-sort="newest" href="#">Newest</a>
+                        <a class="dropdown-item" data-sort="oldest" href="#">Oldest</a>
+                        <a class="dropdown-item" data-sort="alpha"  href="#">By Name</a>
                     </div>
-                    {{ end }}
-                    <div class="blog-content">
-                        <h2 class="blog-post-title">
-                            <a href="{{ .Permalink }}">{{ .Title }}</a>
-                        </h2>
+                </div>
+            </div>
+        </nav>
+        <main id="main-content">
+            <section id="sort-items" class="row">
+            {{ range .Pages }}
+                <div class="sort-item col-md-6" data-sort-name="{{ .Params.Title }}" data-sort-time="{{ .Date.Unix }}">
+                    <article class="blog-content" data-aos="fade-down" data-aos-delay="300">
+                        <a href="{{ .Permalink }}">
+                            {{ if isset .Params "image" }}
+                            <div class="blog-post-image">
+                                {{ $original := .Page.Resources.GetMatch (printf "*%s*" .Params.image) }}
+                                {{ if $original }}
+                                    {{ $image := $original.Fill "800x600 left" }}
+                                    <img class="img-fluid" src="{{ $image.Permalink }}" alt="{{ .Params.imageAlt | default (printf "%s image" .Params.Title) }}"/>
+                                {{ else }}
+                                    {{ errorf "%s: %s not found. (layouts/_tags/list.html)" .File.Path .Params.image }}
+                                {{ end }}
+                            </div>
+                            {{ else }}
+                                {{ warnf "%s: image not set. (layouts/_tags/list.html)" .File.Path }}
+                            {{ end }}
+                            <h2 class="blog-post-title">{{ .Title }}</h2>
+                        </a>
                         <div class="blog-meta">
-                            <span>{{ dateFormat $.Site.Params.monthFormat .Date }}</span>
+                            <time datetime="{{ dateFormat $.Site.Params.rfc3339Format .Date }}">{{ dateFormat $.Site.Params.monthFormat .Date }}</time>
                             {{ with .Params.categories }}<span>&mdash;
                                 {{ delimit . ", " }}
                             </span>
@@ -44,12 +63,12 @@
                         <p>
                             {{ .Summary }}
                         </p>
-                        {{ with .Permalink }}<a href="{{ . }}" class="btn btn-default btn-details hvr-bounce-to-right">Continue Reading</a>{{ end }}
-                    </div>
-                </article>
-            </div>
-        {{ end }}
-      </div>
+                        <a href="{{ .Permalink }}" class="btn btn-default btn-details hvr-bounce-to-right" tabindex="-1" aria-hidden="true">Continue reading<span class="sr-only">&nbsp;about {{ .Title }}</span></a>
+                    </article>
+                </div>
+            {{ end }}
+            </section>
+        </main>
     </div>
 </section>
 
