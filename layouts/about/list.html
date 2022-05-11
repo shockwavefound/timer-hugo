@@ -3,7 +3,7 @@
 {{ partial "page-title.html" . }}
 
 {{ "<!-- Company Description Section Start -->" | safeHTML }}
-<section class="company-description">
+<main id="main-content" class="company-description">
     <div class="container">
         <div class="row">
             <div class="col-md-6" data-aos="fade-left" data-aos-delay="300">
@@ -23,10 +23,10 @@
             </div>
         </div>
     </div>
-</section>
+</main>
 
 {{ "<!--  Company Feature Section Start -->" | safeHTML }}
-<section class="about-feature clearfix">
+<aside class="about-feature clearfix">
     <div class="container-fluid">
         <div class="card-group">
             {{ range $index, $element := .Params.aboutItems }}
@@ -40,7 +40,7 @@
             {{ end }}
         </div>
     </div>
-</section>
+</aside>
 {{ "<!--  Company Feature Section End -->" | safeHTML }}
 
 {{ partial "team.html" . }}

@@ -85,21 +85,8 @@ a:hover {
   padding: 80px 0 40px;
 }
 
-.moduler {
+.modular {
   padding: 140px 0;
-}
-
-.social-share li {
-  display: inline-block;
-  margin: 3px 1px;
-}
-
-.social-share a {
-  font-size: 20px;
-  color: #fff;
-  background: $col-background;
-  padding: 4px 10px;
-  display: inline-block;
 }
 
 .fancybox-close {
@@ -671,17 +658,16 @@ figure figcaption p {
   padding: 40px 0 80px;
 }
 
-.blog-content .blog-meta {
-  color: #9a9a9a;
+.blog-meta {
   font-weight: 300;
   margin-bottom: 25px;
 }
 
-.blog-content .blog-meta span:after {
+.blog-meta span:after {
   padding: 0 3px 0 6px;
 }
 
-.blog-content .blog-meta p {
+.blog-meta p {
   margin-top: 20px;
 }
 

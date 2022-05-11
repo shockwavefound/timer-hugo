@@ -10,10 +10,10 @@
                 {{ end }}
             </div>
             {{ with .Site.Params.socialIcon }}
-            <div class="col-md-4 col-12">
+            <div class="col-md-4 col-12 social text-center text-md-right text-lg-right">
+                Follow us on
                 {{ "<!-- Social Media -->" | safeHTML }}
                 <ul class="social social-icons text-center text-md-right text-lg-right">
-                    <span class="social">Follow us on:&nbsp;</span>
                     {{ range . }}
                       <li><a href="{{ .url }}" target="_blank" rel="noopener noreferrer"><i class="{{ .icon }}"></i><span class="sr-only">{{ .text }}</span></a></li>
                     {{ end }}
