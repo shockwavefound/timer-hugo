@@ -510,9 +510,11 @@ figure img {
   transition: transform 400ms;
 }
 
+/*
 figure:hover img {
   transform: scale3d(1.2, 1.2, 1);
 }
+*/
 
 figure:hover .overlay {
   opacity: 1;
