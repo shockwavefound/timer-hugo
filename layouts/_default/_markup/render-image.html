@@ -22,5 +22,5 @@
         {{- with $imgTitle }} title="{{ . }}"{{ end }}
         {{- with $altText }} alt="{{ . }}" {{ end -}}
       />
-  {{- with $.Title }}<figcaption>{{ . }}</figcaption>{{ end }}
+  {{ with $.Title }}<figcaption>{{ . | safeHTML }}</figcaption>{{ end }}
 </figure>
