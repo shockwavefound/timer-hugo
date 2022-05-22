@@ -53,7 +53,7 @@
                 {{ end }}
                 <article data-aos="fade-left" data-aos-delay="300">
                   <div class="post-date">
-                      <time datetime="{{ dateFormat $.Site.Params.rfc3339Format .Date }}">{{ dateFormat $.Site.Params.dateFormat .Date }}</time>
+                      <time datetime="{{ .Date.Format $.Site.Params.rfc3339Format }}">{{ .Date.Format ($.Site.Params.dateFormat | default "Jan 02, 2006") }}</time>
                       {{ with .Params.tags }}<span>&mdash; {{ delimit . ", " }} </span>{{ end }}
                   </div>
                   <div class="post-content">

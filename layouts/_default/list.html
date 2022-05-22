@@ -2,6 +2,7 @@
 
 {{ partial "page-title.html" . }}
 
+{{ $paginator := .Paginate .Pages }}
 <main id="main-content" class="blog-full-width">
     <div class="container">
         {{ with .Content }}
@@ -12,7 +13,7 @@
         </div>
         {{ end }}
         <div class="row">
-            {{ range .Pages }}
+            {{ range $paginator.Pages }}
                 <div class="col-md-6">
                     <article class="blog-content" data-aos="fade-down" data-aos-delay="300">
                         <a href="{{ .Permalink }}">
@@ -32,7 +33,7 @@
                             <h2 class="blog-post-title">{{ .Title }}</h2>
                         </a>
                         <div class="blog-meta">
-                            <time datetime="{{ dateFormat $.Site.Params.rfc3339Format .Date }}">{{ dateFormat $.Site.Params.dateFormat .Date }}</time>
+                            <time datetime="{{ .Date.Format $.Site.Params.rfc3339Format }}">{{ .Date.Format ($.Site.Params.dateFormat | default "Jan 02, 2006") }}</time>
                             {{ with .Params.categories }}<span>&mdash;
                                 {{ delimit . ", " }}
                             </span>
@@ -49,6 +50,7 @@
                     </article>
                 </div>
             {{ end }}
+            {{ template "_internal/pagination.html" . }}
         </div>
     </div>
 </main>
