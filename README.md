@@ -108,11 +108,13 @@ share those images.
 
 
 ## Hire Us
-We are available for **Hiring** for your next HUGO project. Please, check our
-[services](https://gethugothemes.com/services/?ref=github)
+Besides developing unique, blazing-fast Hugo themes, we also provide customized services. We specialize in creating affordable, high-quality static websites based on Hugo. 
+
+If you need to customize the theme or complete website development from scratch, you can hire us. **Check Our 
+[Services](https://gethugothemes.com/services/?utm_source=timer_github&utm_medium=referral&utm_campaign=github_theme_readme)**
 
 <!-- premium themes -->
 ## Premium Themes By Us
-| [![Mega-Bundle-HUGO](https://demo.gethugothemes.com/thumbnails/bundle.webp)](https://gethugothemes.com/bundle) | [![dot](https://demo.gethugothemes.com/thumbnails/dot.webp)](https://gethugothemes.com/products/dot/) | [![bookworm](https://demo.gethugothemes.com/thumbnails/bookworm.webp)](https://gethugothemes.com/products/bookworm/) |
+| [![Mega-Bundle-HUGO](https://demo.gethugothemes.com/thumbnails/bundle.webp)](https://gethugothemes.com/bundle/?utm_source=timer_github&utm_medium=referral&utm_campaign=github_theme_readme) | [![Meghna](https://demo.gethugothemes.com/thumbnails/meghna.webp)](https://gethugothemes.com/products/meghna-hugo-theme/) | [![Northendlab](https://demo.gethugothemes.com/thumbnails/northendlab.webp)](https://gethugothemes.com/products/northendlab/) |
 |:---:|:---:|:---:|
-| **Premium Theme Bundle (40+)** | **Dot** | **Bookworm** |
+| **Get 50+ Premium Hugo Themes Bundle** | **Meghna** | **Northendlab** |
