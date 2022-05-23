@@ -17,7 +17,7 @@
                              alt="{{ .Params.imageAlt | default "work-single-image" }}">
                          <figcaption class="figure-caption text-right">
                            {{ with .Params.imageCaption }}
-                             {{ . }}
+                             {{ . | markdownify }}
                            {{ else }}
                              image courtesy {{ .Params.client.name }}
                            {{ end }}

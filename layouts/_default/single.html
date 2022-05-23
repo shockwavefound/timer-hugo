@@ -16,7 +16,7 @@
                                  alt="{{ with .Params.imageAlt }}{{ . }}{{ end }}">
                         </div>
                         {{ with .Params.imageCaption }}
-                            <figcaption class="figure-caption text-right">{{ . }}</figcaption>
+                            <figcaption class="figure-caption text-right">{{ . | markdownify }}</figcaption>
                         {{ end }}
                     </figure>
                   {{ else }}
