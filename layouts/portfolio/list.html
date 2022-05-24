@@ -50,7 +50,7 @@
                             <h2 class="blog-post-title">{{ .Title }}</h2>
                         </a>
                         <div class="blog-meta">
-                            <time datetime="{{ dateFormat $.Site.Params.rfc3339Format .Date }}">{{ dateFormat $.Site.Params.monthFormat .Date }}</time>
+                            <time datetime="{{ .Date.Format $.Site.Params.rfc3339Format }}">{{ .Date.Format $.Site.Params.monthFormat | default "Jan 2006"}}</time>
                             {{ with .Params.categories }}<span>&mdash;
                                 {{ delimit . ", " }}
                             </span>
