@@ -3,8 +3,8 @@
 {{- $imgTitle := replaceRE "{.*}$" "" .Title }}
 
 {{- /*  Parse attributes  */ -}}
-{{- $attrs := split ( trim ( index (findRE `{.*}` .Title ) 0 ) "{}" ) " " -}}
-{{- $attributes := (dict "class" (slice "figure" "d-block" "text-center")) -}}
+{{- $attrs := split ( trim ( index (findRE ` *{.*}` .Title ) 0 ) "{}" ) " " -}}
+{{- $attributes := (dict "class" (slice "figure")) -}}
 {{ range $attrs -}}
   {{- if index (findRE `(\#)(.+)` .) 0 -}}
     {{- /*  IDs  */ -}}
@@ -29,21 +29,21 @@
 <figure
   {{- range $attr, $val := $attributes -}}
       {{- if eq $val true -}}
-        {{- (print " " $attr) | safeHTMLAttr -}}
+        {{- (print ` ` $attr) | safeHTMLAttr -}}
       {{- else -}}
-        {{- (printf " %s=%q" $attr (delimit $val ` ` )) | safeHTMLAttr -}}
+        {{- (printf ` %s=%q` $attr (delimit $val ` ` )) | safeHTMLAttr -}}
     {{- end -}}
   {{- end -}}
   >
   <img class="figure-img img-fluid"
     {{- if $src -}}
-      {{- $sizes := dict "tiny" 500 "small" 800 "medium" 1200 "large" 1500 }}
+      {{- $sizes := dict `tiny` 500 `small` 800 `medium` 1200 `large` 1500 }}
       {{- $scratch := newScratch }}
       {{- range $name, $width := $sizes }}
-          {{- $scratch.Set $name ($src.Resize (printf "%dx" $width)) | safeHTMLAttr }}
+          {{- $scratch.Set $name ($src.Resize (printf `%dx` $width)) | safeHTMLAttr }}
       {{- end -}}
       src="{{ $src.Permalink }}"
-      sizes="(min-width: 35em) 1200px, 100vw"
+      sizes="(min-width: 36em) 33.3vw, 100vw"
       srcset="
         {{- range $name, $width := $sizes }}
             {{- if ge $src.Width $width }}
