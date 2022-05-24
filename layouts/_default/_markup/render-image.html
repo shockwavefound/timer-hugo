@@ -1,60 +1,60 @@
-  {{- $src := .Page.Resources.GetMatch (printf "*%s*" .Destination) -}}
-  {{- $altText := .PlainText }}
-  {{- $imgTitle := replaceRE `{.*}$` `` .Title -}}
-    
-  {{- /*  Parse attributes  */ -}}
-  {{- $attrs := split ( trim ( index (findRE `{.*}` .Title ) 0 ) "{}" ) " " -}}
-  {{- $attributes := (dict) -}}
-  {{ range $attrs -}}
-    {{- if index (findRE `(\#)(.+)` .) 0 -}}
-      {{- /*  IDs  */ -}}
-      {{- $attributes = merge $attributes ( dict "id" (slice ( trim . "#" )) ) -}}
-    {{- else if  index (findRE `(\.)(.+)` .) 0 -}}
-      {{- /*  Classes  */ -}}
-      {{- $class := slice ( trim . "." ) -}} 
-      {{- $current := index $attributes "class" | default (slice) -}}
-      {{- $attributes = merge $attributes ( dict "class" ( append $current $class ) ) -}}
-    {{- else if  index (findRE `(\w+)=(['"]?\w+["']?)` . ) 0 -}}
-      {{- /*  Attributes  */ -}}
-      {{- $attr := replaceRE `(\w+)=(['"]?\w+["']?)` `$1` . -}}
-      {{- $val := split ( replaceRE `(\w+)=(['"]?(\w+)["']?)` `$3` . ) " " -}}
-      {{- $current := index $attributes $attr | default (slice) -}}
-      {{- $attributes = merge $attributes ( dict $attr ( append $current $val ) ) -}}
-    {{- else if index (findRE `(\w+)` . ) 0 -}}
-      {{/*  Booleans  */}}
-      {{- $attributes = merge $attributes ( dict . true ) -}}
-    {{- end -}}
-  {{- end -}}
+{{- $src := .Page.Resources.GetMatch (printf "*%s*" .Destination) }}
+{{- $altText := .PlainText }}
+{{- $imgTitle := replaceRE "{.*}$" "" .Title }}
 
-<figure class="figure d-block text-center"
+{{- /*  Parse attributes  */ -}}
+{{- $attrs := split ( trim ( index (findRE `{.*}` .Title ) 0 ) "{}" ) " " -}}
+{{- $attributes := (dict "class" (slice "figure" "d-block" "text-center")) -}}
+{{ range $attrs -}}
+  {{- if index (findRE `(\#)(.+)` .) 0 -}}
+    {{- /*  IDs  */ -}}
+    {{- $attributes = merge $attributes ( dict "id" (slice ( trim . "#" )) ) -}}
+  {{- else if  index (findRE `(\.)(.+)` .) 0 -}}
+    {{- /*  Classes  */ -}}
+    {{- $class := slice (trim . "." ) -}}
+    {{- $current := index $attributes "class" | default (slice) -}}
+    {{- $attributes = merge $attributes ( dict "class" (append $current $class) ) -}}
+  {{- else if  index (findRE `(\w+)=(['"]?\w+["']?)` . ) 0 -}}
+    {{- /*  Attributes  */ -}}
+    {{- $attr := replaceRE `(\w+)=(['"]?\w+["']?)` `$1` . -}}
+    {{- $val := split ( replaceRE `(\w+)=(['"]?(\w+)["']?)` `$3` .) " " -}}
+    {{- $current := index $attributes $attr | default (slice) -}}
+    {{- $attributes = merge $attributes ( dict $attr (append $current $val)) -}}
+  {{- else if index (findRE `(\w+)` . ) 0 -}}
+    {{/*  Booleans  */}}
+    {{- $attributes = merge $attributes (dict . true) -}}
+  {{- end -}}
+{{- end -}}
+
+<figure
   {{- range $attr, $val := $attributes -}}
-    {{- if eq $val true -}}
-      {{ print $attr ` ` | safeHTMLAttr }}
-    {{- else -}}
-      {{ print  $attr `="` (delimit $val ` ` ) `"` | safeHTMLAttr }}
+      {{- if eq $val true -}}
+        {{- (print " " $attr) | safeHTMLAttr -}}
+      {{- else -}}
+        {{- (printf " %s=%q" $attr (delimit $val ` ` )) | safeHTMLAttr -}}
     {{- end -}}
   {{- end -}}
   >
-  {{- if $src }}
+  <img class="figure-img img-fluid"
+    {{- if $src -}}
       {{- $sizes := dict "tiny" 500 "small" 800 "medium" 1200 "large" 1500 }}
       {{- $scratch := newScratch }}
       {{- range $name, $width := $sizes }}
-        {{- $scratch.Set $name ($src.Resize (printf "%dx" $width)) }}
-      {{- end }}
-      <img class="figure-img img-fluid" src="{{ $src.Permalink }}"
-        sizes="(min-width: 35em) 1200px, 100vw"
-        srcset="
+          {{- $scratch.Set $name ($src.Resize (printf "%dx" $width)) | safeHTMLAttr }}
+      {{- end -}}
+      src="{{ $src.Permalink }}"
+      sizes="(min-width: 35em) 1200px, 100vw"
+      srcset="
         {{- range $name, $width := $sizes }}
-          {{- if ge $src.Width $width }}
-            {{- with $scratch.Get $name }}{{ .RelPermalink }} {{ $width }}w, {{ end }}
-          {{- end }}
+            {{- if ge $src.Width $width }}
+                {{- with $scratch.Get $name }}{{ .RelPermalink }} {{ $width }}w, {{ end }}
+            {{- end }}
         {{- end }}"
-  {{- else }}
-      <img class="figure-img img-fluid" src="{{ .Destination | safeURL }}"
-  {{- end }}
-        {{- with $imgTitle }} title="{{ . }}"{{ end }}
-        {{- with $altText }} alt="{{ . }}" {{ end }}
-
-      />
-  {{- with $imgTitle }}<figcaption class="figure-caption text-right">{{ . | safeHTML }}</figcaption>{{ end -}}
+    {{- else -}}
+        src="{{ .Destination | safeURL }}"
+    {{- end -}}
+    {{- with $imgTitle }} title="{{ . }}" {{ end -}}
+    {{- with $altText }} alt="{{ . }}" {{ end -}}
+    />
+  {{- with $imgTitle }}<figcaption class="figure-caption text-right">{{ . | safeHTML }}</figcaption>{{ end }}
 </figure>
