@@ -9,5 +9,5 @@
    {{- with .Title}} title="{{ . }}"{{ end }}
    {{- if $isRemote }} target="_blank" rel="noopener"{{ end }}>
    {{- .Text | safeHTML -}}
-   {{- if $isRemote }} <i aria-hidden="true" class="icon ion-ios-open"></i>{{ end -}}
+   {{- if $isRemote }} <ion-icon aria-hidden="true" name="open-outline"></ion-icon>{{ end -}}
    </a>

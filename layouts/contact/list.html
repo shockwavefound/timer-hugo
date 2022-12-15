@@ -112,20 +112,20 @@
         <div class="row address-details">
             <div class="col-lg-4 col-sm-8">
                 <div class="address" data-aos="fade-left" data-aos-delay="300">
-                    <i class="icon ion-ios-location-outline"></i>
+                    <ion-icon name="location-outline"></ion-icon>
                     {{ with .Site.Data.contact.officeAddress1 }}<h5>{{ . }}</h5>{{ end }}
                 </div>
             </div>
             <div class="col-lg-4 col-sm-8">
                 <div class="email" data-aos="fade-left" data-aos-delay="500">
-                    <i class="icon ion-ios-email-outline"></i>
+                    <ion-icon name="mail-outline"></ion-icon>
                     <p>{{ with .Site.Data.contact.mail1 }}<a href="mailto:{{ . }}" target="_blank">{{ . }}</a>{{ end }}
                        {{ with .Site.Data.contact.mail2 }}<br>{{ . }}{{ end }}</p>
                 </div>
             </div>
             <div class="col-lg-4 col-sm-8">
                 <div class="phone" data-aos="fade-left" data-aos-delay="700">
-                    <i class="icon ion-ios-telephone-outline"></i>
+                    <ion-icon name="call-outline"></ion-icon>
                     <p>{{ with .Site.Data.contact.phone1 }}<a href="tel:{{ . }}" target="_blank">{{ . }}</a>{{ end }}
                        {{ with .Site.Data.contact.phone2 }}<br>{{ . }}{{ end }}</p>
                 </div>

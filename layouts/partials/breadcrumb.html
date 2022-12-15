@@ -7,7 +7,7 @@
 <li class="list-inline-item{{ if eq .p1 .p2 }} active{{ end }}">
   <a href="{{ .p1.Permalink }}">
     {{- if .p1.IsHome -}}
-    <i class="icon ion-ios-home"></i> Home
+    <ion-icon name="home"></ion-icon> Home
     {{- else -}}
       {{- .p1.Title -}}
     {{- end -}}

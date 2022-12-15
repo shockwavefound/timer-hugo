@@ -6,7 +6,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h2><i class="icon ion-ios-pricetags"></i> {{ .Title }}</h2>
+                <h2><ion-icon name="pricetags-outline"></ion-icon> {{ .Title }}</h2>
                 {{ .Content }}
             </div>
         </div>
@@ -31,7 +31,7 @@
                   <span class="letter">{{ $firstChar }}</span><br />
                 {{ end }}
 
-                <a class="badge badge-tag-list-page" href="{{ .Page.Permalink }}"><i class="icon ion-ios-pricetags"></i> {{ .Page.Title }} ({{ .Count }})</a>
+                <a class="badge badge-tag-list-page" href="{{ .Page.Permalink }}"><ion-icon name="pricetags-outline"></ion-icon> {{ .Page.Title }} ({{ .Count }})</a>
               {{ end }}
             {{ end }}
             </div>

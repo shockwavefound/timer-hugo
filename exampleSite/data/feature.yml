@@ -3,32 +3,32 @@ title   : Offer From Me
 subtitle: >
   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed, <br> quasi dolores numquam dolor vero ex, tempora commodi repellendus quod laborum.
 item    :
-  - icon  : ion-ios-flask-outline
+  - icon  : flask-outline
     title : Media heading
     description : >
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum, sint.
 
-  - icon  : ion-ios-lightbulb-outline
+  - icon  : lightbulb-outline
     title : Well documented.
     description : >
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum, sint.
 
-  - icon  : ion-ios-americanfootball-outline
+  - icon  : americanfootball-outline
     title : Free updates
     description : >
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum, sint.
 
-  - icon  : ion-ios-keypad-outline
+  - icon  : keypad-outline
     title : Solid Support
     description : >
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum, sint.
 
-  - icon  : ion-ios-barcode-outline
+  - icon  : barcode-outline
     title : Simple Installation
     description : >
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum, sint.
   
-  - icon  : ion-ios-lightbulb-outline
+  - icon  : lightbulb-outline
     title : Well documented.
     description : >
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum, sint.

@@ -19,7 +19,7 @@
 						{{ range .Site.Data.service.serviceItem }}
 						<div class="col-md-6">
 							<div class="block" data-aos="fade-up" data-aos-delay="700">
-								{{ with .icon }}<i class="{{ . }}"></i>{{ end }}
+								{{ with .icon }}<ion-icon name="{{ . }}"></ion-icon>{{ end }}
 								{{ with .title }}<h4>{{ . }}</h4>{{ end }}
 								{{ with .description }}<p>{{ . }}</p>{{ end }}
 							</div>
