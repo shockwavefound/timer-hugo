@@ -129,6 +129,12 @@ a:hover {
   color: #fff;
 }
 
+.global-page-header .block {
+  position: relative;
+  z-index: 9;
+  text-align: center;
+}
+
 .global-page-header h1 {
   font-size: 42px;
   font-weight: bold;
@@ -140,14 +146,18 @@ a:hover {
   background: none;
   font-size: 16px;
   padding: 8px 0;
-  display: block;
+  display: inline-flex;
 }
 
-.global-page-header a {
-  color: #eee;
+.global-page-header .breadcrumb li {
+  color: #ccc;
 }
 
-.global-page-header a:hover {
+.global-page-header .breadcrumb a {
+  color: #ccc;
+}
+
+.global-page-header .breadcrumb a:hover {
   color: #fff;
 }
 
@@ -156,11 +166,6 @@ a:hover {
   padding-right: 5px;
 }
 
-.global-page-header .block {
-  position: relative;
-  z-index: 9;
-  text-align: center;
-}
 
 .works-fit {
   padding: 40px 0;

@@ -5,8 +5,8 @@
             <div class="col-md-12">
                 <div class="block">
                     <h1>{{ .Title }}</h1>
-                    <nav aria-label="breadcrumbs">
-                        <ol class="breadcrumb list-inline text-center">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
                             {{ template "breadcrumbnav" (dict "p1" . "p2" .) }}
                         </ol>
                     </nav>
