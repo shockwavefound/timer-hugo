@@ -16,22 +16,22 @@
                             {{- $currentPage := . }}
                             {{- range $index, $element := .Site.Menus.main }}
                                 {{- if .HasChildren }}
-                                <li class="nav-item dropdown{{ if or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) }} active{{ end }}">
+                                <li class="nav-item dropdown{{ if or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) }} active" aria-current="page{{ end }}">
                                     <a class="nav-link dropdown-toggle" role="button"
                                        data-toggle="dropdown" id="dropdown{{ $index }}"
                                        aria-haspopup="true" aria-expanded="false"
-                                       href="{{ .URL | absLangURL }}">{{ .Pre }}{{ .Name }}</a>
+                                       href="{{ .URL | absLangURL }}">{{ .Pre }}<span>{{ .Name }}</span></a>
                                     <div class="dropdown-menu" aria-labelledby="dropdown{{ $index }}">
                                     {{ range .Children }}
-                                        <a class="dropdown-item{{ if or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) }} active{{ end }}" href="{{ .URL | absLangURL }}">{{ .Pre }}{{ .Name }}</a>
+                                        <a class="dropdown-item{{ if or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) }} active" aria-current="page{{ end }}" href="{{ .URL | absLangURL }}">{{ .Pre }}<span>{{ .Name }}</span></a>
                                     {{ end }}
                                     </div>
                                 </li>
                                 {{- else }}
-                                <li class="nav-item{{ if or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) }} active{{ end }}">
-                                    <a class="nav-link" href="{{ .URL | absLangURL }}">{{ .Pre }}{{ .Name }}</a>
+                                <li class="nav-item">
+                                    <a class="nav-link{{ if or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) }} active" aria-current="page{{ end }}" href="{{ .URL | absLangURL }}">{{ .Pre }}<span>{{ .Name }}</span></a>
                                 </li>
-                                {{ end }}
+                                {{- end }}
                             {{- end }}
                             <li class="nav-item">
                                     <input id="searchInput"
