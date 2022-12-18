@@ -13,23 +13,29 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navHeader">
                         <ul class="navbar-nav ml-auto">
-                            {{- $currentPage := . }}
+                            {{- $current := . }}
                             {{- range $index, $element := .Site.Menus.main }}
+                                {{- $active := or ($current.IsMenuCurrent "main" .) ($current.HasMenuCurrent "main" .) }}
+                                {{- $active = or $active (eq .Name $current.Title) }}
+                                {{- $active = or $active (and (eq (lower .KeyName) $current.Section) (ne $current.Section "")) }}
                                 {{- if .HasChildren }}
-                                <li class="nav-item dropdown{{ if or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) }} active" aria-current="page{{ end }}">
+                                <li class="nav-item dropdown{{ if $active }} active" aria-current="page{{ end }}">
                                     <a class="nav-link dropdown-toggle" role="button"
                                        data-toggle="dropdown" id="dropdown{{ $index }}"
                                        aria-haspopup="true" aria-expanded="false"
                                        href="{{ .URL | absLangURL }}">{{ .Pre }}<span>{{ .Name }}</span></a>
                                     <div class="dropdown-menu" aria-labelledby="dropdown{{ $index }}">
                                     {{ range .Children }}
-                                        <a class="dropdown-item{{ if or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) }} active" aria-current="page{{ end }}" href="{{ .URL | absLangURL }}">{{ .Pre }}<span>{{ .Name }}</span></a>
+                                        {{- $active := or ($current.IsMenuCurrent "main" .) ($current.HasMenuCurrent "main" .) }}
+                                        {{- $active = or $active (eq .Name $current.Name) }}
+                                        {{- $active = or $active (and (eq (lower .KeyName) $current.Section) (ne $current.Section "")) }}
+                                        <a class="dropdown-item{{ if $active }} active" aria-current="page{{ end }}" href="{{ .URL | absLangURL }}">{{ .Pre }}<span>{{ .Name }}</span></a>
                                     {{ end }}
                                     </div>
                                 </li>
                                 {{- else }}
                                 <li class="nav-item">
-                                    <a class="nav-link{{ if or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) }} active" aria-current="page{{ end }}" href="{{ .URL | absLangURL }}">{{ .Pre }}<span>{{ .Name }}</span></a>
+                                    <a class="nav-link{{ if $active }} active" aria-current="page{{ end }}" href="{{ .URL | absLangURL }}">{{ .Pre }}<span>{{ .Name }}</span></a>
                                 </li>
                                 {{- end }}
                             {{- end }}
