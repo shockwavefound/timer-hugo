@@ -7,7 +7,9 @@
     "url": "{{ .Site.BaseURL }}",
     "description": "{{ .Site.Params.description }}",
     "thumbnailUrl": "{{ .Site.Params.Logo | absURL }}",
-    "license": "{{ .Site.Params.Copyright }}"
+    {{- if .Site.Params.copyright }}
+    "license": "Copyright (c) {{ with .Site.Params.copyrightStart }}{{ . }}-{{ end }}{{ .Site.LastChange | dateFormat "2006" }} by {{ .Site.Params.copyright }}"
+    {{- end }}
 }
 </script>
 {{- else if .IsPage }}
@@ -62,8 +64,8 @@
              {{- $images := $.Resources.ByType "image" -}}
              {{- $featured := $images.GetMatch "*feature*" -}}
              {{- if not $featured }}{{ $featured = $images.GetMatch "{*cover*,*thumbnail*}" }}{{ end -}}
-             {{- with $featured -}}{{ $featured.Permalink -}}{{ end -}}
-             {{- .Site.Params.logo | absURL }}{{ end }},
+             {{- if $featured -}}{{ $featured.Permalink -}}{{ else -}}
+             {{- .Site.Params.logo | absURL }}{{ end }}{{ end }},
     "url" : "{{ .Permalink }}",
     "wordCount" : "{{ .WordCount }}",
     "keywords" : [ {{ range $index, $keyword := .Params.tags }}{{ if $index }}, {{ end }}"{{ $keyword }}" {{ end }}]
