@@ -1,7 +1,7 @@
 <head>
   {{ "<!-- Basic Page Needs -->" | safeHTML }}
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}">
+  <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{if .IsPage}}{{ .Summary }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end }}">
   {{ if eq .Kind "taxonomy" }}<meta name=robots content="noindex,nofollow" />{{end}}
   {{ with .Site.Params.author }}<meta name="author" content="{{ . }}">{{ end }}
   {{ hugo.Generator }}

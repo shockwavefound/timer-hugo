@@ -23,7 +23,7 @@
     "name": "{{ .Title | safeJS }}",
     "headline": "{{ .Title | safeJS }}",
     "alternativeHeadline": "{{ .Params.lead }}",
-    "description": "{{ with .Description }}{{ . | safeJS }}{{ else }}{{if .IsPage}}{{ .Summary | safeJS }}{{ end }}{{ end }}",
+    "description": "{{ with .Description }}{{ . | safeJS }}{{ else }}{{if .IsPage}}{{ .Summary | safeJS }}{{ else }}{{ with .Site.Params.description }}{{ . | safeJS }}{{ end }}{{ end }}{{ end }}",
     "inLanguage": {{ .Site.LanguageCode | default "en-us" }},
     "isFamilyFriendly": "true",
     "mainEntityOfPage": {
