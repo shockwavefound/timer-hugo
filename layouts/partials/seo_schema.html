@@ -1,4 +1,4 @@
-{{- if .IsHome -}}
+{{- if .IsHome }}
 {
     "@context": "http://schema.org",
     "@type": "WebSite",
@@ -6,11 +6,11 @@
     "url": "{{ .Site.BaseURL }}",
     "description": "{{ .Site.Params.description }}",
     {{- with .Site.Params.license }}
-    "license": {{ . }},
+    "license": "{{ . }}",
     {{- end }}
-    "thumbnailUrl": "{{ .Site.Params.Logo | absURL }}",
+    "thumbnailUrl": "{{ .Site.Params.Logo | absURL }}"
 }
-{{- else if .IsPage }}
+{{ else if .IsPage }}
 {{- $org_name :=  .Site.Title }}
 {{- $creditFields := (slice "@type" "name" "jobTitle" "worksFor" "workLocation" "honorificPrefix" "honorificSuffix") }}
 {
