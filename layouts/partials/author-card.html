@@ -26,7 +26,7 @@
                             {{ end }}
                         </h5>
                         {{ if (or .worksFor .jobTitle) }}
-                            <h6 class="byline-title mb-1 text-muted small">>{{ with .jobTitle }}{{ . }}, {{ end }}{{ .worksFor }}</h6>
+                            <h6 class="byline-title mb-1 text-muted small">{{ with .jobTitle }}{{ . }}, {{ end }}{{ .worksFor }}</h6>
                         {{ end }}
                     {{ end }}
                 </div>
