@@ -21,7 +21,7 @@
     "headline": "{{ .Title }}",
     "alternativeHeadline": "{{ .Params.lead }}",
     "description": "{{ with .Description }}{{ . }}{{ else }}{{if .IsPage}}{{ .Summary }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end }}",
-    "inLanguage": {{ .Site.LanguageCode | default "en-us" }},
+    "inLanguage": "{{ .Site.LanguageCode | default "en-us" }}",
     "isFamilyFriendly": "true",
     "mainEntityOfPage": {
         "@type": "WebPage",
@@ -45,25 +45,27 @@
     "dateCreated": "{{ .Date.Format "2006-01-02T15:04:05.00Z" | safeHTML }}",
     "datePublished": "{{ .PublishDate.Format "2006-01-02T15:04:05.00Z" | safeHTML }}",
     "dateModified": "{{ .Lastmod.Format "2006-01-02T15:04:05.00Z" | safeHTML }}",
-    "publisher":{
+    "publisher": {
         "@type": "Organization",
-        "name": {{ $org_name }},
-        "url": {{ .Site.BaseURL }},
+        "name": "{{ $org_name }}",
+        "url": "{{ .Site.BaseURL }}",
         "logo": {
             "@type": "ImageObject",
             "url": "{{ .Site.Params.logo | absURL }}",
-            "width":"32",
-            "height":"32"
+            "width": 32,
+            "height": 32
         }
     },
-    "image": {{ with .Params.images }}[{{ range $i, $e := . }}{{ if $i }}, {{ end }}{{ $e | absURL }}{{ end }}]{{ else -}}
+    "image": "{{- with .Params.images }}[{{ range $i, $e := . }}{{ if $i }}, {{ end }}{{ $e | absURL }}{{ end }}]{{ else }}
              {{- $images := $.Resources.ByType "image" -}}
              {{- $featured := $images.GetMatch "*feature*" -}}
              {{- if not $featured }}{{ $featured = $images.GetMatch "{*cover*,*thumbnail*}" }}{{ end -}}
              {{- if $featured -}}{{ $featured.Permalink -}}{{ else -}}
-             {{- .Site.Params.logo | absURL }}{{ end }}{{ end }},
-    "url" : "{{ .Permalink }}",
-    "wordCount" : "{{ .WordCount }}",
-    "keywords" : [ {{ range $index, $keyword := .Params.tags }}{{ if $index }}, {{ end }}"{{ $keyword }}" {{ end }}]
+             {{- .Site.Params.logo | absURL }}{{ end }}{{ end }}",
+    "url": "{{ .Permalink }}",
+    {{- with .Params.tags }}
+    "keywords": {{ . | jsonify }},
+    {{- end }}
+    "wordCount": {{ .WordCount }}
 }
 {{ end }}
