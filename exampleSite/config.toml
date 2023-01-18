@@ -50,6 +50,7 @@ author = "Themefisher"
 googleAnalitycsID = "Your ID"
 # contact form action
 contactFormAction = "#" # contact form works with https://formspree.io
+rfc3339Format = "2006-01-02T15:04:05Z07:00"
 
 # Banner Section
 [params.banner]

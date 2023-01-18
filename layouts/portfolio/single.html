@@ -44,7 +44,7 @@
                 {{ with .Params.client }}
                 <!-- sidebar -->
                 <div class="work-single-sidebar block" data-aos="fade-right" data-aos-delay="300">
-                    {{ if .logo }}
+                    {{ if isset . "logo" }}
                       {{ $logo := $.Page.Resources.GetMatch (printf "*%s*" .logo) }}
                       {{ if $logo }}
                         {{ with .website }}<a href="{{ . }}" target="_blank">{{ end }}

@@ -1,0 +1,29 @@
+"@type": Person
+name: Anderson Martin
+jobTitle: CEO, Project Manager
+worksFor: Themefisher
+workLocation: San Francisco, CA
+image: team-3.jpg
+weight: 1
+social:
+- text: LinkedIn
+  icon: logo-linkedin
+  url: https://linkedin.com/in/anderson_martin
+- text: Facebook
+  icon: logo-facebook
+  url: https://facebook.com/anderson_martin
+- text: Twitter
+  icon: logo-twitter
+  url: https://twitter.com/anderson_martin
+- text: Mastodon
+  icon: logo-mastodon
+  url: https://mastodon.social/@anderson_martin
+bio: >
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+  incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+  nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+
+
+  Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+  fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+  culpa qui officia deserunt mollit anim id est laborum."
