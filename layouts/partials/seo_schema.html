@@ -12,7 +12,7 @@
 }
 {{ else if .IsPage }}
 {{- $org_name :=  .Site.Title }}
-{{- $creditFields := (slice "@type" "name" "jobTitle" "worksFor" "workLocation" "honorificPrefix" "honorificSuffix") }}
+{{- $personFields := (slice "@type" "name" "jobTitle" "worksFor" "workLocation" "honorificPrefix" "honorificSuffix") }}
 {
     "@context": "http://schema.org",
     "@type": "BlogPosting",
@@ -29,19 +29,22 @@
     },
     {{- range $item := slice "author" "editor" "responsiblePerson" }}
         {{- with (or ($.Param $item) ($.Site.Param $item)) }}
-            {{- range first 1 . }}
+    "{{ $item }}": [
+            {{- range $index, $value := . }}
                 {{- with lower . }}
                     {{- $foo := newScratch }}
                     {{- with index $.Site.Data.bios . }}
                         {{- range $key, $val := . }}
-                            {{- if (in $creditFields $key) }}
+                            {{- if (in $personFields $key) }}
                                 {{- $foo.Set $key $val }}
                             {{- end }}
                         {{- end }}
                     {{- end }}
-    "{{ $item }}": {{ $foo.Values | jsonify }},
+        {{- if gt $index 0 }}, {{ end }}
+        {{- $foo.Values | jsonify }}
                 {{- end }}
-            {{- end }}
+            {{- end -}}
+    ],
         {{- end }}
     {{- end }}
     "copyrightHolder": "{{ $org_name }}",
