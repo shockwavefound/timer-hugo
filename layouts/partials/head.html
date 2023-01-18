@@ -56,5 +56,4 @@
 	{{ "<!-- Custom stylesheet - for your changes -->" | safeHTML}}
 	{{ $custom := resources.Get "css/custom.scss" | toCSS $options }}
   <link rel="stylesheet" href="{{ $custom.Permalink }}" media="screen">
-
 </head>

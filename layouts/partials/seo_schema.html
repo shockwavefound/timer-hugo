@@ -28,16 +28,20 @@
         "@id": "{{ .Permalink }}"
     },
     {{- range $item := slice "author" "editor" "responsiblePerson" }}
-        {{- with lower (or ($.Param $item) ($.Site.Param $item)) }}
-            {{- $foo := newScratch }}
-            {{- with index $.Site.Data.bios . }}
-                {{- range $key, $val := . }}
-                    {{- if (in $creditFields $key) }}
-                        {{- $foo.Set $key $val }}
+        {{- with (or ($.Param $item) ($.Site.Param $item)) }}
+            {{- range first 1 . }}
+                {{- with lower . }}
+                    {{- $foo := newScratch }}
+                    {{- with index $.Site.Data.bios . }}
+                        {{- range $key, $val := . }}
+                            {{- if (in $creditFields $key) }}
+                                {{- $foo.Set $key $val }}
+                            {{- end }}
+                        {{- end }}
                     {{- end }}
+    "{{ $item }}": {{ $foo.Values | jsonify }},
                 {{- end }}
             {{- end }}
-    "{{ $item }}": {{ $foo.Values | jsonify }},
         {{- end }}
     {{- end }}
     "copyrightHolder": "{{ $org_name }}",
