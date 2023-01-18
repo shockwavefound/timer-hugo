@@ -12,7 +12,7 @@
 }
 {{ else if .IsPage }}
 {{- $org_name :=  .Site.Title }}
-{{- $personFields := (slice "@type" "name" "jobTitle" "worksFor" "workLocation" "honorificPrefix" "honorificSuffix") }}
+{{- $personFields := (slice "@type" "name" "jobTitle" "worksFor" "honorificPrefix" "honorificSuffix" "url") }}
 {
     "@context": "http://schema.org",
     "@type": "BlogPosting",
