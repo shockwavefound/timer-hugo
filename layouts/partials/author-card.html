@@ -15,7 +15,7 @@
                 <div class="card-body d-flex flex-column align-items-start">
                     {{ with $author }}
                         <h5 class="byline-name mb-0 text-dark">
-                            {{ .name }}
+                            {{ with .honorificPrefix }}{{ . }} {{ end }}{{ .name }}{{ with .honorificSuffix }}, {{ . }}{{ end }}
                             {{ with .social }}
                             <ul class="social social-icons text-center text-md-right text-lg-right">
                             {{ range . }}
@@ -25,8 +25,8 @@
                             </ul>
                             {{ end }}
                         </h5>
-                        {{ with .title }}
-                            <h6 class="byline-title mb-1 text-muted small">{{ . }}</h6>
+                        {{ if (or .worksFor .jobTitle) }}
+                            <h6 class="byline-title mb-1 text-muted small">>{{ with .jobTitle }}{{ . }}, {{ end }}{{ .worksFor }}</h6>
                         {{ end }}
                     {{ end }}
                 </div>

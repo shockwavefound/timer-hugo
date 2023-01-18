@@ -1,49 +1,45 @@
 {{- if .IsHome -}}
-<script type="application/ld+json">
 {
     "@context": "http://schema.org",
     "@type": "WebSite",
     "name": "{{ .Site.Title }}",
     "url": "{{ .Site.BaseURL }}",
     "description": "{{ .Site.Params.description }}",
-    "thumbnailUrl": "{{ .Site.Params.Logo | absURL }}",
-    {{- if .Site.Params.copyright }}
-    "license": "Copyright (c) {{ with .Site.Params.copyrightStart }}{{ . }}-{{ end }}{{ .Site.LastChange | dateFormat "2006" }} by {{ .Site.Params.copyright }}"
+    {{- with .Site.Params.license }}
+    "license": {{ . }},
     {{- end }}
+    "thumbnailUrl": "{{ .Site.Params.Logo | absURL }}",
 }
-</script>
 {{- else if .IsPage }}
-{{- $author := index .Site.Data.authors (or (.Params.author) (lower .Site.Params.author)) }}
 {{- $org_name :=  .Site.Title }}
-<script type="application/ld+json">
+{{- $creditFields := (slice "@type" "name" "jobTitle" "worksFor" "workLocation" "honorificPrefix" "honorificSuffix") }}
 {
     "@context": "http://schema.org",
     "@type": "BlogPosting",
     "articleSection": "{{ .Section }}",
-    "name": "{{ .Title | safeJS }}",
-    "headline": "{{ .Title | safeJS }}",
+    "name": "{{ .Title }}",
+    "headline": "{{ .Title }}",
     "alternativeHeadline": "{{ .Params.lead }}",
-    "description": "{{ with .Description }}{{ . | safeJS }}{{ else }}{{if .IsPage}}{{ .Summary | safeJS }}{{ else }}{{ with .Site.Params.description }}{{ . | safeJS }}{{ end }}{{ end }}{{ end }}",
+    "description": "{{ with .Description }}{{ . }}{{ else }}{{if .IsPage}}{{ .Summary }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end }}",
     "inLanguage": {{ .Site.LanguageCode | default "en-us" }},
     "isFamilyFriendly": "true",
     "mainEntityOfPage": {
         "@type": "WebPage",
         "@id": "{{ .Permalink }}"
     },
-{{- if $author }}
-    "author" : {
-        "@type": "Person",
-        "name": "{{ $author.name }}"
-    },
-    "creator" : {
-        "@type": "Person",
-        "name": "{{ $author.name }}"
-    },
-    "accountablePerson" : {
-        "@type": "Person",
-        "name": "{{ $author.name }}"
-    },
-{{- end }}
+    {{- range $item := slice "author" "editor" "responsiblePerson" }}
+        {{- with lower (or ($.Param $item) ($.Site.Param $item)) }}
+            {{- $foo := newScratch }}
+            {{- with index $.Site.Data.authors . }}
+                {{- range $key, $val := . }}
+                    {{- if (in $creditFields $key) }}
+                        {{- $foo.Set $key $val }}
+                    {{- end }}
+                {{- end }}
+            {{- end }}
+    "{{ $item }}": {{ $foo.Values | jsonify }},
+        {{- end }}
+    {{- end }}
     "copyrightHolder": "{{ $org_name }}",
     "copyrightYear": "{{ .Date.Format "2006" }}",
     "dateCreated": "{{ .Date.Format "2006-01-02T15:04:05.00Z" | safeHTML }}",
@@ -70,5 +66,4 @@
     "wordCount" : "{{ .WordCount }}",
     "keywords" : [ {{ range $index, $keyword := .Params.tags }}{{ if $index }}, {{ end }}"{{ $keyword }}" {{ end }}]
 }
-</script>
 {{ end }}

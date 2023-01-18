@@ -1,0 +1,5 @@
+{{- if or .IsPage .IsHome }}
+<script type="application/ld+json">
+{{- partial "seo_schema" . | safeJS -}}
+</script>
+{{- end }}
