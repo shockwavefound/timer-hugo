@@ -68,9 +68,6 @@
 <script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/{{ .uid1 }}/{{ .uid2 }}.js");</script>
 {{ end }}
 
-{{/* Google Analytics */}}
-{{ template "_internal/google_analytics.html" . }}
-
 {{/* Custom JS for the site (should be last) */}}
 {{ $script := resources.Get "js/script.js" | minify}}
 <script src="{{ $script.Permalink }}"></script>
