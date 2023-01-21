@@ -4,11 +4,11 @@ date: 2018-07-08T12:22:40+06:00
 type: post
 image: images/blog/post-1.jpg
 authors:
-  - Themefisher
+  - "Themefisher"
 tags: ["install"]
 ---
 
-## Install this template by following those simple steps:
+## Install this template by following those simple steps
 
 ### STEP-1 : Hugo installation
 
@@ -19,18 +19,22 @@ Check this link below for install hugo on your computer.
 
 Hugo provides a `new` command to create a new website.
 
-```
+```bash
 hugo new site <new_project>
 ```
 
 ### STEP-3 : Install the theme
+
 Run this command
-```
+
+```bash
 hugo new site timer-hugo
 ```
+
 and then go to the themes folder inside of timer-hugo folder. You can also use this command ```cd timer-hugo/themes``` for going to this folder.
-Then run the command 
-```
+Then run the command
+
+```bash
 git clone git@github.com:themefisher/timer-hugo.git
 ```
 
@@ -44,7 +48,7 @@ open the command prompt again and run `cd ../` command for go back to the root f
 
 Launching the website locally by using the following command:
 
-```
+```bash
 hugo serve
 ```
 
@@ -64,7 +68,7 @@ theme = "timer-hugo"
 
 ### STEP-6 : Create your first content pages
 
-```
+```bash
 hugo new blog/post-name.md
 ```
 
@@ -72,7 +76,7 @@ hugo new blog/post-name.md
 
 When your site is ready to deploy, run the following command:
 
-```
+```bash
 hugo
 
 # You can also create a minified version by using this command:
