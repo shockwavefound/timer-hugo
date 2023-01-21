@@ -27,7 +27,7 @@
         "@type": "WebPage",
         "@id": "{{ .Permalink }}"
     },
-    {{- range $item := slice "author" "editor" "responsiblePerson" }}
+    {{- range $item := slice "authors" "editors" "responsiblePersons" }}
         {{- with (or ($.Param $item) ($.Site.Param $item)) }}
     "{{ $item }}": [
             {{- range $index, $value := . }}

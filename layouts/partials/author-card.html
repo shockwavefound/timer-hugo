@@ -1,6 +1,6 @@
-{{ if isset .Params "author" }}
+{{ if isset .Params "authors" }}
     <div class="row mb-2">
-        {{ range .Params.author }}
+        {{ range .Params.authors }}
             {{ with index $.Site.Data.bios . }}
                 <div class="col-md-6">
                     <div class="card flex-md-row mb-4 shadow-sm h-md-250">
@@ -15,7 +15,9 @@
                         {{ end }}
                         <div class="card-body d-flex flex-column align-items-start">
                             <h5 class="byline-name mb-0 text-dark">
-                                {{ with .honorificPrefix }}{{ . }} {{ end }}{{ .name }}{{ with .honorificSuffix }}, {{ . }}{{ end }}
+                                <a href="{{ relref $.Page (printf "%s%s" "/about#" (replace .name " " "-" | htmlEscape)) }}">
+                                    {{ with .honorificPrefix }}{{ . }} {{ end }}{{ .name }}{{ with .honorificSuffix }}, {{ . }}{{ end }}
+                                </a>
                                 {{ with .social }}
                                 <ul class="social social-icons text-center text-md-right text-lg-right">
                                 {{ range . }}
