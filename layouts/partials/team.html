@@ -10,7 +10,7 @@
                 {{ with index $.Site.Data.bios $element }}
                 <div class="card">
                     {{ $delay := mul $index 300 }}
-                    <div class="team-member" data-aos="fade-left" data-aos-delay="{{ $delay }}">
+                    <div id="{{ replace .name " " "-" | htmlEscape }}" class="team-member" data-aos="fade-left" data-aos-delay="{{ $delay }}">
                         {{ if .image }}
                         <div class="card-img-top team-img">
                             {{ $original := $.Resources.GetMatch .image }}
