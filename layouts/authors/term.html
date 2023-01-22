@@ -1,0 +1,96 @@
+{{ define "main" }}
+
+{{ partial "page-title.html" . }}
+
+<main id="main-content" class="blog-full-width">
+    <div class="container">
+        {{ .Lastmod }}
+        {{ with .Content }}
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="block">{{ . }}</div>
+            </div>
+        </div>
+        {{ end }}
+        {{ with index $.Site.Data.bios .LinkTitle }}
+        <div class="row">
+            <div class="card">
+                <div id="{{ replace .name " " "-" | htmlEscape }}" class="team-member">
+                    {{ if .image }}
+                    <div class="card-img-top Xteam-img">
+                        {{ $about_bundle  := $.Site.GetPage "/about" }}
+                        {{ $original := $about_bundle.Resources.GetMatch .image }}
+                        {{ $image := $original.Fill "400x600" }}
+                        <img src="{{ $original.Permalink }}" class="Xteam-pic"
+                            alt="{{ .name }} portrait">
+                    </div>
+                    {{ end }}
+                    <div class="card-body">
+                        {{ if .name }}
+                        <h3 class="team-name">{{ with .honorificPrefix }}{{ . }} {{ end }}{{ .name }}{{ with .honorificSuffix }}, {{ . }}{{ end }}
+                            {{ with .social }}
+                            <ul class="social social-icons text-center text-md-right text-lg-right">
+                                {{ range . }}
+                                    <li><a href="{{ .url }}" target="_blank" rel="me noopener noreferrer"><ion-icon name="{{ .icon }}"></ion-icon>
+                                    <span class="sr-only"> {{ .text }}</span></a></li>
+                                {{ end }}
+                            </ul>
+                            {{ end }}
+                        </h3>
+                        {{ end }}
+                        {{ if .worksFor }}<p class="team_designation">{{ with .jobTitle }}{{ . }}, {{ end }}{{ .worksFor }}{{ with .workLocation }}<br/>{{ . }}{{ end }}</p>{{ end }}
+                        {{ with .bio }}<p class="team_text">{{ . | markdownify }}</p>{{ end }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{ end }}
+        {{ if .Pages }}
+        <div class="row pt-5">
+            <div class="col-md-6">
+                <h2>Articles:</h2>
+            </div>
+        </div>
+        <div class="row">
+            {{ range .Pages }}
+                <div class="col-md-6">
+                    <article class="blog-content" data-aos="fade-down" data-aos-delay="300">
+                        <a href="{{ .Permalink }}">
+                            {{ if isset .Params "image" }}
+                            <div class="blog-post-image">
+                                {{ $original := .Page.Resources.GetMatch (printf "*%s*" .Params.image) }}
+                                {{ if $original }}
+                                    {{ $image := $original.Fill "800x600 left" }}
+                                    <img class="img-fluid" src="{{ $image.Permalink }}" alt="{{ .Params.imageAlt | default (printf "%s image" .Params.Title) }}"/>
+                                {{ else }}
+                                    {{ errorf "%s: %s not found. (layouts/authors/list.html)" $.File.Path .Params.image }}
+                                {{ end }}
+                            </div>
+                            {{ else }}
+                                {{ warnf "%s: image not set. (layouts/authors/list.html)" $.File.Path }}
+                            {{ end }}
+                            <h2 class="blog-post-title">{{ .Title }}</h2>
+                        </a>
+                        <div class="blog-meta">
+                            <time datetime="{{ .Date.Format $.Site.Params.rfc3339Format }}">{{ .Date.Format ($.Site.Params.dateFormat | default "2 January 2006") }}</time>
+                            {{ with .Params.categories }}<span>&mdash;
+                                {{ delimit . ", " }}
+                            </span>
+                            {{ end }}
+                            {{ with .Params.tags }}<span>&mdash;
+                                {{ delimit . ", " }}
+                            </span>
+                            {{ end }}
+                        </div>
+                        <p>
+                            {{ .Summary }}
+                        </p>
+                        <a href="{{ .Permalink }}" class="btn btn-default btn-details hvr-bounce-to-right" tabindex="-1" aria-hidden="true">Continue reading<span class="sr-only">&nbsp;about {{ .Title }}</span></a>
+                    </article>
+                </div>
+            {{ end }}
+        </div>
+        {{ end }}
+    </div>
+</main>
+{{ end }}
