@@ -15,7 +15,7 @@
                 {{ "<!-- Social Media -->" | safeHTML }}
                 <ul class="social social-icons text-center text-md-right text-lg-right">
                     {{ range . }}
-                      <li><a rel="me" href="{{ .url }}" target="_blank" rel="noopener noreferrer"><ion-icon name="{{ .icon }}"></ion-icon><span class="sr-only">{{ .text }}</span></a></li>
+                      <li><a href="{{ .url }}" target="_blank" rel="me noopener noreferrer"><ion-icon name="{{ .icon }}"></ion-icon><span class="sr-only">{{ .text }}</span></a></li>
                     {{ end }}
                 </ul>
             </div>
