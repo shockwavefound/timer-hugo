@@ -2,7 +2,7 @@
   {{ "<!-- Basic Page Needs -->" | safeHTML }}
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{if .IsPage}}{{ .Summary }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end }}">
-  {{ if eq .Kind "taxonomy" }}<meta name=robots content="noindex,nofollow" />{{ end }}
+  {{ if or (eq .Kind "taxonomy") (eq .Kind "term") }}<meta name="robots" content="noindex, nofollow">{{ end }}
   {{ range .Site.Params.authors }}<meta name="author" content="{{ . }}">{{ end }}
   {{ hugo.Generator }}
   {{ range .AlternativeOutputFormats -}}
