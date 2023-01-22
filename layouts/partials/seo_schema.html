@@ -28,8 +28,8 @@
         "@id": "{{ .Permalink }}"
     },
     {{- range $item := slice "authors" "editors" "responsiblePersons" }}
-        {{- with (or ($.Param $item) ($.Site.Param $item)) }}
-    "{{ $item }}": [
+        {{- with $.Param $item }}
+    "{{ $item | singularize }}": [
             {{- range $index, $value := . }}
                 {{- with lower . }}
                     {{- $foo := newScratch }}
