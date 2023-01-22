@@ -46,7 +46,7 @@
                 {{ with .Date }}
                   <p class="card-footer mb-2 text-muted">
                     Updated: 
-                    <time datetime="{{ dateFormat $.Site.Params.rfc3339Format . }}">{{ dateFormat $.Site.Params.dateFormat . }}</time>
+                    <time datetime="{{ dateFormat $.Site.Params.rfc3339Format . }}">{{ dateFormat ($.Site.Params.dateFormat | default "2 January 2006") . }}</time>
                   </p>
                 {{ end }}
               </figure>

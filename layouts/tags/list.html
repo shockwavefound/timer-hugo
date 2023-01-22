@@ -41,16 +41,16 @@
                                     {{ $image := $original.Fill "800x600 left" }}
                                     <img class="img-fluid" src="{{ $image.Permalink }}" alt="{{ .Params.imageAlt | default (printf "%s image" .Params.Title) }}"/>
                                 {{ else }}
-                                    {{ errorf "%s: %s not found. (layouts/_tags/list.html)" .File.Path .Params.image }}
+                                    {{ errorf "%s: %s not found. (layouts/tags/list.html)" .File.Path .Params.image }}
                                 {{ end }}
                             </div>
                             {{ else }}
-                                {{ warnf "%s: image not set. (layouts/_tags/list.html)" .File.Path }}
+                                {{ warnf "%s: image not set. (layouts/tags/list.html)" .File.Path }}
                             {{ end }}
                             <h2 class="blog-post-title">{{ .Title }}</h2>
                         </a>
                         <div class="blog-meta">
-                            <time datetime="{{ dateFormat $.Site.Params.rfc3339Format .Date }}">{{ dateFormat $.Site.Params.monthFormat .Date }}</time>
+                            <time datetime="{{ .Date.Format $.Site.Params.rfc3339Format }}">{{ .Date.Format ($.Site.Params.monthFormat | default "January 2006") }}</time>
                             {{ with .Params.categories }}<span>&mdash;
                                 {{ delimit . ", " }}
                             </span>

@@ -35,7 +35,7 @@
                   </div>
                   <p class="post-date">
                     Last updated:
-                    <time datetime="{{ dateFormat $.Site.Params.rfc3339Format .Date }}">{{ dateFormat $.Site.Params.dateFormat .Date }}</time>
+                    <time datetime="{{ dateFormat $.Site.Params.rfc3339Format .Date }}">{{ dateFormat ($.Site.Params.dateFormat | default "2 January 2006") .Date }}</time>
                   </p>
                 </article>
                 {{ partial "related.html" . }}
@@ -82,11 +82,11 @@
                       <hr>
                       {{ with .dateSubmitted }}
                         <h5>Date Submitted</h5>
-                        <p><time datetime="{{ dateFormat $.Site.Params.rfc3339Format . }}">{{ dateFormat $.Site.Params.monthFormat . }}</time></p>
+                        <p><time datetime="{{ dateFormat $.Site.Params.rfc3339Format . }}">{{ dateFormat ($.Site.Params.monthFormat | default "January 2006") . }}</time></p>
                       {{ end }}
                       {{ with .dateAwarded }}
                         <h5>Date Awarded</h5>
-                        <p><time datetime="{{ dateFormat $.Site.Params.rfc3339Format . }}">{{ dateFormat $.Site.Params.monthFormat . }}</time></p>
+                        <p><time datetime="{{ dateFormat $.Site.Params.rfc3339Format . }}">{{ dateFormat ($.Site.Params.monthFormat | default "January 2006") . }}</time></p>
                       {{ end }}
                       {{ with .requested }}
                         <h5>Requested</h5>

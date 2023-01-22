@@ -40,7 +40,7 @@
               {{ range first 1 (sort . "dateAwarded" "desc") }}
                   <p class="card-subtitle mb-2 text-muted">
                     {{ with (or .awarded .invested) }}${{ lang.NumFmt 0 . }}{{ end }}
-                    {{ with .dateAwarded }} / <time datetime="{{ dateFormat $.Site.Params.rfc3339Format . }}">{{ dateFormat $.Site.Params.monthFormat . }}</time>{{ end }}
+                    {{ with .dateAwarded }} / <time datetime="{{ dateFormat $.Site.Params.rfc3339Format . }}">{{ dateFormat ($.Site.Params.monthFormat | default "January 2006") . }}</time>{{ end }}
                   </p>
               {{ end }}
             {{ end }}
@@ -49,7 +49,7 @@
           {{ with .Date }}
             <p class="card-footer mb-2 text-muted">
                 Updated:
-                <time datetime="{{ dateFormat $.Site.Params.rfc3339Format . }}">{{ dateFormat $.Site.Params.dateFormat . }}</time>
+                <time datetime="{{ dateFormat $.Site.Params.rfc3339Format . }}">{{ dateFormat ($.Site.Params.dateFormat | default "2 January 2006") . }}</time>
             </p>
           {{ end }}
         </figure>
