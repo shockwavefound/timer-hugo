@@ -14,7 +14,7 @@
                       <figure class="figure">
                         <img class="figure-img img-fluid w-100" src="{{ $image.Permalink }}"
                              width="{{ $image.Width }}" height="{{ $image.Height }}"
-                             alt="{{ .Params.imageAlt | default "work-single-image" }}">
+                             alt="{{ with .Params.imageAlt }}{{ . }}{{ end }}">
                          <figcaption class="figure-caption text-right">
                            {{ with .Params.imageCaption }}
                              {{ . | markdownify }}
@@ -27,6 +27,8 @@
                   {{ else }}
                     {{ errorf "%s: %s not found. (layouts/portfolio/single.html)" .File.Path .Params.image }}
                   {{ end }}
+                {{ else }}
+                  {{ warnf "%s: image not set. (layouts/portfolio/single.html)" .File.Path }}
                 {{ end }}
                 <!-- work single Content -->
                 <article data-aos="fade-left" data-aos-delay="300">

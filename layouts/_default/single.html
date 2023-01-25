@@ -6,7 +6,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                {{ if isset .Params "image" }}
+                {{ if .Params.image }}
                   {{ $original := .Page.Resources.GetMatch (printf "*%s*" .Params.image) }}
                   {{ if $original }}
                     {{ $image := $original.Resize "1100x" }}
