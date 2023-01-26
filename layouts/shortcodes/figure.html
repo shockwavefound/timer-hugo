@@ -1,29 +1,27 @@
-<!-- image -->
-{{ $original := .Page.Resources.GetMatch (printf "*%s*" (.Get "src")) }}
-{{ if $original }}
-  {{ $image := $original.Resize "730x" }}
+{{- $original := .Page.Resources.GetMatch (printf "*%s*" (.Get "src")) }}
+{{- if $original }}
+  {{- $image := $original.Resize "730x" }}
   <div class="work-single-image">
-    <figure {{ with .Get "class" }}class="{{.}}"{{ else }}class="figure"{{ end }}>
-    {{ with .Get "link" }}<a href="{{ . }}">{{ end }}
+    <figure class="{{ default `figure` (.Get `class`) }}">
+    {{- with .Get "link" }}<a href="{{ . }}">{{ end }}
     <img class="figure-img img-fluid w-100"
             src="{{ $image.Permalink }}"
             width="{{ $image.Width }}" height="{{ $image.Height }}"
-            {{ if or (.Get "alt") (.Get "caption") }}alt="{{ with .Get "alt" }}{{ . }}{{ else }}{{ .Get "caption" }}{{ end }}"{{ end }} />
-    {{ if .Get "link" }}</a>{{ end }}
-    {{ if or (or (.Get "title") (.Get "caption")) (.Get "attr") }}
-        <figcaption class="figure-caption text-left">
-            {{ if isset .Params "title" }}<h4>{{ .Get "title" }}</h4>{{ end }}
-            {{ if or (.Get "caption") (.Get "attr") }}<p>
-            {{ .Get "caption" }}
-            {{ with .Get "attrlink" }}<a href="{{ . }}"> {{ end }}
-                {{ .Get "attr" }}
-            {{ if .Get "attrlink" }}</a> {{ end }}
-            </p> {{ end }}
+            {{- with or (.Get `alt`) (.Get `caption`) }}alt="{{ . }}"{{ end }}>
+    {{- if .Get "link" }}</a>{{ end }}
+    {{- if or (or (.Get "title") (.Get "caption")) (.Get "attr") }}
+        <figcaption class="figure-caption">
+            {{- if isset .Params "title" }}<h4>{{ .Get "title" }}</h4>{{ end }}
+            {{- if or (.Get "caption") (.Get "attr") }}
+              {{- .Get "caption" }}
+              {{- with .Get "attrlink" }}<a href="{{ . }}"> {{ end }}
+                  {{- .Get "attr" }}
+              {{- if .Get "attrlink" }}</a>{{ end -}}
+            {{- end }}
         </figcaption>
-    {{ end }}
+    {{- end }}
     </figure>
 </div>
-{{ else }}
-  {{ errorf "%s: %s not found. (shortcodes/image.html)" .File.Path (.Get 0) }}
-{{ end }}
-<!-- image -->
+{{- else }}
+  {{ errorf "%s: %s not found. (shortcodes/figure.html)" .File.Path (.Get 0) }}
+{{- end }}
