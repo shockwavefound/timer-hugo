@@ -2,13 +2,11 @@
 <footer id="footer">
     <div class="container">
         <div class="row content-justify-between">
-            <div class="col-md-8 col-12 text-center text-lg-left text-md-left">
-                {{ if .Site.Params.copyright }}
-                <p class="copyright">Copyright &copy;{{ with .Site.Params.copyrightStart }} {{ . }} - {{ end }}
-                    {{ .Site.LastChange | dateFormat "2006" }} by {{ .Site.Params.copyright }}
-                </p>
-                {{ end }}
-            </div>
+            {{ with site.Copyright }}
+                <div class="col-md-8 col-12 text-center text-lg-left text-md-left">
+                    <p class="copyright">{{ replace . "{year}" now.Year | safeHTML }}</p>
+                </div>
+            {{ end }}
             {{ with .Site.Params.socialIcon }}
             <div class="col-md-4 col-12 social text-center text-md-right text-lg-right">
                 Follow us on
