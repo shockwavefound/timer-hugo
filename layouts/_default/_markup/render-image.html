@@ -4,7 +4,7 @@
 
 {{- /*  Parse attributes  */ -}}
 {{- $attrs := split ( trim ( index (findRE ` *{.*}` .Title ) 0 ) "{}" ) " " -}}
-{{- $attributes := (dict "class" (slice "figure")) -}}
+{{- $attributes := (dict "class" (slice "img-fluid")) -}}
 {{ range $attrs -}}
   {{- if index (findRE `(\#)(.+)` .) 0 -}}
     {{- /*  IDs  */ -}}
@@ -26,7 +26,7 @@
   {{- end -}}
 {{- end -}}
 
-<figure
+<img
   {{- range $attr, $val := $attributes -}}
       {{- if eq $val true -}}
         {{- (print ` ` $attr) | safeHTMLAttr -}}
@@ -34,30 +34,27 @@
         {{- (printf ` %s=%q` $attr (delimit $val ` ` )) | safeHTMLAttr -}}
     {{- end -}}
   {{- end -}}
-  >
-  <img class="figure-img img-fluid"
-    {{- if $src -}}
-      {{- $sizes := dict `tiny` 500 `small` 800 `medium` 1200 `large` 1500 }}
-      {{- $scratch := newScratch }}
+  {{- if $src -}}
+    {{- $sizes := dict `tiny` 500 `small` 800 `medium` 1200 `large` 1500 }}
+    {{- $scratch := newScratch }}
+    {{- range $name, $width := $sizes }}
+        {{- $scratch.Set $name ($src.Resize (printf `%dx` $width)) | safeHTMLAttr }}
+    {{- end }}
+    {{- $scratch.Set "count" 0 }}
+    src="{{ $src.Permalink }}"
+    sizes="(min-width: 36em) 33.3vw, 100vw"
+    srcset="
       {{- range $name, $width := $sizes }}
-          {{- $scratch.Set $name ($src.Resize (printf `%dx` $width)) | safeHTMLAttr }}
-      {{- end }}
-      {{- $scratch.Set "count" 0 }}
-      src="{{ $src.Permalink }}"
-      sizes="(min-width: 36em) 33.3vw, 100vw"
-      srcset="
-        {{- range $name, $width := $sizes }}
-            {{- if ge $src.Width $width }}
-                {{- if ne 0 ($scratch.Get "count") }}, {{ end }} 
-                {{- $scratch.Add "count" 1 }}       
-                {{- with $scratch.Get $name }}{{ .Permalink }} {{ $width }}w{{ end }}
-            {{- end }}
-        {{- end }}"
-    {{- else }}
-        src="{{ .Destination | safeURL }}"
-    {{- end -}}
-    {{- with $imgTitle }} title="{{ . }}" {{ end -}}
-    {{- with $altText }} alt="{{ . }}" {{ end -}}
-    >
-  {{- with $imgTitle }}<figcaption class="figure-caption text-right">{{ . | safeHTML }}</figcaption>{{ end }}
-</figure>
+          {{- if ge $src.Width $width }}
+              {{- if ne 0 ($scratch.Get "count") }}, {{ end }} 
+              {{- $scratch.Add "count" 1 }}       
+              {{- with $scratch.Get $name }}{{ .Permalink }} {{ $width }}w{{ end }}
+          {{- end }}
+      {{- end }}"
+  {{- else }}
+      src="{{ .Destination | safeURL }}"
+  {{- end -}}
+  {{- with $imgTitle }} title="{{ . }}" {{ end -}}
+  {{- with $altText }} alt="{{ . }}" {{ end -}}
+  >
+  
