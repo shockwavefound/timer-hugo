@@ -41,20 +41,20 @@
       {{- $scratch := newScratch }}
       {{- range $name, $width := $sizes }}
           {{- $scratch.Set $name ($src.Resize (printf `%dx` $width)) | safeHTMLAttr }}
-      {{- end -}}
+      {{- end }}
       src="{{ $src.Permalink }}"
       sizes="(min-width: 36em) 33.3vw, 100vw"
       srcset="
         {{- range $name, $width := $sizes }}
             {{- if ge $src.Width $width }}
-                {{- with $scratch.Get $name }}{{ .RelPermalink }} {{ $width }}w, {{ end }}
+                {{- with $scratch.Get $name }}{{ .Permalink }} {{ $width }}w, {{ end }}
             {{- end }}
         {{- end }}"
-    {{- else -}}
+    {{- else }}
         src="{{ .Destination | safeURL }}"
     {{- end -}}
     {{- with $imgTitle }} title="{{ . }}" {{ end -}}
     {{- with $altText }} alt="{{ . }}" {{ end -}}
-    />
+    >
   {{- with $imgTitle }}<figcaption class="figure-caption text-right">{{ . | safeHTML }}</figcaption>{{ end }}
 </figure>
