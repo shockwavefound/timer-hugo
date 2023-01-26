@@ -4,22 +4,22 @@
   <div class="work-single-image">
     <figure class="{{ default `figure` (.Get `class`) }}">
     {{- with .Get "link" }}<a href="{{ . }}">{{ end }}
-    <img class="figure-img img-fluid w-100"
-            src="{{ $image.Permalink }}"
-            width="{{ $image.Width }}" height="{{ $image.Height }}"
-            {{- with or (.Get `alt`) (.Get `caption`) }} alt="{{ . }}"{{ end }}>
-    {{- if .Get "link" }}</a>{{ end }}
-    {{- if or (or (.Get "title") (.Get "caption")) (.Get "attr") }}
-        <figcaption class="figure-caption">
-            {{- if isset .Params "title" }}<h4>{{ .Get "title" }}</h4>{{ end }}
-            {{- if or (.Get "caption") (.Get "attr") }}
-              {{- .Get "caption" }}
-              {{- with .Get "attrlink" }}<a href="{{ . }}"> {{ end }}
-                  {{- .Get "attr" }}
-              {{- if .Get "attrlink" }}</a>{{ end -}}
-            {{- end }}
-        </figcaption>
-    {{- end }}
+      <img class="figure-img img-fluid w-100"
+              src="{{ $image.Permalink }}"
+              width="{{ $image.Width }}" height="{{ $image.Height }}"
+              alt="{{ .Get `alt` | default `` }}">
+      {{- if .Get "link" }}</a>{{ end }}
+      {{- if or (or (.Get "title") (.Get "caption")) (.Get "attr") }}
+      <figcaption class="figure-caption">
+          {{- if isset .Params "title" }}<h4>{{ .Get "title" }}</h4>{{ end }}
+          {{- if or (.Get "caption") (.Get "attr") }}
+            {{- .Get "caption" }}
+            {{- with .Get "attrlink" }}<a href="{{ . }}"> {{ end }}
+                {{- .Get "attr" }}
+            {{- if .Get "attrlink" }}</a>{{ end -}}
+          {{- end -}}
+      </figcaption>
+      {{- end }}
     </figure>
 </div>
 {{- else }}
