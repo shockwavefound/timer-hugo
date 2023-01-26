@@ -42,12 +42,15 @@
       {{- range $name, $width := $sizes }}
           {{- $scratch.Set $name ($src.Resize (printf `%dx` $width)) | safeHTMLAttr }}
       {{- end }}
+      {{- $scratch.Set "count" 0 }}
       src="{{ $src.Permalink }}"
       sizes="(min-width: 36em) 33.3vw, 100vw"
       srcset="
         {{- range $name, $width := $sizes }}
             {{- if ge $src.Width $width }}
-                {{- with $scratch.Get $name }}{{ .Permalink }} {{ $width }}w, {{ end }}
+                {{- if ne 0 ($scratch.Get "count") }}, {{ end }} 
+                {{- $scratch.Add "count" 1 }}       
+                {{- with $scratch.Get $name }}{{ .Permalink }} {{ $width }}w{{ end }}
             {{- end }}
         {{- end }}"
     {{- else }}
