@@ -1,27 +1,48 @@
-{{- $original := .Page.Resources.GetMatch (printf "*%s*" (.Get "src")) }}
-{{- if $original }}
-  {{- $image := $original.Resize "730x" }}
-  <div class="work-single-image">
-    <figure class="{{ default `figure` (.Get `class`) }}">
-    {{- with .Get "link" }}<a href="{{ . }}">{{ end }}
-      <img class="figure-img img-fluid w-100"
-              src="{{ $image.Permalink }}"
-              width="{{ $image.Width }}" height="{{ $image.Height }}"
-              alt="{{ .Get `alt` | default `` }}">
-      {{- if .Get "link" }}</a>{{ end }}
-      {{- if or (or (.Get "title") (.Get "caption")) (.Get "attr") }}
-      <figcaption class="figure-caption">
-          {{- if isset .Params "title" }}<h4>{{ .Get "title" }}</h4>{{ end }}
-          {{- if or (.Get "caption") (.Get "attr") }}
-            {{- .Get "caption" }}
-            {{- with .Get "attrlink" }}<a href="{{ . }}"> {{ end }}
-                {{- .Get "attr" }}
-            {{- if .Get "attrlink" }}</a>{{ end -}}
-          {{- end -}}
-      </figcaption>
-      {{- end }}
-    </figure>
-</div>
-{{- else }}
-  {{ errorf "%s: %s not found. (shortcodes/figure.html)" .File.Path (.Get 0) }}
-{{- end }}
+<figure class="{{ default `figure` (.Get `class`) }}">
+    {{- if .Get "link" -}}
+        <a href="{{ .Get `link` }}"{{ with .Get `target` }} target="{{ . }}"{{ end }}{{ with .Get `rel` }} rel="{{ . }}"{{ end }}>
+    {{- end -}}
+    <img class="{{ default `figure-img img-fluid w-100` (.Get `imgclass`) }}"
+        {{- if or (.Get `alt`) (.Get `caption`) }}
+          alt="{{ with .Get `alt` }}{{ . }}{{ else }}{{ .Get `caption` | markdownify | plainify }}{{ end }}"
+        {{- end -}}
+        {{- $image := .Page.Resources.GetMatch (printf `*%s*` (.Get `src`)) }}
+        {{- if $image }}
+          src="{{ $image.Permalink }}"
+          {{- $sizes := dict `tiny` 500 `small` 800 `medium` 1200 `large` 1500 }}
+          {{- $scratch := newScratch }}
+          {{- range $name, $width := $sizes }}
+              {{- $scratch.Set $name ($image.Resize (printf `%dx` $width)) | safeHTMLAttr }}
+          {{- end }}
+          sizes="(min-width: 36rem) 50vw, 100vw"
+          {{- $scratch.Set `count` 0 | safeHTMLAttr }}
+          srcset="
+            {{- range $name, $width := $sizes }}
+                {{- if ge $image.Width $width }}
+                    {{- if ne 0 ($scratch.Get `count`) }}, {{ end }} 
+                    {{- $scratch.Add `count` 1 }}       
+                    {{- with $scratch.Get $name }}{{ .Permalink }} {{ $width }}w{{ end }}
+                {{- end }}
+            {{- end }}"
+        {{- else -}}
+          src="{{ .Get `src` | safeURL }}"
+          {{- warnf `%s: %s not found, assuming link. (shortcodes/figure.html)` .File.Path (.Get `src`) -}}
+        {{- end -}}
+    >{{/* Closing img tag */}}
+    {{- if .Get "link" }}</a>{{ end -}}
+    {{- if or (or (.Get "title") (.Get "caption")) (.Get "attr") -}}
+        <figcaption class="figcaption">
+            {{ with (.Get "title") -}}
+                <h4>{{ . }}</h4>
+            {{- end -}}
+            {{- if or (.Get "caption") (.Get "attr") -}}<p>
+                {{- .Get "caption" | markdownify -}}
+                {{- with .Get "attrlink" }}
+                    <a href="{{ . }}">
+                {{- end -}}
+                {{- .Get "attr" | markdownify -}}
+                {{- if .Get "attrlink" }}</a>{{ end }}</p>
+            {{- end }}
+        </figcaption>
+    {{- end }}
+</figure>

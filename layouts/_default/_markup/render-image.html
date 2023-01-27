@@ -35,13 +35,13 @@
     {{- end -}}
   {{- end -}}
   {{- if $src -}}
+    src="{{ $src.Permalink }}"
     {{- $sizes := dict `tiny` 500 `small` 800 `medium` 1200 `large` 1500 }}
     {{- $scratch := newScratch }}
     {{- range $name, $width := $sizes }}
         {{- $scratch.Set $name ($src.Resize (printf `%dx` $width)) | safeHTMLAttr }}
     {{- end }}
     {{- $scratch.Set `count` 0 | safeHTMLAttr }}
-    src="{{ $src.Permalink }}"
     sizes="(min-width: 36em) 33.3vw, 100vw"
     srcset="
       {{- range $name, $width := $sizes }}
@@ -56,4 +56,4 @@
   {{- end -}}
   {{- with $imgTitle }} title="{{ . }}" {{ end -}}
   {{- with $altText }} alt="{{ . }}" {{ end -}}
-  >
+>
