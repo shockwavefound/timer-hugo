@@ -28,7 +28,7 @@
                 <article data-aos="fade-left" data-aos-delay="300">
                   {{ partial "author-card.html" . }}
                   <div class="post-date">
-                      <time pubdate datetime="{{ .Date.Format $.Site.Params.rfc3339Format }}">{{ .Date.Format ($.Site.Params.dateFormat | default "2 January 2006") }}</time>
+                      <time datetime="{{ .Date.Format $.Site.Params.rfc3339Format }}">{{ .Date.Format ($.Site.Params.dateFormat | default "2 January 2006") }}</time>
                       {{ with .Params.tags }}<span>&mdash; {{ delimit . ", " }} </span>{{ end }}
                   </div>
                   <div class="post-content">
