@@ -34,7 +34,7 @@
         {{- (printf ` %s=%q` $attr (delimit $val ` ` )) | safeHTMLAttr -}}
     {{- end -}}
   {{- end -}}
-  {{- if $src -}}
+  {{- if $src }}
     src="{{ $src.Permalink }}"
     {{- $sizes := dict `tiny` 500 `small` 800 `medium` 1200 `large` 1500 }}
     {{- $scratch := newScratch }}

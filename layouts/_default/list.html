@@ -1,9 +1,8 @@
 {{ define "main" }}
 
-{{ partial "page-title.html" . }}
-
 {{ $paginator := .Paginate .Pages }}
 <main id="main-content" class="blog-full-width">
+    {{ partial "page-title.html" . }}
     <div class="container">
         {{ with .Content }}
         <div class="row">
@@ -22,7 +21,7 @@
                                 {{ $original := .Page.Resources.GetMatch (printf "*%s*" .Params.image) }}
                                 {{ if $original }}
                                     {{ $image := $original.Fill "800x600 left" }}
-                                    <img class="img-fluid" src="{{ $image.Permalink }}" alt="{{ .Params.imageAlt | default (printf "%s image" .Params.Title) }}"/>
+                                    <img class="img-fluid" src="{{ $image.Permalink }}" alt="{{ .Params.imageAlt | default (printf `%s image` .Params.Title) }}">
                                 {{ else }}
                                     {{ errorf "%s: %s not found. (layouts/_default/list.html)" .File.Path .Params.image }}
                                 {{ end }}
@@ -43,9 +42,7 @@
                             </span>
                             {{ end }}
                         </div>
-                        <p>
-                            {{ .Summary }}
-                        </p>
+                        {{ .Summary }}
                         <a href="{{ .Permalink }}" class="btn btn-default btn-details hvr-bounce-to-right" tabindex="-1" aria-hidden="true">Continue reading<span class="sr-only">&nbsp;about {{ .Title }}</span></a>
                     </article>
                 </div>

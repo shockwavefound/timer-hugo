@@ -1,8 +1,8 @@
 {{ define "main" }}
 
-{{ partial "page-title.html" . }}
+<main id="portfolio" class="blog-full-width">
+    {{ partial "page-title.html" . }}
 
-<section id="portfolio" class="blog-full-width">
     <div class="container">
         {{ with .Content }}
         <div class="row">
@@ -28,49 +28,45 @@
                 </div>
             </div>
         </nav>
-        <main id="main-content">
-            <section id="sort-items" class="row">
-            {{ range .Pages }}
-                <div class="sort-item col-md-6" data-sort-name="{{ .Params.Title }}" data-sort-time="{{ .Date.Unix }}">
-                    <article class="blog-content" data-aos="fade-down" data-aos-delay="300">
-                        <a href="{{ .Permalink }}">
-                            {{ if isset .Params "image" }}
-                            <div class="blog-post-image">
-                                {{ $original := .Page.Resources.GetMatch (printf "*%s*" .Params.image) }}
-                                {{ if $original }}
-                                    {{ $image := $original.Fill "800x600 left" }}
-                                    <img class="img-fluid" src="{{ $image.Permalink }}" alt="{{ .Params.imageAlt | default (printf "%s image" .Params.Title) }}"/>
-                                {{ else }}
-                                    {{ errorf "%s: %s not found. (layouts/tags/list.html)" .File.Path .Params.image }}
-                                {{ end }}
-                            </div>
+        <div id="sort-items" class="row">
+        {{ range .Pages }}
+            <div class="sort-item col-md-6" data-sort-name="{{ .Params.Title }}" data-sort-time="{{ .Date.Unix }}">
+                <article class="blog-content" data-aos="fade-down" data-aos-delay="300">
+                    <a href="{{ .Permalink }}">
+                        {{ if isset .Params "image" }}
+                        <div class="blog-post-image">
+                            {{ $original := .Page.Resources.GetMatch (printf "*%s*" .Params.image) }}
+                            {{ if $original }}
+                                {{ $image := $original.Fill "800x600 left" }}
+                                <img class="img-fluid" src="{{ $image.Permalink }}" alt="{{ .Params.imageAlt | default (printf `%s image` .Params.Title) }}">
                             {{ else }}
-                                {{ warnf "%s: image not set. (layouts/tags/list.html)" .File.Path }}
-                            {{ end }}
-                            <h2 class="blog-post-title">{{ .Title }}</h2>
-                        </a>
-                        <div class="blog-meta">
-                            <time datetime="{{ .Date.Format $.Site.Params.rfc3339Format }}">{{ .Date.Format ($.Site.Params.monthFormat | default "January 2006") }}</time>
-                            {{ with .Params.categories }}<span>&mdash;
-                                {{ delimit . ", " }}
-                            </span>
-                            {{ end }}
-                            {{ with .Params.tags }}<span>&mdash;
-                                {{ delimit . ", " }}
-                            </span>
+                                {{ errorf "%s: %s not found. (layouts/tags/list.html)" .File.Path .Params.image }}
                             {{ end }}
                         </div>
-                        <p>
-                            {{ .Summary }}
-                        </p>
-                        <a href="{{ .Permalink }}" class="btn btn-default btn-details hvr-bounce-to-right" tabindex="-1" aria-hidden="true">Continue reading<span class="sr-only">&nbsp;about {{ .Title }}</span></a>
-                    </article>
-                </div>
-            {{ end }}
-            </section>
-        </main>
+                        {{ else }}
+                            {{ warnf "%s: image not set. (layouts/tags/list.html)" .File.Path }}
+                        {{ end }}
+                        <h2 class="blog-post-title">{{ .Title }}</h2>
+                    </a>
+                    <div class="blog-meta">
+                        <time datetime="{{ .Date.Format $.Site.Params.rfc3339Format }}">{{ .Date.Format ($.Site.Params.monthFormat | default "January 2006") }}</time>
+                        {{ with .Params.categories }}<span>&mdash;
+                            {{ delimit . ", " }}
+                        </span>
+                        {{ end }}
+                        {{ with .Params.tags }}<span>&mdash;
+                            {{ delimit . ", " }}
+                        </span>
+                        {{ end }}
+                    </div>
+                    {{ .Summary }}
+                    <a href="{{ .Permalink }}" class="btn btn-default btn-details hvr-bounce-to-right" tabindex="-1" aria-hidden="true">Continue reading<span class="sr-only">&nbsp;about {{ .Title }}</span></a>
+                </article>
+            </div>
+        {{ end }}
+        </div>
     </div>
-</section>
+</main>
 
 {{ partial "cta.html" . }}
 

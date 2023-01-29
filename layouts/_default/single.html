@@ -1,8 +1,7 @@
 {{ define "main" }}
 
-{{ partial "page-title.html" . }}
-
 <main id="main-content" class="single-post">
+    {{ partial "page-title.html" . }}
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -27,6 +26,7 @@
                 {{ end }}
                 <article data-aos="fade-left" data-aos-delay="300">
                   {{ partial "author-card.html" . }}
+                  <h2>{{ .Title }}</h2>
                   <div class="post-date">
                       <time datetime="{{ .Date.Format $.Site.Params.rfc3339Format }}">{{ .Date.Format ($.Site.Params.dateFormat | default "2 January 2006") }}</time>
                       {{ with .Params.tags }}<span>&mdash; {{ delimit . ", " }} </span>{{ end }}
@@ -47,7 +47,7 @@
             {{ template "_internal/disqus.html" . }}
         </div>
     </div>
-  </main>
+</main>
 
 {{ partial "cta.html" . }}
 

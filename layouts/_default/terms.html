@@ -1,8 +1,7 @@
 {{ define "main" }}
 
-{{ partial "page-title.html" . }}
-
 <main id="main-content" class="single-post">
+    {{ partial "page-title.html" . }}
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -28,15 +27,25 @@
                 {{ if ne $firstChar $curLetter }}
                 <!-- update the current letter and print it -->
                   {{ $.Scratch.Set "curLetter" $firstChar }}
-                  <span class="letter">{{ $firstChar }}</span><br />
+                  <span class="letter">{{ $firstChar }}</span><br>
                 {{ end }}
 
-                <a class="badge badge-tag-list-page" href="{{ .Page.Permalink }}"><ion-icon name="pricetags-outline"></ion-icon> {{ .Page.Title }} ({{ .Count }})</a>
+                <a class="badge badge-tag-list-page" href="{{ .Page.Permalink }}"><ion-icon name="pricetags-outline"></ion-icon>
+                {{ if ne $.Data.Plural "authors" }}
+                  {{ .Page.Title }}
+                {{ else }}
+                  {{ with index $.Site.Data.bios .Page.Title }}
+                    {{ .name }}
+                  {{ else }}
+                    {{ .Page.Title }}
+                  {{ end }}
+                {{ end }}
+                ({{ .Count }})</a>
               {{ end }}
             {{ end }}
             </div>
         </div>
-    </div>
+     </div>
   </main>
 
 {{ end }}

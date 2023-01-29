@@ -1,10 +1,9 @@
 {{ define "main" }}
 
-{{ partial "page-title.html" . }}
-
 {{ if .Site.Data.service.enable }}
 {{ "<!-- Service Section Start -->" | safeHTML }}
-<section id="service-page" class="pages service-page">
+<main id="service-page" class="pages service-page">
+	{{ partial "page-title.html" . }}
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-6">
@@ -37,7 +36,7 @@
 			{{ end }}
 		</div>
 	</div>
-</section>
+</main>
 {{ "<!-- Service Section End -->" | safeHTML }}
 {{ end }}
 

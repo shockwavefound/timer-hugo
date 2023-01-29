@@ -8,15 +8,15 @@
                 </div>
             {{ end }}
             {{ with .Site.Params.socialIcon }}
-            <div class="col-md-4 col-12 social text-center text-md-right text-lg-right">
-                Follow us on
                 {{ "<!-- Social Media -->" | safeHTML }}
-                <ul class="social social-icons text-center text-md-right text-lg-right">
-                    {{ range . }}
-                      <li><a href="{{ .url }}" target="_blank" rel="me noopener noreferrer"><ion-icon name="{{ .icon }}"></ion-icon><span class="sr-only">{{ .text }}</span></a></li>
-                    {{ end }}
-                </ul>
-            </div>
+                <div class="col-md-4 col-12 social text-center text-md-right text-lg-right">
+                    Follow us on:
+                    <ul class="social social-icons text-center text-md-right text-lg-right">
+                        {{ range . }}
+                        <li><a href="{{ .url }}" target="_blank" rel="me noopener noreferrer"><ion-icon name="{{ .icon }}"></ion-icon><span class="sr-only">{{ .text }}</span></a></li>
+                        {{ end }}
+                    </ul>
+                </div>
             {{ end }}
         </div>
     </div>
@@ -53,7 +53,7 @@
 <script id="searchResultsTemplate" type="text/x-js-template">
     <li>
         <a href="${permalink}" tabindex="0">
-            <span class="title">${title}</span><br/>
+            <span class="title">${title}</span><br>
             <span class="section">${section}</span>
             ${isset date}<span class="date">${date}</span>${end}
             ${isset summary}<span class="summary">${summary}${end}

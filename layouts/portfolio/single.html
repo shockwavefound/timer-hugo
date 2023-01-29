@@ -1,8 +1,8 @@
 {{ define "main" }}
 
-{{ partial "page-title.html" . }}
-
 <main id="main-content" class="work-single">
+    {{ partial "page-title.html" . }}
+
     <div class="container">
         <div class="row">
             <div class="col-lg-8">
@@ -10,7 +10,7 @@
                   {{ $original := .Page.Resources.GetMatch (printf "*%s*" .Params.image) }}
                   {{ if $original }}
                     {{ $image := $original.Resize "730x" }}
-                    <div class="work-single-image">
+                    <div class="work-single-image" data-aos="fade-top" data-aos-delay="300">
                       <figure class="figure">
                         <img class="figure-img img-fluid w-100" src="{{ $image.Permalink }}"
                              width="{{ $image.Width }}" height="{{ $image.Height }}"
@@ -30,87 +30,91 @@
                 {{ else }}
                   {{ warnf "%s: image not set. (layouts/portfolio/single.html)" .File.Path }}
                 {{ end }}
-                <!-- work single Content -->
                 <article data-aos="fade-left" data-aos-delay="300">
+                  <h2>{{ .Title }}</h2>
                   <div class="work-single-content block">
                     {{ .Content }}
                   </div>
-                  <p class="post-date">
+                  <footer class="post-date">
                     Last updated:
                     <time datetime="{{ dateFormat $.Site.Params.rfc3339Format .Date }}">{{ dateFormat ($.Site.Params.dateFormat | default "2 January 2006") .Date }}</time>
-                  </p>
+                  </footer>
+                  {{ partial "related.html" . }}
                 </article>
-                {{ partial "related.html" . }}
             </div>
+            <!-- sidebar -->
             <aside class="col-lg-4">
                 {{ with .Params.client }}
-                <!-- sidebar -->
                 <div class="work-single-sidebar block" data-aos="fade-right" data-aos-delay="300">
-                    {{ if isset . "logo" }}
-                      {{ $logo := $.Page.Resources.GetMatch (printf "*%s*" .logo) }}
-                      {{ if $logo }}
-                        {{ with .website }}<a href="{{ . }}" target="_blank">{{ end }}
-                          <img class="img-fluid mx-auto d-block p-3" src="{{ $logo.Permalink }}" alt="{{ .name }} logo">
-                        {{ with .website }}</a>{{ end }}
-                      {{ else }}
-                        {{ errorf "%s: %s: Not found" $.File.Path .logo }}
-                      {{ end }}
+                  {{ if isset . "logo" }}
+                    {{ $logo := $.Page.Resources.GetMatch (printf "*%s*" .logo) }}
+                    {{ if $logo }}
+                      {{ with .website }}<a href="{{ . }}" target="_blank">{{ end }}
+                        <img class="img-fluid mx-auto d-block p-3" src="{{ $logo.Permalink }}" alt="{{ .name }} logo">
+                      {{ with .website }}</a>{{ end }}
+                    {{ else }}
+                      {{ errorf "%s: %s: Not found" $.File.Path .logo }}
                     {{ end }}
+                  {{ end }}
+                  <dl>
                     {{ with .name }}
-                    <h5>Organization</h5>
-                    <p>{{ . }}</p>
+                    <dt>Organization</dt>
+                    <dd>{{ . }}</dd>
                     {{ end }}
                     {{ with .website }}
-                    <h5>Website</h5>
-                    <p><a href="{{ . }}" target="_blank">{{ . }}</a></p>
+                    <dt>Website</dt>
+                    <dd><a href="{{ . }}" target="_blank">{{ . }}</a></dd>
                     {{ end }}
                     {{ with $.Params.categories }}
-                    <h5>Categories</h5>
-                    <p>{{ delimit . ", " }}</p>
+                    <dt>Categories</dt>
+                    <dd>{{ delimit . ", " }}</dd>
                     {{ end }}
                     {{ with $.Params.tags }}
-                    <h5>Tags</h5>
-                    <p>{{ delimit . ", " }}</p>
+                    <dt>Tags</dt>
+                    <dd>{{ delimit . ", " }}</dd>
                     {{ end }}
                     {{ with .beneficiaries }}
-                    <h5>Beneficiaries</h5>
-                    <p>{{ delimit . ", " }}</p>
+                    <dt>Beneficiaries</dt>
+                    <dd>{{ delimit . ", " }}</dd>
                     {{ end }}
                     {{ with .locations }}
-                    <h5>Location(s)</h5>
-                    <p>{{ delimit . ", " }}</p>
+                    <dt>Location(s)</dt>
+                    <dd>{{ delimit . ", " }}</dd>
                     {{ end }}
-                    {{ range sort .awards "dateAwarded" "desc" }}
-                      <hr>
-                      {{ with .dateSubmitted }}
-                        <h5>Date Submitted</h5>
-                        <p><time datetime="{{ dateFormat $.Site.Params.rfc3339Format . }}">{{ dateFormat ($.Site.Params.monthFormat | default "January 2006") . }}</time></p>
-                      {{ end }}
-                      {{ with .dateAwarded }}
-                        <h5>Date Awarded</h5>
-                        <p><time datetime="{{ dateFormat $.Site.Params.rfc3339Format . }}">{{ dateFormat ($.Site.Params.monthFormat | default "January 2006") . }}</time></p>
-                      {{ end }}
-                      {{ with .requested }}
-                        <h5>Requested</h5>
-                        <p>${{ lang.NumFmt 0 . }}</p>
-                      {{ end }}
-                      {{ with .awarded }}
-                        <h5>Awarded</h5>
-                        <p>${{ lang.NumFmt 0 . }}</p>
-                      {{ end }}
-                      {{ with .invested }}
-                        <h5>Invested</h5>
-                        <p>${{ lang.NumFmt 0 . }}</p>
-                      {{ end }}
-                      {{ with .distributed }}
-                        <h5>Distributed</h5>
-                        <p>${{ lang.NumFmt 0 . }}</p>
-                      {{ end }}
-                      {{ with .duration }}
-                        <h5>Project Duration</h5>
-                        <p>{{ . }}</p>
-                      {{ end }}
+                  </dl>
+                  {{ range sort .awards "dateAwarded" "desc" }}
+                    <hr>
+                    <dl>
+                    {{ with .dateSubmitted }}
+                      <dt>Date Submitted</dt>
+                      <dd><time datetime="{{ dateFormat $.Site.Params.rfc3339Format . }}">{{ dateFormat ($.Site.Params.monthFormat | default "January 2006") . }}</time></dd>
                     {{ end }}
+                    {{ with .dateAwarded }}
+                      <dt>Date Awarded</dt>
+                      <dd><time datetime="{{ dateFormat $.Site.Params.rfc3339Format . }}">{{ dateFormat ($.Site.Params.monthFormat | default "January 2006") . }}</time></dd>
+                    {{ end }}
+                    {{ with .requested }}
+                      <dt>Requested</dt>
+                      <dd>${{ lang.NumFmt 0 . }}</dd>
+                    {{ end }}
+                    {{ with .awarded }}
+                      <dt>Awarded</dt>
+                      <dd>${{ lang.NumFmt 0 . }}</dd>
+                    {{ end }}
+                    {{ with .invested }}
+                      <dt>Invested</dt>
+                      <dd>${{ lang.NumFmt 0 . }}</dd>
+                    {{ end }}
+                    {{ with .distributed }}
+                      <dt>Distributed</dt>
+                      <dd>${{ lang.NumFmt 0 . }}</dd>
+                    {{ end }}
+                    {{ with .duration }}
+                      <dt>Project Duration</dt>
+                      <dd>{{ . }}</dd>
+                    {{ end }}
+                    </dl>
+                  {{ end }}
                 </div>
                 {{ end }}
               </aside>

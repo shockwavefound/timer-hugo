@@ -1,8 +1,7 @@
 {{ define "main" }}
 
-{{ partial "page-title.html" . }}
-
 <main id="main-content" class="blog-full-width">
+    {{ partial "page-title.html" . }}
     <div class="container">
         {{ with .Content }}
         <div class="row">
@@ -13,32 +12,31 @@
         {{ end }}
         {{ with index $.Site.Data.bios .LinkTitle }}
         <div class="row">
-            <div class="card">
-                <div id="{{ replace .name " " "-" | htmlEscape }}" class="team-member">
-                    {{ if .image }}
-                    <div class="card-img-top Xteam-img">
+            <div id="{{ replace .name ` ` `-` | htmlEscape }}" class="card mb-3 team-member">
+                <div class="row g-0">
+                    <div class="col-md-4">
                         {{ $about_bundle  := $.Site.GetPage "/about" }}
                         {{ $original := $about_bundle.Resources.GetMatch .image }}
                         {{ $image := $original.Fill "400x600" }}
-                        <img src="{{ $original.Permalink }}" class="Xteam-pic"
-                            alt="{{ .name }} portrait">
+                        <img src="{{ $original.Permalink }}" class="img-fluid rounded-start"
+                             alt="{{ .name }} portrait">
                     </div>
-                    {{ end }}
-                    <div class="card-body">
-                        {{ if .name }}
-                        <h3 class="team-name">{{ with .honorificPrefix }}{{ . }} {{ end }}{{ .name }}{{ with .honorificSuffix }}, {{ . }}{{ end }}
-                            {{ with .social }}
-                            <ul class="social social-icons text-center text-md-right text-lg-right">
-                                {{ range . }}
-                                    <li><a href="{{ .url }}" target="_blank" rel="me noopener noreferrer"><ion-icon name="{{ .icon }}"></ion-icon>
-                                    <span class="sr-only"> {{ .text }}</span></a></li>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <div class="clearfix">
+                                <h3 class="card-title float-left">{{ with .honorificPrefix }}{{ . }} {{ end }}{{ .name }}{{ with .honorificSuffix }}, {{ . }}{{ end }}</h3>
+                                {{ with .social }}
+                                    <ul class="social-icons float-right">
+                                        {{ range . }}
+                                            <li><a href="{{ .url }}" target="_blank" rel="me noopener noreferrer"><ion-icon name="{{ .icon }}"></ion-icon>
+                                            <span class="sr-only"> {{ .text }}</span></a></li>
+                                        {{ end }}
+                                    </ul>
                                 {{ end }}
-                            </ul>
-                            {{ end }}
-                        </h3>
-                        {{ end }}
-                        {{ if .worksFor }}<p class="team_designation">{{ with .jobTitle }}{{ . }}, {{ end }}{{ .worksFor }}{{ with .workLocation }}<br/>{{ . }}{{ end }}</p>{{ end }}
-                        {{ with .bio }}<p class="team_text">{{ . | markdownify }}</p>{{ end }}
+                            </div>
+                            {{ if .worksFor }}<p class="card-subtitle mb-2 text-muted">{{ with .jobTitle }}{{ . }}, {{ end }}{{ .worksFor }}{{ with .workLocation }}<br>{{ . }}{{ end }}</p>{{ end }}
+                            {{ with .bio }}{{ . | markdownify }}{{ end }}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -60,7 +58,7 @@
                                 {{ $original := .Page.Resources.GetMatch (printf "*%s*" .Params.image) }}
                                 {{ if $original }}
                                     {{ $image := $original.Fill "800x600 left" }}
-                                    <img class="img-fluid" src="{{ $image.Permalink }}" alt="{{ .Params.imageAlt | default (printf "%s image" .Params.Title) }}"/>
+                                    <img class="img-fluid" src="{{ $image.Permalink }}" alt="{{ .Params.imageAlt | default (printf `%s image` .Params.Title) }}">
                                 {{ else }}
                                     {{ errorf "%s: %s not found. (layouts/authors/list.html)" $.File.Path .Params.image }}
                                 {{ end }}

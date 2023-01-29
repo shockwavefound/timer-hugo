@@ -10,7 +10,7 @@
                 {{ with index $.Site.Data.bios $element }}
                 <div class="card">
                     {{ $delay := mul $index 300 }}
-                    <div id="{{ replace .name " " "-" | htmlEscape }}" class="team-member" data-aos="fade-left" data-aos-delay="{{ $delay }}">
+                    <div id="{{ replace .name ` ` `-` | htmlEscape }}" class="team-member" data-aos="fade-left" data-aos-delay="{{ $delay }}">
                         {{ if .image }}
                         <div class="card-img-top team-img">
                             {{ $original := $.Resources.GetMatch .image }}
@@ -21,20 +21,19 @@
                         </div>
                         {{ end }}
                         <div class="card-body">
-                            {{ if .name }}
-                            <h3 class="team-name">{{ with .honorificPrefix }}{{ . }} {{ end }}{{ .name }}{{ with .honorificSuffix }}, {{ . }}{{ end }}
+                            <div class="clearfix">
+                                <h3 class="team-name card-title float-left">{{ with .honorificPrefix }}{{ . }} {{ end }}{{ .name }}{{ with .honorificSuffix }}, {{ . }}{{ end }}</h3>
                                 {{ with .social }}
-                                <ul class="social social-icons text-center text-md-right text-lg-right">
-                                    {{ range . }}
-                                        <li><a href="{{ .url }}" target="_blank" rel="me noopener noreferrer"><ion-icon name="{{ .icon }}"></ion-icon>
-                                        <span class="sr-only"> {{ .text }}</span></a></li>
-                                    {{ end }}
-                                </ul>
+                                    <ul class="social-icons">
+                                        {{ range . }}
+                                            <li><a href="{{ .url }}" target="_blank" rel="me noopener noreferrer"><ion-icon name="{{ .icon }}"></ion-icon>
+                                            <span class="sr-only"> {{ .text }}</span></a></li>
+                                        {{ end }}
+                                    </ul>
                                 {{ end }}
-                            </h3>
-                            {{ end }}
-                            {{ if .worksFor }}<p class="team_designation">{{ with .jobTitle }}{{ . }}, {{ end }}{{ .worksFor }}{{ with .workLocation }}<br/>{{ . }}{{ end }}</p>{{ end }}
-                            {{ with .bio }}<p class="team_text">{{ . | markdownify }}</p>{{ end }}
+                            </div>
+                            {{ if .worksFor }}<p class="card-subtitle mb-2 text-muted team-designation">{{ with .jobTitle }}{{ . }}, {{ end }}{{ .worksFor }}{{ with .workLocation }}<br>{{ . }}{{ end }}</p>{{ end }}
+                            {{ with .bio }}{{ . | markdownify }}{{ end }}
                         </div>
                     </div>
                 </div>

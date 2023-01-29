@@ -1,11 +1,11 @@
 {{ define "main" }}
 
-{{ partial "page-title.html" . }}
+{{ if .Site.Data.contact.enable }}
 
 <!--sse-->
-{{ if .Site.Data.contact.enable }}
 {{ "<!-- Contact Section Start -->" | safeHTML }}
 <main id="main-content" class="contact-section">
+    {{ partial "page-title.html" . }}
     <div class="container">
         <div class="row">
             <div class="col-md-6 mb-5 mb-md-0">
@@ -13,7 +13,7 @@
                     {{ with .Site.Data.contact.contactFormTitle }}<h2 class="subtitle" >{{ . }}</h2>{{ end }}
                     {{ with .Site.Data.contact.contactFormSubtitle | safeHTML }}<p class="subtitle-des">{{ . }}</p>{{ end }}
                     <div class="contact-form">
-                        <form id="contact-form" method="POST" action="{{ .Site.Data.contact.contactPost }}" role="form" validate>
+                        <form id="contact-form" method="POST" action="{{ .Site.Data.contact.contactPost }}">
                             <div class="form-group">
                                 <label for="email">Email Address</label>
                                 <input type="email" placeholder="email@example.com" class="form-control" name="email" id="email" required autocomplete="email">
@@ -72,7 +72,7 @@
                                 <div class="indicates-required"><span class="asterisk">*</span> indicates required</div>
                                 <div class="mc-field-group form-group">
                                     <label for="mce-EMAIL">Email Address <span class="asterisk">*</span></label>
-                                    <input type="email" placeholder="email@example.com" value="" name="EMAIL" class="required" id="mce-EMAIL" required>
+                                    <input type="email" placeholder="email@example.com" value="" name="EMAIL" class="required" id="mce-EMAIL" required autocomplete="email">
                                 </div>
                                 <div class="mc-field-group form-group">
                                     <label for="mce-FNAME">First Name </label>
@@ -102,7 +102,7 @@
                             </div>
                         </form>
                     </div>
-                    <script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script><script type='text/javascript'>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';fnames[3]='ADDRESS';ftypes[3]='address';fnames[4]='PHONE';ftypes[4]='phone';fnames[6]='MMERGE6';ftypes[6]='text';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
+                    <script src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script><script>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';fnames[3]='ADDRESS';ftypes[3]='address';fnames[4]='PHONE';ftypes[4]='phone';fnames[6]='MMERGE6';ftypes[6]='text';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
                     <!--End mc_embed_signup-->
                 </div>
             </div>
@@ -111,32 +111,33 @@
         {{ if .Site.Data.contact.enableAddress }}
         <div class="row address-details">
             <div class="col-lg-4 col-sm-8">
-                <div class="address" data-aos="fade-left" data-aos-delay="300">
+                <dl class="address" data-aos="fade-left" data-aos-delay="300">
                     <ion-icon name="location-outline"></ion-icon>
-                    {{ with .Site.Data.contact.officeAddress1 }}<h5>{{ . }}</h5>{{ end }}
-                </div>
+                    {{ with .Site.Data.contact.officeAddress1 }}<dt>{{ . }}</dt>{{ end }}
+                    {{ with .Site.Data.contact.officeAddress2 }}<dd>{{ . }}{{ end }}</dd>
+                </dl>
             </div>
             <div class="col-lg-4 col-sm-8">
-                <div class="email" data-aos="fade-left" data-aos-delay="500">
+                <dl class="email" data-aos="fade-left" data-aos-delay="500">
                     <ion-icon name="mail-outline"></ion-icon>
-                    <p>{{ with .Site.Data.contact.mail1 }}<a href="mailto:{{ . }}" target="_blank">{{ . }}</a>{{ end }}
-                       {{ with .Site.Data.contact.mail2 }}<br>{{ . }}{{ end }}</p>
-                </div>
+                    {{ with .Site.Data.contact.mail1 }}<dt><a href="mailto:{{ . }}" target="_blank">{{ . }}</a></dt>{{ end }}
+                    {{ with .Site.Data.contact.mail2 }}<dd>{{ . }}{{ end }}</dd>
+                    </dl>
             </div>
             <div class="col-lg-4 col-sm-8">
-                <div class="phone" data-aos="fade-left" data-aos-delay="700">
+                <dl class="phone" data-aos="fade-left" data-aos-delay="700">
                     <ion-icon name="call-outline"></ion-icon>
-                    <p>{{ with .Site.Data.contact.phone1 }}<a href="tel:{{ . }}" target="_blank">{{ . }}</a>{{ end }}
-                       {{ with .Site.Data.contact.phone2 }}<br>{{ . }}{{ end }}</p>
-                </div>
+                    {{ with .Site.Data.contact.phone1 }}<dt><a href="tel:{{ . }}" target="_blank">{{ . }}</a></dt>{{ end }}
+                    {{ with .Site.Data.contact.phone2 }}<dd>{{ . }}{{ end }}</dd>
+                </dl>
             </div>
         </div>
         {{ end }}
     </div>
 </main>
 {{ "<!-- Contact Section End -->" | safeHTML }}
-{{ end }}
 <!--/sse-->
+{{ end }}
 
 {{ partial "cta.html" . }}
 

@@ -1,8 +1,7 @@
 {{ define "main" }}
 
-{{ partial "page-title.html" . }}
-
 <main id="main-content" class="gallery">
+  {{ partial "page-title.html" . }}
   <div class="container">
     <div class="row">
       {{ range $index, $element := .Site.Data.gallery.galleryImages }}
