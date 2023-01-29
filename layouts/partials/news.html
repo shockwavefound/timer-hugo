@@ -1,4 +1,5 @@
 {{ if .Site.Params.news.enable }}
+{{ $dateFormat := .Param "dateFormat" | default "2 January 2006" }}
 {{ "<!-- News Section Start -->" | safeHTML }}
 {{ $maxItems := cond (isset .Site.Params.news "twitter") 2 3 }}
 <section id="news" class="works">
@@ -46,7 +47,7 @@
                 {{ with .Date }}
                   <p class="card-footer mb-2 text-muted">
                     Updated: 
-                    <time datetime="{{ dateFormat $.Site.Params.rfc3339Format . }}">{{ dateFormat ($.Site.Params.dateFormat | default "2 January 2006") . }}</time>
+                    <time datetime="{{ .Format $.Site.Params.rfc3339Format }}">{{ .Format $dateFormat }}</time>
                   </p>
                 {{ end }}
               </figure>

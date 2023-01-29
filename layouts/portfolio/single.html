@@ -1,4 +1,5 @@
 {{ define "main" }}
+{{ $dateFormat := .Param "dateFormat" | default "2 January 2006" }}
 
 <main id="main-content" class="work-single">
     {{ partial "page-title.html" . }}
@@ -37,7 +38,7 @@
                   </div>
                   <footer class="post-date">
                     Last updated:
-                    <time datetime="{{ dateFormat $.Site.Params.rfc3339Format .Date }}">{{ dateFormat ($.Site.Params.dateFormat | default "2 January 2006") .Date }}</time>
+                    <time datetime="{{ .Date.Format $.Site.Params.rfc3339Format }}">{{ .Date.Format $dateFormat }}</time>
                   </footer>
                   {{ partial "related.html" . }}
                 </article>

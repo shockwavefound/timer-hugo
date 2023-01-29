@@ -1,4 +1,5 @@
 {{ define "main" }}
+{{ $dateFormat := .Param "dateFormat" | default "2 January 2006" }}
 
 <main id="main-content" class="single-post">
     {{ partial "page-title.html" . }}
@@ -28,7 +29,7 @@
                   {{ partial "authors.html" . }}
                   <h2>{{ .Title }}</h2>
                   <div class="post-date">
-                      <time datetime="{{ .Date.Format $.Site.Params.rfc3339Format }}">{{ .Date.Format ($.Site.Params.dateFormat | default "2 January 2006") }}</time>
+                      <time datetime="{{ .Date.Format $.Site.Params.rfc3339Format }}">{{ .Date.Format $dateFormat }}</time>
                       {{ with .Params.tags }}<span>&mdash; {{ delimit . ", " }} </span>{{ end }}
                   </div>
                   <div class="post-content">
