@@ -8,7 +8,7 @@
           {{ with .Site.Params.cta.title }}<h2 class="title" data-aos="fade-down" data-aos-delay="300">{{ . }}</h2>{{ end }}
             {{ with .Site.Params.cta.content }}<p data-aos="fade-down" data-aos-delay="500">
               {{ . | safeHTML }}</p>{{ end }}
-            <a href="{{ .Site.Params.cta.btnURL }}" class="btn btn-default btn-contact"
+            <a href="{{ .Site.Params.cta.btnURL }}" class="btn btn-default btn-contact hvr-bounce-to-right"
               data-aos="fade-down" data-aos-delay="700">{{ .Site.Params.cta.btnText }}</a>
         </div>
       </div>
