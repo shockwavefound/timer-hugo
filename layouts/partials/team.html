@@ -32,7 +32,7 @@
                                     </ul>
                                 {{ end }}
                             </div>
-                            {{ if .worksFor }}<p class="card-subtitle mb-2 text-muted team-designation">{{ with .jobTitle }}{{ . }}, {{ end }}{{ .worksFor }}{{ with .workLocation }}<br>{{ . }}{{ end }}</p>{{ end }}
+                            {{ if .worksFor }}<p class="card-subtitle mt-0 mb-2 text-muted team-designation">{{ with .jobTitle }}{{ . }}, {{ end }}{{ .worksFor }}{{ with .workLocation }}<br>{{ . }}{{ end }}</p>{{ end }}
                             {{ with .bio }}{{ . | markdownify }}{{ end }}
                         </div>
                     </div>

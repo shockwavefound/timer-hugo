@@ -19,11 +19,11 @@
             </div>
         </nav>
         {{ end }}
-        {{ if eq .Section "authors" }}
-            {{ with index $.Site.Data.bios .LinkTitle }}
+        {{ if and (eq .Section "authors") (eq .Kind "term") }}
+            {{ with index $.Site.Data.bios .Data.Term }}
             <div class="row">
                 <div id="{{ replace .name ` ` `-` | htmlEscape }}" class="card mb-3 team-member">
-                    <div class="row g-0">
+                    <div class="row">
                         <div class="col-md-4">
                             {{ $about_bundle  := $.Site.GetPage "/about" }}
                             {{ $original := $about_bundle.Resources.GetMatch .image }}
@@ -34,7 +34,7 @@
                         <div class="col-md-8">
                             <div class="card-body">
                                 <div class="clearfix">
-                                    <h3 class="card-title float-left">{{ with .honorificPrefix }}{{ . }} {{ end }}{{ .name }}{{ with .honorificSuffix }}, {{ . }}{{ end }}</h3>
+                                    <h2 class="card-title float-left">{{ with .honorificPrefix }}{{ . }} {{ end }}{{ .name }}{{ with .honorificSuffix }}, {{ . }}{{ end }}</h2>
                                     {{ with .social }}
                                         <ul class="social-icons float-right">
                                             {{ range . }}
@@ -44,7 +44,7 @@
                                         </ul>
                                     {{ end }}
                                 </div>
-                                {{ if .worksFor }}<p class="card-subtitle mb-2 text-muted">{{ with .jobTitle }}{{ . }}, {{ end }}{{ .worksFor }}{{ with .workLocation }}<br>{{ . }}{{ end }}</p>{{ end }}
+                                {{ if .worksFor }}<p class="card-subtitle mt-0 mb-2 text-muted">{{ with .jobTitle }}{{ . }}, {{ end }}{{ .worksFor }}{{ with .workLocation }}<br>{{ . }}{{ end }}</p>{{ end }}
                                 {{ with .bio }}{{ . | markdownify }}{{ end }}
                             </div>
                         </div>
