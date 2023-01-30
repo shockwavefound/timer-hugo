@@ -1,10 +1,15 @@
 {{- if .IsHome }}
 {
-    "@context": "http://schema.org",
+    "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "{{ .Site.Title }}",
     "url": "{{ .Site.BaseURL }}",
     "description": "{{ .Site.Params.description }}",
+    {{- if .Site.Params.about.enable }}
+        {{- with .Site.Params.about.content }}
+    "abstract: "{{ . }}",
+        {{- end }}
+    {{- end }}
     {{- with .Site.Params.license }}
     "license": "{{ . }}",
     {{- end }}
@@ -12,9 +17,9 @@
 }
 {{ else if .IsPage }}
 {{- $org_name :=  .Site.Title }}
-{{- $personFields := (slice "@type" "name" "jobTitle" "worksFor" "honorificPrefix" "honorificSuffix" "url") }}
+{{- $omitFields := (slice "image" "bio" "social") }}
 {
-    "@context": "http://schema.org",
+    "@context": "https://schema.org",
     "@type": "BlogPosting",
     "articleSection": "{{ .Section }}",
     "name": "{{ .Title }}",
@@ -35,7 +40,7 @@
                     {{- $foo := newScratch }}
                     {{- with index $.Site.Data.bios . }}
                         {{- range $key, $val := . }}
-                            {{- if (in $personFields $key) }}
+                            {{- if not (in $omitFields $key) }}
                                 {{- $foo.Set $key $val }}
                             {{- end }}
                         {{- end }}
@@ -58,9 +63,7 @@
         "url": "{{ .Site.BaseURL }}",
         "logo": {
             "@type": "ImageObject",
-            "url": "{{ .Site.Params.logo | absURL }}",
-            "width": 32,
-            "height": 32
+            "url": "{{ .Site.Params.logo | absURL }}"
         }
     },
     "image": "{{- with .Params.images }}[{{ range $i, $e := . }}{{ if $i }}, {{ end }}{{ $e | absURL }}{{ end }}]{{ else }}
