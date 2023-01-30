@@ -8,7 +8,7 @@
     {{ partial "page-title.html" . }}
     <div class="container">
         <div class="row">
-            <div class="col-md-6 mb-5 mb-md-0">
+            <div class="col-md-6 mb-5 mb-md-0" data-aos="fade-left" data-aos-delay="300">
                 <div class="block">
                     {{ with .Site.Data.contact.contactFormTitle }}<h2 class="subtitle" >{{ . }}</h2>{{ end }}
                     {{ with .Site.Data.contact.contactFormSubtitle | safeHTML }}<p class="subtitle-des">{{ . }}</p>{{ end }}
@@ -46,7 +46,7 @@
                 </div>
             </div>
             {{ if .Site.Data.contact.mapUrl }}
-            <div class="col-md-6">
+            <div class="col-md-6" data-aos="fade-right" data-aos-delay="300">
                 <div class="map-area">
                     {{ with .Site.Data.contact.mapTitle }}<h2 class="subtitle">{{ . }}</h2>{{ end }}
                     {{ with .Site.Data.contact.mapSubtitle }}<p class="subtitle-des">{{ . }}</p>{{ end }}
@@ -58,7 +58,7 @@
             </div>
             {{ end }}
             {{ with .Site.Data.contact.mailChimp }}
-            <div class="col-md-6">
+            <div class="col-md-6" data-aos="fade-right" data-aos-delay="300">
                 <div class="block">
                     {{ with .title }}<h2 class="subtitle">{{ . | safeHTML }}</h2>{{ end }}
                     {{ with .subtitle }}<p class="subtitle-des">{{ . | safeHTML }}</p>{{ end }}

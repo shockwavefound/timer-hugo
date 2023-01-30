@@ -5,7 +5,7 @@
     {{ partial "page-title.html" . }}
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12" data-aos="fade-right" data-aos-delay="300">
                 {{ if .Params.image }}
                   {{ $original := .Page.Resources.GetMatch (printf "*%s*" .Params.image) }}
                   {{ if $original }}
@@ -25,7 +25,7 @@
                 {{ else }}
                     {{ warnf "%s: image not set. (layouts/_default/single.html)" .File.Path }}
                 {{ end }}
-                <article data-aos="fade-left" data-aos-delay="300">
+                <article data-aos="fade-down" data-aos-delay="300">
                   {{ partial "authors.html" . }}
                   <h2>{{ .Title }}</h2>
                   <div class="post-date">

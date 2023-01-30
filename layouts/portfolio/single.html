@@ -11,7 +11,7 @@
                   {{ $original := .Page.Resources.GetMatch (printf "*%s*" .Params.image) }}
                   {{ if $original }}
                     {{ $image := $original.Resize "730x" }}
-                    <div class="work-single-image" data-aos="fade-top" data-aos-delay="300">
+                    <div class="work-single-image" data-aos="fade-left" data-aos-delay="300">
                       <figure class="figure">
                         <img class="figure-img img-fluid w-100" src="{{ $image.Permalink }}"
                              width="{{ $image.Width }}" height="{{ $image.Height }}"

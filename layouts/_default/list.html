@@ -23,7 +23,7 @@
             {{ with index $.Site.Data.bios .Data.Term }}
             <div class="row">
                 <div id="{{ replace .name ` ` `-` | htmlEscape }}" class="card mb-3 team-member">
-                    <div class="row">
+                    <div class="row" data-aos="fade-right" data-aos-delay="300">
                         <div class="col-md-4">
                             {{ $about_bundle  := $.Site.GetPage "/about" }}
                             {{ $original := $about_bundle.Resources.GetMatch .image }}
