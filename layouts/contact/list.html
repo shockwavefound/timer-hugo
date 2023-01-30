@@ -112,21 +112,24 @@
         <div class="row address-details">
             <div class="col-lg-4 col-sm-8">
                 <dl class="address" data-aos="fade-left" data-aos-delay="300">
-                    <ion-icon name="location-outline"></ion-icon>
+                    <ion-icon name="location-outline" aria-hidden="true"></ion-icon>
+                    <ion-label>Location</ion-label>
                     {{ with .Site.Data.contact.officeAddress1 }}<dt>{{ . }}</dt>{{ end }}
                     {{ with .Site.Data.contact.officeAddress2 }}<dd>{{ . }}{{ end }}</dd>
                 </dl>
             </div>
             <div class="col-lg-4 col-sm-8">
                 <dl class="email" data-aos="fade-left" data-aos-delay="500">
-                    <ion-icon name="mail-outline"></ion-icon>
+                    <ion-icon name="mail-outline" aria-hidden="true"></ion-icon>
+                    <icon-label>E-Mail</icon-label>
                     {{ with .Site.Data.contact.mail1 }}<dt><a href="mailto:{{ . }}" target="_blank">{{ . }}</a></dt>{{ end }}
                     {{ with .Site.Data.contact.mail2 }}<dd>{{ . }}{{ end }}</dd>
                     </dl>
             </div>
             <div class="col-lg-4 col-sm-8">
                 <dl class="phone" data-aos="fade-left" data-aos-delay="700">
-                    <ion-icon name="call-outline"></ion-icon>
+                    <ion-icon name="call-outline" aria-hidden="true"></ion-icon>
+                    <ion-label>Phone</ion-label>
                     {{ with .Site.Data.contact.phone1 }}<dt><a href="tel:{{ . }}" target="_blank">{{ . }}</a></dt>{{ end }}
                     {{ with .Site.Data.contact.phone2 }}<dd>{{ . }}{{ end }}</dd>
                 </dl>

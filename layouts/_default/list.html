@@ -28,8 +28,7 @@
                             {{ $about_bundle  := $.Site.GetPage "/about" }}
                             {{ $original := $about_bundle.Resources.GetMatch .image }}
                             {{ $image := $original.Fill "400x600" }}
-                            <img src="{{ $original.Permalink }}" class="img-fluid rounded-start"
-                                alt="{{ .name }} portrait">
+                            <img src="{{ $original.Permalink }}" class="img-fluid rounded-start" alt="" aria-hidden="true">
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
@@ -38,7 +37,7 @@
                                     {{ with .social }}
                                         <ul class="social-icons float-right">
                                             {{ range . }}
-                                                <li><a href="{{ .url }}" target="_blank" rel="me noopener noreferrer"><ion-icon name="{{ .icon }}"></ion-icon>
+                                                <li><a href="{{ .url }}" target="_blank" rel="me noopener noreferrer"><ion-icon name="{{ .icon }}" aria-hidden="true"></ion-icon>
                                                 <span class="sr-only"> {{ .text }}</span></a></li>
                                             {{ end }}
                                         </ul>
@@ -71,7 +70,7 @@
                     <article class="blog-content" data-aos="fade-down" data-aos-delay="300">
                         <a href="{{ .Permalink }}">
                             {{ if isset .Params "image" }}
-                            <div class="blog-post-image">
+                            <div class="blog-post-image" aria-hidden="true">
                                 {{ $original := .Page.Resources.GetMatch (printf "*%s*" .Params.image) }}
                                 {{ if $original }}
                                     {{ $image := $original.Fill "800x600 left" }}
@@ -97,7 +96,9 @@
                             {{ end }}
                         </div>
                         {{ .Summary }}
-                        <p><a href="{{ .Permalink }}" class="btn btn-default btn-details hvr-bounce-to-right" tabindex="-1" aria-hidden="true">Continue reading<span class="sr-only">&nbsp;about {{ .Title }}</span></a></p>
+                        <div aria-hidden="true">
+                            <p><a href="{{ .Permalink }}" class="btn btn-default btn-details hvr-bounce-to-right" tabindex="-1">Continue reading<span class="sr-only">&nbsp;about {{ .Title }}</span></a></p>
+                        </div>
                     </article>
                 </div>
             {{ end }}

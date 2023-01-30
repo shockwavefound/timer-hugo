@@ -26,7 +26,7 @@
                                 {{ with .social }}
                                     <ul class="social-icons">
                                         {{ range . }}
-                                            <li><a href="{{ .url }}" target="_blank" rel="me noopener noreferrer"><ion-icon name="{{ .icon }}"></ion-icon>
+                                            <li><a href="{{ .url }}" target="_blank" rel="me noopener noreferrer"><ion-icon name="{{ .icon }}" aria-hidden="true"></ion-icon>
                                             <span class="sr-only"> {{ .text }}</span></a></li>
                                         {{ end }}
                                     </ul>

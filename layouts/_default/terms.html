@@ -5,7 +5,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h2><ion-icon name="pricetags-outline"></ion-icon> {{ .Title }}</h2>
+                <h2><ion-icon name="pricetags-outline" aria-hidden="true"></ion-icon> {{ .Title }}</h2>
                 {{ .Content }}
             </div>
         </div>
@@ -30,7 +30,7 @@
                   <span class="letter">{{ $firstChar }}</span><br>
                 {{ end }}
 
-                <a class="badge badge-tag-list-page" href="{{ .Page.Permalink }}"><ion-icon name="pricetags-outline"></ion-icon>
+                <a class="badge badge-tag-list-page" href="{{ .Page.Permalink }}"><ion-icon name="pricetags-outline" aria-hidden="true"></ion-icon>
                 {{ if ne $.Data.Plural "authors" }}
                   {{ .Page.Title }}
                 {{ else }}

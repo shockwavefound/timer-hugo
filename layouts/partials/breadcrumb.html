@@ -12,7 +12,7 @@
   <li class="breadcrumb-item">
     <a href="{{ .p1.Permalink }}">
       {{- if .p1.IsHome -}}
-      <ion-icon name="home"></ion-icon> Home
+      <ion-icon name="home" aria-hidden="true"></ion-icon> Home
       {{- else -}}
         {{- .p1.Title -}}
       {{- end -}}
