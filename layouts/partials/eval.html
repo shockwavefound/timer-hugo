@@ -1,0 +1,4 @@
+{{- $f := printf "%d.txt" now.UnixNano }}
+{{- $r := printf "{{ %s }}" . | resources.FromString $f }}
+{{- $r = $r | resources.ExecuteAsTemplate $f . }}
+{{- return $r.Content }}
