@@ -6,7 +6,7 @@ User-agent: *
 Disallow: /
 {{ else -}}
 User-agent: *
-Disallow: 404.html
+Disallow: /404.html
 
 Sitemap: {{ .Sitemap.Filename | default "/sitemap.xml" | absLangURL }}
 {{ end -}}
