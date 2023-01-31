@@ -1,7 +1,7 @@
 {{ define "main" }}
 {{ $dateFormat := .Param "dateFormat" | default "2 January 2006" }}
 
-<main id="main-content" class="single-post">
+<main class="single-post">
     {{ partial "page-title.html" . }}
     <div class="container">
         <div class="row">
@@ -11,10 +11,8 @@
                   {{ if $original }}
                     {{ $image := $original.Resize "1100x" }}
                     <figure class="figure">
-                        <div class="post-img">
-                            <img class="figure-img img-fluid w-100" src="{{ $image.Permalink }}"
-                                 alt="{{ with .Params.imageAlt }}{{ . }}{{ end }}">
-                        </div>
+                      <img class="figure-img img-fluid w-100" src="{{ $image.Permalink }}"
+                            alt="{{ with .Params.imageAlt }}{{ . }}{{ end }}">
                         {{ with .Params.imageCaption }}
                             <figcaption class="figure-caption text-right">{{ . | markdownify }}</figcaption>
                         {{ end }}
@@ -25,16 +23,17 @@
                 {{ else }}
                     {{ warnf "%s: image not set. (layouts/_default/single.html)" .File.Path }}
                 {{ end }}
-                <article data-aos="fade-down" data-aos-delay="300">
+                <article id="main-content">
                   {{ partial "authors.html" . }}
                   <h2>{{ .Title }}</h2>
-                  <div class="post-date">
+                  <footer class="post-date">
                       <time datetime="{{ .Date.Format $.Site.Params.rfc3339Format }}">{{ .Date.Format $dateFormat }}</time>
                       {{ with .Params.tags }}<span>&mdash; {{ delimit . ", " }} </span>{{ end }}
-                  </div>
-                  <div class="post-content">
+                  </footer>
+                  <div class="post-content mt-4">
                       {{ .Content }}
                   </div>
+                  {{ partial "related.html" . }}
                 </article>
                 {{ if .Params.about }}
                 <footer class="mission text-muted small">
@@ -43,7 +42,6 @@
                   <a href="{{ .Site.BaseURL }}">{{ .Site.BaseURL }}</a>.
                 </footer>
                 {{ end }}
-                {{ partial "related.html" . }}
             </div>
             {{ template "_internal/disqus.html" . }}
         </div>

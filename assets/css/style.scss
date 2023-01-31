@@ -34,9 +34,9 @@ a {
 }
 
 a:hover {
-  color: $col-hover;
-  text-decoration: none;
-}
+    color: $col-hover;
+    text-decoration: none;
+  }
 
 .slick-slide:focus {
   outline: 0;
@@ -149,8 +149,8 @@ a:hover {
 }
 
 .global-page-header .breadcrumb a:hover {
-  color: #fff;
-}
+    color: #fff;
+  }
 
 .global-page-header .breadcrumb li:not(:first-child)::before {
   content: ">";
@@ -607,10 +607,6 @@ figure figcaption p {
   box-shadow: 0px 0px 0px 1px $col-background;
 }
 
-.related-pages {
-  padding-top: 1rem;
-}
-
 #clients {
   padding: 30px 0 60px;
 }
@@ -716,12 +712,17 @@ figure figcaption p {
   left: 40%;
 }
 
+.work-single,
 .single-post {
   padding: 80px 0 20px;
 }
 
-.single-post .post-content {
-  padding: 40px 0;
+.sidebar {
+  background: #eae9ec;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 100px;
+  padding: 30px 25px;
 }
 
 .post-content blockquote p {
@@ -739,34 +740,26 @@ figure figcaption p {
   border: none;
 }
 
-.single-post .comments {
+.post-comment {
   margin-top: 40px;
 }
 
-.single-post .post-comment {
-  margin-top: 40px;
-}
-
-.single-post .post-comment h3 {
+.post-comment h3 {
   margin-bottom: 15px;
 }
 
-.single-post .post-comment .form-control {
+.post-comment .form-control {
   box-shadow: none;
   border-radius: 0;
 }
 
-.single-post .post-comment .btn-send {
+.post-comment .btn-send {
   background: $col-background;
   color: #fff;
   border-radius: 0;
 }
 
 /* portfolio single */
-.work-single {
-  padding: 80px 0 20px;
-}
-
 .work-single blockquote {
   margin-bottom: 30px;
   padding: 30px 25px;
@@ -776,14 +769,6 @@ figure figcaption p {
 
 .work-single blockquote p {
   margin-bottom: 0;
-}
-
-.work-single-sidebar {
-  background: #eae9ec;
-  position: -webkit-sticky;
-  position: sticky;
-  top: 100px;
-  padding: 30px 25px;
 }
 
 .service-page .service-parts .block {

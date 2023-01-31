@@ -13,11 +13,11 @@
         </div>
         {{ end }}
         {{ if .Param "tagCloud" }}
-        <nav class="row" aria-label="tag cloud">
+        <div class="row">
             <div class="col-sm-12">
                 {{ partial "tag-cloud.html" . }}
             </div>
-        </nav>
+        </div>
         {{ end }}
         {{ if and (eq .Section "authors") (eq .Kind "term") }}
             {{ with index $.Site.Data.bios .Data.Term }}
@@ -68,13 +68,13 @@
             {{ range .Pages }}
                 <div class="sort-item col-md-6" data-sort-name="{{ .Params.Title }}" data-sort-time="{{ .Date.Unix }}">
                     <article class="blog-content" data-aos="fade-down" data-aos-delay="300">
-                        <a href="{{ .Permalink }}">
+                        <a id="{{ .RelPermalink | md5 }}" href="{{ .Permalink }}">
                             {{ if isset .Params "image" }}
-                            <div class="blog-post-image" aria-hidden="true">
+                            <div class="blog-post-image">
                                 {{ $original := .Page.Resources.GetMatch (printf "*%s*" .Params.image) }}
                                 {{ if $original }}
                                     {{ $image := $original.Fill "800x600 left" }}
-                                    <img class="img-fluid" src="{{ $image.Permalink }}" alt="{{ .Params.imageAlt | default (printf `%s image` .Params.Title) }}">
+                                    <img class="img-fluid" src="{{ $image.Permalink }}" alt="">
                                 {{ else }}
                                     {{ errorf "%s: %s not found. (layouts/_default/list.html)" .File.Path .Params.image }}
                                 {{ end }}
@@ -96,9 +96,8 @@
                             {{ end }}
                         </div>
                         {{ .Summary }}
-                        <div aria-hidden="true">
-                            <p><a href="{{ .Permalink }}" class="btn btn-default btn-details hvr-bounce-to-right" tabindex="-1">Continue reading<span class="sr-only">&nbsp;about {{ .Title }}</span></a></p>
-                        </div>
+                        <p><a href="{{ .Permalink }}" class="btn btn-default btn-details hvr-bounce-to-right"
+                              aria-labelledby="{{ .RelPermalink | md5 }}">Continue reading<span class="sr-only"> about {{ .Title }}</span></a></p>
                     </article>
                 </div>
             {{ end }}
