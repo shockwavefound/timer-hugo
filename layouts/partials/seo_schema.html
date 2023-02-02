@@ -7,7 +7,7 @@
     "description": "{{ .Site.Params.description }}",
     {{- if .Site.Params.about.enable }}
         {{- with .Site.Params.about.content }}
-    "abstract: "{{ . }}",
+    "abstract": "{{ . }}",
         {{- end }}
     {{- end }}
     {{- with .Site.Params.license }}
