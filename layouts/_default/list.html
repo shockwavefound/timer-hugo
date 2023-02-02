@@ -66,7 +66,7 @@
         </nav>
         <div id="sort-items" class="row">
             {{ range .Pages }}
-                <div class="sort-item col-md-6" data-sort-name="{{ .Params.Title }}" data-sort-time="{{ .Date.Unix }}">
+                <div class="sort-item col-md-6 my-3" data-sort-name="{{ .Params.Title }}" data-sort-time="{{ .Date.Unix }}">
                     <article class="blog-content" data-aos="fade-down" data-aos-delay="300">
                         <a href="{{ .Permalink }}">
                             {{ if isset .Params "image" }}
@@ -90,7 +90,7 @@
                             {{ with .Params.tags }}<span>&mdash;{{ delimit . ", " }}</span>{{ end }}
                         </div>
                         {{ .Summary }}
-                        <p><a href="{{ .Permalink }}" class="btn btn-default btn-details hvr-bounce-to-right">Continue reading<span class="visually-hidden"> {{ .Title }}</span></a></p>
+                        {{/* <p><a href="{{ .Permalink }}" class="btn btn-default btn-details hvr-bounce-to-right">Continue reading<span class="visually-hidden"> {{ .Title }}</span></a></p> */}}
                     </article>
                 </div>
             {{ end }}
