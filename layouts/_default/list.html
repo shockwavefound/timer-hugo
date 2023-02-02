@@ -13,8 +13,8 @@
         </div>
         {{ end }}
         {{ if .Param "tagCloud" }}
-        <div class="row">
-            <div class="col-sm-12">
+        <div class="row mb-2">
+            <div class="col-sm-12" data-aos="fade-down" data-aos-delay="100">
                 {{ partial "tag-cloud.html" . }}
             </div>
         </div>
@@ -23,7 +23,7 @@
             {{ with index $.Site.Data.bios .Data.Term }}
             <div class="row">
                 <div id="{{ replace .name ` ` `-` | htmlEscape }}" class="card mb-3 team-member">
-                    <div class="row" data-aos="fade-right" data-aos-delay="300">
+                    <div class="row" data-aos="fade-down" data-aos-delay="200">
                         <div class="col-md-4">
                             {{ $about_bundle  := $.Site.GetPage "/about" }}
                             {{ $original := $about_bundle.Resources.GetMatch .image }}
@@ -33,12 +33,12 @@
                         <div class="col-md-8">
                             <div class="card-body">
                                 <div class="clearfix">
-                                    <h2 class="card-title float-left">{{ with .honorificPrefix }}{{ . }} {{ end }}{{ .name }}{{ with .honorificSuffix }}, {{ . }}{{ end }}</h2>
+                                    <h2 class="card-title float-start">{{ with .honorificPrefix }}{{ . }} {{ end }}{{ .name }}{{ with .honorificSuffix }}, {{ . }}{{ end }}</h2>
                                     {{ with .social }}
-                                        <ul class="social-icons float-right">
+                                        <ul class="social-icons float-end">
                                             {{ range . }}
                                                 <li><a href="{{ .url }}" target="_blank" rel="me noopener noreferrer"><ion-icon name="{{ .icon }}" aria-hidden="true"></ion-icon>
-                                                <span class="sr-only"> {{ .text }}</span></a></li>
+                                                <span class="visually-hidden"> {{ .text }}</span></a></li>
                                             {{ end }}
                                         </ul>
                                     {{ end }}
@@ -52,10 +52,10 @@
             </div>
             {{ end }}
         {{ end }}
-        <nav class="row" aria-label="sort order">
+        <nav class="row mb-2" aria-label="sort order" data-aos="fade-down" data-aos-delay="250">
             <div class="col-sm-12">
-                <div class="dropdown float-right sort-btn">
-                    <button type="button" id="itemSortButton" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sort</button>
+                <div class="dropdown float-end sort-btn">
+                    <button type="button" id="itemSortButton" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sort</button>
                     <div class="dropdown-menu" aria-labelledby="itemSortButton">
                         <a class="dropdown-item" data-sort="newest" href="#">Newest</a>
                         <a class="dropdown-item" data-sort="oldest" href="#">Oldest</a>
@@ -68,7 +68,7 @@
             {{ range .Pages }}
                 <div class="sort-item col-md-6" data-sort-name="{{ .Params.Title }}" data-sort-time="{{ .Date.Unix }}">
                     <article class="blog-content" data-aos="fade-down" data-aos-delay="300">
-                        <a id="{{ .RelPermalink | md5 }}" href="{{ .Permalink }}">
+                        <a href="{{ .Permalink }}">
                             {{ if isset .Params "image" }}
                             <div class="blog-post-image">
                                 {{ $original := .Page.Resources.GetMatch (printf "*%s*" .Params.image) }}
@@ -86,18 +86,11 @@
                         </a>
                         <div class="blog-meta">
                             <time datetime="{{ .Date.Format $.Site.Params.rfc3339Format }}">{{ .Date.Format $dateFormat }}</time>
-                            {{ with .Params.categories }}<span>&mdash;
-                                {{ delimit . ", " }}
-                            </span>
-                            {{ end }}
-                            {{ with .Params.tags }}<span>&mdash;
-                                {{ delimit . ", " }}
-                            </span>
-                            {{ end }}
+                            {{ with .Params.categories }}<span>&mdash;{{ delimit . ", " }}</span>{{ end }}
+                            {{ with .Params.tags }}<span>&mdash;{{ delimit . ", " }}</span>{{ end }}
                         </div>
                         {{ .Summary }}
-                        <p><a href="{{ .Permalink }}" class="btn btn-default btn-details hvr-bounce-to-right"
-                              aria-labelledby="{{ .RelPermalink | md5 }}">Continue reading<span class="sr-only"> about {{ .Title }}</span></a></p>
+                        <p><a href="{{ .Permalink }}" class="btn btn-default btn-details hvr-bounce-to-right">Continue reading<span class="visually-hidden"> {{ .Title }}</span></a></p>
                     </article>
                 </div>
             {{ end }}

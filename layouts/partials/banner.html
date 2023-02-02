@@ -7,7 +7,7 @@
         <div class="block" data-aos="fade-up" data-aos-delay="300">
           {{ "<!-- Slider -->" | safeHTML}}
           <div class="cd-intro">
-            <h1 class="cd-headline slide animated" data-aos="fade-up" data-aos-delay="300">
+            <h1 class="cd-headline slide animated" data-aos="fade-up" data-aos-delay="400">
               {{ with .Site.Params.banner.heading }}<span>{{ . }}</span>{{ end }}
               <br>
               <span class="cd-words-wrapper text-center">
@@ -20,7 +20,7 @@
           {{ with .Site.Params.banner.description }}<p class="tag" data-aos="fade-up" data-aos-delay="600">{{ . }}</p>
           {{ end }}
           {{ if .Site.Params.banner.btn }}
-          <a class="btn-lines dark light btn btn-default btn-green hvr-bounce-to-right" data-aos="fade-up" data-aos-delay="900"
+          <a class="btn btn-default hvr-bounce-to-right" data-aos="fade-up" data-aos-delay="900"
             href="{{ .Site.Params.banner.btnURL }}">{{ .Site.Params.banner.btnText }}</a>
           {{ end }}
         </div>

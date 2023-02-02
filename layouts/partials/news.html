@@ -2,17 +2,17 @@
 {{ $dateFormat := .Param "dateFormat" | default "2 January 2006" }}
 {{ "<!-- News Section Start -->" | safeHTML }}
 {{ $maxItems := cond (isset .Site.Params.news "twitter") 2 3 }}
-<section id="news" class="works">
-    <div class="container">
-        <div class="section-heading">
+<section id="news" class="news">
+    <div class="container my-3">
+        <div class="section-heading text-center">
             {{ with .Site.Params.news.title }}<h2 class="title" data-aos="fade-down" data-aos-delay="300">{{ . }}</h2>{{ end }}
-            {{ with .Site.Params.news.subtitle }}<p data-aos="fade-down" data-aos-delay="500">{{ . }}</p>{{ end }}
+            {{ with .Site.Params.news.subtitle }}<p class="subtitle" data-aos="fade-down" data-aos-delay="500">{{ . }}</p>{{ end }}
         </div>
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
           {{ range $index, $element:= first $maxItems (where .Site.RegularPages "Type" "news") }}
             <div class="col mb-3">
               {{ $delay := mul $index 300 }}
-              <figure class="news-item card h-100" data-aos="fade-left" data-aos-delay="{{ $delay }}">
+              <figure class="news-item card h-100" data-aos="fade-right" data-aos-delay="{{ $delay }}">
                 {{ if isset .Params "image" }}
                   {{ $original := .Page.Resources.GetMatch (printf "*%s*" .Params.image) }}
                   {{ if $original }}
@@ -22,7 +22,7 @@
                       {{ if .Site.Params.news.imageButtons -}}
                       <div class="overlay">
                         <div class="buttons">
-                          {{/* <a rel="gallery" class="fancybox" href="{{ $original.Permalink }}">Demo</a> */}}
+                          <a rel="gallery" class="fancybox" href="{{ $original.Permalink }}">Demo</a>
                           <a href="{{ .Permalink }}">Details</a>
                         </div>
                       </div>
@@ -55,7 +55,7 @@
           {{ end }}
           {{ with .Site.Params.news.twitter }}
             <div class="col mb-3">
-              <figure class="news-item card h-100" data-aos="fade-left" data-aos-delay="600">
+              <figure class="news-item card h-100" data-aos="fade-right" data-aos-delay="600">
                 {{ partial "twitter_widget.html" . }}
               </figure>
             </div>

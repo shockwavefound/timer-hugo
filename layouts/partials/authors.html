@@ -1,35 +1,38 @@
 {{ if isset .Params "authors" }}
-    <footer class="row mb-2">
+    <footer class="row mb-2 author-card">
         {{ range .Params.authors }}
             {{ with index $.Site.Data.bios . }}
-                <div class="col-md-6">
-                    <div class="card flex-md-row mb-4 shadow-sm h-md-250">
-                        {{ if isset . "image" }}
-                            {{ $about_bundle  := $.Site.GetPage "/about" }}
-                            {{ $original := $about_bundle.Resources.GetMatch .image }}
-                            {{ $image := $original.Fill "66x100" }}
-                            {{ $grey := $image | images.Filter (images.Grayscale) }}
-                            <img class="byline-pic card-img-left flex-auto d-none d-lg-block"
-                                    src="{{ $grey.Permalink }}"
-                                    alt="{{ .name }} portrait">
-                        {{ end }}
-                        <div class="card-body d-flex flex-column align-items-start">
-                            <address class="h5 byline-name mb-0 text-dark">
-                                <a rel="author" href="{{ ref $.Page (printf `%s%s` `/about#` (replace .name ` ` `-` | htmlEscape)) }}">
-                                    {{ with .honorificPrefix }}{{ . }} {{ end }}{{ .name }}{{ with .honorificSuffix }}, {{ . }}{{ end }}
-                                </a>
-                                {{ with .social }}
-                                <ul class="social social-icons text-center text-md-right text-lg-right">
-                                {{ range . }}
-                                    <li><a href="{{ .url }}" target="_blank" rel="me noopener noreferrer"><ion-icon name="{{ .icon }}"></ion-icon>
-                                    <span class="sr-only"> {{ .text }}</span></a></li>
-                                {{ end }}
-                                </ul>
-                                {{ end }}
-                            </address>
-                            {{ if (or .worksFor .jobTitle) }}
-                                <p class="byline-title mb-1 text-muted small">{{ with .jobTitle }}{{ . }}, {{ end }}{{ .worksFor }}</p>
-                            {{ end }}
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="row g-0">
+                            <div class="col-2">
+                            {{- if isset . "image" }}
+                                {{- $about_bundle  := $.Site.GetPage "/about" }}
+                                {{- $original := $about_bundle.Resources.GetMatch .image }}
+                                {{- $image := $original.Fill "66x100" }}
+                                {{- $grey := $image | images.Filter (images.Grayscale) }}
+                                <img class="img-fluid rounded-start" src="{{ $grey.Permalink }}" alt="">
+                            </div>
+                            {{- end }}
+                            <div class="col-10 d-flex align-items-center">
+                                <div class="card-body">
+                                    <address class="card-title">
+                                        <a rel="author" class="h5" href="{{ ref $.Page (printf `%s%s` `/about#` (replace .name ` ` `-` | htmlEscape)) }}">
+                                            {{ with .honorificPrefix }}{{ . }} {{ end }}{{ .name }}{{ with .honorificSuffix }}, {{ . }}{{ end }}
+                                        </a>
+                                        {{ with .social }}
+                                        <ul class="social-icons">
+                                        {{ range . }}
+                                            <li><a href="{{ .url }}" target="_blank" rel="me noopener noreferrer"><ion-icon name="{{ .icon }}" aria-hidden="true"></ion-icon><span class="visually-hidden">{{ .text }}</span></a></li>
+                                        {{ end }}
+                                        </ul>
+                                        {{ end }}
+                                    </address>
+                                    {{ if (or .worksFor .jobTitle) }}
+                                        <p class="card-subtitle small">{{ with .jobTitle }}{{ . }}, {{ end }}{{ .worksFor }}</p>
+                                    {{ end }}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

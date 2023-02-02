@@ -1,33 +1,33 @@
-{{ if .Site.Data.team.enable }}
+{{ if .Params.team.enable }}
 {{ "<!-- Team Section Start -->" | safeHTML }}
 <section id="team">
-    <div class="container">
-        <div class="row card-deck">
+    <div class="container my-5">
+        <div class="row">
             <div class="col-lg-12">
-                {{ with .Site.Data.team.title }}<h2 class="subtitle text-center">{{ . }}</h2>{{ end }}
+                {{ with .Params.team.title }}<h2 class="subtitle text-center">{{ . }}</h2>{{ end }}
             </div>
-            {{ range $index, $element := .Site.Data.team.members }}
+        </div>
+        <div class="row row-cols-md-3">
+            {{ range $index, $element := .Params.team.members }}
                 {{ with index $.Site.Data.bios $element }}
                 <div class="card">
                     {{ $delay := mul $index 300 }}
                     <div id="{{ replace .name ` ` `-` | htmlEscape }}" class="team-member" data-aos="fade-left" data-aos-delay="{{ $delay }}">
                         {{ if .image }}
-                        <div class="card-img-top team-img">
                             {{ $original := $.Resources.GetMatch .image }}
                             {{ $image := $original.Fill "400x600" }}
                             {{/* $grey := $image | images.Filter (images.Grayscale) */}}
-                            <img src="{{ $image.Permalink }}" class="team-pic"
+                            <img src="{{ $image.Permalink }}" class="card-img-top team-pic team-img"
                                 alt="{{ .name }} portrait">
-                        </div>
                         {{ end }}
                         <div class="card-body">
                             <div class="clearfix">
-                                <h3 class="team-name card-title float-left">{{ with .honorificPrefix }}{{ . }} {{ end }}{{ .name }}{{ with .honorificSuffix }}, {{ . }}{{ end }}</h3>
+                                <h3 class="team-name card-title float-start">{{ with .honorificPrefix }}{{ . }} {{ end }}{{ .name }}{{ with .honorificSuffix }}, {{ . }}{{ end }}</h3>
                                 {{ with .social }}
                                     <ul class="social-icons">
                                         {{ range . }}
                                             <li><a href="{{ .url }}" target="_blank" rel="me noopener noreferrer"><ion-icon name="{{ .icon }}" aria-hidden="true"></ion-icon>
-                                            <span class="sr-only"> {{ .text }}</span></a></li>
+                                            <span class="visually-hidden"> {{ .text }}</span></a></li>
                                         {{ end }}
                                     </ul>
                                 {{ end }}

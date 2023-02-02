@@ -1,21 +1,21 @@
 {{ define "main" }}
 
-{{ if .Site.Data.service.enable }}
+{{ if .Params.enable }}
 {{ "<!-- Service Section Start -->" | safeHTML }}
 <main id="service-page" class="pages service-page">
 	{{ partial "page-title.html" . }}
-	<div class="container">
+	<div class="container pb-5 my-3">
 		<div class="row">
-			<div class="col-lg-6">
-				{{ with .Site.Data.service.title }}<h2 class="subtitle" data-aos="fade-up" data-aos-delay="300">{{ . }}</h2>{{ end }}
-				{{ with .Site.Data.service.subtitle }}<p class="subtitle-des" data-aos="fade-up" data-aos-delay="500">{{ . }}</p>{{ end }}
+			<div class="col-lg-6 pt-5">
+				{{ with .Params.serviceTitle }}<h2 class="subtitle" data-aos="fade-up" data-aos-delay="300">{{ . }}</h2>{{ end }}
+				{{ with .Params.serviceSubtitle }}<p class="subtitle-des" data-aos="fade-up" data-aos-delay="500">{{ . }}</p>{{ end }}
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-lg-6 order-2 order-lg-1">
+			<div class="col-lg-6 order-2 order-lg-1 my-3">
 				<div class="block">
 					<div class="row service-parts">
-						{{ range .Site.Data.service.serviceItem }}
+						{{ range .Params.serviceItems }}
 						<div class="col-md-6">
 							<div class="block" data-aos="fade-up" data-aos-delay="700">
 								{{ with .icon }}<ion-icon name="{{ . }}" aria-hidden="true"></ion-icon>{{ end }}
@@ -27,10 +27,14 @@
 					</div>
 				</div>
 			</div>
-			{{ with .Site.Data.service.image }}
+			{{ if .Params.image }}
 			<div class="col-lg-6 order-1 order-lg-2">
 				<div class="block">
-					<img class="img-fluid" src="{{ . | absURL }}" alt="about-image">
+					{{ $image := .Page.Resources.GetMatch (printf "*%s*" .Params.image) }}
+					{{ if not $image }}
+						{{ errorf "%s: %s not found. (layouts/service/list.html)" .File.Path .Params.image }}
+					{{ end }}
+					<img class="img-fluid" src="{{ $image.Permalink }}"{{ with .Params.imageAlt }} alt="{{ . }}"{{ end }}>
 				</div>
 			</div>
 			{{ end }}
