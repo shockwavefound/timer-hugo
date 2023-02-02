@@ -16,7 +16,7 @@
             {{ if $original }}
               {{ $image := $original.Fill "350x240 left" }}
               <div class="img-wrapper">
-                <img src="{{ $image.Permalink }}" class="card-img-top portfolio-pic" alt=""/>
+                <img src="{{ $image.Permalink }}" class="card-img-top portfolio-pic" alt="">
                 {{- if .Site.Params.portfolio.buttons }}
                 <div class="overlay">
                   <div class="buttons">
