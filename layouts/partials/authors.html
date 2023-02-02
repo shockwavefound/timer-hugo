@@ -1,6 +1,7 @@
 {{ if isset .Params "authors" }}
     <footer class="row mb-2 author-card">
         {{ range .Params.authors }}
+            {{ $authorTerm := . }}
             {{ with index $.Site.Data.bios . }}
                 <div class="col-lg-6">
                     <div class="card">
@@ -17,7 +18,7 @@
                             <div class="col-10 d-flex align-items-center">
                                 <div class="card-body">
                                     <address class="card-title">
-                                        <a rel="author" class="h5" href="{{ ref $.Page (printf `%s%s` `/about#` (replace .name ` ` `-` | htmlEscape)) }}">
+                                        <a rel="author" class="h5" href="{{ ref $.Page (printf `/authors/%s` $authorTerm) }}">
                                             {{ with .honorificPrefix }}{{ . }} {{ end }}{{ .name }}{{ with .honorificSuffix }}, {{ . }}{{ end }}
                                         </a>
                                         {{ with .social }}

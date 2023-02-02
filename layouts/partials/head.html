@@ -5,7 +5,7 @@
 
   {{ "<!-- SEO -->" | safeHTML }}
   <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{if .IsPage}}{{ .Summary }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end }}">
-  {{ if or (eq .Kind "taxonomy") (eq .Kind "term") }}<meta name="robots" content="noindex, nofollow">{{ end }}
+  {{/* {{ if or (eq .Kind "taxonomy") (eq .Kind "term") }}<meta name="robots" content="noindex, nofollow">{{ end }} */}}
   {{ range .Site.Params.authors }}<meta name="author" content="{{ . }}">{{ end }}
   {{ hugo.Generator }}
   {{ range .AlternativeOutputFormats -}}
