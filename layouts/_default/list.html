@@ -14,7 +14,7 @@
         {{ end }}
         {{ if .Param "tagCloud" }}
         <div class="row mb-2">
-            <div class="col-sm-12" data-aos="fade-down" data-aos-delay="100">
+            <div class="col-sm-12" data-aos="fade-down">
                 {{ partial "tag-cloud.html" . }}
             </div>
         </div>
@@ -23,7 +23,7 @@
             {{ with index $.Site.Data.bios .Data.Term }}
             <div class="row">
                 <div id="{{ replace .name ` ` `-` | htmlEscape }}" class="card mb-3 team-member">
-                    <div class="row" data-aos="fade-down" data-aos-delay="200">
+                    <div class="row" data-aos="fade-down">
                         <div class="col-md-4">
                             {{ $about_bundle  := $.Site.GetPage "/about" }}
                             {{ $original := $about_bundle.Resources.GetMatch .image }}
@@ -52,7 +52,7 @@
             </div>
             {{ end }}
         {{ end }}
-        <nav class="row mb-2" aria-label="sort order" data-aos="fade-down" data-aos-delay="250">
+        <nav class="row mb-2" aria-label="sort order" data-aos="fade-down">
             <div class="col-sm-12">
                 <div class="dropdown float-end sort-btn">
                     <button type="button" id="itemSortButton" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sort</button>
@@ -67,7 +67,7 @@
         <div id="sort-items" class="row">
             {{ range .Pages }}
                 <div class="sort-item col-md-6 my-3" data-sort-name="{{ .Params.Title }}" data-sort-time="{{ .Date.Unix }}">
-                    <article class="blog-content" data-aos="fade-down" data-aos-delay="300">
+                    <article class="blog-content" data-aos="fade-down">
                         <a href="{{ .Permalink }}">
                             {{ if isset .Params "image" }}
                             <div class="blog-post-image">

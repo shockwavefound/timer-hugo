@@ -6,9 +6,9 @@
     <div class="row">
       <div class="col-md-12">
         <div class="block">
-          {{ with .title }}<h2 class="title" data-aos="fade-down" data-aos-delay="300">{{ . }}</h2>{{ end }}
-          {{ with .content }}<p data-aos="fade-down" data-aos-delay="500">{{ . | safeHTML }}</p>{{ end }}
-          <a href="{{ .btnURL }}" class="btn btn-default btn-contact hvr-bounce-to-right" data-aos="fade-down" data-aos-delay="700">{{ .btnText }}</a>
+          {{ with .title }}<h2 class="title" data-aos="fade-down">{{ . }}</h2>{{ end }}
+          {{ with .content }}<p data-aos="fade-down">{{ . | safeHTML }}</p>{{ end }}
+          <a href="{{ .btnURL }}" class="btn btn-default btn-contact hvr-bounce-to-right" data-aos="fade-down">{{ .btnText }}</a>
         </div>
       </div>
     </div>

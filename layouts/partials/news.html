@@ -5,14 +5,13 @@
 <section id="news" class="news">
     <div class="container my-3">
         <div class="section-heading text-center">
-            {{ with .Site.Params.news.title }}<h2 class="title" data-aos="fade-down" data-aos-delay="300">{{ . }}</h2>{{ end }}
-            {{ with .Site.Params.news.subtitle }}<p class="subtitle" data-aos="fade-down" data-aos-delay="500">{{ . }}</p>{{ end }}
+            {{ with .Site.Params.news.title }}<h2 class="title" data-aos="fade-down">{{ . }}</h2>{{ end }}
+            {{ with .Site.Params.news.subtitle }}<p class="subtitle" data-aos="fade-down">{{ . }}</p>{{ end }}
         </div>
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
           {{ range $index, $element:= first $maxItems (where .Site.RegularPages "Type" "news") }}
             <div class="col mb-3">
-              {{ $delay := mul $index 300 }}
-              <figure class="news-item card h-100" data-aos="fade-right" data-aos-delay="{{ $delay }}">
+              <figure class="news-item card h-100" data-aos="fade-right">
                 {{ if isset .Params "image" }}
                   {{ $original := .Page.Resources.GetMatch (printf "*%s*" .Params.image) }}
                   {{ if $original }}
@@ -55,7 +54,7 @@
           {{ end }}
           {{ with .Site.Params.news.twitter }}
             <div class="col mb-3">
-              <figure class="news-item card h-100" data-aos="fade-right" data-aos-delay="600">
+              <figure class="news-item card h-100" data-aos="fade-right">
                 {{ partial "twitter_widget.html" . }}
               </figure>
             </div>

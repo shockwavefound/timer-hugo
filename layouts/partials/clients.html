@@ -5,9 +5,9 @@
     <div class="row">
       <div class="col-md-12">
         {{ with .Site.Data.client.title }}<h2 class="subtitle text-center"
-          data-aos="fade-up" data-aos-delay="300">{{ . }}</h2>{{ end }}
+          data-aos="fade-up">{{ . }}</h2>{{ end }}
         {{ with .Site.Data.client.subtitle }}<p class="subtitle-des text-center"
-          data-aos="fade-up" data-aos-delay="500">{{ . }}</p>{{ end }}
+          data-aos="fade-up">{{ . }}</p>{{ end }}
         <div id="clients-logo" class="clients-logo-slider">
           {{ range .Site.Data.client.clientsLogo }}
           {{ with .url }}<a href="{{ . }}">{{ end }}

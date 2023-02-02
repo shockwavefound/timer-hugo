@@ -7,8 +7,8 @@
 	<div class="container pb-5 my-3">
 		<div class="row">
 			<div class="col-lg-6 pt-5">
-				{{ with .Params.serviceTitle }}<h2 class="subtitle" data-aos="fade-up" data-aos-delay="300">{{ . }}</h2>{{ end }}
-				{{ with .Params.serviceSubtitle }}<p class="subtitle-des" data-aos="fade-up" data-aos-delay="500">{{ . }}</p>{{ end }}
+				{{ with .Params.serviceTitle }}<h2 class="subtitle" data-aos="fade-up">{{ . }}</h2>{{ end }}
+				{{ with .Params.serviceSubtitle }}<p class="subtitle-des" data-aos="fade-up">{{ . }}</p>{{ end }}
 			</div>
 		</div>
 		<div class="row">
@@ -17,7 +17,7 @@
 					<div class="row service-parts">
 						{{ range .Params.serviceItems }}
 						<div class="col-md-6">
-							<div class="block" data-aos="fade-up" data-aos-delay="700">
+							<div class="block" data-aos="fade-up">
 								{{ with .icon }}<ion-icon name="{{ . }}" aria-hidden="true"></ion-icon>{{ end }}
 								{{ with .title }}<h4>{{ . }}</h4>{{ end }}
 								{{ with .description }}<p>{{ . }}</p>{{ end }}

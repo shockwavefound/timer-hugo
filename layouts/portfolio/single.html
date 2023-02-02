@@ -6,7 +6,7 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-lg-8" data-aos="fade-right" data-aos-delay="300">
+            <div class="col-lg-8" data-aos="fade-right">
                 {{ if .Params.image }}
                   {{ $original := .Page.Resources.GetMatch (printf "*%s*" .Params.image) }}
                   {{ if $original }}
@@ -39,7 +39,7 @@
             <!-- sidebar -->
             <aside class="col-lg-4">
                 {{ with .Params.client }}
-                <div class="sidebar block" data-aos="fade-left" data-aos-delay="300">
+                <div class="sidebar block" data-aos="fade-left">
                   {{ if isset . "logo" }}
                     {{ $logo := $.Page.Resources.GetMatch (printf "*%s*" .logo) }}
                     {{ if $logo }}

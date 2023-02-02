@@ -4,7 +4,7 @@
 <main class="single-post">
     {{ partial "page-title.html" . }}
     <div class="container">
-        <div class="row" data-aos="fade-left" data-aos-delay="300">
+        <div class="row" data-aos="fade-left">
             {{ if .Params.image }}
                 {{ $original := .Page.Resources.GetMatch (printf "*%s*" .Params.image) }}
                 {{ if $original }}

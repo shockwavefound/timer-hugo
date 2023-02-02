@@ -3,14 +3,13 @@
 <section id="feature">
 	<div class="container my-3">
 		<div class="section-heading">
-			{{ with .Site.Data.feature.title }}<h2 class="title" data-aos="fade-down" data-aos-delay="300">{{ . }}</h2>{{ end }}
-			{{ with .Site.Data.feature.subtitle }}<p data-aos="fade-down" data-aos-delay="500">{{ . | safeHTML }}</p>{{ end }}
+			{{ with .Site.Data.feature.title }}<h2 class="title" data-aos="fade-down">{{ . }}</h2>{{ end }}
+			{{ with .Site.Data.feature.subtitle }}<p data-aos="fade-down">{{ . | safeHTML }}</p>{{ end }}
 		</div>
 		<div class="row">
 			{{ range $index, $element := .Site.Data.feature.item }}
 			<div class="col-sm-6 col-lg-4">
-				{{ $delay := mul (add $index 1) 100 }}
-				<div class="media d-flex align-items-center" data-aos="fade-right" data-aos-delay="{{ $delay }}">
+				<div class="media d-flex align-items-center" data-aos="fade-right">
 					<div class="media-start">
 						<div class="icon">
 							{{ with .icon }}<ion-icon name="{{ . }}" aria-hidden="true"></ion-icon>{{ end }}

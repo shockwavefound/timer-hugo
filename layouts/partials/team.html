@@ -11,8 +11,7 @@
             {{ range $index, $element := .Params.team.members }}
                 {{ with index $.Site.Data.bios $element }}
                 <div class="card">
-                    {{ $delay := mul $index 300 }}
-                    <div id="{{ replace .name ` ` `-` | htmlEscape }}" class="team-member" data-aos="fade-left" data-aos-delay="{{ $delay }}">
+                    <div id="{{ replace .name ` ` `-` | htmlEscape }}" class="team-member" data-aos="fade-left">
                         {{ if .image }}
                             {{ $original := $.Resources.GetMatch .image }}
                             {{ $image := $original.Fill "400x600" }}
