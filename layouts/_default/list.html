@@ -22,7 +22,7 @@
         {{ if and (eq .Section "authors") (eq .Kind "term") }}
             {{ with index $.Site.Data.bios .Data.Term }}
             <div class="row">
-                <div id="{{ replace .name ` ` `-` | htmlEscape }}" class="card mb-3 team-member">
+                <div id="{{ .name | anchorize }}" class="card mb-3 team-member">
                     <div class="row" data-aos="fade-down">
                         <div class="col-md-4">
                             {{ $about_bundle  := $.Site.GetPage "/about" }}

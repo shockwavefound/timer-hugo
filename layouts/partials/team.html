@@ -11,7 +11,7 @@
             {{ range $index, $element := .Params.team.members }}
                 {{ with index $.Site.Data.bios $element }}
                 <div class="card">
-                    <div id="{{ replace .name ` ` `-` | htmlEscape }}" class="team-member" data-aos="fade-left">
+                    <div id="{{ .name | anchorize }}" class="team-member" data-aos="fade-left">
                         {{ if .image }}
                             {{ $original := $.Resources.GetMatch .image }}
                             {{ $image := $original.Fill "400x600" }}
