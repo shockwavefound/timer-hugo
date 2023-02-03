@@ -26,8 +26,10 @@
                             <textarea rows="6" placeholder="Your Message" class="form-control" name="message" id="message" minlength="20" required></textarea>
                         </div>
                         {{ with .subject }}<input type="hidden" name="_subject" value="{{ . }}" class="invisible" tabindex="-1" hidden>{{ end }}
-                        <label for="gotcha" class="form-label invisible" hidden>Don't fill this in</label>
-                        <input type="text" id="gotcha" name="_gotcha" class="form-control invisible" tabindex="-1" hidden>
+                        <div style="position: absolute; left: -5000px;">
+                            <label for="gotcha" class="form-label invisible" hidden>Don't fill this in</label>
+                            <input type="text" id="gotcha" name="_gotcha" class="invisible" tabindex="-1" value="" placeholder="Do not fill this in">
+                        </div>
                         {{ with .reCAPTCHAkey }}
                         <script src="//www.google.com/recaptcha/api.js" async defer></script>
                         <div class="g-recaptcha" data-sitekey="{{ . }}" data-aos="fade-down" ></div>
@@ -70,7 +72,7 @@
                                 </div>
                                 <div class="mc-field-group row my-2" data-aos="fade-down">
                                     <label for="mce-MMERGE6" class="form-label">Organization </label>
-                                    <input type="text" placeholder="United Federation" value="" name="MMERGE6" class="form-control" id="mce-MMERGE6" autocomplete="organization">
+                                    <input type="text" placeholder="Organization" value="" name="MMERGE6" class="form-control" id="mce-MMERGE6" autocomplete="organization">
                                     <span id="mce-MMERGE6-HELPERTEXT" class="helper_text"></span>
                                 </div>
                                 <div id="mce-responses" class="clear foot">
@@ -79,12 +81,13 @@
                                 </div>
                                 <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
                                 <div style="position: absolute; left: -5000px;">
-                                    <input type="text" name="b_65810877db6c5386233516942_eae5322031" tabindex="-1" aria-hidden="true" value="">
+                                    <label for="b_65810877db6c5386233516942_eae5322031" class="form-label invisible" hidden>Don't fill this in</label>
+                                    <input type="text" name="b_65810877db6c5386233516942_eae5322031"  class="invisible" tabindex="-1" value="" placeholder="Do not fill this in">
                                 </div>
                                 <div class="optionalParent">
                                     <div id="mc-subscribe" class="clear" data-aos="fade-down">
                                         <button type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe"
-                                                class="btn btn-default hvr-bounce-to-right">Subscribe</button>
+                                                class="btn btn-default hvr-bounce-to-right" tabindex="0">Subscribe</button>
                                     </div>
                                 </div>
                             </div>
