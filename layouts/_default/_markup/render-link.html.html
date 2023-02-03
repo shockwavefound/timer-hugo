@@ -5,9 +5,11 @@
 {{- $fragment := "" }}
 {{- with $url.Fragment }}{{ $fragment = printf "#%s" . }}{{ end -}}
 {{- with .Page.GetPage $url.Path }}{{ $link = printf "%s%s" .Permalink $fragment }}{{ end }}{{ end -}}
+<span class="rendered-link">
 <a href="{{ $link | safeURL }}"
    {{- with .Title}} title="{{ . }}"{{ end }}
    {{- if $isRemote }} target="_blank" rel="noopener"{{ end }}>
    {{- .Text | safeHTML -}}
-   {{- if $isRemote }} <ion-icon aria-hidden="true" name="open-outline"></ion-icon>{{ end -}}
    </a>
+{{- if $isRemote }} <ion-icon class="external-link" aria-hidden="true" name="open-outline"></ion-icon>{{ end -}}
+</span>

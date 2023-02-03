@@ -3,9 +3,9 @@
 {{ "<!-- Company Description Section Start -->" | safeHTML }}
 <main id="main-content" class="company-description">
     {{ partial "page-title.html" . }}
-    <div class="container">
+    <div class="container my-3">
         <div class="row">
-            <div class="col-md-6" data-aos="fade-left" data-aos-delay="300">
+            <div class="col-md-6" data-aos="fade-left">
                 {{ with .Params.image }}
                     {{ $original := $.Resources.GetMatch (printf "*%s*" .) }}
                     {{ $image := $original.Resize "540x" }}
@@ -14,9 +14,9 @@
             </div>
             <div class="col-md-6">
                 <div class="block">
-                    {{ with .Params.about.title }}<h3 class="subtitle" data-aos="fade-up" data-aos-delay="500">{{ . }}</h3>{{ end }}
+                    {{ with .Params.about.title }}<h3 class="subtitle" data-aos="fade-up">{{ . }}</h3>{{ end }}
                     {{ with .Content }}
-                    <div data-aos="fade-up" data-aos-delay="500">{{ . }}</div>
+                    <div data-aos="fade-up">{{ . }}</div>
                     {{ end }}
                 </div>
             </div>
@@ -26,12 +26,12 @@
 
 {{ "<!--  Company Feature Section Start -->" | safeHTML }}
 <aside class="about-feature clearfix">
-    <div class="container-fluid">
+    <div class="container-fluid my-3">
         <div class="card-group">
             {{ range $index, $element := .Params.aboutItems }}
                 {{ $class := add $index 1 }}
                 <div class="col-lg-4 px-0 card about-feature-{{ $class }}">
-                    <div class="block" data-aos="fade-down" data-aos-delay="300">
+                    <div class="block py-5 px-3" data-aos="fade-down">
                         {{ with .title }}<h2>{{ . }}</h2>{{ end }}
                         {{ with .description }}<p>{{ . }}</p>{{ end }}
                     </div>

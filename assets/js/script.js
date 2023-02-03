@@ -19,14 +19,15 @@ $(document).ready(function () {
         }
     });
 
-    // slick (for clients slider)
+    // slick (for partials/clients slider)
     $('.clients-logo-slider').slick({
-        dots: false,
-        infinite: true,
-        speed: 300,
+        dots: true,
+        autoplay: true,
+        autoplaySpeed: 2000,
         slidesToShow: 5,
         slidesToScroll: 1,
         arrows: false,
+        mobileFirst: false,
         responsive: [
           {
             breakpoint: 1024,
@@ -39,6 +40,13 @@ $(document).ready(function () {
             breakpoint: 600,
             settings: {
               slidesToShow: 2,
+              slidesToScroll: 1
+            }
+          },
+          {
+            breakpoint: 480,
+            settings: {
+              slidesToShow: 1,
               slidesToScroll: 1
             }
           }
@@ -95,7 +103,7 @@ $(function() {
         var $this = $(this);
         var mode = $this.data('sort');
         var items = $(".sort-item");
-        $(".sort-item *").removeAttr('data-aos');
+        $(".sort-item *").removeAttr('data-aos');  // AOS breaks sorting so just turn it off --pst
         switch(mode) {
             case 'alpha':
                 items.sort(function(a, b) {

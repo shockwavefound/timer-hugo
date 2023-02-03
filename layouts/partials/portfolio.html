@@ -1,23 +1,22 @@
 {{ if .Site.Params.portfolio.enable }}
 {{ "<!-- Portfolio Section Start -->" | safeHTML }}
 <section id="works" class="works">
-  <div class="container">
+  <div class="container my-3">
     <div class="section-heading">
-      {{ with .Site.Params.portfolio.title }}<h2 class="title" data-aos="fade-down" data-aos-delay="300">{{ . }}</h2>{{ end }}
-      {{ with .Site.Params.portfolio.subtitle }}<p data-aos="fade-down" data-aos-delay="500">{{ . }}</p>{{ end }}
+      {{ with .Site.Params.portfolio.title }}<h2 class="title" data-aos="fade-down">{{ . }}</h2>{{ end }}
+      {{ with .Site.Params.portfolio.subtitle }}<p data-aos="fade-down">{{ . }}</p>{{ end }}
     </div>
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
     {{ range $index, $element:= first 6 (where .Site.RegularPages "Type" "portfolio") }}
       <div class="col mb-3">
-        {{ $delay := mul $index 300 }}
-        <figure class="portfolio-item card h-100" data-aos="fade-left" data-aos-delay="{{ $delay }}">
+        <figure class="portfolio-item card h-100" data-aos="fade-right">
           {{ if isset .Params "image" }}
             {{ $original := .Page.Resources.GetMatch (printf "*%s*" .Params.image) }}
             {{ if $original }}
               {{ $image := $original.Fill "350x240 left" }}
               <div class="img-wrapper">
-                <img src="{{ $image.Permalink }}" class="card-img-top portfolio-pic" alt=""/>
-                {{ if .Site.Params.portfolio.buttons -}}
+                <img src="{{ $image.Permalink }}" class="card-img-top portfolio-pic" alt="">
+                {{- if .Site.Params.portfolio.buttons }}
                 <div class="overlay">
                   <div class="buttons">
                     <a rel="gallery" class="fancybox" href="{{ $original.Permalink }}">Demo</a>

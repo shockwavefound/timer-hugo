@@ -1,144 +1,154 @@
 {{ define "main" }}
-
 {{ if .Site.Data.contact.enable }}
-
 <!--sse-->
+
 {{ "<!-- Contact Section Start -->" | safeHTML }}
 <main id="main-content" class="contact-section">
     {{ partial "page-title.html" . }}
     <div class="container">
-        <div class="row">
-            <div class="col-md-6 mb-5 mb-md-0" data-aos="fade-left" data-aos-delay="300">
+        <div class="row my-3">
+            {{ with .Site.Data.contact.contactForm }}
+            <div class="col-md-6 g-5" data-aos="fade-right">
                 <div class="block">
-                    {{ with .Site.Data.contact.contactFormTitle }}<h2 class="subtitle" >{{ . }}</h2>{{ end }}
-                    {{ with .Site.Data.contact.contactFormSubtitle | safeHTML }}<p class="subtitle-des">{{ . }}</p>{{ end }}
-                    <div class="contact-form">
-                        <form id="contact-form" method="POST" action="{{ .Site.Data.contact.contactPost }}">
-                            <div class="form-group">
-                                <label for="email">Email Address</label>
-                                <input type="email" placeholder="email@example.com" class="form-control" name="email" id="email" required autocomplete="email">
-                            </div>
-                            <div class="form-group">
-                                <label for="name">Full Name</label>
-                                <input type="text" placeholder="First and Last" class="form-control" name="name" id="name" minlength="4" required autocomplete="name">
-                            </div>
-                            <div class="form-group">
-                                <label for="message">Message</label>
-                                <textarea rows="6" placeholder="Your Message" class="form-control" name="message" id="message" minlength="10" required></textarea>
-                            </div>
-
-                            {{ with .Site.Data.contact.contactSubject }}<input type="hidden" name="_subject" value="{{ . }}" hidden>{{ end }}
-                            <label for="gotcha" style="display:none" hidden>Don't fill this in</label>
-                            <input type="text" id="gotcha" name="_gotcha" style="display:none" hidden>
-
-                            {{ with .Site.Data.contact.reCAPTCHAkey }}
-                            <script src="//www.google.com/recaptcha/api.js" async defer></script>
-                            <div class="g-recaptcha" data-sitekey="{{ . }}"></div>
-                            {{ end }}
-
-                            <div id="success" class="success">Thank you, your message is on its way.</div>
-                            <div id="error" class="error">Sorry, there was an error submitting the form.</div>
-                            <div id="submit">
-                                <button type="submit" id="contact-submit" class="btn btn-default btn-send hvr-bounce-to-right" value="Send Message">Send Message</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            {{ if .Site.Data.contact.mapUrl }}
-            <div class="col-md-6" data-aos="fade-right" data-aos-delay="300">
-                <div class="map-area">
-                    {{ with .Site.Data.contact.mapTitle }}<h2 class="subtitle">{{ . }}</h2>{{ end }}
-                    {{ with .Site.Data.contact.mapSubtitle }}<p class="subtitle-des">{{ . }}</p>{{ end }}
-                    <div class="map">
-                        <iframe src="{{ .Site.Data.contact.mapUrl }}"
-                            width="100%" height="400" frameborder="0" style="border:0" allowfullscreen></iframe>
-                    </div>
+                    {{ with .title }}<h2 class="subtitle" >{{ . }}</h2>{{ end }}
+                    {{ with .subtitle | markdownify }}<div class="subtitle-des">{{ . }}</div>{{ end }}
+                    <form id="contact-form" method="POST" action="{{ .post }}">
+                        <div class="row my-2" data-aos="fade-down">
+                            <label for="email" class="form-label">Email Address</label>
+                            <input type="email" placeholder="email@example.com" class="form-control" name="email" id="email" required autocomplete="email">
+                        </div>
+                        <div class="row my-2" data-aos="fade-down">
+                            <label for="name" class="form-label">Full Name</label>
+                            <input type="text" placeholder="First and Last" class="form-control" name="name" id="name" minlength="4" required autocomplete="name">
+                        </div>
+                        <div class="row my-2" data-aos="fade-down">
+                            <label for="message" class="form-label">Message</label>
+                            <textarea rows="6" placeholder="Your Message" class="form-control" name="message" id="message" minlength="20" required></textarea>
+                        </div>
+                        {{ with .subject }}<input type="hidden" name="_subject" value="{{ . }}" class="invisible" tabindex="-1" hidden>{{ end }}
+                        <div style="position: absolute; left: -5000px;">
+                            <label for="gotcha" class="form-label invisible" hidden>Don't fill this in</label>
+                            <input type="text" id="gotcha" name="_gotcha" class="invisible" tabindex="-1" value="" placeholder="Do not fill this in">
+                        </div>
+                        {{ with .reCAPTCHAkey }}
+                        <script src="//www.google.com/recaptcha/api.js" async defer></script>
+                        <div class="g-recaptcha" data-sitekey="{{ . }}" data-aos="fade-down" ></div>
+                        {{ end }}
+                        <div id="success" class="success">Thank you, your message is on its way.</div>
+                        <div id="error" class="error">Sorry, there was an error submitting the form.</div>
+                        <div id="submit">
+                            <button type="submit" id="contact-submit" class="btn btn-default hvr-bounce-to-right"
+                                    value="Send Message" data-aos="fade-down">Send Message</button>
+                        </div>
+                    </form>
                 </div>
             </div>
             {{ end }}
             {{ with .Site.Data.contact.mailChimp }}
-            <div class="col-md-6" data-aos="fade-right" data-aos-delay="300">
+            <div class="col-md-6 g-5" data-aos="fade-right">
                 <div class="block">
-                    {{ with .title }}<h2 class="subtitle">{{ . | safeHTML }}</h2>{{ end }}
-                    {{ with .subtitle }}<p class="subtitle-des">{{ . | safeHTML }}</p>{{ end }}
+                    {{ with .title }}<h2 class="subtitle">{{ . }}</h2>{{ end }}
+                    {{ with .subtitle | markdownify }}<div class="subtitle-des">{{ . }}</div>{{ end }}
                     <!-- Begin mailchimp Signup Form -->
-                    <link href="//cdn-images.mailchimp.com/embedcode/classic-10_7.css" rel="stylesheet" type="text/css">
-                    <div id="mc_embed_signup">
+                    <div id="mc_embed_signup" class="contact-form">
                         <form action="{{ .subscribeURL | safeURL }}"
                             method="post" id="mc-embedded-subscribe-form"
                             name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
                             <div id="mc_embed_signup_scroll">
-                                <div class="indicates-required"><span class="asterisk">*</span> indicates required</div>
-                                <div class="mc-field-group form-group">
-                                    <label for="mce-EMAIL">Email Address <span class="asterisk">*</span></label>
-                                    <input type="email" placeholder="email@example.com" value="" name="EMAIL" class="required" id="mce-EMAIL" required autocomplete="email">
+                                <div class="mc-field-group row my-2" data-aos="fade-down">
+                                    <label for="mce-EMAIL" class="form-label">Email Address</label>
+                                    <input type="email" placeholder="email@example.com" value="" name="EMAIL" class="required form-control" id="mce-EMAIL" required autocomplete="email">
+                                    <span id="mce-EMAIL-HELPERTEXT" class="helper_text"></span>
                                 </div>
-                                <div class="mc-field-group form-group">
-                                    <label for="mce-FNAME">First Name </label>
-                                    <input type="text" placeholder="John" value="" name="FNAME" class="" id="mce-FNAME" autocomplete="given-name">
+                                <div class="mc-field-group row my-2" data-aos="fade-down">
+                                    <label for="mce-FNAME" class="form-label">First Name</label>
+                                    <input type="text" placeholder="John" value="" name="FNAME" class="required form-control" id="mce-FNAME" autocomplete="given-name">
+                                    <span id="mce-FNAME-HELPERTEXT" class="helper_text"></span>
                                 </div>
-                                <div class="mc-field-group form-group">
-                                    <label for="mce-LNAME">Last Name </label>
-                                    <input type="text" placeholder="Smith" value="" name="LNAME" class="" id="mce-LNAME" autocomplete="family-name">
+                                <div class="mc-field-group row my-2" data-aos="fade-down">
+                                    <label for="mce-LNAME" class="form-label">Last Name</label>
+                                    <input type="text" placeholder="Smith" value="" name="LNAME" class="required form-control" id="mce-LNAME" autocomplete="family-name">
+                                    <span id="mce-LNAME-HELPERTEXT" class="helper_text"></span>
                                 </div>
-                                <div class="mc-field-group form-group">
-                                    <label for="mce-MMERGE6">Organization </label>
-                                    <input type="text" placeholder="United Federation" value="" name="MMERGE6" class="" id="mce-MMERGE6" autocomplete="organization">
+                                <div class="mc-field-group row my-2" data-aos="fade-down">
+                                    <label for="mce-MMERGE6" class="form-label">Organization </label>
+                                    <input type="text" placeholder="Organization" value="" name="MMERGE6" class="form-control" id="mce-MMERGE6" autocomplete="organization">
+                                    <span id="mce-MMERGE6-HELPERTEXT" class="helper_text"></span>
                                 </div>
-                                <div id="mce-responses" class="clear">
+                                <div id="mce-responses" class="clear foot">
                                     <div class="response" id="mce-error-response" style="display:none"></div>
                                     <div class="response" id="mce-success-response" style="display:none"></div>
                                 </div>
                                 <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
                                 <div style="position: absolute; left: -5000px;">
-                                    <input type="text" name="b_65810877db6c5386233516942_eae5322031" tabindex="-1" aria-hidden="true"
-                                        value="">
+                                    <label for="b_65810877db6c5386233516942_eae5322031" class="form-label invisible" hidden>Don't fill this in</label>
+                                    <input type="text" name="b_65810877db6c5386233516942_eae5322031"  class="invisible" tabindex="-1" value="" placeholder="Do not fill this in">
                                 </div>
-                                <div id="mc-subscribe" class="clear">
-                                    <button type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe"
-                                            class="btn btn-default btn-send hvr-bounce-to-right">Subscribe</button>
+                                <div class="optionalParent">
+                                    <div id="mc-subscribe" class="clear" data-aos="fade-down">
+                                        <button type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe"
+                                                class="btn btn-default hvr-bounce-to-right" tabindex="0">Subscribe</button>
+                                    </div>
                                 </div>
                             </div>
                         </form>
                     </div>
-                    <script src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script><script>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';fnames[3]='ADDRESS';ftypes[3]='address';fnames[4]='PHONE';ftypes[4]='phone';fnames[6]='MMERGE6';ftypes[6]='text';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
+                    <script src='https://s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script><script>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';fnames[3]='ADDRESS';ftypes[3]='address';fnames[4]='PHONE';ftypes[4]='phone';fnames[6]='MMERGE6';ftypes[6]='text';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
                     <!--End mc_embed_signup-->
                 </div>
             </div>
             {{ end }}
         </div>
-        {{ if .Site.Data.contact.enableAddress }}
+        {{ with .Site.Data.contact.map }}
+        <div class="col-md-6 g-5" data-aos="fade-right">
+            <div class="map-area">
+                {{ with .title }}<h2 class="subtitle">{{ . }}</h2>{{ end }}
+                {{ with .subtitle | markdownify }}<div class="subtitle-des">{{ . }}</div>{{ end }}
+                <div class="map">
+                    <iframe src="{{ .url }}"
+                        width="100%" height="400" frameborder="0" style="border:0" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+        {{ end }}
+        {{ with .Site.Data.contact.addresses }}
         <div class="row address-details">
+            {{ with .physical }}
             <div class="col-lg-4 col-sm-8">
-                <dl class="address" data-aos="fade-left" data-aos-delay="300">
-                    <ion-icon name="location-outline" aria-hidden="true"></ion-icon>
-                    <ion-label>Location</ion-label>
-                    {{ with .Site.Data.contact.officeAddress1 }}<dt>{{ . }}</dt>{{ end }}
-                    {{ with .Site.Data.contact.officeAddress2 }}<dd>{{ . }}{{ end }}</dd>
-                </dl>
+                <div class="address" data-aos="fade-right">
+                    <p><ion-icon name="location-outline" aria-hidden="true"></ion-icon> <ion-label>Location</ion-label></p>
+                    {{ range . }}
+                      <p>{{ . | markdownify }}</p>
+                      {{ end }}
+                </div>
             </div>
+            {{ end }}
+            {{ with .email }}
             <div class="col-lg-4 col-sm-8">
-                <dl class="email" data-aos="fade-left" data-aos-delay="500">
-                    <ion-icon name="mail-outline" aria-hidden="true"></ion-icon>
-                    <icon-label>E-Mail</icon-label>
-                    {{ with .Site.Data.contact.mail1 }}<dt><a href="mailto:{{ . }}" target="_blank">{{ . }}</a></dt>{{ end }}
-                    {{ with .Site.Data.contact.mail2 }}<dd>{{ . }}{{ end }}</dd>
-                    </dl>
+                <div class="email" data-aos="fade-right">
+                    <p><ion-icon name="mail-outline" aria-hidden="true"></ion-icon> <icon-label>E-Mail</icon-label></p>
+                    {{ range . }}
+                        <p><a href="mailto:{{ . }}">{{ . }}</a></p>
+                    {{ end }}
+                </div>
             </div>
+            {{ end }}
+            {{ with .phone }}
             <div class="col-lg-4 col-sm-8">
-                <dl class="phone" data-aos="fade-left" data-aos-delay="700">
-                    <ion-icon name="call-outline" aria-hidden="true"></ion-icon>
-                    <ion-label>Phone</ion-label>
-                    {{ with .Site.Data.contact.phone1 }}<dt><a href="tel:{{ . }}" target="_blank">{{ . }}</a></dt>{{ end }}
-                    {{ with .Site.Data.contact.phone2 }}<dd>{{ . }}{{ end }}</dd>
-                </dl>
+                <dl class="phone" data-aos="fade-right">
+                    <p><ion-icon name="call-outline" aria-hidden="true"></ion-icon> <ion-label>Phone</ion-label></p>
+                    {{ range . }}
+                        <p><a href="tel:{{ replace . ` ` `` }}">{{ . }}</a></p>
+                    {{ end }}
+                </div>
             </div>
+            {{ end }}
         </div>
         {{ end }}
     </div>
 </main>
 {{ "<!-- Contact Section End -->" | safeHTML }}
+
 <!--/sse-->
 {{ end }}
 

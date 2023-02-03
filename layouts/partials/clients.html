@@ -1,16 +1,22 @@
 {{ if .Site.Data.client.enable }}
 {{ "<!-- Client Section Start -->" | safeHTML }}
 <section id="clients">
-  <div class="container">
+  <div class="container my-3">
     <div class="row">
       <div class="col-md-12">
         {{ with .Site.Data.client.title }}<h2 class="subtitle text-center"
-          data-aos="fade-up" data-aos-delay="300">{{ . }}</h2>{{ end }}
+          data-aos="fade-up">{{ . }}</h2>{{ end }}
         {{ with .Site.Data.client.subtitle }}<p class="subtitle-des text-center"
-          data-aos="fade-up" data-aos-delay="500">{{ . }}</p>{{ end }}
+          data-aos="fade-up">{{ . }}</p>{{ end }}
         <div id="clients-logo" class="clients-logo-slider">
           {{ range .Site.Data.client.clientsLogo }}
-          <img class="img-fluid mx-2" src="{{ .image | absURL }}" alt="client-logo">
+          {{ with .url }}<a href="{{ . }}">{{ end }}
+          {{ if .image }}
+            <img class="img-fluid m-2" src="{{ .image | absURL }}" alt="{{ .name }}">
+          {{ else }}
+            <p class="h3 m-2">{{.name}}</p>
+          {{ end }}
+          {{ with .url }}</a>{{ end }}
           {{ end }}
         </div>
       </div>

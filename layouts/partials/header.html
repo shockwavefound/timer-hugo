@@ -1,50 +1,52 @@
-<a href="#main-content" class="sr-only">Skip to main content</a>
-<header class="top-bar navbar-fixed-top animated-header">
+<a href="#main-content" class="visually-hidden-focusable">Skip to main content</a>
+<header class="top-bar sticky-top bg-light animated-header">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <nav class="navbar navbar-expand-md navbar-light bg-light" aria-label="Site Navigation">
-                    <a class="navbar-brand" href="{{ .Site.BaseURL }}">
-                        <img src="{{ .Site.Params.logo | absURL }}" alt="{{ .Site.Params.logoAlt | default .Site.Title }}">
-                    </a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navHeader"
-                        aria-controls="navHeader" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navHeader">
-                        <ul class="navbar-nav ml-auto">
-                            {{- $current := . }}
-                            {{- range $index, $element := .Site.Menus.main }}
-                                {{- $active := or ($current.IsMenuCurrent "main" .) ($current.HasMenuCurrent "main" .) }}
-                                {{- $active = or $active (eq .Name $current.Title) }}
-                                {{- $active = or $active (and (eq (lower .KeyName) $current.Section) (ne $current.Section "")) }}
-                                {{- if .HasChildren }}
-                                <li class="nav-item dropdown{{ if $active }} active" aria-current="page{{ end }}">
-                                    <a class="nav-link dropdown-toggle" role="button"
-                                       data-toggle="dropdown" id="dropdown{{ $index }}"
-                                       aria-haspopup="true" aria-expanded="false"
-                                       href="{{ .URL | absLangURL }}">{{ .Pre }}<span>{{ .Name }}</span></a>
-                                    <div class="dropdown-menu" aria-labelledby="dropdown{{ $index }}">
-                                    {{ range .Children }}
-                                        {{- $active := or ($current.IsMenuCurrent "main" .) ($current.HasMenuCurrent "main" .) }}
-                                        {{- $active = or $active (eq .Name $current.Name) }}
-                                        {{- $active = or $active (and (eq (lower .KeyName) $current.Section) (ne $current.Section "")) }}
-                                        <a class="dropdown-item{{ if $active }} active" aria-current="page{{ end }}" href="{{ .URL | absLangURL }}">{{ .Pre }}<span>{{ .Name }}</span></a>
-                                    {{ end }}
-                                    </div>
-                                </li>
-                                {{- else }}
-                                <li class="nav-item">
-                                    <a class="nav-link{{ if $active }} active" aria-current="page{{ end }}" href="{{ .URL | absLangURL }}">{{ .Pre }}<span>{{ .Name }}</span></a>
-                                </li>
+                <nav class="navbar navbar-expand-md py-0" aria-label="Site Navigation">
+                    <div class="container-fluid">
+                        <a class="navbar-brand" href="{{ .Site.BaseURL }}">
+                            <img src="{{ .Site.Params.logo | absURL }}" alt="{{ .Site.Params.logoAlt | default .Site.Title }}">
+                        </a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navHeader"
+                                aria-controls="navHeader" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navHeader">
+                            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+                                {{- $current := . }}
+                                {{- range $index, $element := .Site.Menus.main }}
+                                    {{- $active := or ($current.IsMenuCurrent "main" .) ($current.HasMenuCurrent "main" .) }}
+                                    {{- $active = or $active (eq .Name $current.Title) }}
+                                    {{- $active = or $active (and (eq (lower .KeyName) $current.Section) (ne $current.Section "")) }}
+                                    {{- if .HasChildren }}
+                                    <li class="nav-item dropdown{{ if $active }} active" aria-current="page{{ end }}">
+                                        <a class="nav-link dropdown-toggle" role="button"
+                                        data-bs-toggle="dropdown" id="dropdown{{ $index }}"
+                                        aria-haspopup="true" aria-expanded="false"
+                                        href="{{ .URL | absLangURL }}">{{ .Pre }}<span>{{ .Name }}</span></a>
+                                        <div class="dropdown-menu" aria-labelledby="dropdown{{ $index }}">
+                                        {{ range .Children }}
+                                            {{- $active := or ($current.IsMenuCurrent "main" .) ($current.HasMenuCurrent "main" .) }}
+                                            {{- $active = or $active (eq .Name $current.Name) }}
+                                            {{- $active = or $active (and (eq (lower .KeyName) $current.Section) (ne $current.Section "")) }}
+                                            <a class="dropdown-item{{ if $active }} active" aria-current="page{{ end }}" href="{{ .URL | absLangURL }}">{{ .Pre }}<span>{{ .Name }}</span></a>
+                                        {{ end }}
+                                        </div>
+                                    </li>
+                                    {{- else }}
+                                    <li class="nav-item">
+                                        <a class="nav-link{{ if $active }} active" aria-current="page{{ end }}" href="{{ .URL | absLangURL }}">{{ .Pre }}<span>{{ .Name }}</span></a>
+                                    </li>
+                                    {{- end }}
                                 {{- end }}
-                            {{- end }}
-                            <li class="nav-item">
-                                    <input id="searchInput"
-                                           class="form-control ml-sm-2" type="search"
-                                           placeholder="Search" aria-label="Search" tabindex="0">
-                            </li>
-                        </ul>
+                                <li class="nav-item">
+                                        <input id="searchInput"
+                                            class="form-control ms-sm-2" type="search"
+                                            placeholder="Search" aria-label="Search">
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </nav>
                 <ul id="searchResults"></ul>

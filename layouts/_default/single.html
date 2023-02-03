@@ -4,47 +4,49 @@
 <main class="single-post">
     {{ partial "page-title.html" . }}
     <div class="container">
-        <div class="row">
-            <div class="col-md-12" data-aos="fade-right" data-aos-delay="300">
-                {{ if .Params.image }}
-                  {{ $original := .Page.Resources.GetMatch (printf "*%s*" .Params.image) }}
-                  {{ if $original }}
+        <div class="row" data-aos="fade-left">
+            {{ if .Params.image }}
+                {{ $original := .Page.Resources.GetMatch (printf "*%s*" .Params.image) }}
+                {{ if $original }}
                     {{ $image := $original.Resize "1100x" }}
                     <figure class="figure">
-                      <img class="figure-img img-fluid w-100" src="{{ $image.Permalink }}"
-                            alt="{{ with .Params.imageAlt }}{{ . }}{{ end }}">
+                        <img class="figure-img img-fluid" src="{{ $image.Permalink }}"
+                              alt="{{ with .Params.imageAlt }}{{ . }}{{ end }}">
                         {{ with .Params.imageCaption }}
-                            <figcaption class="figure-caption text-right">{{ . | markdownify }}</figcaption>
+                        <figcaption class="figure-caption text-end">{{ . | markdownify }}</figcaption>
                         {{ end }}
                     </figure>
-                  {{ else }}
-                    {{ errorf "%s: %s not found. (layouts/_default/single.html)" .File.Path .Params.image }}
-                  {{ end }}
                 {{ else }}
-                    {{ warnf "%s: image not set. (layouts/_default/single.html)" .File.Path }}
+                    {{ errorf "%s: %s not found. (layouts/_default/single.html)" .File.Path .Params.image }}
                 {{ end }}
-                <article id="main-content">
-                  {{ partial "authors.html" . }}
-                  <h2>{{ .Title }}</h2>
-                  <footer class="post-date">
-                      <time datetime="{{ .Date.Format $.Site.Params.rfc3339Format }}">{{ .Date.Format $dateFormat }}</time>
-                      {{ with .Params.tags }}<span>&mdash; {{ delimit . ", " }} </span>{{ end }}
-                  </footer>
-                  <div class="post-content mt-4">
-                      {{ .Content }}
-                  </div>
-                  {{ partial "related.html" . }}
-                </article>
-                {{ if .Params.about }}
-                <footer class="mission text-muted small">
-                  {{ .Site.Params.about.content | safeHTML }}
-                  For more information, visit
-                  <a href="{{ .Site.BaseURL }}">{{ .Site.BaseURL }}</a>.
+            {{ else }}
+                {{ warnf "%s: image not set. (layouts/_default/single.html)" .File.Path }}
+            {{ end }}
+            <article id="main-content">
+                {{ partial "authors.html" . }}
+                <h2>{{ .Title }}</h2>
+                <footer class="post-date">
+                    <p>
+                        <time datetime="{{ .Date.Format $.Site.Params.rfc3339Format }}">{{ .Date.Format $dateFormat }}</time>
+                        {{ with .Params.tags }}<span>&mdash; {{ delimit . ", " }} </span>{{ end }}
+                    </p>
                 </footer>
-                {{ end }}
-            </div>
-            {{ template "_internal/disqus.html" . }}
+                <div class="post-content mt-4">
+                    {{ .Content }}
+                </div>
+                {{ partial "related.html" . }}
+            </article>
+            {{ if .Params.about }}
+                <footer class="mission text-muted small">
+                    <p>
+                        {{ .Site.Params.about.content | markdownify }}
+                        For more information, visit
+                        <a href="{{ .Site.BaseURL }}">{{ .Site.BaseURL }}</a>.
+                    </p>
+                </footer>
+            {{ end }}
         </div>
+    {{ template "_internal/disqus.html" . }}
     </div>
 </main>
 
