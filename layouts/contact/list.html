@@ -25,9 +25,8 @@
                             <label for="message" class="form-label">Message</label>
                             <textarea rows="6" placeholder="Your Message" class="form-control" name="message" id="message" minlength="20" required></textarea>
                         </div>
-                        {{ with .subject }}<input type="hidden" name="_subject" value="{{ . }}" class="invisible" tabindex="-1" hidden>{{ end }}
+                        {{ with .subject }}<input type="hidden" name="_subject" value="{{ . }}" class="invisible" tabindex="-1">{{ end }}
                         <div style="position: absolute; left: -5000px;">
-                            <label for="gotcha" class="form-label invisible" hidden>Don't fill this in</label>
                             <input type="text" id="gotcha" name="_gotcha" class="invisible" tabindex="-1" value="" placeholder="Do not fill this in">
                         </div>
                         {{ with .reCAPTCHAkey }}
@@ -81,8 +80,7 @@
                                 </div>
                                 <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
                                 <div style="position: absolute; left: -5000px;">
-                                    <label for="b_65810877db6c5386233516942_eae5322031" class="form-label invisible" hidden>Don't fill this in</label>
-                                    <input type="text" name="b_65810877db6c5386233516942_eae5322031"  class="invisible" tabindex="-1" value="" placeholder="Do not fill this in">
+                                    <input type="text" name="b_65810877db6c5386233516942_eae5322031" id="mce-b_65810877db6c5386233516942_eae5322031" class="invisible" tabindex="-1" value="" placeholder="Do not fill this in">
                                 </div>
                                 <div class="optionalParent">
                                     <div id="mc-subscribe" class="clear" data-aos="fade-down">
