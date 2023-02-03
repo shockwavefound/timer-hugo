@@ -11,11 +11,7 @@
                 {{ "<!-- Social Media -->" | safeHTML }}
                 <div class="col-md-4 text-center text-md-end">
                     Follow us on:
-                    <ul class="social-icons ps-2">
-                        {{ range . }}
-                        <li><a href="{{ .url }}" target="_blank" rel="me noopener noreferrer"><ion-icon name="{{ .icon }}" aria-hidden="true"></ion-icon><span class="visually-hidden">{{ .text }}</span></a></li>
-                        {{ end }}
-                    </ul>
+                    <span class="ps-2">{{ partial "social-icons.html" . }}</span>
                 </div>
             {{ end }}
         </div>

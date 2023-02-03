@@ -1,0 +1,7 @@
+{{- with . }}
+<ul class="social-icons">
+    {{- range . }}
+    <li><a href="{{ .url }}" target="_blank" rel="me noopener noreferrer nofollow"><ion-icon name="{{ .icon }}" aria-hidden="true"></ion-icon><span class="visually-hidden">{{ .text }}</span></a></li>
+    {{- end }}
+</ul>
+{{- end }}

@@ -35,12 +35,7 @@
                                 <div class="clearfix">
                                     <h2 class="card-title float-start">{{ with .honorificPrefix }}{{ . }} {{ end }}{{ .name }}{{ with .honorificSuffix }}, {{ . }}{{ end }}</h2>
                                     {{ with .social }}
-                                        <ul class="social-icons float-end">
-                                            {{ range . }}
-                                                <li><a href="{{ .url }}" target="_blank" rel="me noopener noreferrer"><ion-icon name="{{ .icon }}" aria-hidden="true"></ion-icon>
-                                                <span class="visually-hidden"> {{ .text }}</span></a></li>
-                                            {{ end }}
-                                        </ul>
+                                        <span class="float-end">{{ partial "social-icons.html" . }}</span>
                                     {{ end }}
                                 </div>
                                 {{ if .worksFor }}<p class="card-subtitle mt-0 mb-2 text-muted">{{ with .jobTitle }}{{ . }}, {{ end }}{{ .worksFor }}{{ with .workLocation }}<br>{{ . }}{{ end }}</p>{{ end }}

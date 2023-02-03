@@ -21,13 +21,7 @@
                                         <a rel="author" class="h5" href="{{ ref $.Page (printf `/authors/%s` $authorTerm) }}">
                                             {{ with .honorificPrefix }}{{ . }} {{ end }}{{ .name }}{{ with .honorificSuffix }}, {{ . }}{{ end }}
                                         </a>
-                                        {{ with .social }}
-                                        <ul class="social-icons">
-                                        {{ range . }}
-                                            <li><a href="{{ .url }}" target="_blank" rel="me noopener noreferrer"><ion-icon name="{{ .icon }}" aria-hidden="true"></ion-icon><span class="visually-hidden">{{ .text }}</span></a></li>
-                                        {{ end }}
-                                        </ul>
-                                        {{ end }}
+                                        {{ partial "social-icons.html" .social }}
                                     </address>
                                     {{ if (or .worksFor .jobTitle) }}
                                         <p class="card-subtitle small">{{ with .jobTitle }}{{ . }}, {{ end }}{{ .worksFor }}</p>

@@ -22,14 +22,7 @@
                         <div class="card-body">
                             <div class="clearfix">
                                 <h3 class="team-name card-title float-start">{{ with .honorificPrefix }}{{ . }} {{ end }}{{ .name }}{{ with .honorificSuffix }}, {{ . }}{{ end }}</h3>
-                                {{ with .social }}
-                                    <ul class="social-icons">
-                                        {{ range . }}
-                                            <li><a href="{{ .url }}" target="_blank" rel="me noopener noreferrer"><ion-icon name="{{ .icon }}" aria-hidden="true"></ion-icon>
-                                            <span class="visually-hidden"> {{ .text }}</span></a></li>
-                                        {{ end }}
-                                    </ul>
-                                {{ end }}
+                                {{ partial "social-icons.html" .social }}
                             </div>
                             {{ if .worksFor }}<p class="card-subtitle mt-0 mb-2 text-muted team-designation">{{ with .jobTitle }}{{ . }}, {{ end }}{{ .worksFor }}{{ with .workLocation }}<br>{{ . }}{{ end }}</p>{{ end }}
                             {{ with .bio }}{{ . | markdownify }}{{ end }}
