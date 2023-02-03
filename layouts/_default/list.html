@@ -35,7 +35,7 @@
                                 <div class="clearfix">
                                     <h2 class="card-title float-start">{{ with .honorificPrefix }}{{ . }} {{ end }}{{ .name }}{{ with .honorificSuffix }}, {{ . }}{{ end }}</h2>
                                     {{ with .social }}
-                                        <span class="float-end">{{ partial "social-icons.html" . }}</span>
+                                    <div class="float-end">{{ partial "social-icons.html" . }}</div>
                                     {{ end }}
                                 </div>
                                 {{ if .worksFor }}<p class="card-subtitle mt-0 mb-2 text-muted">{{ with .jobTitle }}{{ . }}, {{ end }}{{ .worksFor }}{{ with .workLocation }}<br>{{ . }}{{ end }}</p>{{ end }}
