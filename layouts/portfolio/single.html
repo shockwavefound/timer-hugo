@@ -43,7 +43,7 @@
                   {{ if isset . "logo" }}
                     {{ $logo := $.Page.Resources.GetMatch (printf "*%s*" .logo) }}
                     {{ if $logo }}
-                      {{ with .website }}<a href="{{ . }}" target="_blank" aria-labelledby="{{ . | md5 }}">{{ end }}
+                      {{ with .website }}<a href="{{ . }}" rel="external noopener" target="_blank" aria-labelledby="{{ . | md5 }}">{{ end }}
                         <img class="img-fluid mx-auto d-block p-3" src="{{ $logo.Permalink }}" alt="{{ .name }}">
                       {{ with .website }}</a>{{ end }}
                     {{ else }}
@@ -57,7 +57,7 @@
                     {{ end }}
                     {{ if .website }}
                     <dt>Website</dt>
-                    <dd><a href="{{ .website }}" target="_blank" id="{{ .website | md5 }}" aria-label="Link to {{ .name }}">{{ .website }}</a></dd>
+                    <dd><a href="{{ .website }}" rel="external noopener" target="_blank" id="{{ .website | md5 }}" aria-label="Link to {{ .name }}">{{ .website }}</a></dd>
                     {{ end }}
                     {{ with $.Params.categories }}
                     <dt>Categories</dt>
