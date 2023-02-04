@@ -6,7 +6,7 @@
     <div class="container">
         <div class="row" data-aos="fade-left">
             {{ if .Params.image }}
-                {{ $original := .Page.Resources.GetMatch (printf "*%s*" .Params.image) }}
+                {{ $original := (.Resources.ByType "image").GetMatch (printf "*%s*" .Params.image) }}
                 {{ if $original }}
                     {{ $image := $original.Resize "1100x" }}
                     <figure class="figure">

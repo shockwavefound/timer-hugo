@@ -11,7 +11,7 @@
       <div class="col mb-3">
         <figure class="portfolio-item card h-100" data-aos="fade-right">
           {{ if isset .Params "image" }}
-            {{ $original := .Page.Resources.GetMatch (printf "*%s*" .Params.image) }}
+            {{ $original := (.Page.Resources.ByType "image").GetMatch (printf "*%s*" .Params.image) }}
             {{ if $original }}
               {{ $image := $original.Fill "350x240 left" }}
               <div class="img-wrapper">

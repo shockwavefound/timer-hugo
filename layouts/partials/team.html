@@ -13,7 +13,7 @@
                 <div class="card">
                     <div id="{{ .name | anchorize }}" class="team-member" data-aos="fade-left">
                         {{ if .image }}
-                            {{ $original := $.Resources.GetMatch .image }}
+                            {{ $original := ($.Resources.ByType "image").GetMatch .image }}
                             {{ $image := $original.Fill "400x600" }}
                             {{/* $grey := $image | images.Filter (images.Grayscale) */}}
                             <img src="{{ $image.Permalink }}" class="card-img-top team-pic team-img"

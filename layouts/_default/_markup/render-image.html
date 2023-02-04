@@ -1,4 +1,4 @@
-{{- $src := .Page.Resources.GetMatch (printf "*%s*" .Destination) }}
+{{- $src := (.Page.Resources.ByType "image").GetMatch (printf "*%s*" .Destination) }}
 {{- $altText := .PlainText }}
 {{- $imgTitle := replaceRE "{.*}$" "" .Title }}
 

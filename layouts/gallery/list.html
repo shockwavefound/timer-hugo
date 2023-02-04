@@ -8,7 +8,7 @@
       <div class="col-md-4 col-sm-6">
         <figure class="portfolio-item animated" data-aos="fade-left">
           <div class="img-wrapper">
-            {{ $image := $.Page.Resources.GetMatch (printf "*%s*" .image) }}
+            {{ $image := ($.Page.Resources.ByType "image").GetMatch (printf "*%s*" .image) }}
             {{ if not $image }}
               {{ errorf "%s: %s not found. (layouts/gallery/list.html)" .File.Path .Params.image }}
             {{ end }}

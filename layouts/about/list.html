@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col-md-6" data-aos="fade-left">
                 {{ with .Params.image }}
-                    {{ $original := $.Resources.GetMatch (printf "*%s*" .) }}
+                    {{ $original := ($.Resources.ByType "image").GetMatch (printf "*%s*" .) }}
                     {{ $image := $original.Resize "540x" }}
                     <img src="{{ $image.Permalink }}" class="img-fluid" alt="{{ $.Params.imageAlt | default "about us image"}}">
                 {{ end }}

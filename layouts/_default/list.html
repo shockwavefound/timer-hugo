@@ -26,7 +26,7 @@
                     <div class="row" data-aos="fade-down">
                         <div class="col-md-4">
                             {{ $about_bundle  := $.Site.GetPage "/about" }}
-                            {{ $original := $about_bundle.Resources.GetMatch .image }}
+                            {{ $original := ($about_bundle.Resources.ByType "image").GetMatch .image }}
                             {{ $image := $original.Fill "400x600" }}
                             <img src="{{ $original.Permalink }}" class="img-fluid rounded-start" alt="" aria-hidden="true">
                         </div>
@@ -67,7 +67,7 @@
                         <a href="{{ .Permalink }}">
                             {{ if isset .Params "image" }}
                             <div class="blog-post-image">
-                                {{ $original := .Page.Resources.GetMatch (printf "*%s*" .Params.image) }}
+                                {{ $original := (.Resources.ByType "image").GetMatch (printf "*%s*" .Params.image) }}
                                 {{ if $original }}
                                     {{ $image := $original.Fill "800x600 left" }}
                                     <img class="img-fluid" src="{{ $image.Permalink }}" alt="">
