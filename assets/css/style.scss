@@ -22,10 +22,26 @@ a {
   }
 }
 
-.rendered-link {
-  color: var(--bs-link-color);
+a[rel~="external"].markdown-link::after {
+  content: "";
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'%3E%3Ctitle%3EOpen%3C/title%3E%3Cpath d='M384 224v184a40 40 0 01-40 40H104a40 40 0 01-40-40V168a40 40 0 0140-40h167.48M336 64h112v112M224 288L440 72' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='32'/%3E%3C/svg%3E");
+  width: 1rem;
+  height: 1rem;
+  margin-left: .1rem;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  display: inline-block;
+  /*
+  fill: var(--bs-link-color);
   &:hover, &:focus {
     color: $col-hover;
+  } */
+}
+
+@media print {
+  a[rel~="external"].markdown-link::after {
+    content: " (" attr(href) ">";
   }
 }
 
