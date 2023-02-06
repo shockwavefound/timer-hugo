@@ -18,7 +18,7 @@
                     {{ $image := $original.Fill "350x240 left" }}
                     <div class="img-wrapper">
                       <img src="{{ $image.Permalink }}" class="card-img-top news-pic" alt="">
-                      {{ if .Site.Params.news.imageButtons -}}
+                      {{- if .Site.Params.news.imageButtons -}}
                       <div class="overlay">
                         <div class="buttons">
                           <a rel="gallery" class="fancybox" href="{{ $original.Permalink }}">Demo</a>
@@ -31,13 +31,11 @@
                     {{ errorf "%s: %s not found. (layouts/partials/news.html)" .File.Path .Params.image }}
                   {{ end }}
                 {{ else }}
-                  {{ warnf "%s: image not set. (layouts/partials/news.html)" .File.Path }}
+                  {{ warnf "%s: image not set. layouts/partials/news.html)" .File.Path }}
                 {{ end }}
                 <div class="card-body">
                   <h3 class="card-title">
-                    <a href="{{ .Permalink }}">
-                      {{ .Title }}
-                    </a>
+                    <a href="{{ .Permalink }}">{{ .Title }}</a>
                   </h3>
                   <p class="card-text">
                     {{ .Summary }}

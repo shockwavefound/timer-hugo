@@ -12,12 +12,14 @@
                   {{ if $original }}
                     {{ $image := $original.Resize "730x" }}
                       <figure class="figure">
-                        <img class="figure-img img-fluid w-100" src="{{ $image.Permalink }}"
-                             alt="{{ with .Params.imageAlt }}{{ . }}{{ end }}">
-                         <figcaption class="figure-caption text-end">
+                        <div class="img-wrapper">
+                          <img class="figure-img img-fluid w-100" src="{{ $image.Permalink }}"
+                              alt="{{ with .Params.imageAlt }}{{ . }}{{ end }}">
+                        </div>
+                        <figcaption class="figure-caption text-end">
                              {{ .Params.imageCaption | default (printf "image courtesy %s" .Params.client.name) | markdownify }}
-                         </figcaption>
-                       </figure>
+                        </figcaption>
+                      </figure>
                   {{ else }}
                     {{ errorf "%s: %s not found. (layouts/portfolio/single.html)" .File.Path .Params.image }}
                   {{ end }}

@@ -2,9 +2,9 @@
 {{ "<!-- Portfolio Section Start -->" | safeHTML }}
 <section id="works" class="works">
   <div class="container my-3">
-    <div class="section-heading">
+    <div class="section-heading text-center">
       {{ with .Site.Params.portfolio.title }}<h2 class="title" data-aos="fade-down">{{ . }}</h2>{{ end }}
-      {{ with .Site.Params.portfolio.subtitle }}<p data-aos="fade-down">{{ . }}</p>{{ end }}
+      {{ with .Site.Params.portfolio.subtitle }}<p class="subtitle" data-aos="fade-down">{{ . }}</p>{{ end }}
     </div>
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
     {{ range $index, $element:= first 6 (where .Site.RegularPages "Type" "portfolio") }}
@@ -26,10 +26,10 @@
                 {{- end }}
               </div>
             {{ else }}
-              {{ errorf "%s: %s not found. (partials/portfolio.html)" .File.Path .Params.image }}
+              {{ errorf "%s: %s not found. (layouts/partials/portfolio.html)" .File.Path .Params.image }}
             {{ end }}
           {{ else }}
-            {{ warnf "%s: image not set. (partials/portfolio.html)" }}
+            {{ warnf "%s: image not set. (layouts/partials/portfolio.html)" .File.Path }}
           {{ end }}
           <div class="card-body">
             <h3 class="card-title">
@@ -48,7 +48,7 @@
           {{ with .Date }}
             <p class="card-footer mb-2 text-muted">
                 Updated:
-                <time datetime="{{ dateFormat $.Site.Params.rfc3339Format . }}">{{ dateFormat ($.Site.Params.dateFormat | default "2 January 2006") . }}</time>
+                <time datetime="{{ .Format $.Site.Params.rfc3339Format }}">{{ dateFormat ($.Site.Params.dateFormat | default "2 January 2006") . }}</time>
             </p>
           {{ end }}
         </figure>

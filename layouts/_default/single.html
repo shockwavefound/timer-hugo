@@ -10,8 +10,10 @@
                 {{ if $original }}
                     {{ $image := $original.Resize "1100x" }}
                     <figure class="figure">
-                        <img class="figure-img img-fluid" src="{{ $image.Permalink }}"
-                              alt="{{ with .Params.imageAlt }}{{ . }}{{ end }}">
+                        <div class="img-wrapper">
+                            <img class="figure-img img-fluid" src="{{ $image.Permalink }}"
+                                alt="{{ with .Params.imageAlt }}{{ . }}{{ end }}">
+                        </div>
                         {{ with .Params.imageCaption }}
                         <figcaption class="figure-caption text-end">{{ . | markdownify }}</figcaption>
                         {{ end }}
