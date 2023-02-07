@@ -1,64 +1,85 @@
-{{ if .Site.Params.news.enable }}
-{{ $dateFormat := .Param "dateFormat" | default "2 January 2006" }}
-{{ "<!-- News Section Start -->" | safeHTML }}
-{{ $maxItems := cond (isset .Site.Params.news "twitter") 2 3 }}
-<section id="news" class="news">
-    <div class="container my-3">
-        <div class="section-heading text-center">
-            {{ with .Site.Params.news.title }}<h2 class="title" data-aos="fade-down">{{ . }}</h2>{{ end }}
-            {{ with .Site.Params.news.subtitle }}<p class="subtitle" data-aos="fade-down">{{ . }}</p>{{ end }}
-        </div>
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
-          {{ range $index, $element:= first $maxItems (where .Site.RegularPages "Type" "news") }}
-            <div class="col mb-3">
-              <figure class="news-item card h-100" data-aos="fade-right">
-                {{ if isset .Params "image" }}
-                  {{ $original := (.Page.Resources.ByType "image").GetMatch (printf "*%s*" .Params.image) }}
-                  {{ if $original }}
-                    {{ $image := $original.Fill "350x240 left" }}
-                    <div class="img-wrapper">
-                      <img src="{{ $image.Permalink }}" class="card-img-top news-pic" alt="">
-                      {{- if .Site.Params.news.imageButtons -}}
-                      <div class="overlay">
-                        <div class="buttons">
-                          <a rel="gallery" class="fancybox" href="{{ $original.Permalink }}">Demo</a>
-                          <a href="{{ .Permalink }}">Details</a>
-                        </div>
-                      </div>
-                      {{- end }}
-                    </div>
-                  {{ else }}
-                    {{ errorf "%s: %s not found. (layouts/partials/news.html)" .File.Path .Params.image }}
-                  {{ end }}
-                {{ else }}
-                  {{ warnf "%s: image not set. layouts/partials/news.html)" .File.Path }}
-                {{ end }}
-                <div class="card-body">
-                  <h3 class="card-title">
-                    <a href="{{ .Permalink }}">{{ .Title }}</a>
-                  </h3>
-                  <p class="card-text">
-                    {{ .Summary }}
-                  </p>
-                </div>
-                {{ with .Date }}
-                  <p class="card-footer mb-2 text-muted">
-                    Updated: 
-                    <time datetime="{{ .Format $.Site.Params.rfc3339Format }}">{{ .Format $dateFormat }}</time>
-                  </p>
-                {{ end }}
-              </figure>
-            </div>
-          {{ end }}
-          {{ with .Site.Params.news.twitter }}
-            <div class="col mb-3">
-              <figure class="news-item card h-100" data-aos="fade-right">
-                {{ partial "twitter_widget.html" . }}
-              </figure>
-            </div>
-          {{ end }}
-        </div>
+{{- $context := "" }}
+{{- $data := default nil }}
+{{- $id := default nil }}
+{{- if reflect.IsMap . }}
+  {{- $context = .context }}
+  {{- $data = cond (not .data) nil .data }}
+  {{- $id = cond (not .id) nil .id }}
+{{- else }}
+  {{/* Passing dot context, default behavior */}}
+  {{- $context = . -}}
+  {{- $id = "news" }}
+  {{- $data = site.Params.news }}
+{{- end }}
+
+{{- with $data }}
+{{- if .enable }}
+{{- $maxItems := cond (isset . "twitter") 2 3 }}
+
+<!-- {{ $id | humanize }} Section Start -->
+<section id="{{ $id }}" class="{{ $id }}">
+  <div class="container my-3">
+    <div class="section-heading text-center">
+      {{- with .title }}<h2 class="title" data-aos="fade-down">{{ . }}</h2>{{ end }}
+      {{- with .subtitle }}<p class="subtitle" data-aos="fade-down">{{ . }}</p>{{ end }}
     </div>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
+      {{- $imageButtons :=  .imageButtons }}
+      {{- range $index, $element:= first $maxItems (where site.RegularPages "Type" $id) }}
+        <div class="col mb-3">
+          <figure class="{{ $id }}-item card h-100" data-aos="fade-right">
+            {{- if .Params.image }}
+              {{- $original := (.Page.Resources.ByType "image").GetMatch (printf "*%s*" .Params.image) }}
+              {{- if $original }}
+                {{- $image := $original.Fill "350x240 left" }}
+                <div class="img-wrapper">
+                  <img src="{{ $image.Permalink }}" class="card-img-top {{ $id }}-pic" alt="">
+                    {{- if $imageButtons -}}
+                    <div class="overlay">
+                      <div class="buttons">
+                        <a rel="gallery" class="fancybox" href="{{ $original.Permalink }}">{{ $imageButtons }}</a>
+                        {{/* <a href="{{ .Permalink }}">Details</a> */}}
+                      </div>
+                    </div>
+                    {{- end }}
+                </div>
+              {{- else }}
+                {{- errorf "%s: %s not found. (layouts/partials/news.html) [%s]" .File.Path .Params.image $id }}
+              {{- end }}
+            {{- else }}
+              {{ warnf "%s: image not set. (layouts/partials/news.html) [%s]" .File.Path $id }}
+            {{- end }}
+            <div class="card-body">
+              <h3 class="card-title"><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+              {{- with .Params.client.awards }}
+                {{- range first 1 (sort . "dateAwarded" "desc") }}
+                <p class="card-subtitle mb-2 text-muted">
+                  {{- with (or .awarded .invested) }}${{ lang.NumFmt 0 . }}{{ end }}
+                  {{- with .dateAwarded }} / <time datetime="{{ dateFormat site.Params.rfc3339Format . }}">{{ dateFormat (site.Params.monthFormat | default "January 2006") . }}</time>{{ end }}
+                </p>
+                {{- end }}
+              {{- end }}
+              <p class="card-text">{{ .Params.caption | default .Summary }}</p>
+            </div>
+            {{- with .Date }}
+            <p class="card-footer mb-2 text-muted">
+              Updated:
+              <time datetime="{{ .Format site.Params.rfc3339Format }}">{{ dateFormat (site.Params.dateFormat | default "2 January 2006") . }}</time>
+            </p>
+            {{- end }}
+          </figure>
+        </div>
+      {{- end }}
+      {{- with .twitter }}
+        <div class="col mb-3">
+          <figure class="news-item card h-100" data-aos="fade-right">
+            {{ partial "twitter_widget.html" . }}
+          </figure>
+        </div>
+      {{- end }}
+    </div>
+  </div>
 </section>
-{{ "<!-- News Section End -->" | safeHTML }}
-{{ end }}
+<!-- {{ $id | humanize }} Section End -->
+{{- end }}
+{{- end }}

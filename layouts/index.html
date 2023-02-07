@@ -10,7 +10,7 @@
 
 {{ partial "news.html" . }}
 
-{{ partial "portfolio.html" . }}
+{{ partial "news.html" (dict "context" . "id" "portfolio" "data" site.Params.portfolio) }}
 
 {{ partial "feature.html" . }}
 
