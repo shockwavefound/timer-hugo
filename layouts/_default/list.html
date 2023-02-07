@@ -7,23 +7,26 @@
     <div class="container">
         {{ with .Content }}
         <div class="row">
-            <div class="col-sm-12">
+            <div class="col-12">
                 <div class="block">{{ . }}</div>
             </div>
         </div>
         {{ end }}
-        {{ if .Param "tagCloud" }}
-        <div class="row mb-2">
-            <div class="col-sm-12" data-aos="fade-down">
+        {{ if .Params.tagCloud }}
+        <div class="row mb-3">
+            <div class="col-sm-12" data-aos="fade-down-right">
+                <div class="section-heading">
+                    <h2 class="title">{{ .Params.tagCloud }}</h2>
+                </div>
                 {{ partial "tag-cloud.html" . }}
             </div>
         </div>
         {{ end }}
         {{ if and (eq .Section "authors") (eq .Kind "term") }}
             {{ with index $.Site.Data.bios .Data.Term }}
-            <div class="row">
+            <div class="row my-3">
                 <div id="{{ .name | anchorize }}" class="card mb-3 team-member">
-                    <div class="row" data-aos="fade-down">
+                    <div class="row" data-aos="fade-down-right">
                         <div class="col-md-4">
                             {{ $about_bundle  := $.Site.GetPage "/about" }}
                             {{ $original := ($about_bundle.Resources.ByType "image").GetMatch .image }}
@@ -48,48 +51,52 @@
             {{ end }}
         {{ end }}
         {{ if .Pages }}
-        <nav class="row mb-2" aria-label="sort order" data-aos="fade-down">
-            <div class="col-sm-12">
-                <div class="dropdown float-end sort-btn">
+        <nav class="row mb-3" aria-label="sort order" data-aos="fade-down-right">
+            <div class="col offset-11">
+                <div class="dropdown sort-btn">
                     <button type="button" id="itemSortButton" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sort</button>
-                    <div class="dropdown-menu" aria-labelledby="itemSortButton">
-                        <a class="dropdown-item" data-sort="newest" href="#">Newest</a>
-                        <a class="dropdown-item" data-sort="oldest" href="#">Oldest</a>
-                        <a class="dropdown-item" data-sort="alpha"  href="#">By Name</a>
-                    </div>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="itemSortButton">
+                        <li><a class="dropdown-item" data-sort="newest" href="#">Newest</a></li>
+                        <li><a class="dropdown-item" data-sort="oldest" href="#">Oldest</a></li>
+                        <li><a class="dropdown-item" data-sort="alpha"  href="#">By Name</a></li>
+                    </ul>
                 </div>
             </div>
         </nav>
-        <div id="sort-items" class="row">
+        <div id="sort-items" class="row gy-4 row-cols-1 row-cols-md-2 row-cols-xl-3">
             {{ range .Pages }}
-                <div class="sort-item col-md-6 my-3" data-sort-name="{{ .Params.Title }}" data-sort-time="{{ .Date.Unix }}">
-                    <article class="blog-content" data-aos="fade-down">
-                        <a href="{{ .Permalink }}">
-                            {{ if isset .Params "image" }}
-                            <div class="blog-post-image">
-                                {{ $original := (.Resources.ByType "image").GetMatch (printf "*%s*" .Params.image) }}
-                                {{ if $original }}
-                                    {{ $image := $original.Fill "800x600 left" }}
-                                    <img class="img-fluid" src="{{ $image.Permalink }}" alt="">
+                <div class="sort-item col" data-sort-name="{{ .Params.Title }}" data-sort-time="{{ .Date.Unix }}">
+                    <div class="card h-100">
+                        <article class="blog-content card-body" data-aos="fade-down-right">
+                            <a href="{{ .Permalink }}">
+                                {{ if isset .Params "image" }}
+                                <figure class="blog-post-image card-img-top">
+                                    {{ $original := (.Resources.ByType "image").GetMatch (printf "*%s*" .Params.image) }}
+                                    {{ if $original }}
+                                        {{ $image := $original.Fill "800x600 left" }}
+                                        <div class="img-wrapper">
+                                            <img class="img-fluid" src="{{ $image.Permalink }}" alt="">
+                                        </div>
+                                    {{ else }}
+                                        {{ errorf "%s: %s not found. (layouts/_default/list.html)" .File.Path .Params.image }}
+                                    {{ end }}
+                                </figure>
                                 {{ else }}
-                                    {{ errorf "%s: %s not found. (layouts/_default/list.html)" .File.Path .Params.image }}
+                                    {{ warnf "%s: image not set. (layouts/_default/list.html)" .File.Path }}
                                 {{ end }}
+                                <h2 class="blog-post-title card-title">{{ .Title }}</h2>
+                            </a>
+                            <div class="blog-meta mb-2 card-text">
+                                <time datetime="{{ .Date.Format $.Site.Params.rfc3339Format }}">{{ .Date.Format $dateFormat }}</time>
+                                {{ with .Params.categories }}<span>&mdash;{{ delimit . ", " }}</span>{{ end }}
+                                {{ with .Params.tags }}<span>&mdash;{{ delimit . ", " }}</span>{{ end }}
                             </div>
-                            {{ else }}
-                                {{ warnf "%s: image not set. (layouts/_default/list.html)" .File.Path }}
-                            {{ end }}
-                            <h2 class="blog-post-title">{{ .Title }}</h2>
-                        </a>
-                        <div class="blog-meta mb-2">
-                            <time datetime="{{ .Date.Format $.Site.Params.rfc3339Format }}">{{ .Date.Format $dateFormat }}</time>
-                            {{ with .Params.categories }}<span>&mdash;{{ delimit . ", " }}</span>{{ end }}
-                            {{ with .Params.tags }}<span>&mdash;{{ delimit . ", " }}</span>{{ end }}
+                            <div class="blog-summary card-text">
+                            {{ .Summary }}
+                            </div>
+                            {{/* <p><a href="{{ .Permalink }}" class="btn btn-default btn-details hvr-bounce-to-right">Continue reading<span class="visually-hidden"> {{ .Title }}</span></a></p> */}}
+                        </article>
                         </div>
-                        <div class="blog-summary">
-                        {{ .Summary }}
-                        </div>
-                        {{/* <p><a href="{{ .Permalink }}" class="btn btn-default btn-details hvr-bounce-to-right">Continue reading<span class="visually-hidden"> {{ .Title }}</span></a></p> */}}
-                    </article>
                 </div>
             {{ end }}
         </div>
