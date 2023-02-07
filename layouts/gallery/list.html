@@ -15,7 +15,7 @@
             <img src="{{ $image.Permalink }}" class="img-fluid"{{ with .alt}} alt="{{ . }}"{{ end }}>
             <div class="overlay">
               <div class="buttons">
-                <a rel="gallery" class="fancybox" href="{{ $image.Permalink }}">{{ $.Param "enlargeName" | default "Enlarge" }}</a>
+                <a data-fancybox="gallery" href="{{ $image.Permalink }}">{{ $.Param "enlargeName" | default "Enlarge" }}</a>
               </div>
             </div>
           </div>

@@ -37,7 +37,7 @@
                     {{- if $imageButtons -}}
                     <div class="overlay">
                       <div class="buttons">
-                        <a rel="gallery" class="fancybox" href="{{ $original.Permalink }}">{{ $imageButtons }}</a>
+                        <a data-fancybox href="{{ $original.Permalink }}">{{ $imageButtons }}</a>
                         {{/* <a href="{{ .Permalink }}">Details</a> */}}
                       </div>
                     </div>
