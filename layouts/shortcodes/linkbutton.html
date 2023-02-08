@@ -1,3 +1,15 @@
-{{ $url := .Get 0 }}
-{{ $text := .Get 1 }}
-<div class="link-button"><a class="btn btn-default hvr-bounce-to-right" href="{{ $url }}">{{ $text }}</a></div>
+{{- $url := "" }}
+{{- $ref := "" }}
+{{- $relref := "" }}
+{{- $text := "" }}
+{{- if .IsNamedParams }}
+    {{- $url = .Get "url" }}
+    {{- $ref = .Get "ref" }}
+    {{- $relref = .Get "relref" }}
+    {{- $text = .Get "text" }}
+{{- else }}
+    {{- $url = .Get 0 }}
+    {{- $text = .Get 1 }}
+{{- end }}
+{{- $url = $url | default (ref $.Page $ref | default (relref $.Page $relref)) }}
+<a class="btn btn-default hvr-bounce-to-right link-button" href="{{ $url }}">{{ $text }}</a>

@@ -46,8 +46,9 @@ a[rel~="external"].markdown-link::after {
   }
 }
 
-.link-button {
+a.link-button {
   margin-bottom: 1.5rem;
+  margin-top: 0;
 }
 
 .btn-default {
