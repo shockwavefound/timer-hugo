@@ -21,9 +21,8 @@ $(document).ready(function () {
 
     // slick (for partials/clients slider)
     $('.clients-logo-slider').slick({
-        dots: true,
         autoplay: true,
-        autoplaySpeed: 2000,
+        autoplaySpeed: 1000,
         slidesToShow: 5,
         slidesToScroll: 1,
         arrows: false,

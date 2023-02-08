@@ -24,6 +24,7 @@ a {
 
 a[rel~="external"].markdown-link::after {
   content: "";
+  // ion-icon external link
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'%3E%3Ctitle%3EOpen%3C/title%3E%3Cpath d='M384 224v184a40 40 0 01-40 40H104a40 40 0 01-40-40V168a40 40 0 0140-40h167.48M336 64h112v112M224 288L440 72' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='32'/%3E%3C/svg%3E");
   width: 1rem;
   height: 1rem;
@@ -146,7 +147,7 @@ a[rel~="external"].markdown-link::after {
 
 ///
 /// 404 Page
-/// 
+///
 
 .wrapper_404 {
   padding: 5rem 0;
@@ -264,15 +265,10 @@ a[rel~="external"].markdown-link::after {
   letter-spacing: .1rem;
   text-transform: uppercase;
   transition: all linear .2s;
-}
-
-#call-to-action .block .btn-contact i {
-  margin-right: 1rem;
-}
-
-#call-to-action .block .btn-contact:hover {
-  color: #fff;
-  background: $col-hover;
+  &:hover, &:focus {
+    color: #fff;
+    background: $col-hover;
+  }
 }
 
 #about {
@@ -316,8 +312,8 @@ a[rel~="external"].markdown-link::after {
 }
 
 ///
-/// About Page Section
-/// 
+/// About partial
+///
 
 .about-feature .block {
   color: #fff;
@@ -339,9 +335,28 @@ a[rel~="external"].markdown-link::after {
   background: #00A6BB;
 }
 
+//
+// Clients partial
+//
+
+.client-logo {
+  background-color: rgb(244, 241, 240);
+  display: flex !important;
+  text-align: center;
+  align-items: center;
+  height: 86px;
+}
+
+.client-logo img,
+.client-logo p {
+  max-width: 90%;
+  height: auto;
+  margin: auto;
+}
+
 ///
-/// About Page Team Section
-/// 
+/// Team partial
+///
 
 .team-member:hover img {
   opacity: .8;
@@ -360,7 +375,8 @@ a[rel~="external"].markdown-link::after {
 }
 
 ///
-/// Originally used in timer for gallery and "portfolio" section of main page.
+/// Originally used in timer for gallery and "portfolio" section of main page,
+/// but now used for all figures including portfolio and news.
 ///
 
 figure {
@@ -448,7 +464,7 @@ figure figcaption p {
 
 ///
 /// Contact Page
-/// 
+///
 
 .contact-section input {
   display: block;
@@ -520,7 +536,7 @@ figure figcaption p {
 
 ///
 /// Default Blog Single Tweaks
-/// 
+///
 
 .author-card img {
   width: 100%;
@@ -531,7 +547,7 @@ figure figcaption p {
 
 ///
 /// Portfolio Single Tweaks
-/// 
+///
 
 .sidebar {
   background: #eae9ec;
@@ -548,7 +564,7 @@ figure figcaption p {
 
 ///
 /// Gallery Section Page
-/// 
+///
 
 /*
 .gallery {
@@ -562,7 +578,7 @@ figure figcaption p {
 
 ///
 /// Service Page Tweaks
-/// 
+///
 
 .service-page .service-parts .block {
   margin-bottom: 40px;

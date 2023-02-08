@@ -4,21 +4,26 @@
   <div class="container my-3">
     <div class="row">
       <div class="col-md-12">
-        {{ with .Site.Data.client.title }}<h2 class="subtitle text-center"
-          data-aos="fade-up">{{ . }}</h2>{{ end }}
-        {{ with .Site.Data.client.subtitle }}<p class="subtitle-des text-center"
-          data-aos="fade-up">{{ . }}</p>{{ end }}
-        <div id="clients-logo" class="clients-logo-slider">
+        {{ with .Site.Data.client.title }}<h2 class="subtitle text-center" data-aos="fade-up">{{ . }}</h2>{{ end }}
+        {{ with .Site.Data.client.subtitle }}<p class="subtitle-des text-center" data-aos="fade-up">{{ . }}</p>{{ end }}
+        <ul id="clients-logo" class="clients-logo-slider">
           {{ range .Site.Data.client.clientsLogo }}
-          {{ with .url }}<a href="{{ . }}">{{ end }}
-          {{ if .image }}
-            <img class="img-fluid m-2" src="{{ .image | absURL }}" alt="{{ .name }}">
-          {{ else }}
-            <p class="h3 m-2">{{.name}}</p>
+          <li class="client-logo mx-2 overflow-hidden">
+            {{ with .url }}<a target="_blank" rel="external noopener nofollow" href="{{ . }}">{{ end }}
+            {{ if .image }}
+              {{ $image := (resources.ByType "image").GetMatch .image }}
+              {{ if $image }}
+                <img alt="{{ .name }}" src="{{ $image.Permalink }}">
+              {{ else }}
+                <img alt="{{ .name }}" src="{{ .image | absURL }}">
+              {{ end }}
+            {{ else }}
+              <p class="h3">{{.name}}</p>
+            {{ end }}
+            {{ with .url }}</a>{{ end }}
+          </li>
           {{ end }}
-          {{ with .url }}</a>{{ end }}
-          {{ end }}
-        </div>
+        </ul>
       </div>
     </div>
   </div>
