@@ -28,8 +28,7 @@
                 <div id="{{ .name | anchorize }}" class="card mb-3 team-member">
                     <div class="row" data-aos="fade-down-right">
                         <div class="col-md-4">
-                            {{ $about_bundle  := $.Site.GetPage "/about" }}
-                            {{ $original := ($about_bundle.Resources.ByType "image").GetMatch .image }}
+                            {{ $original := (resources.ByType "image").GetMatch .image }}
                             {{ $image := $original.Fill "400x600" }}
                             <img src="{{ $original.Permalink }}" class="img-fluid rounded-start" alt="" aria-hidden="true">
                         </div>

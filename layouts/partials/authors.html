@@ -8,8 +8,7 @@
                         <div class="row g-0">
                             <div class="col-2">
                             {{- if isset . "image" }}
-                                {{- $about_bundle  := $.Site.GetPage "/about" }}
-                                {{- $original := ($about_bundle.Resources.ByType "image").GetMatch .image }}
+                                {{- $original := (resources.ByType "image").GetMatch .image }}
                                 {{- $image := $original.Fill "66x100" }}
                                 {{- $grey := $image | images.Filter (images.Grayscale) }}
                                 <img class="img-fluid rounded-start" src="{{ $grey.Permalink }}" alt="">
