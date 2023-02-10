@@ -1,9 +1,9 @@
 {{ define "main" }}
 
 {{ if .Params.enable }}
+{{ partial "page-title.html" . }}
 {{ "<!-- Service Section Start -->" | safeHTML }}
 <main id="service-page" class="pages service-page">
-	{{ partial "page-title.html" . }}
 	<div class="container pb-5 my-3">
 		<div class="row">
 			<div class="col-lg-6 pt-5">

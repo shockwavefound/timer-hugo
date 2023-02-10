@@ -1,8 +1,8 @@
 {{ define "main" }}
 {{ $dateFormat := .Param "dateFormat" | default "2 January 2006" }}
+{{ partial "page-title.html" . }}
 
 <main class="single-post">
-    {{ partial "page-title.html" . }}
     <div class="container">
         <div class="row" data-aos="fade-left">
             {{ if .Params.image }}

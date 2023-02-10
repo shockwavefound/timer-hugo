@@ -1,9 +1,8 @@
 {{- define "main" }}
 {{- $dateFormat := .Param "dateFormat" | default "2 January 2006" }}
+{{ partial "page-title.html" . }}
 
 <main class="work-single">
-    {{- partial "page-title.html" . }}
-
     <div class="container">
         <div class="row">
             <div class="col-lg-8" data-aos="fade-right">
@@ -41,6 +40,7 @@
             <!-- sidebar -->
             {{- with .Params.client }}
                 <aside class="sidebar col-lg-4 block">
+                  <h2 class="visually-hidden">Partner Info</h2>
                   {{- if isset . "logo" }}
                     {{- $logo := ($.Page.Resources.ByType "image").GetMatch (printf "*%s*" .logo) }}
                     {{- if $logo }}
@@ -114,7 +114,7 @@
             {{- end }}
         </div>
     </div>
-  </main>
+</main>
 
 {{- partial "cta.html" . }}
 

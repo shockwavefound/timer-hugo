@@ -1,9 +1,8 @@
 {{ define "main" }}
 {{ $dateFormat := .Param "dateFormat" | default "2 January 2006" }}
+{{ partial "page-title.html" . }}
 
 <main id="main-content" class="blog-full-width">
-    {{ partial "page-title.html" . }}
-
     <div class="container">
         {{ with .Content }}
         <div class="row">

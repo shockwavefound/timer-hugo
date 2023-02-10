@@ -1,10 +1,10 @@
 {{ define "main" }}
 {{ if .Site.Data.contact.enable }}
 <!--sse-->
+{{ partial "page-title.html" . }}
 
 {{ "<!-- Contact Section Start -->" | safeHTML }}
 <main id="main-content" class="contact-section">
-    {{ partial "page-title.html" . }}
     <div class="container">
         <div class="row my-3">
             {{ with .Site.Data.contact.contactForm }}
