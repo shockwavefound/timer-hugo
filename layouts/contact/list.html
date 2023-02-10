@@ -1,9 +1,9 @@
 {{ define "main" }}
-{{ if .Site.Data.contact.enable }}
-<!--sse-->
 {{ partial "page-title.html" . }}
-
+{{ if .Site.Data.contact.enable }}
 {{ "<!-- Contact Section Start -->" | safeHTML }}
+{{/*  Tell cloudflare to hide this content from scrapers */}}
+{{ "<!--sse-->" | safeHTML }}
 <main id="main-content" class="contact-section">
     <div class="container">
         <div class="row my-3">
@@ -147,7 +147,7 @@
 </main>
 {{ "<!-- Contact Section End -->" | safeHTML }}
 
-<!--/sse-->
+{{ "<!--/sse-->" | safeHTML }}
 {{ end }}
 
 {{ partial "cta.html" . }}
