@@ -1,123 +1,121 @@
-{{ define "main" }}
-{{ $dateFormat := .Param "dateFormat" | default "2 January 2006" }}
+{{- define "main" }}
+{{- $dateFormat := .Param "dateFormat" | default "2 January 2006" }}
 
 <main class="work-single">
-    {{ partial "page-title.html" . }}
+    {{- partial "page-title.html" . }}
 
     <div class="container">
         <div class="row">
             <div class="col-lg-8" data-aos="fade-right">
-                {{ if .Params.image }}
-                  {{ $original := (.Page.Resources.ByType "image").GetMatch (printf "*%s*" .Params.image) }}
-                  {{ if $original }}
-                    {{ $image := $original.Resize "730x" }}
+                {{- if .Params.image }}
+                  {{- $original := (.Page.Resources.ByType "image").GetMatch (printf "*%s*" .Params.image) }}
+                  {{- if $original }}
+                    {{- $image := $original.Resize "730x" }}
                       <figure class="figure">
                         <div class="img-wrapper">
-                          <img class="figure-img img-fluid w-100" src="{{ $image.Permalink }}"
-                              alt="{{ with .Params.imageAlt }}{{ . }}{{ end }}">
+                          <img class="figure-img img-fluid w-100" src="{{- $image.Permalink }}"
+                              alt="{{- with .Params.imageAlt }}{{ . }}{{ end }}">
                         </div>
                         <figcaption class="figure-caption text-end">
-                             {{ .Params.imageCaption | default (printf "image courtesy %s" .Params.client.name) | markdownify }}
+                             {{- .Params.imageCaption | default (printf "image courtesy %s" .Params.client.name) | markdownify }}
                         </figcaption>
                       </figure>
-                  {{ else }}
-                    {{ errorf "%s: %s not found. (layouts/portfolio/single.html)" .File.Path .Params.image }}
-                  {{ end }}
-                {{ else }}
-                  {{ warnf "%s: image not set. (layouts/portfolio/single.html)" .File.Path }}
-                {{ end }}
+                  {{- else }}
+                    {{- errorf "%s: %s not found. (layouts/portfolio/single.html)" .File.Path .Params.image }}
+                  {{- end }}
+                {{- else }}
+                  {{- warnf "%s: image not set. (layouts/portfolio/single.html)" .File.Path }}
+                {{- end }}
                 <article id="main-content">
-                  <h2>{{ .Title }}</h2>
+                  <h2>{{- .Title }}</h2>
                   <div class="post-content mt-4">
-                    {{ .Content }}
+                    {{- .Content }}
                   </div>
                   <footer class="post-date mb-3">
                     Last updated:
-                    <time datetime="{{ .Date.Format $.Site.Params.rfc3339Format }}">{{ .Date.Format $dateFormat }}</time>
+                    <time datetime="{{- .Date.Format $.Site.Params.rfc3339Format }}">{{ .Date.Format $dateFormat }}</time>
                   </footer>
-                  {{ partial "related.html" . }}
+                  {{- partial "related.html" . }}
                 </article>
             </div>
             <!-- sidebar -->
-            <aside class="col-lg-4">
-                {{ with .Params.client }}
-                <div class="sidebar block" data-aos="fade-left">
-                  {{ if isset . "logo" }}
-                    {{ $logo := ($.Page.Resources.ByType "image").GetMatch (printf "*%s*" .logo) }}
-                    {{ if $logo }}
+            {{- with .Params.client }}
+                <aside class="sidebar col-lg-4 block">
+                  {{- if isset . "logo" }}
+                    {{- $logo := ($.Page.Resources.ByType "image").GetMatch (printf "*%s*" .logo) }}
+                    {{- if $logo }}
                       {{ with .website }}<a href="{{ . }}" rel="external noopener" target="_blank" aria-labelledby="{{ . | md5 }}">{{ end }}
-                        <img class="img-fluid mx-auto d-block p-3" src="{{ $logo.Permalink }}" alt="{{ .name }}">
+                        <img class="img-fluid mx-auto d-block p-3" src="{{- $logo.Permalink }}" alt="{{ .name }}">
                       {{ with .website }}</a>{{ end }}
-                    {{ else }}
-                      {{ errorf "%s: %s: Not found" $.File.Path .logo }}
-                    {{ end }}
-                  {{ end }}
+                    {{- else }}
+                      {{- errorf "%s: %s: Not found" $.File.Path .logo }}
+                    {{- end }}
+                  {{- end }}
                   <dl>
-                    {{ with .name }}
+                    {{- with .name }}
                     <dt>Organization</dt>
-                    <dd>{{ . }}</dd>
-                    {{ end }}
-                    {{ if .website }}
+                    <dd>{{- . }}</dd>
+                    {{- end }}
+                    {{- if .website }}
                     <dt>Website</dt>
-                    <dd><a href="{{ .website }}" rel="external noopener" target="_blank" id="{{ .website | md5 }}" aria-label="Link to {{ .name }}">{{ .website }}</a></dd>
-                    {{ end }}
-                    {{ with $.Params.categories }}
+                    <dd><a href="{{- .website }}" rel="external noopener" target="_blank" id="{{ .website | md5 }}" aria-label="Link to {{ .name }}">{{ .website }}</a></dd>
+                    {{- end }}
+                    {{- with $.Params.categories }}
                     <dt>Categories</dt>
-                    <dd>{{ delimit . ", " }}</dd>
-                    {{ end }}
-                    {{ with $.Params.tags }}
+                    <dd>{{- delimit . ", " }}</dd>
+                    {{- end }}
+                    {{- with $.Params.tags }}
                     <dt>Tags</dt>
-                    <dd>{{ delimit . ", " }}</dd>
-                    {{ end }}
-                    {{ with .beneficiaries }}
+                    <dd>{{- delimit . ", " }}</dd>
+                    {{- end }}
+                    {{- with .beneficiaries }}
                     <dt>Beneficiaries</dt>
-                    <dd>{{ delimit . ", " }}</dd>
-                    {{ end }}
-                    {{ with .locations }}
+                    <dd>{{- delimit . ", " }}</dd>
+                    {{- end }}
+                    {{- with .locations }}
                     <dt>Location(s)</dt>
-                    <dd>{{ delimit . ", " }}</dd>
-                    {{ end }}
+                    <dd>{{- delimit . ", " }}</dd>
+                    {{- end }}
                   </dl>
-                  {{ range sort .awards "dateAwarded" "desc" }}
+                  {{- range sort .awards "dateAwarded" "desc" }}
                     <hr>
                     <dl>
-                    {{ with .dateSubmitted }}
+                    {{- with .dateSubmitted }}
                       <dt>Date Submitted</dt>
-                      <dd><time datetime="{{ dateFormat $.Site.Params.rfc3339Format . }}">{{ dateFormat ($.Site.Params.monthFormat | default "January 2006") . }}</time></dd>
-                    {{ end }}
-                    {{ with .dateAwarded }}
+                      <dd><time datetime="{{- dateFormat $.Site.Params.rfc3339Format . }}">{{ dateFormat ($.Site.Params.monthFormat | default "January 2006") . }}</time></dd>
+                    {{- end }}
+                    {{- with .dateAwarded }}
                       <dt>Date Awarded</dt>
-                      <dd><time datetime="{{ dateFormat $.Site.Params.rfc3339Format . }}">{{ dateFormat ($.Site.Params.monthFormat | default "January 2006") . }}</time></dd>
-                    {{ end }}
-                    {{ with .requested }}
+                      <dd><time datetime="{{- dateFormat $.Site.Params.rfc3339Format . }}">{{ dateFormat ($.Site.Params.monthFormat | default "January 2006") . }}</time></dd>
+                    {{- end }}
+                    {{- with .requested }}
                       <dt>Requested</dt>
-                      <dd>${{ lang.NumFmt 0 . }}</dd>
-                    {{ end }}
-                    {{ with .awarded }}
+                      <dd>${{- lang.NumFmt 0 . }}</dd>
+                    {{- end }}
+                    {{- with .awarded }}
                       <dt>Awarded</dt>
-                      <dd>${{ lang.NumFmt 0 . }}</dd>
-                    {{ end }}
-                    {{ with .invested }}
+                      <dd>${{- lang.NumFmt 0 . }}</dd>
+                    {{- end }}
+                    {{- with .invested }}
                       <dt>Invested</dt>
-                      <dd>${{ lang.NumFmt 0 . }}</dd>
-                    {{ end }}
-                    {{ with .distributed }}
+                      <dd>${{- lang.NumFmt 0 . }}</dd>
+                    {{- end }}
+                    {{- with .distributed }}
                       <dt>Distributed</dt>
-                      <dd>${{ lang.NumFmt 0 . }}</dd>
-                    {{ end }}
-                    {{ with .duration }}
+                      <dd>${{- lang.NumFmt 0 . }}</dd>
+                    {{- end }}
+                    {{- with .duration }}
                       <dt>Project Duration</dt>
-                      <dd>{{ . }}</dd>
-                    {{ end }}
+                      <dd>{{- . }}</dd>
+                    {{- end }}
                     </dl>
-                  {{ end }}
-                </div>
-                {{ end }}
-              </aside>
+                  {{- end }}
+                </aside>
+            {{- end }}
         </div>
     </div>
   </main>
 
-{{ partial "cta.html" . }}
+{{- partial "cta.html" . }}
 
-{{ end }}
+{{- end }}
