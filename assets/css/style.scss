@@ -4,6 +4,7 @@ $col-link: #27459c;
 $col-hover: #2cc0d3;
 $col-hover-shadow: #00a4ba;
 $col-tertiary: #9b59b6;
+$col-bg-sidebar: #eae9ec;
 
 body {
   font-family: "Roboto", sans-serif;
@@ -553,21 +554,20 @@ figure figcaption p {
   border-bottom-right-radius: 0;
 }
 
+.single-post blockquote,
+.work-single blockquote {
+  background: $col-bg-sidebar;
+}
+
 ///
 /// Portfolio Single Tweaks
 ///
 
 .sidebar {
-  background: #eae9ec;
+  background: $col-bg-sidebar;
   position: sticky;
   padding: 2rem 1.5rem;
 }
-
-.work-single blockquote {
-  background: #eae9ec;
-  color: #848484;
-}
-
 
 ///
 /// Gallery Section Page
