@@ -69,21 +69,21 @@ a.link-button {
 }
 
 .section-heading p {
-  font-weight: 300;
+  font-weight: normal;
   color: #727272;
   line-height: 1.5rem;
 }
 
 .title {
   line-height: 1.1;
-  font-weight: 300;
+  font-weight: normal;
   color: #333;
   text-transform: uppercase;
   margin-bottom: 1.25rem;
 }
 
 .subtitle {
-  font-weight: 600;
+  font-weight: bold;
   margin-bottom: 1rem;
   text-transform: uppercase;
 }
@@ -91,7 +91,7 @@ a.link-button {
 .subtitle-des {
   color: #727272;
   margin-bottom: 2rem;
-  font-weight: 300;
+  font-weight: normal;
 }
 
 .global-page-header {
@@ -208,13 +208,13 @@ a.link-button {
 
 #hero-area h1 {
   color: #333;
-  font-weight: 700;
+  font-weight: bold;
   text-transform: uppercase;
 }
 
 #hero-area .tag {
   font-size: 1.2rem;
-  font-weight: 400;
+  font-weight: normal;
   line-height: 2rem;
   text-transform: uppercase;
   color: #333;
@@ -233,6 +233,7 @@ a.link-button {
 #hero-area .cd-headline.slide .cd-words-wrapper {
   color: $col-background;
   text-shadow: 0.0em 0.0em 0.1em white;
+  font-weight: bold;
 }
 
 #call-to-action {
@@ -322,7 +323,7 @@ a.link-button {
 }
 
 .about-feature .block p {
-  font-weight: 300;
+  font-weight: normal;
 }
 
 .about-feature .about-feature-1 {
@@ -653,7 +654,7 @@ a.badge-tag {
   display: inline-block;
   padding: 0.25em 0.4em;
   font-size: 0.75rem;
-  font-weight: 400;
+  font-weight: normal;
   line-height: 1;
   text-align: center;
   white-space: nowrap;
@@ -664,7 +665,7 @@ a.badge-tag {
 .letter {
     color: #3c6382;
     font-size: 1.2rem;
-    font-weight: 400;
+    font-weight: normal;
     display: inline-block;
     width: 100%;
     border-bottom: 1.25pt solid #3c6382;
@@ -774,7 +775,7 @@ a.badge-tag-list-page {
   border: 1px solid #dedede;
   text-align: center;
   margin: 0 4px;
-  font-weight: 500;
+  font-weight: bold;
   color: #02bdd5;
   padding: 0;
   line-height: 41px;
