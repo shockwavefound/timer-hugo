@@ -90,19 +90,19 @@
                     {{- end }}
                     {{- with .requested }}
                       <dt>Requested</dt>
-                      <dd>${{- lang.NumFmt 0 . }}</dd>
+                      <dd>${{- lang.FormatNumberCustom 0 . }}</dd>
                     {{- end }}
                     {{- with .awarded }}
                       <dt>Awarded</dt>
-                      <dd>${{- lang.NumFmt 0 . }}</dd>
+                      <dd>${{- lang.FormatNumberCustom 0 . }}</dd>
                     {{- end }}
                     {{- with .invested }}
                       <dt>Invested</dt>
-                      <dd>${{- lang.NumFmt 0 . }}</dd>
+                      <dd>${{- lang.FormatNumberCustom 0 . }}</dd>
                     {{- end }}
                     {{- with .distributed }}
                       <dt>Distributed</dt>
-                      <dd>${{- lang.NumFmt 0 . }}</dd>
+                      <dd>${{- lang.FormatNumberCustom 0 . }}</dd>
                     {{- end }}
                     {{- with .duration }}
                       <dt>Project Duration</dt>

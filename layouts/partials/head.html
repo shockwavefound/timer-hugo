@@ -64,7 +64,7 @@
 <link rel="stylesheet" href="{{ $custom.Permalink }}" media="screen">
 
 {{/* WTF Hugo */}}
-{{- if and (.Param "WTFHugo") site.IsServer -}}
+{{- if and (.Param "WTFHugo") hugo.IsServer -}}
     {{- partial "wtfhugo.html" . }}
 {{- end -}}
 </head>
