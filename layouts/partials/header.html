@@ -8,7 +8,14 @@
                 <nav class="navbar navbar-expand-md py-0" aria-label="Site Navigation">
                     <div class="container-fluid">
                         <a class="navbar-brand" href="{{ .Site.BaseURL }}">
+                            {{- with .Site.Params.logoSet }}
+                            <img src="{{ .src | absURL }}"
+                                {{- with .width }} width="{{ . }}" {{ end }}
+                                {{- with .height}} height="{{ . }}"{{ end }}
+                                {{- with .alt}} alt="{{ . | default $.Site.Title }}"{{ end }}>
+                            {{- else }}
                             <img src="{{ .Site.Params.logo | absURL }}" alt="{{ .Site.Params.logoAlt | default .Site.Title }}">
+                            {{- end }}
                         </a>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navHeader"
                                 aria-controls="navHeader" aria-expanded="false" aria-label="Toggle navigation">
