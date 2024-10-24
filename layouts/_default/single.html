@@ -1,54 +1,58 @@
 {{ define "main" }}
-{{ $dateFormat := .Param "dateFormat" | default .Parent.Param "dateFormat" | default "2 January 2006" }}
+{{ $dateFormat := .Param "dateFormat" | default (.Parent.Param "dateFormat") | default "2 January 2006" }}
 {{ partial "page-title.html" . }}
 
 <main class="single-post">
     <div class="container">
-        <div class="row" data-aos="fade-left">
-            {{ if .Params.image }}
-                {{ $original := (.Resources.ByType "image").GetMatch (printf "*%s*" .Params.image) }}
-                {{ if $original }}
-                    {{ $image := $original.Resize "1100x" }}
-                    <figure class="figure">
-                        <div class="img-wrapper">
-                            <img class="figure-img img-fluid" src="{{ $image.Permalink }}"
-                                alt="{{ with .Params.imageAlt }}{{ . }}{{ end }}">
-                        </div>
-                        {{ with .Params.imageCaption }}
-                        <figcaption class="figure-caption text-end">{{ . | markdownify }}</figcaption>
-                        {{ end }}
-                    </figure>
-                {{ else }}
-                    {{ errorf "%s: %s not found. (layouts/_default/single.html)" .File.Path .Params.image }}
-                {{ end }}
-            {{ else }}
-                {{ warnf "%s: image not set. (layouts/_default/single.html)" .File.Path }}
-            {{ end }}
-            <article id="main-content">
-                {{ partial "authors.html" . }}
-                <h2>{{ .Title }}</h2>
-                <footer class="post-date">
-                    <p>
-                        <time datetime="{{ .Date.Format $.Site.Params.rfc3339Format }}">{{ .Date.Format $dateFormat }}</time>
-                        {{ with .Params.tags }}<span>&mdash; {{ delimit . ", " }} </span>{{ end }}
-                    </p>
-                </footer>
-                <div class="post-content mt-4">
-                    {{ .Content }}
-                </div>
-                {{ partial "related.html" . }}
-            </article>
-            {{ if .Params.about }}
-                <footer class="mission text-muted small">
-                    <p>
-                        {{ .Site.Params.about.content | markdownify }}
-                        For more information, visit
-                        <a href="{{ .Site.BaseURL }}">{{ .Site.BaseURL }}</a>.
-                    </p>
-                </footer>
-            {{ end }}
+        <div class="row">
+            <div class="col" data-aos="fade-left">
+                {{- if .Params.image }}
+                    {{- $original := (.Page.Resources.ByType "image").GetMatch (printf "*%s*" .Params.image) }}
+                    {{- if $original }}
+                        {{- $image := $original.Resize "1100x" }}
+                        <figure class="figure">
+                            <div class="img-wrapper">
+                                <img class="figure-img img-fluid" src="{{ $image.Permalink }}"
+                                    alt="{{ with .Params.imageAlt }}{{ . }}{{ end }}">
+                            </div>
+                            {{- with .Params.imageCaption }}
+                            <figcaption class="figure-caption text-end">{{ . | markdownify }}</figcaption>
+                            {{- end }}
+                        </figure>
+                    {{- else }}
+                        {{- errorf "%s: %s image not found." .File.Path .Params.image }}
+                    {{- end }}
+                {{- else }}
+                    {{- warnf "%s: image not set." .File.Path }}
+                {{- end }}
+                <article id="main-content">
+                    {{ partial "authors.html" . }}
+                    <h2>{{ .Title }}</h2>
+                    {{ if .Date }}
+                    <footer class="post-date">
+                        <p>
+                            <time datetime="{{ .Date.Format $.Site.Params.rfc3339Format }}">{{ .Date.Format $dateFormat }}</time>
+                            {{ with .Params.tags }}<span>&mdash; {{ delimit . ", " }} </span>{{ end }}
+                        </p>
+                    </footer>
+                    {{ end }}
+                    <div class="post-content mt-4">
+                        {{ .Content }}
+                    </div>
+                    {{ partial "related.html" . }}
+                </article>
+            </div>
         </div>
-    {{ template "_internal/disqus.html" . }}
+        {{ if .Params.about }}
+            <footer class="row mission text-muted small">
+                <p>
+                    {{ .Site.Params.about.content | markdownify }}
+                    For more information, visit
+                    <a href="{{ .Site.BaseURL }}">{{ .Site.BaseURL }}</a>.
+                </p>
+            </footer>
+        {{ end }}
+        {{ template "_internal/disqus.html" . }}
     </div>
 </main>
 

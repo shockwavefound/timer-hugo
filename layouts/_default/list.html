@@ -1,16 +1,50 @@
 {{ define "main" }}
-{{ $dateFormat := .Param "dateFormat" | default "2 January 2006" }}
+{{ $dateFormat := .Param "dateFormat" | default (.Parent.Param "dateFormat") | default "2 January 2006" }}
 {{ partial "page-title.html" . }}
 
-<main id="main-content" class="blog-full-width">
+<main class="single-post">
     <div class="container">
-        {{ with .Content }}
         <div class="row">
-            <div class="col-12">
-                <div class="block">{{ . }}</div>
+            <div class="col" data-aos="fade-left">
+                {{- if .Params.image }}
+                    {{- $original := (.Page.Resources.ByType "image").GetMatch (printf "*%s*" .Params.image) }}
+                    {{- if $original }}
+                        {{- $image := $original.Resize "1100x" }}
+                        <figure class="figure">
+                            <div class="img-wrapper">
+                                <img class="figure-img img-fluid" src="{{ $image.Permalink }}"
+                                    alt="{{ with .Params.imageAlt }}{{ . }}{{ end }}">
+                            </div>
+                            {{- with .Params.imageCaption }}
+                            <figcaption class="figure-caption text-end">{{ . | markdownify }}</figcaption>
+                            {{- end }}
+                        </figure>
+                    {{- else }}
+                        {{- errorf "%s: %s image not found." .File.Path .Params.image }}
+                    {{- end }}
+                {{- else }}
+                    {{/* warnf "%s: image not set." .File.Path */}}
+                {{- end }}
+                <article id="main-content">
+{{/*
+                    {{ partial "authors.html" . }}
+                    <h2>{{ .Title }}</h2>
+                    {{ if .Date }}
+                    <footer class="post-date">
+                        <p>
+                            <time datetime="{{ .Date.Format $.Site.Params.rfc3339Format }}">{{ .Date.Format $dateFormat }}</time>
+                            {{ with .Params.tags }}<span>&mdash; {{ delimit . ", " }} </span>{{ end }}
+                        </p>
+                    </footer>
+                    {{ end }}
+*/}}
+                    <div class="post-content mt-4">
+                        {{ .Content }}
+                    </div>
+                    {{ partial "related.html" . }}
+                </article>
             </div>
         </div>
-        {{ end }}
         {{ if .Params.tagCloud }}
         <div class="row mb-3">
             <div class="col-sm-12" data-aos="fade-down-right">
@@ -48,7 +82,8 @@
             </div>
             {{ end }}
         {{ end }}
-        {{ if .Pages }}
+        {{- $pages := where .Pages "Type" "ne" "redirect" }}
+        {{- if $pages }}
         <nav class="row mb-3" aria-label="sort order" data-aos="fade-down-right">
             <div class="col offset-11">
                 <div class="dropdown sort-btn">
@@ -62,7 +97,7 @@
             </div>
         </nav>
         <div id="sort-items" class="row gy-4 row-cols-1 row-cols-md-2 row-cols-xl-3">
-            {{ range .Pages }}
+            {{ range $pages }}
                 <div class="sort-item col" data-sort-name="{{ .Params.Title }}" data-sort-time="{{ .Date.Unix }}">
                     <div class="card h-100">
                         <article class="blog-content card-body" data-aos="fade-down-right">
@@ -76,7 +111,7 @@
                                             <img class="img-fluid" src="{{ $image.Permalink }}" alt="">
                                         </div>
                                     {{ else }}
-                                        {{ errorf "%s: %s not found. (layouts/_default/list.html)" .File.Path .Params.image }}
+                                        {{ errorf "%s: %s image not found. (layouts/_default/list.html)" .File.Path .Params.image }}
                                     {{ end }}
                                 </figure>
                                 {{ else }}
@@ -103,11 +138,21 @@
                             </div>
                             {{/* <p><a href="{{ .Permalink }}" class="btn btn-default btn-details hvr-bounce-to-right">Continue reading<span class="visually-hidden"> {{ .Title }}</span></a></p> */}}
                         </article>
-                        </div>
+                    </div>
                 </div>
             {{ end }}
-        </div>
+            </div>
         {{ end }}
+        {{ if .Params.about }}
+            <footer class="row mission text-muted small">
+                <p>
+                    {{ .Site.Params.about.content | markdownify }}
+                    For more information, visit
+                    <a href="{{ .Site.BaseURL }}">{{ .Site.BaseURL }}</a>.
+                </p>
+            </footer>
+        {{ end }}
+        {{ template "_internal/disqus.html" . }}
     </div>
 </main>
 
