@@ -27,7 +27,7 @@
                 {{- end }}"
             {{- else -}}
             src="{{ .Get `src` | safeURL }}"
-            {{- warnf `%s: %s not found, assuming link. (shortcodes/figure.html)` .File.Path (.Get `src`) -}}
+            {{- warnf `%s: %s image not found, assuming link. (shortcodes/figure.html)` .File.Path (.Get `src`) -}}
             {{- end -}}
         >{{/* Closing img tag */}}
         <div class="overlay">

@@ -10,7 +10,7 @@
           <div class="img-wrapper">
             {{ $image := ($.Page.Resources.ByType "image").GetMatch (printf "*%s*" .image) }}
             {{ if not $image }}
-              {{ errorf "%s: %s not found. (layouts/gallery/list.html)" .File.Path .Params.image }}
+              {{ errorf "%s: %s image not found. (layouts/gallery/list.html)" .File.Path .Params.image }}
             {{ end }}
             <img src="{{ $image.Permalink }}" class="img-fluid"{{ with .alt}} alt="{{ . }}"{{ end }}>
             <div class="overlay">

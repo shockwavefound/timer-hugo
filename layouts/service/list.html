@@ -32,7 +32,7 @@
 				<div class="block">
 					{{ $image := .Page.Resources.GetMatch (printf "*%s*" .Params.image) }}
 					{{ if not $image }}
-						{{ errorf "%s: %s not found. (layouts/service/list.html)" .File.Path .Params.image }}
+						{{ errorf "%s: %s image not found. (layouts/service/list.html)" .File.Path .Params.image }}
 					{{ end }}
 					<img class="img-fluid" src="{{ $image.Permalink }}"{{ with .Params.imageAlt }} alt="{{ . }}"{{ end }}>
 				</div>
