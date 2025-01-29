@@ -30,7 +30,7 @@
                             <input type="text" id="gotcha" name="_gotcha" class="invisible" tabindex="-1" value="" placeholder="Do not fill this in">
                         </div>
                         {{ with .reCAPTCHAkey }}
-                        <script src="//www.google.com/recaptcha/api.js" async defer></script>
+                        <script src="//www.google.com/recaptcha/enterprise.js" async defer></script>
                         <div class="g-recaptcha" data-sitekey="{{ . }}" data-aos="fade-down" ></div>
                         {{ end }}
                         <div id="success" class="success">Thank you, your message is on its way.</div>
