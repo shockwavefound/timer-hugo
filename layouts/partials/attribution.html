@@ -1,0 +1,10 @@
+{{ $authors := .Params.authors | default (cond (eq .Kind "term") (slice .Data.Term) slice) }}
+{{ range $authors -}}
+    {{  with index $.Site.Data.bios . -}}
+        {{ range .social -}}
+            {{ if and .id (eq .text "Mastodon") -}}
+                <meta name="fediverse:creator" content="@{{ .id }}">
+            {{ end -}}
+        {{ end -}}
+    {{ end -}}
+{{ end -}}

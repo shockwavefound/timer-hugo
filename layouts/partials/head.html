@@ -11,10 +11,13 @@
 {{ range .AlternativeOutputFormats -}}
   {{ printf `<link rel="%s" type="%s" href="%s" title="%s">` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
 {{ end -}}
-{{ template "_internal/google_analytics.html" . }}
-{{ template "_internal/opengraph.html" . }}
-{{ template "_internal/twitter_cards.html" . }}
-{{ partial "schema" . }}
+{{- template "_internal/google_analytics.html" . }}
+{{- template "_internal/opengraph.html" . }}
+{{- template "_internal/twitter_cards.html" . }}
+{{- partial "schema" . }}
+{{- partial "attribution" . }}
+
+{{ "<!-- Mobile Specific Metas -->" | safeHTML }}
 
 {{ "<!-- Favicon References -->" | safeHTML }}
 {{ if (fileExists "static/apple-touch-icon.png") -}}

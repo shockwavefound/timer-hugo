@@ -25,6 +25,7 @@
                 {{- else }}
                     {{- warnf "%s: image not set." .File.Path }}
                 {{- end }}
+                {{ partial "sharing.html" . }}
                 <article id="main-content">
                     {{ partial "authors.html" . }}
                     <h2>{{ .Title }}</h2>

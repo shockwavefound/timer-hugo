@@ -1,0 +1,43 @@
+{{- if .Param "share_page" | default true }}
+{{- $title := .Title }}
+{{- $url := .Permalink }}
+{{- $body := print $title ", by " .Site.Title "\n\n" $url "\n\n" (.Summary | plainify) "\n" }}
+{{ "<!-- Article Sharing -->" | safeHTML }}
+<footer id="footer">
+    <div class="row content-justify-between small">
+        <div class="col-md text-center text-md-end">
+            Share this on:
+            <ul class="social-icons">
+                <li>
+                    <a href="http://twitter.com/share?url={{ $url }}&text={{ $title }}&via={{with .Param "social.twitter" }}{{ . }}{{ end }}"
+                        class="twitter" aria-label="share on X" target="_blank">
+                        <ion-icon name="logo-twitter" aria-hidden="true"></ion-icon><span class="visually-hidden">share on
+                            X</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ $url }}&title={{ $title }}&summary={{ $body }}"
+                        class="linkedin" aria-label="share on LinkedIn" target="_blank">
+                        <ion-icon name="logo-linkedin" aria-hidden="true"></ion-icon><span class="visually-hidden">share on
+                            LinkedIn</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="http://www.facebook.com/sharer.php?u={{ $url }}"
+                        class="facebook" aria-label="share on Facebook" target="_blank">
+                        <ion-icon name="logo-facebook" aria-hidden="true"></ion-icon><span class="visually-hidden">share on
+                            Facebook</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="mailto:?subject=Check%20out%20{{ $title }}.&body={{ $body }}" class="email"
+                        aria-label="share on Email">
+                        <ion-icon name="mail" aria-hidden="true"></ion-icon><span class="visually-hidden">share on Email</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</footer>
+{{ "<!-- Article Sharing end -->" | safeHTML }}
+{{ end }}
