@@ -1,5 +1,18 @@
 {{ define "main" }}
 {{ partial "page-title.html" . }}
+{{ with .Content}}
+<section class="single-post">
+    <div class="container">
+        <div class="row">
+            <div class="col" data-aos="fade-left">
+                <div class="post-content mt-4">
+                    {{ . }}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{{ end }}
 {{ if .Site.Data.contact.enable }}
 {{ "<!-- Contact Section Start -->" | safeHTML }}
 {{/*  Tell cloudflare to hide this content from scrapers */}}
