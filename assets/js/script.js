@@ -1,11 +1,13 @@
 $(document).ready(function () {
     "use strict";
 
+/*
     // Initialize AOS animations
     AOS.init({
         disable: 'mobile',
         once: true
     });
+*/
 
     // looks like this reduces/hides the brand link after a scroll?
     // I think this is dead/redundant code
@@ -79,7 +81,6 @@ $(function() {
         var $this = $(this);
         var mode = $this.data('sort');
         var items = $(".sort-item");
-        $(".sort-item *").removeAttr('data-aos');  // AOS breaks sorting so just turn it off --pst
         switch(mode) {
             case 'alpha':
                 items.sort(function(a, b) {

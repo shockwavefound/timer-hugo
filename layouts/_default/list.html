@@ -120,14 +120,14 @@
                                 <h2 class="blog-post-title card-title">{{ .Title }}</h2>
                             </a>
                             <div class="blog-meta mb-2 card-text">
-                                <time datetime="{{ .Date.Format $.Site.Params.rfc3339Format }}">{{ .Date.Format $dateFormat }}</time>
+                                {{/* <time datetime="{{ .Date.Format $.Site.Params.rfc3339Format }}">{{ .Date.Format $dateFormat }}</time> */}}
                                 {{ with .Params.client }}
                                     {{ $granted := 0 }}
                                     {{ range .awards }}
                                         {{ $granted = add $granted (add (int .awarded) (int .invested)) }}
                                     {{ end }}
                                     {{ with $granted }}
-                                        <span>&mdash;&nbsp;{{ . | lang.FormatCurrency 2 "USD" }}</span>
+                                        <span>{{/*&mdash;&nbsp;*/}}{{ . | lang.FormatCurrency 2 "USD" }}</span>
                                     {{ end }}
                                 {{ end }}
                                 {{ with .Params.categories }}<span>&mdash;&nbsp;{{ delimit . ", " }}</span>{{ end }}

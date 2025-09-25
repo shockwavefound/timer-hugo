@@ -61,12 +61,14 @@
               {{- end }}
               <p class="card-text">{{ .Params.caption | default .Summary }}</p>
             </div>
-            {{- with .Date }}
+{{/*
+              {{- with .Date }}
             <p class="card-footer mb-2 text-muted">
               Updated:
               <time datetime="{{ .Format site.Params.rfc3339Format }}">{{ dateFormat (site.Params.dateFormat | default "2 January 2006") . }}</time>
             </p>
             {{- end }}
+  */}}
           </figure>
         </div>
       {{- end }}

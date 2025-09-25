@@ -31,10 +31,12 @@
                     <div class="post-content mt-4">
                         {{ .Content }}
                     </div>
+{{/*
                     <footer class="post-date mb-3">
                         Last updated:
                         <time datetime="{{ .Date.Format $.Site.Params.rfc3339Format }}">{{ .Date.Format $dateFormat }}</time>
                     </footer>
+*/}}
                     {{ partial "related.html" . }}
                 </article>
             </div>

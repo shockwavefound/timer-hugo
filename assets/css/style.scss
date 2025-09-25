@@ -361,9 +361,11 @@ a.link-button {
 /// Team partial
 ///
 
+/*
 .team-member:hover img {
   opacity: .8;
 }
+*/
 
 .team-member .team-name {
   font-size: 1.25rem;
@@ -398,6 +400,7 @@ figure img {
   transition: transform 400ms;
 }
 
+/*
 figure:hover img {
   transform: scale3d(1.2, 1.2, 1);
 }
@@ -405,6 +408,7 @@ figure:hover img {
 figure:hover .overlay {
   opacity: 1;
 }
+*/
 
 figure:hover .overlay .buttons a {
   transform: scale3d(1, 1, 1);

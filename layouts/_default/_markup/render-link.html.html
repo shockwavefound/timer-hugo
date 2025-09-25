@@ -1,0 +1,12 @@
+{{- $link := .Destination }}
+{{- $isRemote := strings.HasPrefix $link "http" }}
+{{- if not $isRemote -}}
+{{- $url := urls.Parse .Destination }}
+{{- $fragment := "" }}
+{{- with $url.Fragment }}{{ $fragment = printf "#%s" . }}{{ end -}}
+{{- with .Page.GetPage $url.Path }}{{ $link = printf "%s%s" .Permalink $fragment }}{{ end }}{{ end -}}
+<a href="{{ $link | safeURL }}" class="markdown-link"
+   {{- with .Title}} title="{{ . }}"{{ end }}
+   {{- if $isRemote }} rel="external noopener nofollow"{{ end }}>
+   {{- .Text | safeHTML -}}
+</a>
