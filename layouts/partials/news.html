@@ -55,7 +55,9 @@
                 {{- range first 1 (sort . "dateAwarded" "desc") }}
                 <p class="card-subtitle mb-2 text-muted">
                   {{- with (or .awarded .invested) }}${{ lang.FormatNumberCustom 0 . }}{{ end }}
-                  {{- with .dateAwarded }} / <time datetime="{{ dateFormat site.Params.rfc3339Format . }}">{{ dateFormat (site.Params.monthFormat | default "January 2006") . }}</time>{{ end }}
+{{/*              {{- with .dateAwarded }} / <time datetime="{{ dateFormat site.Params.rfc3339Format . }}">{{ dateFormat (site.Params.monthFormat | default "January 2006") . }}</time>{{ end }} */}}
+                  {{- with .name }} - {{ . }}{{ end }}
+                  {{- with .awarder }} ({{ . }}){{ end }}
                 </p>
                 {{- end }}
               {{- end }}
